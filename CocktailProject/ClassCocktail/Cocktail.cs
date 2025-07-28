@@ -18,6 +18,7 @@ namespace CocktailProject.ClassCocktail
         protected Enum_Glass glass;
         protected int _CountPart = 0;
         protected bool _AddIce = false;
+        protected Enum_TypeOfCocktail typeOfCocktail;
 
         public Cocktail()
         {
@@ -46,6 +47,29 @@ namespace CocktailProject.ClassCocktail
             _AddIce = addIce;
         }
 
+        /// <summary>
+        /// Constructor for cocktails with multiple alcohols and mixers.
+        /// </summary>
+        /// <param name="alcoholWithQuantity">A dictionary of <see cref="Enum_Alcohol"/> and their quantities in ml.</param>
+        /// <param name="mixerWithQuantity">A dictionary of <see cref="Enum_Mixer"/> and their quantities in ml.</param>
+        /// <param name="method">The method used to prepare the cocktail.</param>
+        /// <param name="glass">The type of glass used to serve the cocktail.</param>
+        /// <param name="addIce">Indicates whether ice is added to the cocktail.</param>
+        public Cocktail(Dictionary<Enum_Alcohol, int> alcoholWithQuantity,
+                        Dictionary<Enum_Mixer, int> mixerWithQuantity,
+                        Enum_Method method,
+                        Enum_Glass glass,
+                        bool addIce,
+                        Enum_TypeOfCocktail typeOfCocktail)
+        {
+            _alcoholWithQuantity = alcoholWithQuantity ?? new Dictionary<Enum_Alcohol, int>();
+            _mixerWithQuantity = mixerWithQuantity ?? new Dictionary<Enum_Mixer, int>();
+            this.method = method;
+            this.glass = glass;
+            _AddIce = addIce;
+            this.typeOfCocktail = typeOfCocktail;
+        }
+
 
         /// <summary>
         /// Method to display the cocktail's ingredients and preparation details.
@@ -69,6 +93,7 @@ namespace CocktailProject.ClassCocktail
             info += $"Method: {method}\n";
             info += $"Glass: {glass}\n";
             info += $"Add Ice: {_AddIce}\n";
+            info += $"Type of Cocktail: {typeOfCocktail}\n";
             info += $"Total Parts: {_CountPart} / 10\n";
 
             //Debug.WriteLine(info); // For debugging purposes
@@ -84,7 +109,7 @@ namespace CocktailProject.ClassCocktail
             return DictionariesEqual(_alcoholWithQuantity, other._alcoholWithQuantity) &&
                    DictionariesEqual(_mixerWithQuantity, other._mixerWithQuantity) &&
                    method == other.method &&
-                   (glass == other.glass || glass == Enum_Glass.NotFix) &&
+                   typeOfCocktail == other.typeOfCocktail &&
                    _AddIce == other._AddIce;
         }
 

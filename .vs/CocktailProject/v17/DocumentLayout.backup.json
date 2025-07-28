@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\enumelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\enumelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,40 +19,8 @@
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\regular.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\regular.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\italic.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\italic.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\bold.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\bold.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktailbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktailbuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\cocktailproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\cocktailproject.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\textures\\cursor_default.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\textures\\cursor_default.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\example\\cursor.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\example\\cursor.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\content.mgcb||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\content.mgcb||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,8 +30,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnumElement.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\EnumElement.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\EnumElement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T16:59:57.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CocktailDicMaker.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowGEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T13:07:40.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CocktailBuilder.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowEEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T13:07:33.615Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -68,153 +83,23 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAhwIAAAABkAAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAAGoAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T05:30:21.888Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EnumElement.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:46.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CocktailDicMaker.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:40.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CocktailBuilder.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAowA0AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:33.615Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Cocktail.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\Cocktail.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\Cocktail.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwEQAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:19.039Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CocktailProject.csproj",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\CocktailProject.csproj",
-              "RelativeDocumentMoniker": "CocktailProject\\CocktailProject.csproj",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\CocktailProject.csproj",
-              "RelativeToolTip": "CocktailProject\\CocktailProject.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-28T13:05:58.974Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Regular.spritefont",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
-              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-28T07:39:36.946Z",
+              "Title": "Cocktail.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAwHIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T16:32:01.715Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Italic.spritefont",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
-              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-28T07:39:24.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Bold.spritefont",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
-              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-28T07:37:26.528Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "cursor_default.png",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
-              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-07-28T07:15:48.7Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "cursor.png",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Example\\cursor.png",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\Example\\cursor.png",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Example\\cursor.png",
-              "RelativeToolTip": "CocktailProject\\Content\\Example\\cursor.png",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-07-28T07:15:19.143Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Content.mgcb",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Content.mgcb",
-              "RelativeDocumentMoniker": "CocktailProject\\Content\\Content.mgcb",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Content.mgcb",
-              "RelativeToolTip": "CocktailProject\\Content\\Content.mgcb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-28T06:59:15.684Z"
             }
           ]
         }

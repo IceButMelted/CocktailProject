@@ -28,7 +28,8 @@ namespace CocktailProject.ClassCocktail
 
         Soda,
 
-        Syrup
+        Syrup,
+        PepperMint
     }
 
 
@@ -54,5 +55,14 @@ namespace CocktailProject.ClassCocktail
         None,
         Mixing,
         Shaking
+    }
+
+    public enum Enum_TypeOfCocktail : byte
+    {
+        None,
+        HighAlcohol,
+        LowAlcohol,
+        NonAlcoholic,
+        NotMatch
     }
 }

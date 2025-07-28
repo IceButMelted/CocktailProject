@@ -27,6 +27,7 @@ public class Game1 : Core
     Panel _inGame_Mixer;
     Button _BTN_Alcohol;
     Button _BTN_Mixer;
+
     #region Button
     Button _BTN_AddIce;
     Button _BTN_Shake;
@@ -48,6 +49,8 @@ public class Game1 : Core
     #endregion  
 
     Paragraph currentCocktailInfo;
+    Paragraph targetCockTailInfo;
+    Paragraph result;
 
 
     int width_ReciptPanel = 500;
@@ -60,6 +63,7 @@ public class Game1 : Core
 
     #region Cocktail
     private static string _targetCocktailName;
+    private Cocktail targetCoctail = new Cocktail();
     private CocktailBuilder CurrentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
 
@@ -89,7 +93,6 @@ public class Game1 : Core
         _slime.Scale = new Vector2(4.0f, 4.0f);
 
 
-
 #region Init Ui
         UserInterface.Initialize(Content, BuiltinThemes.hd);
         _titlePanel = new Panel(new Vector2(500, 500), PanelSkin.Default, Anchor.Center);
@@ -98,12 +101,20 @@ public class Game1 : Core
         _startBTN.ToolTipText = "Click to start the game!";
         _startBTN.OnClick = (Entity entity) =>
         {
+
+            _targetCocktailName = GetRandomCocktailName();
+            CocktailDicMaker.CocktailDictionary.TryGetValue(_targetCocktailName, out targetCoctail);
+            targetCockTailInfo.Text = "Target Cocktail: " + _targetCocktailName + targetCoctail.Info();
+
             Debug.WriteLine($"Target Cocktail: {_targetCocktailName}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
             _inGamePanel.Enabled = true;
             _inGamePanel.Visible = true;
             UserInterface.Active.SetCursor(CursorType.Default);
+
+            
+
         };
 
         _exitBTN  = new Button("Exit Game", ButtonSkin.Default, Anchor.AutoCenter, new Vector2(200,50));
@@ -145,7 +156,21 @@ public class Game1 : Core
         _BTN_Serve.OnMouseDown = (Entity e) =>
         {
             // Logic for Serve button click
-            Debug.WriteLine("Serve button clicked!");
+            if (!CocktailDicMaker.CocktailDictionary.TryGetValue(_targetCocktailName, out Cocktail targetCocktail))
+            {
+                Console.WriteLine("Error: Target cocktail not found!");
+                return;
+            }
+
+            if (targetCocktail.Equals(CurrentCocktail))
+            {
+                result.Text = "You made a cocktail: " + _targetCocktailName + "!";
+            }
+            else { 
+                result.Text = "You made a cocktail, but it is not " + _targetCocktailName + "!";
+            }
+
+                Debug.WriteLine("Serve button clicked!");
         };
 
         _BTN_Reset = new Button("Reset", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(400, -100));
@@ -316,8 +341,15 @@ public class Game1 : Core
         _inGame_Mixer.AddChild(_BTN_Perpermint);
         _inGame_Mixer.AddChild(_BTN_Mixer);
 
-        currentCocktailInfo = new Paragraph(CurrentCocktail.Info(), Anchor.TopLeft, new Vector2(500, 500));
+        currentCocktailInfo = new Paragraph(CurrentCocktail.Info(), Anchor.TopLeft, new Vector2(300, 500));
         currentCocktailInfo.FillColor = Color.White;
+
+        targetCockTailInfo = new Paragraph("Target Cocktail: " + _targetCocktailName + targetCoctail.Info(), Anchor.TopLeft, new Vector2(300, 500), new Vector2(300, 0));
+        targetCockTailInfo.FillColor = Color.White;
+        
+
+        result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0,0));
+        result.FillColor = Color.White;
 
         /// Add Chiildren to the panels
         _titlePanel.AddChild(_startBTN);
@@ -335,6 +367,9 @@ public class Game1 : Core
         UserInterface.Active.SetCursor(CursorType.Default);
         
         UserInterface.Active.AddEntity(currentCocktailInfo);
+        UserInterface.Active.AddEntity(targetCockTailInfo);
+        UserInterface.Active.AddEntity(result);
+
         UserInterface.Active.AddEntity(_titlePanel);
         UserInterface.Active.AddEntity(_inGamePanel);
 #endregion
