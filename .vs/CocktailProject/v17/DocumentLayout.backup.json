@@ -1,0 +1,141 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Git\\CocktailProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\italic.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\italic.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\bold.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\bold.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\textures\\cursor_default.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\textures\\cursor_default.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\example\\cursor.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\example\\cursor.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\content.mgcb||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\content.mgcb||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\regular.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\regular.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Regular.spritefont",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
+              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-28T07:39:36.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Italic.spritefont",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
+              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Italic.spritefont",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-28T07:39:24.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Bold.spritefont",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
+              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-28T07:37:26.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "cursor_default.png",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
+              "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\textures\\cursor_default.png",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-07-28T07:15:48.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "cursor.png",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Example\\cursor.png",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\Example\\cursor.png",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Example\\cursor.png",
+              "RelativeToolTip": "CocktailProject\\Content\\Example\\cursor.png",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-07-28T07:15:19.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Content.mgcb",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Content.mgcb",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\Content.mgcb",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\Content.mgcb",
+              "RelativeToolTip": "CocktailProject\\Content\\Content.mgcb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-28T06:59:15.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Game1.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
+              "RelativeToolTip": "CocktailProject\\Game1.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAIwHoAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T05:30:21.888Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

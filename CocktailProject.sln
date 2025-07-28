@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocktailProject", "CocktailProject\CocktailProject.csproj", "{603DEABE-0041-4AE6-9764-968CBF968C87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameLibrary", "MonoGameLibrary\MonoGameLibrary.csproj", "{136C3C93-6D14-C06D-3DBE-468E75475147}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{603DEABE-0041-4AE6-9764-968CBF968C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{603DEABE-0041-4AE6-9764-968CBF968C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{603DEABE-0041-4AE6-9764-968CBF968C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{603DEABE-0041-4AE6-9764-968CBF968C87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5A1D9B1-8CEA-4891-B068-45E138EC57F8}
+	EndGlobalSection
+EndGlobal
