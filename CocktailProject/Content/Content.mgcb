@@ -247,6 +247,9 @@
 #begin Fonts/Bitstream Vera Sans Mono Roman.ttf
 /copy:Fonts/Bitstream Vera Sans Mono Roman.ttf
 
+#begin Fonts/SOV_monomon-hinted.ttf
+/copy:Fonts/SOV_monomon-hinted.ttf
+
 #begin Fonts/THSarabunNew Bold.ttf
 /copy:Fonts/THSarabunNew Bold.ttf
 
