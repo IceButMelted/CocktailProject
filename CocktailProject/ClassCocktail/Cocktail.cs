@@ -20,6 +20,32 @@ namespace CocktailProject.ClassCocktail
         protected bool _AddIce = false;
         protected Enum_TypeOfCocktail typeOfCocktail;
 
+
+        /// Get Methods for properties
+        public Dictionary<Enum_Alcohol, int> GetDicAlcohol()
+        {
+            return _alcoholWithQuantity;
+        }
+        public Dictionary<Enum_Mixer, int> GetDicMixer()
+        {
+            return _mixerWithQuantity;
+        }
+        public Enum_Method Getmethod()
+        {
+            return method;
+        }
+        public int GetCountPart()
+        {
+            return _CountPart;
+        }
+        public Enum_TypeOfCocktail GetTypeOfCocktail()
+        {
+            return typeOfCocktail;
+        }
+
+        /// <summary>
+        /// Default constructor for creating an empty cocktail.
+        /// </summary>
         public Cocktail()
         {
             _alcoholWithQuantity = new Dictionary<Enum_Alcohol, int>();
@@ -101,6 +127,11 @@ namespace CocktailProject.ClassCocktail
         }
 
         // Equality implementation
+        /// <summary>
+        /// Checks if this cocktail is equal to another cocktail based on its ingredients and preparation method.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(Cocktail other)
         {
             if (other == null) return false;
@@ -119,11 +150,6 @@ namespace CocktailProject.ClassCocktail
         public bool IsPartFull()
         {
             return _CountPart >= 10;
-        }
-
-        public Enum_Method Getmethod()
-        {
-            return method;
         }
 
         public bool IsSameAlcohol(Cocktail _cocktail)
@@ -160,5 +186,6 @@ namespace CocktailProject.ClassCocktail
             }
             return true;
         }
+
     }
 }

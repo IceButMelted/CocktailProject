@@ -66,7 +66,10 @@ namespace CocktailProject.ClassCocktail
         {
             this.glass = glass;
         }
-
+        /// <summary>
+        /// Adds ice to the cocktail if desired.
+        /// </summary>
+        /// <param name="_bool"></param>
         public void AddIce(bool _bool)
         {
             this._AddIce = _bool;
@@ -82,7 +85,35 @@ namespace CocktailProject.ClassCocktail
             method = Enum_Method.None;
             glass = Enum_Glass.None;
             _AddIce = false;
-            _CountPart = 0; 
+            _CountPart = 0;
+            typeOfCocktail = Enum_TypeOfCocktail.None;
+        }
+
+        /// <summary>
+        /// Sets the type of cocktail based on the ingredients added to the builder.
+        /// </summary>
+        public void SetTypeOfCocktailBySearch()
+        {
+            CocktailDicMaker.CocktailDictionary
+                .Where(c => c.Value.GetDicAlcohol().Count == _alcoholWithQuantity.Count &&
+                            c.Value.GetDicMixer().Count == _mixerWithQuantity.Count)
+                .ToList()
+                .ForEach(c =>
+                {
+                    if (c.Value.GetDicAlcohol().All(a => _alcoholWithQuantity.ContainsKey(a.Key) && _alcoholWithQuantity[a.Key] == a.Value) &&
+                        c.Value.GetDicMixer().All(m => _mixerWithQuantity.ContainsKey(m.Key) && _mixerWithQuantity[m.Key] == m.Value))
+                    {
+                        typeOfCocktail = c.Value.GetTypeOfCocktail();
+                    }
+                    else {
+                        typeOfCocktail = Enum_TypeOfCocktail.None;
+                    }
+                });
+        }
+
+        public void IsSameIngredient()
+        {
+            
         }
 
         /// <summary>

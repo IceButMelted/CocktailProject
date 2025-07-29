@@ -143,6 +143,7 @@ public class Game1 : Core
             _currentCocktail.UseMethod(Enum_Method.Shaking);
             _BTN_Shake.Enabled = false;
             _BTN_Mix.Enabled = false;
+            _currentCocktail.SetTypeOfCocktailBySearch();
         };
 
         _BTN_Mix = new Button("Mix", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(200, -100));
@@ -151,6 +152,7 @@ public class Game1 : Core
             _currentCocktail.UseMethod(Enum_Method.Mixing);
             _BTN_Mix.Enabled = false;
             _BTN_Shake.Enabled = false;
+            _currentCocktail.SetTypeOfCocktailBySearch();
         };
         _BTN_Serve = new Button("Serve", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(300, -100));
         _BTN_Serve.OnMouseDown = (Entity e) =>
@@ -228,7 +230,7 @@ public class Game1 : Core
             Debug.WriteLine("Gin button clicked!");
         };
 
-        _BTN_Vodka = new Button("Vodka", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
+        _BTN_Vodka = new Button("Vodka", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(30, 0));
         _BTN_Vodka.OnMouseDown = (Entity e) =>
         {
             _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
@@ -326,7 +328,7 @@ public class Game1 : Core
         _BTN_Perpermint = new Button("Paper mint", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Perpermint.OnMouseDown = (Entity e) =>
         {
-            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
             MixPartCount++;
             Debug.WriteLine("Paper mint button clicked!");
         };
@@ -469,8 +471,6 @@ public class Game1 : Core
         UserInterface.Active.Draw(SpriteBatch);
         base.Draw(gameTime);
     }
-
-
 
 
     private string GetRandomCocktailName()

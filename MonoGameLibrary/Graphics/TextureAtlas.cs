@@ -144,16 +144,16 @@ public class TextureAtlas
             {
                 XDocument doc = XDocument.Load(reader);
                 XElement root = doc.Root;
-
+                #region texture
                 // Load all textures
                 // The <Textures> element contains individual <Texture> elements, each one describing
                 // a different texture region within the atlas.  
                 //
                 // Example:
                 // <Textures>
-		        //   <Texture name="atlas">Images/atlas</Texture>
-		        //   <Texture name="atlas2">Images/atlas2</Texture>
-	            // </Textures>
+                //   <Texture name="atlas">Images/atlas</Texture>
+                //   <Texture name="atlas2">Images/atlas2</Texture>
+                // </Textures>
                 //
                 // So we retrieve all of the <Texture> elements then loop through each one
                 // to get path of Texture.
@@ -170,7 +170,9 @@ public class TextureAtlas
                         }
                     }
                 }
+                #endregion
 
+                #region region
                 // Load regions
                 // The <Regions> element contains individual <Region> elements, each one describing
                 // a different texture region within the atlas.  
@@ -201,7 +203,9 @@ public class TextureAtlas
                         }
                     }
                 }
+#endregion
 
+                #region animation
                 // Load animations
                 // The <Animations> element contains individual <Animation> elements, each one describing
                 // a different animation within the atlas.
@@ -238,6 +242,7 @@ public class TextureAtlas
                         atlas.AddAnimation(name, new Animation(frames, delay));
                     }
                 }
+                #endregion
             }
         }
 
