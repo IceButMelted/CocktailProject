@@ -48,9 +48,9 @@ public class Game1 : Core
     Button _BTN_Perpermint;
     #endregion  
 
-    Paragraph currentCocktailInfo;
-    Paragraph targetCockTailInfo;
-    Paragraph result;
+    Paragraph p_currentCocktailInfo;
+    Paragraph p_targetCockTailInfo;
+    Paragraph p_result;
 
 
     int width_ReciptPanel = 500;
@@ -62,9 +62,9 @@ public class Game1 : Core
     bool _isOpenMixer = false;
 
     #region Cocktail
-    private static string _targetCocktailName;
-    private Cocktail targetCoctail = new Cocktail();
-    private CocktailBuilder CurrentCocktail = new CocktailBuilder();
+    private static string str_targetCocktail_Name;
+    private Cocktail _targetCoctail = new Cocktail();
+    private CocktailBuilder _currentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
 
     #endregion
@@ -102,11 +102,11 @@ public class Game1 : Core
         _startBTN.OnClick = (Entity entity) =>
         {
 
-            _targetCocktailName = GetRandomCocktailName();
-            CocktailDicMaker.CocktailDictionary.TryGetValue(_targetCocktailName, out targetCoctail);
-            targetCockTailInfo.Text = "Target Cocktail: " + _targetCocktailName + targetCoctail.Info();
+            str_targetCocktail_Name = GetRandomCocktailName();
+            CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+            p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
 
-            Debug.WriteLine($"Target Cocktail: {_targetCocktailName}");
+            Debug.WriteLine($"Target Cocktail: {str_targetCocktail_Name}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
             _inGamePanel.Enabled = true;
@@ -133,14 +133,14 @@ public class Game1 : Core
         _BTN_AddIce = new Button("AddIce", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(0, -100));
         _BTN_AddIce.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddIce(true);
+            _currentCocktail.AddIce(true);
             _BTN_AddIce.Enabled = false;
         };
         
         _BTN_Shake = new Button("Shake", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(100, -100));
         _BTN_Shake.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.UseMethod(Enum_Method.Shaking);
+            _currentCocktail.UseMethod(Enum_Method.Shaking);
             _BTN_Shake.Enabled = false;
             _BTN_Mix.Enabled = false;
         };
@@ -148,7 +148,7 @@ public class Game1 : Core
         _BTN_Mix = new Button("Mix", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(200, -100));
         _BTN_Mix.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.UseMethod(Enum_Method.Mixing);
+            _currentCocktail.UseMethod(Enum_Method.Mixing);
             _BTN_Mix.Enabled = false;
             _BTN_Shake.Enabled = false;
         };
@@ -156,18 +156,18 @@ public class Game1 : Core
         _BTN_Serve.OnMouseDown = (Entity e) =>
         {
             // Logic for Serve button click
-            if (!CocktailDicMaker.CocktailDictionary.TryGetValue(_targetCocktailName, out Cocktail targetCocktail))
+            if (!CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out Cocktail targetCocktail))
             {
                 Console.WriteLine("Error: Target cocktail not found!");
                 return;
             }
 
-            if (targetCocktail.Equals(CurrentCocktail))
+            if (targetCocktail.Equals(_currentCocktail))
             {
-                result.Text = "You made a cocktail: " + _targetCocktailName + "!";
+                p_result.Text = "You made a cocktail: " + str_targetCocktail_Name + "!";
             }
             else { 
-                result.Text = "You made a cocktail, but it is not " + _targetCocktailName + "!";
+                p_result.Text = "You made a cocktail, but it is not " + str_targetCocktail_Name + "!";
             }
 
                 Debug.WriteLine("Serve button clicked!");
@@ -193,7 +193,7 @@ public class Game1 : Core
             _BTN_Mix.Enabled = true;
             _BTN_Shake.Enabled = true;
 
-            CurrentCocktail.ClearAllIngredients();
+            _currentCocktail.ClearAllIngredients();
             MixPartCount = 0;
 
             Debug.WriteLine("Reset button clicked!");
@@ -222,7 +222,7 @@ public class Game1 : Core
         _BTN_Gin = new Button("Gin", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Gin.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
+            _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
             MixPartCount++;
             // Logic for Gin button click
             Debug.WriteLine("Gin button clicked!");
@@ -231,7 +231,7 @@ public class Game1 : Core
         _BTN_Vodka = new Button("Vodka", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Vodka.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
+            _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
             MixPartCount++;
             Debug.WriteLine("Vodka button clicked!");
         };
@@ -241,7 +241,7 @@ public class Game1 : Core
         _BTN_TripleSec = new Button("Triple Sec", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_TripleSec.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
+            _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
             MixPartCount++;
             Debug.WriteLine("Triple Sec button clicked!");
         };
@@ -249,7 +249,7 @@ public class Game1 : Core
         _BTN_Vermoth = new Button("Vermouth", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Vermoth.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
+            _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
             MixPartCount++;
             Debug.WriteLine("Vermouth button clicked!");
         };
@@ -284,7 +284,7 @@ public class Game1 : Core
         _BTN_Lemon = new Button("Lemon", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Lemon.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
             MixPartCount++;
             Debug.WriteLine("Lemon button clicked!");
         };
@@ -292,7 +292,7 @@ public class Game1 : Core
         _BTN_Syrup = new Button("Syrup", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Syrup.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
             MixPartCount++;
             Debug.WriteLine("Syrup button clicked!");
         };
@@ -300,7 +300,7 @@ public class Game1 : Core
         _BTN_Soda = new Button("Soda", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Soda.OnMouseDown = (Entity e) => 
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
             MixPartCount++;
             Debug.WriteLine("Soda button clicked!");
         };
@@ -310,7 +310,7 @@ public class Game1 : Core
         _BTN_Grape = new Button("Grapefruit juice", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Grape.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
             MixPartCount++;
             Debug.WriteLine("Grapefruit juice button clicked!");
         };
@@ -318,7 +318,7 @@ public class Game1 : Core
         _BTN_Cranberry = new Button("Cranberry juice", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Cranberry.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
             MixPartCount++;
             Debug.WriteLine("Cranberry juice button clicked!");
         };
@@ -326,7 +326,7 @@ public class Game1 : Core
         _BTN_Perpermint = new Button("Paper mint", ButtonSkin.Default, Anchor.AutoInline, new Vector2(150, 100), new Vector2(0, 0));
         _BTN_Perpermint.OnMouseDown = (Entity e) =>
         {
-            CurrentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+            _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
             MixPartCount++;
             Debug.WriteLine("Paper mint button clicked!");
         };
@@ -341,15 +341,15 @@ public class Game1 : Core
         _inGame_Mixer.AddChild(_BTN_Perpermint);
         _inGame_Mixer.AddChild(_BTN_Mixer);
 
-        currentCocktailInfo = new Paragraph(CurrentCocktail.Info(), Anchor.TopLeft, new Vector2(300, 500));
-        currentCocktailInfo.FillColor = Color.White;
+        p_currentCocktailInfo = new Paragraph(_currentCocktail.Info(), Anchor.TopLeft, new Vector2(300, 500));
+        p_currentCocktailInfo.FillColor = Color.White;
 
-        targetCockTailInfo = new Paragraph("Target Cocktail: " + _targetCocktailName + targetCoctail.Info(), Anchor.TopLeft, new Vector2(300, 500), new Vector2(300, 0));
-        targetCockTailInfo.FillColor = Color.White;
+        p_targetCockTailInfo = new Paragraph("Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info(), Anchor.TopLeft, new Vector2(300, 500), new Vector2(300, 0));
+        p_targetCockTailInfo.FillColor = Color.White;
         
 
-        result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0,0));
-        result.FillColor = Color.White;
+        p_result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0,0));
+        p_result.FillColor = Color.White;
 
         /// Add Chiildren to the panels
         _titlePanel.AddChild(_startBTN);
@@ -366,9 +366,9 @@ public class Game1 : Core
 
         UserInterface.Active.SetCursor(CursorType.Default);
         
-        UserInterface.Active.AddEntity(currentCocktailInfo);
-        UserInterface.Active.AddEntity(targetCockTailInfo);
-        UserInterface.Active.AddEntity(result);
+        UserInterface.Active.AddEntity(p_currentCocktailInfo);
+        UserInterface.Active.AddEntity(p_targetCockTailInfo);
+        UserInterface.Active.AddEntity(p_result);
 
         UserInterface.Active.AddEntity(_titlePanel);
         UserInterface.Active.AddEntity(_inGamePanel);
@@ -388,7 +388,7 @@ public class Game1 : Core
         PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
-        currentCocktailInfo.Text = CurrentCocktail.Info();
+        p_currentCocktailInfo.Text = _currentCocktail.Info();
 
         //update method
         UserInterface.Active.Update(gameTime);

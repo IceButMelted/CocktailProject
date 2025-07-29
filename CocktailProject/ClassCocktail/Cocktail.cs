@@ -106,10 +106,10 @@ namespace CocktailProject.ClassCocktail
             if (other == null) return false;
             if (ReferenceEquals(this, other)) return true;
 
-            return DictionariesEqual(_alcoholWithQuantity, other._alcoholWithQuantity) &&
-                   DictionariesEqual(_mixerWithQuantity, other._mixerWithQuantity) &&
+            return IsSameAlcohol(other) &&
+                   IsSameMixer(other) &&
                    method == other.method &&
-                   typeOfCocktail == other.typeOfCocktail &&
+                   //typeOfCocktail == other.typeOfCocktail &&
                    _AddIce == other._AddIce;
         }
 
@@ -124,6 +124,25 @@ namespace CocktailProject.ClassCocktail
         public Enum_Method Getmethod()
         {
             return method;
+        }
+
+        public bool IsSameAlcohol(Cocktail _cocktail)
+        {
+            return DictionariesEqual(_alcoholWithQuantity, _cocktail._alcoholWithQuantity);
+        }
+
+        public bool IsSameMixer(Cocktail _cocktail)
+        {
+            return DictionariesEqual(_mixerWithQuantity, _cocktail._mixerWithQuantity);
+        }
+
+        public bool IsSameMethod(Cocktail _cocktail) { 
+            return method == _cocktail.method;
+        }
+
+        public bool IsAddIceBoth(Cocktail _cocktail)
+        {
+            return _AddIce == _cocktail._AddIce;
         }
 
 
