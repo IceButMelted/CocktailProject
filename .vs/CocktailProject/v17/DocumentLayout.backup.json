@@ -66,8 +66,7 @@
               "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-29T15:46:58.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T15:46:58.679Z"
             },
             {
               "$type": "Document",
@@ -79,8 +78,7 @@
               "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureAtlas.cs",
               "ViewState": "AgIAAEoAAAAAAAAAAAAowFsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T08:16:34.323Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T08:16:34.323Z"
             },
             {
               "$type": "Document",
@@ -92,8 +90,7 @@
               "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureRegion.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T08:16:30.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T08:16:30.642Z"
             },
             {
               "$type": "Document",
@@ -105,8 +102,7 @@
               "RelativeToolTip": "CocktailProject\\Content\\images\\atlas-definition.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-07-29T04:07:02.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T04:07:02.135Z"
             },
             {
               "$type": "Document",
@@ -116,7 +112,7 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAAJUAAAAAAAAAAAAwwKsAAABhAAAAAAAAAA==",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAiwNEBAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T05:30:21.888Z",
               "EditorCaption": ""
@@ -143,8 +139,7 @@
               "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
               "ViewState": "AgIAAEgAAAAAAAAAAAAxwFwAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:33.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-28T13:07:33.615Z"
             },
             {
               "$type": "Document",
@@ -156,8 +151,7 @@
               "RelativeToolTip": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-29T03:00:33.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T03:00:33.264Z"
             },
             {
               "$type": "Document",
@@ -169,8 +163,7 @@
               "RelativeToolTip": "CocktailProject\\ClassCocktail\\EnumElement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T16:59:57.506Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-28T16:59:57.506Z"
             },
             {
               "$type": "Document",
@@ -182,8 +175,7 @@
               "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwH8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:40.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-28T13:07:40.161Z"
             }
           ]
         }
