@@ -25,6 +25,9 @@ public class Game1 : Core
     Panel _inGamePanel;
     Panel _inGame_Alcohol;
     Panel _inGame_Mixer;
+    Panel _inGame_MethodScreen;
+
+    Panel _UI_Table;
     Button _BTN_Alcohol;
     Button _BTN_Mixer;
 
@@ -46,6 +49,8 @@ public class Game1 : Core
     Button _BTN_Grape;
     Button _BTN_Cranberry;
     Button _BTN_Perpermint;
+
+    Button _BTN_PaperMakeCocktail;
     #endregion  
 
     Paragraph p_currentCocktailInfo;
@@ -53,8 +58,14 @@ public class Game1 : Core
     Paragraph p_result;
 
 
-    int width_ReciptPanel = 500;
-    int heigh_ReciptPanel = 250;
+    int width_ReciptPanel = 960;
+    int heigh_ReciptPanel = 550;
+    int OffsetY_RecipPanel = 50;
+    int Padding_ReciptPanel = 80;
+
+    int BTN_Open_Width = 75;
+    int BTN_Open_Height = 150;
+    int BTN_Open_Padding = 20;
 
     Panel _summaryPanel;
 
@@ -73,7 +84,7 @@ public class Game1 : Core
     private AnimatedSprite _slime;
     private Vector2 _slimePosition = new Vector2(100, 100);
 
-    public Game1() : base("CocktialProject", 1280, 720, false)
+    public Game1() : base("CocktialProject", 1920, 1080, true)
     {
         
     }
@@ -95,13 +106,16 @@ public class Game1 : Core
 
 #region Init Ui
         UserInterface.Initialize(Content, BuiltinThemes.hd);
-        _titlePanel = new Panel(new Vector2(500, 500), PanelSkin.Default, Anchor.Center);
+
+        _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
+        _inGame_MethodScreen = new Panel(new Vector2(960, 400), PanelSkin.Default, Anchor.BottomRight, new Vector2(0, 100));
+
+        _titlePanel = new Panel(new Vector2(500, 400), PanelSkin.Default, Anchor.Center);
         _startBTN = new Button("Start Game", ButtonSkin.Default,Anchor.AutoCenter, new Vector2(200,50));
         _startBTN.Padding = new Vector2(0, 25);
         _startBTN.ToolTipText = "Click to start the game!";
         _startBTN.OnClick = (Entity entity) =>
         {
-
             str_targetCocktail_Name = GetRandomCocktailName();
             CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
             p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
@@ -111,10 +125,8 @@ public class Game1 : Core
             _titlePanel.Visible = false;
             _inGamePanel.Enabled = true;
             _inGamePanel.Visible = true;
-            UserInterface.Active.SetCursor(CursorType.Default);
-
             
-
+            UserInterface.Active.SetCursor(CursorType.Default);
         };
 
         _exitBTN  = new Button("Exit Game", ButtonSkin.Default, Anchor.AutoCenter, new Vector2(200,50));
@@ -125,36 +137,39 @@ public class Game1 : Core
         };
 
         /// Create the in-game panel
-        _inGamePanel = new Panel(new Vector2(500, 500), PanelSkin.Default, Anchor.TopRight);
+        _inGamePanel = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
         _inGamePanel.Padding = new Vector2(0, 0);
         _inGamePanel.Enabled = false;
         _inGamePanel.Visible = false;
+        _inGamePanel.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
 
-        _BTN_AddIce = new Button("AddIce", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(0, -100));
+        _BTN_AddIce = new Button("AddIce", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(200, 200), new Vector2(0, 200));
         _BTN_AddIce.OnMouseDown = (Entity e) =>
         {
             _currentCocktail.AddIce(true);
             _BTN_AddIce.Enabled = false;
         };
         
-        _BTN_Shake = new Button("Shake", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(100, -100));
+        _BTN_Shake = new Button("Shake", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(700, 300));
         _BTN_Shake.OnMouseDown = (Entity e) =>
         {
             _currentCocktail.UseMethod(Enum_Method.Shaking);
             _BTN_Shake.Enabled = false;
             _BTN_Mix.Enabled = false;
+            DisableBTNMakeCocktail();
             _currentCocktail.SetTypeOfCocktailBySearch();
         };
 
-        _BTN_Mix = new Button("Mix", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(200, -100));
+        _BTN_Mix = new Button("Mix", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(800, 300));
         _BTN_Mix.OnMouseDown = (Entity e) =>
         {
             _currentCocktail.UseMethod(Enum_Method.Mixing);
             _BTN_Mix.Enabled = false;
             _BTN_Shake.Enabled = false;
+            DisableBTNMakeCocktail();
             _currentCocktail.SetTypeOfCocktailBySearch();
         };
-        _BTN_Serve = new Button("Serve", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(300, -100));
+        _BTN_Serve = new Button("Serve", ButtonSkin.Default, Anchor.BottomCenter, new Vector2(150, 75), new Vector2(0, 0));
         _BTN_Serve.OnMouseDown = (Entity e) =>
         {
             // Logic for Serve button click
@@ -175,7 +190,7 @@ public class Game1 : Core
                 Debug.WriteLine("Serve button clicked!");
         };
 
-        _BTN_Reset = new Button("Reset", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(100, 100), new Vector2(400, -100));
+        _BTN_Reset = new Button("Reset", ButtonSkin.Default, Anchor.BottomRight, new Vector2(100, 100), new Vector2(0, 0));
         _BTN_Reset.OnMouseDown = (Entity e) =>
         {
             //enable all buttons
@@ -201,11 +216,18 @@ public class Game1 : Core
             Debug.WriteLine("Reset button clicked!");
         };
 
+
+        _BTN_PaperMakeCocktail = new Button("Paper Make Cocktail", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(150, 75), new Vector2(0, 20));
+        _BTN_PaperMakeCocktail.OnMouseDown = (Entity e) =>
+        {
+            Debug.WriteLine("Paper Make Cocktail button clicked!");
+        };
+
         /// Create the in-game alcohol and mixer panels
         /// Alchol
-        _inGame_Alcohol = new Panel(new Vector2(width_ReciptPanel, heigh_ReciptPanel), PanelSkin.Default, Anchor.TopLeft,new Vector2(width_ReciptPanel,0));
+        _inGame_Alcohol = new Panel(new Vector2(width_ReciptPanel, heigh_ReciptPanel), PanelSkin.Default, Anchor.TopLeft,new Vector2(width_ReciptPanel, OffsetY_RecipPanel));
         _inGame_Alcohol.Padding = new Vector2(20, 10);
-        _BTN_Alcohol = new Button("Alchol", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(50, 100), new Vector2(-70,0));
+        _BTN_Alcohol = new Button("Alchol", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(BTN_Open_Width, BTN_Open_Height), new Vector2(-BTN_Open_Width - BTN_Open_Padding, BTN_Open_Height));
         _BTN_Alcohol.OnMouseDown = (Entity e) =>
         {
             if (!_isOpenAlcohol)
@@ -265,9 +287,9 @@ public class Game1 : Core
         
 
         /// Mixer
-        _inGame_Mixer = new Panel(new Vector2(width_ReciptPanel, heigh_ReciptPanel), PanelSkin.Default, Anchor.TopLeft, new Vector2(width_ReciptPanel,heigh_ReciptPanel));
+        _inGame_Mixer = new Panel(new Vector2(width_ReciptPanel, heigh_ReciptPanel), PanelSkin.Default, Anchor.TopLeft, new Vector2(width_ReciptPanel , OffsetY_RecipPanel));
         _inGame_Mixer.Padding = new Vector2(20, 10);
-        _BTN_Mixer = new Button("Mixer", ButtonSkin.Default, Anchor.TopLeft, new Vector2(50, 100), new Vector2(-70, 0));
+        _BTN_Mixer = new Button("Mixer", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(BTN_Open_Width, BTN_Open_Height), new Vector2(-BTN_Open_Width - BTN_Open_Padding, 0));
         _BTN_Mixer.OnMouseDown = (Entity e) =>
         {
             if (!_isOpenMixer)
@@ -360,14 +382,22 @@ public class Game1 : Core
         _inGamePanel.AddChild(_BTN_AddIce);
         _inGamePanel.AddChild(_BTN_Shake);
         _inGamePanel.AddChild(_BTN_Mix);
-        _inGamePanel.AddChild(_BTN_Serve);
+        //_inGamePanel.AddChild(_BTN_Serve);
+        _inGamePanel.AddChild(_BTN_PaperMakeCocktail);
         _inGamePanel.AddChild(_BTN_Reset);
 
         _inGamePanel.AddChild(_inGame_Alcohol);
         _inGamePanel.AddChild(_inGame_Mixer);
+        _inGame_MethodScreen.AddChild(_BTN_Serve);
+        _inGamePanel.AddChild(_inGame_MethodScreen);
+
 
         UserInterface.Active.SetCursor(CursorType.Default);
         
+        UserInterface.Active.AddEntity(_UI_Table);
+        _UI_Table.SendToBack();
+
+
         UserInterface.Active.AddEntity(p_currentCocktailInfo);
         UserInterface.Active.AddEntity(p_targetCockTailInfo);
         UserInterface.Active.AddEntity(p_result);
@@ -409,7 +439,7 @@ public class Game1 : Core
         }
         else
         {
-            if (_inGame_Alcohol.Offset.X >= 0)
+            if (_inGame_Alcohol.Offset.X >= Padding_ReciptPanel)
             {
                 _inGame_Alcohol.Offset -= new Vector2(25, 0);
                 _BTN_Alcohol.Enabled = false;
@@ -428,7 +458,7 @@ public class Game1 : Core
         }
         else
         {
-            if (_inGame_Mixer.Offset.X >= 0)
+            if (_inGame_Mixer.Offset.X >= Padding_ReciptPanel)
             {
                 _inGame_Mixer.Offset -= new Vector2(25, 0);
                 _BTN_Mixer.Enabled = false;
@@ -441,19 +471,23 @@ public class Game1 : Core
 
     protected void GameplayLogic() {
         if (MixPartCount >= 10) { 
-            _BTN_Vodka.Enabled = false;
-            _BTN_Gin.Enabled = false;
-            _BTN_TripleSec.Enabled = false;
-            _BTN_Vermoth.Enabled = false;   
-
-            _BTN_Lemon.Enabled = false;
-            _BTN_Syrup.Enabled = false;
-            _BTN_Soda.Enabled = false;
-            _BTN_Grape.Enabled = false;
-            _BTN_Soda.Enabled = false;
-            _BTN_Cranberry.Enabled = false;
-            _BTN_Perpermint.Enabled = false;
+            DisableBTNMakeCocktail();
         }
+    }
+
+    protected void DisableBTNMakeCocktail() {
+        _BTN_Vodka.Enabled = false;
+        _BTN_Gin.Enabled = false;
+        _BTN_TripleSec.Enabled = false;
+        _BTN_Vermoth.Enabled = false;
+
+        _BTN_Lemon.Enabled = false;
+        _BTN_Syrup.Enabled = false;
+        _BTN_Soda.Enabled = false;
+        _BTN_Grape.Enabled = false;
+        _BTN_Soda.Enabled = false;
+        _BTN_Cranberry.Enabled = false;
+        _BTN_Perpermint.Enabled = false;
     }
 
     protected override void Draw(GameTime gameTime)
