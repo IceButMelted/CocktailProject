@@ -1,29 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
-	<Textures>
-		<Texture name="atlas">Images/atlas</Texture>
-		<Texture name="atlas2">Images/atlas2</Texture>
-	</Textures>
+	<Texture>images/atlas</Texture>
 	<Regions>
-		<Region name="slime-1" texture="atlas" x="0" y="0" width="20" height="20" />
-		<Region name="slime-2" texture="atlas" x="0" y="20" width="20" height="20" />
-		<Region name="bat-1" texture="atlas2" x="20" y="0" width="20" height="20" />
-		<Region name="bat-2" texture="atlas2" x="20" y="20" width="20" height="20" />
-		<Region name="bat-3" texture="atlas2" x="40" y="0" width="20" height="20" />
+		<Region name="slime-1" x="0" y="0" width="20" height="20" />
+		<Region name="slime-2" x="0" y="20" width="20" height="20" />
+		<Region name="bat-1" x="20" y="0" width="20" height="20" />
+		<Region name="bat-2" x="20" y="20" width="20" height="20" />
+		<Region name="bat-3" x="40" y="0" width="20" height="20" />
 	</Regions>
 	<Animations>
-		<Animation name="slime-animation" delay="150">
+		<Animation name="slime-animation" delay="200">
 			<Frame region="slime-1" />
-			<Frame region="slime-2" />
-			<Frame region="slime-1" />
-			<Frame region="slime-2" />
-			<Frame region="slime-2" />
-			<Frame region="slime-1" />
-			<Frame region="slime-2" />
-			<Frame region="slime-2" />
 			<Frame region="slime-2" />
 		</Animation>
-		<Animation name="bat-animation" delay="100">
+		<Animation name="bat-animation" delay="200">
 			<Frame region="bat-1" />
 			<Frame region="bat-2" />
 			<Frame region="bat-1" />
