@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Graphics;
 
-namespace MonoGameLibrary.Graphics;
+namespace Lab05_01.Graphics;
 
 public class AnimatedSprite : Sprite
 {
@@ -57,62 +59,67 @@ public class AnimatedSprite : Sprite
             Region = _animation.Frames[_currentFrame];
         }
     }
+
     /// <summary>
-    /// Update Animation with Freezz last Frame
+    ///  Update with Freez specific frame is true or Loop roll back animation is true.
     /// </summary>
     /// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
-    /// <param name="isFreezeLastSprite">Indicates whether to freeze the last sprite frame or loop back to the first frame.</param>
-    public void Update(GameTime gameTime, bool isFreezeLastSprite)
+    public void Update(GameTime gameTime, int SpecificFrame, bool IsFreezeFramem = false, bool IsReverse = false)
     {
         _elapsed += gameTime.ElapsedGameTime;
 
         if (_elapsed >= _animation.Delay)
         {
             _elapsed -= _animation.Delay;
-            _currentFrame++;
-
-            int frameCount = _animation.Frames.Count;
-
-            if (_currentFrame >= frameCount)
-            {
-                _currentFrame = isFreezeLastSprite ? frameCount - 1 : 0;
-            }
-
-            Region = _animation.Frames[_currentFrame];
-        }
-    }
-
-    /// <summary>
-    /// Update Animation with Freez last frame or Loop roll back animation.
-    /// </summary>
-    /// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
-    /// <param name="isFreezeLastSprite">Indicates whether to freeze the last sprite frame or loop back to the first frame.</param>
-    /// <param name="isReverse">Indicates reverse an animation or not.</param>"
-    public void Update(GameTime gameTime, bool isFreezeLastSprite, bool isReverse)
-    {
-        _elapsed += gameTime.ElapsedGameTime;
-        if (_elapsed >= _animation.Delay)
-        {
-            _elapsed -= _animation.Delay;
-            if (isReverse)
-            {
+            if (IsFreezeFramem)
+                _currentFrame = SpecificFrame;
+            else if (IsReverse)
                 _currentFrame--;
-                if (_currentFrame < 0)
-                {
-                    _currentFrame = isFreezeLastSprite ? 0 : _animation.Frames.Count - 1;
-                }
-            }
             else
-            {
                 _currentFrame++;
-                if (_currentFrame >= _animation.Frames.Count)
-                {
-                    _currentFrame = isFreezeLastSprite ? _animation.Frames.Count - 1 : 0;
-                }
+
+            if (_currentFrame >= _animation.Frames.Count)
+            {
+                _currentFrame = 0;
             }
+            if (_currentFrame < 0)
+            {
+                _currentFrame = _animation.Frames.Count - 1;
+            }
+
             Region = _animation.Frames[_currentFrame];
         }
     }
+
+    /// <summary>
+    ///  Update with Freez specific frame is true or Loop roll back animation is true and flip or not.
+    /// </summary>
+    /// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
+    public void Update(GameTime gameTime, int SpecificFrame, bool IsFreezeFramem = false, bool IsReverse = false, SpriteEffects spriteEffects = SpriteEffects.None)
+    {
+        _elapsed += gameTime.ElapsedGameTime;
+        if (_elapsed >= _animation.Delay)
+        {
+            _elapsed -= _animation.Delay;
+            if (IsFreezeFramem)
+                _currentFrame = SpecificFrame;
+            else if (IsReverse)
+                _currentFrame--;
+            else
+                _currentFrame++;
+            if (_currentFrame >= _animation.Frames.Count)
+            {
+                _currentFrame = 0;
+            }
+            if (_currentFrame < 0)
+            {
+                _currentFrame = _animation.Frames.Count - 1;
+            }
+            Region = _animation.Frames[_currentFrame];
+            Effects = spriteEffects;
+        }
+    }
+
 
     public bool IsLastFrame()
     {
