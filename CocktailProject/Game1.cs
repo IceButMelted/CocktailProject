@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using CocktailProject.ClassCocktail;
+using CocktailProject.ClassTime;
 
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
@@ -13,6 +14,7 @@ using GeonBit.UI.Entities;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Transactions;
 
 namespace CocktailProject;
 
@@ -22,10 +24,16 @@ public class Game1 : Core
     Button _startBTN;
     Button _exitBTN;
 
-    Panel _inGamePanel;
+    Panel _inGamePanelCatagory;
     Panel _inGame_Alcohol;
     Panel _inGame_Mixer;
     Panel _inGame_MethodScreen;
+
+    Panel _summaryPanelCataory;
+    Panel _summaryPanel;
+    int _summaryPanelWidth = 600;
+    int _summaryPanelHeight = 700;
+
 
     Panel _UI_Table;
     Button _BTN_Alcohol;
@@ -57,6 +65,12 @@ public class Game1 : Core
     Paragraph p_targetCockTailInfo;
     Paragraph p_result;
 
+    //testing function in editor
+#if DEBUG
+    Button _BTN_Randomcocktail;
+#endif
+
+
 
     int width_ReciptPanel = 960;
     int heigh_ReciptPanel = 550;
@@ -67,8 +81,6 @@ public class Game1 : Core
     int BTN_Open_Height = 150;
     int BTN_Open_Padding = 20;
 
-    Panel _summaryPanel;
-
     bool _isOpenAlcohol = false;
     bool _isOpenMixer = false;
     bool _isOpenMethod = false;
@@ -78,14 +90,17 @@ public class Game1 : Core
     private Cocktail _targetCoctail = new Cocktail();
     private CocktailBuilder _currentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
-
     #endregion
 
+    private int attemptCount = 0;
+    private int maxAttempts = 3; // Maximum number of attempts allowed
 
     private AnimatedSprite _slime;
     private Vector2 _slimePosition = new Vector2(100, 100);
 
-    public Game1() : base("CocktialProject", 1920, 1080, true)
+    private Timer timer;
+
+    public Game1() : base("CocktialProject", 1920, 1080, false)
     {
 
     }
@@ -93,6 +108,9 @@ public class Game1 : Core
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+        timer = new Timer(120f);
+        timer.StartStop();
+
         base.Initialize();
     }
 
@@ -108,28 +126,24 @@ public class Game1 : Core
         #region Init Ui
         UserInterface.Initialize(Content, BuiltinThemes.hd);
 
-        _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
-        _inGame_MethodScreen = new Panel(new Vector2(width_ReciptPanel - 220, 400), PanelSkin.Default, Anchor.BottomLeft, new Vector2(width_ReciptPanel, 100));
-
+        #region TitlePanel
+        /// Add Chiildren to the panels
         _titlePanel = new Panel(new Vector2(500, 400), PanelSkin.Default, Anchor.Center);
         _startBTN = new Button("Start Game", ButtonSkin.Default, Anchor.AutoCenter, new Vector2(200, 50));
         _startBTN.Padding = new Vector2(0, 25);
         _startBTN.ToolTipText = "Click to start the game!";
         _startBTN.OnClick = (Entity entity) =>
         {
-            str_targetCocktail_Name = GetRandomCocktailName();
-            CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
-            p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
+            RandomeTargetCocktail();
 
             Debug.WriteLine($"Target Cocktail: {str_targetCocktail_Name}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
-            _inGamePanel.Enabled = true;
-            _inGamePanel.Visible = true;
+            _inGamePanelCatagory.Enabled = true;
+            _inGamePanelCatagory.Visible = true;
 
             UserInterface.Active.SetCursor(CursorType.Default);
         };
-
         _exitBTN = new Button("Exit Game", ButtonSkin.Default, Anchor.AutoCenter, new Vector2(200, 50));
         _exitBTN.Padding = new Vector2(0, 25);
         _exitBTN.OnClick = (Entity entity) =>
@@ -137,12 +151,31 @@ public class Game1 : Core
             Exit();
         };
 
+        _titlePanel.AddChild(_startBTN);
+        _titlePanel.AddChild(_exitBTN);
+        #endregion
+
+        #region InGamePanel
+
+        #region InGamePanel Init
+#if DEBUG
+        _BTN_Randomcocktail = new Button("Random Cocktail", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(200, 50), new Vector2(0, 0));
+        _BTN_Randomcocktail.OnMouseDown = (Entity e) =>
+        {
+            RandomeTargetCocktail();
+        };
+        UserInterface.Active.AddEntity(_BTN_Randomcocktail);
+#endif
+
+        _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
+        _inGame_MethodScreen = new Panel(new Vector2(width_ReciptPanel - 220, 400), PanelSkin.Default, Anchor.BottomLeft, new Vector2(width_ReciptPanel, 100));
+
         /// Create the in-game panel
-        _inGamePanel = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
-        _inGamePanel.Padding = new Vector2(0, 0);
-        _inGamePanel.Enabled = false;
-        _inGamePanel.Visible = false;
-        _inGamePanel.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
+        _inGamePanelCatagory = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
+        _inGamePanelCatagory.Padding = new Vector2(0, 0);
+        _inGamePanelCatagory.Enabled = false;
+        _inGamePanelCatagory.Visible = false;
+        _inGamePanelCatagory.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
 
         _BTN_AddIce = new Button("AddIce", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(200, 200), new Vector2(0, 200));
         _BTN_AddIce.OnMouseDown = (Entity e) =>
@@ -188,12 +221,14 @@ public class Game1 : Core
                 return;
             }
 
+            float price = CalcualatePrice(targetCocktail);
+
             if (targetCocktail.Equals(_currentCocktail))
             {
-                p_result.Text = "You made a cocktail: " + str_targetCocktail_Name + "!";
+                p_result.Text = "You made a cocktail: " + str_targetCocktail_Name + "!" + $"{price}";
             }
             else {
-                p_result.Text = "You made a cocktail, but it is not " + str_targetCocktail_Name + "!";
+                p_result.Text = "You made a cocktail, but it is not " + str_targetCocktail_Name + "!" +$"{price}";
             }
 
             _isOpenMethod = false;
@@ -372,23 +407,37 @@ public class Game1 : Core
 
         p_result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0, 0));
         p_result.FillColor = Color.White;
+        #endregion
 
-        /// Add Chiildren to the panels
-        _titlePanel.AddChild(_startBTN);
-        _titlePanel.AddChild(_exitBTN);
-
-        _inGamePanel.AddChild(_BTN_AddIce);
-        _inGamePanel.AddChild(_BTN_Shake);
-        _inGamePanel.AddChild(_BTN_Mix);
+        #region AddChild IngamePanel
+        _inGamePanelCatagory.AddChild(_BTN_AddIce);
+        _inGamePanelCatagory.AddChild(_BTN_Shake);
+        _inGamePanelCatagory.AddChild(_BTN_Mix);
         //_inGamePanel.AddChild(_BTN_Serve);
-        _inGamePanel.AddChild(_BTN_PaperMakeCocktail);
-        _inGamePanel.AddChild(_BTN_Reset);
+        _inGamePanelCatagory.AddChild(_BTN_PaperMakeCocktail);
+        _inGamePanelCatagory.AddChild(_BTN_Reset);
 
-        _inGamePanel.AddChild(_inGame_Alcohol);
-        _inGamePanel.AddChild(_inGame_Mixer);
+        _inGamePanelCatagory.AddChild(_inGame_Alcohol);
+        _inGamePanelCatagory.AddChild(_inGame_Mixer);
         _inGame_MethodScreen.AddChild(_BTN_Serve);
-        _inGamePanel.AddChild(_inGame_MethodScreen);
+        _inGamePanelCatagory.AddChild(_inGame_MethodScreen);
+        #endregion
 
+        #endregion
+
+        #region SummaryPanel
+        _summaryPanelCataory = new Panel(new Vector2(1920, 1080), PanelSkin.None, Anchor.Center);
+
+        #region SummaryPanel Init
+        _summaryPanel = new Panel(new Vector2(_summaryPanelWidth, _summaryPanelHeight), PanelSkin.Default, Anchor.Center);
+
+        #endregion
+
+        #region summaryPanel AddChild
+        _summaryPanelCataory.AddChild(_summaryPanel);   
+        #endregion
+
+        #endregion
 
         UserInterface.Active.SetCursor(CursorType.Default);
 
@@ -401,7 +450,10 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(p_result);
 
         UserInterface.Active.AddEntity(_titlePanel);
-        UserInterface.Active.AddEntity(_inGamePanel);
+        UserInterface.Active.AddEntity(_inGamePanelCatagory);
+        UserInterface.Active.AddEntity(_summaryPanelCataory);
+
+
         #endregion
 
         base.LoadContent();
@@ -415,6 +467,10 @@ public class Game1 : Core
         // TODO: Add your update logic here
         _slime.Update(gameTime);
 
+        // Update timer
+        Time.Update(gameTime);
+        timer.UpdateTime();
+
         PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
@@ -425,7 +481,24 @@ public class Game1 : Core
         base.Update(gameTime);
     }
 
-    protected void PanelInGameLogic() {
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+
+        // TODO: Add your drawing code here
+        SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
+
+
+        _slime.Draw(SpriteBatch, _slimePosition);
+
+        SpriteBatch.End();
+
+        UserInterface.Active.Draw(SpriteBatch);
+        base.Draw(gameTime);
+    }
+
+    protected void PanelInGameLogic()
+    {
         if (!_isOpenAlcohol)
         {
             if (_inGame_Alcohol.Offset.X < width_ReciptPanel)
@@ -468,13 +541,32 @@ public class Game1 : Core
         }
     }
 
-    protected void GameplayLogic() {
-        if (MixPartCount >= 10) {
+    protected void GameplayLogic()
+    {
+        if (MixPartCount >= 10)
+        {
             DisableBTNMakeCocktail();
         }
     }
 
-    protected void DisableBTNMakeCocktail() {
+    protected void RandomeTargetCocktail() {
+        str_targetCocktail_Name = GetRandomCocktailName();
+        CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+        p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
+    }
+
+    private string GetRandomCocktailName()
+    {
+        if (CocktailDicMaker.CocktailDictionary.Count == 0)
+            return string.Empty;
+
+        var random = new Random();
+        int randomIndex = random.Next(CocktailDicMaker.CocktailDictionary.Count);
+        return CocktailDicMaker.CocktailDictionary.Keys.ElementAt(randomIndex);
+    }
+
+    protected void DisableBTNMakeCocktail()
+    {
         _BTN_Vodka.Enabled = false;
         _BTN_Gin.Enabled = false;
         _BTN_TripleSec.Enabled = false;
@@ -489,7 +581,8 @@ public class Game1 : Core
         _BTN_Perpermint.Enabled = false;
     }
 
-    protected void EnableBTNALLInGamePanel() {
+    protected void EnableBTNALLInGamePanel()
+    {
         //enable all buttons
         _BTN_Vodka.Enabled = true;
         _BTN_Gin.Enabled = true;
@@ -511,7 +604,8 @@ public class Game1 : Core
         _BTN_Mixer.Enabled = true;
     }
 
-    protected void DiableBTN_inGame() { 
+    protected void DiableBTN_inGame()
+    {
         _BTN_Alcohol.Enabled = false;
         _BTN_Mixer.Enabled = false;
 
@@ -519,30 +613,48 @@ public class Game1 : Core
         _isOpenMixer = false;
     }
 
-    protected override void Draw(GameTime gameTime)
+    protected bool AddandCheckAttemp()
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        attemptCount++;
+        if (attemptCount >= maxAttempts)
+        {
+            p_result.Text = "You have reached the maximum number of attempts!";
+            return false;
+        }
+        return true;
+    }
 
-        // TODO: Add your drawing code here
-        SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
+    protected void ResetAttemptCount()
+    {
+        attemptCount = 0;
+        p_result.Text = "You can try again!";
+    }
 
+    protected float CalcualatePrice(Cocktail _targetCocktail) {
 
-        _slime.Draw(SpriteBatch, _slimePosition);
+        float _price = 0;
+        _price = _targetCocktail.GetPrice();
 
-        SpriteBatch.End();
+        if (_targetCocktail.Equals(_currentCocktail)) { 
+            _price = _price * 1.2f;        
+        }
+        else
+        {
+            if (!_targetCocktail.IsSameTypeOfCocktail(_currentCocktail)) {
+                _price = 0;
+                return _price;
+            }
+            if (!_targetCocktail.IsSameMethod(_currentCocktail))
+            {
+                _price = _price * 0.8f;
+            }
+            if (!_targetCocktail.IsAddIceBoth(_currentCocktail)) { 
+                _price = _price * 0.8f;
+            }
+        }
 
-        UserInterface.Active.Draw(SpriteBatch);
-        base.Draw(gameTime);
+        return _price;
     }
 
 
-    private string GetRandomCocktailName()
-    {
-        if (CocktailDicMaker.CocktailDictionary.Count == 0)
-            return string.Empty;
-
-        var random = new Random();
-        int randomIndex = random.Next(CocktailDicMaker.CocktailDictionary.Count);
-        return CocktailDicMaker.CocktailDictionary.Keys.ElementAt(randomIndex);
-    }
 }

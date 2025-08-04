@@ -27,7 +27,10 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Shaking,
                 Enum_Glass.NotFix,
                 false,
-                Enum_TypeOfCocktail.HighAlcohol));
+                Enum_TypeOfCocktail.HighAlcohol,
+                120)
+                )
+                ;
 
             _cocktails.Add("Martini", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Gin, 7 },
@@ -36,7 +39,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 false,
-                Enum_TypeOfCocktail.HighAlcohol));
+                Enum_TypeOfCocktail.HighAlcohol,
+                140));
 
             _cocktails.Add("White lady", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Gin, 5 },
@@ -45,7 +49,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Shaking,
                 Enum_Glass.NotFix,
                 false,
-                Enum_TypeOfCocktail.HighAlcohol));
+                Enum_TypeOfCocktail.HighAlcohol,
+                130));
 
             // Low Alcohol
             _cocktails.Add("Gin fizz", CreateCocktail(
@@ -56,7 +61,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Shaking,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.LowAlcohol));
+                Enum_TypeOfCocktail.LowAlcohol,
+                90));
 
             _cocktails.Add("Greyhound", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Vodka, 4 } },
@@ -64,7 +70,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.LowAlcohol));
+                Enum_TypeOfCocktail.LowAlcohol,
+                100));
 
             _cocktails.Add("Sea breeze", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Vodka, 4 } },
@@ -73,19 +80,21 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Shaking,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.LowAlcohol));
+                Enum_TypeOfCocktail.LowAlcohol,
+                80));
 
             /// None Alcohol
             _cocktails.Add("Nojito", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { },
-                new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 3 },
-                                                  { Enum_Mixer.Syrup, 2 },
+                new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 1 },
+                                                  { Enum_Mixer.Syrup, 1 },
                                                   { Enum_Mixer.PepperMint, 1 },
-                                                  { Enum_Mixer.Soda, 4 }},
+                                                  { Enum_Mixer.Soda, 1 }},
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.NonAlcoholic));
+                Enum_TypeOfCocktail.NonAlcoholic,
+                100));
 
             _cocktails.Add("Cranberry Fizz", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { },
@@ -96,7 +105,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Shaking,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.NonAlcoholic));
+                Enum_TypeOfCocktail.NonAlcoholic,
+                80));
 
             _cocktails.Add("Grapefruit Spritz", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { },
@@ -106,7 +116,8 @@ namespace CocktailProject.ClassCocktail
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 true,
-                Enum_TypeOfCocktail.NonAlcoholic));
+                Enum_TypeOfCocktail.NonAlcoholic,
+                90));
 
             return _cocktails;
         }
@@ -123,10 +134,12 @@ namespace CocktailProject.ClassCocktail
             Dictionary<Enum_Mixer, int> mixers,
             Enum_Method method = Enum_Method.Shaking,
             Enum_Glass glass = Enum_Glass.NotFix,
-            bool garnish = false,
-            Enum_TypeOfCocktail typeOfCocktail = Enum_TypeOfCocktail.None) 
+            bool ice = false,
+            Enum_TypeOfCocktail typeOfCocktail = Enum_TypeOfCocktail.None,
+            int price = 0
+            ) 
         {
-            return new Cocktail(alcohols, mixers, method, glass, garnish, typeOfCocktail);
+            return new Cocktail(alcohols, mixers, method, glass, ice, typeOfCocktail, price);
         }
     }
 }

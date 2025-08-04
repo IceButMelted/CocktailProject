@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Graphics;
 
-namespace Lab05_01.Graphics;
+namespace MonoGameLibrary.Graphics;
 
 public class AnimatedSprite : Sprite
 {

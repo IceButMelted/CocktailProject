@@ -94,22 +94,23 @@ namespace CocktailProject.ClassCocktail
         /// </summary>
         public void SetTypeOfCocktailBySearch()
         {
-            CocktailDicMaker.CocktailDictionary
-                .Where(c => c.Value.GetDicAlcohol().Count == _alcoholWithQuantity.Count &&
-                            c.Value.GetDicMixer().Count == _mixerWithQuantity.Count)
-                .ToList()
-                .ForEach(c =>
+            typeOfCocktail = Enum_TypeOfCocktail.None;
+
+            foreach (var c in CocktailDicMaker.CocktailDictionary.Values)
+            {
+                if (c.GetDicAlcohol().Count != _alcoholWithQuantity.Count ||
+                    c.GetDicMixer().Count != _mixerWithQuantity.Count)
+                    continue;
+
+                if (c.GetDicAlcohol().All(a => _alcoholWithQuantity.TryGetValue(a.Key, out var qtyA) && qtyA == a.Value) &&
+                    c.GetDicMixer().All(m => _mixerWithQuantity.TryGetValue(m.Key, out var qtyM) && qtyM == m.Value))
                 {
-                    if (c.Value.GetDicAlcohol().All(a => _alcoholWithQuantity.ContainsKey(a.Key) && _alcoholWithQuantity[a.Key] == a.Value) &&
-                        c.Value.GetDicMixer().All(m => _mixerWithQuantity.ContainsKey(m.Key) && _mixerWithQuantity[m.Key] == m.Value))
-                    {
-                        typeOfCocktail = c.Value.GetTypeOfCocktail();
-                    }
-                    else {
-                        typeOfCocktail = Enum_TypeOfCocktail.None;
-                    }
-                });
+                    typeOfCocktail = c.GetTypeOfCocktail();
+                    break; // Exit as soon as match is found
+                }
+            }
         }
+
 
         public void IsSameIngredient()
         {

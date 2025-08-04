@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace CocktailProject.ClassCocktail
         protected int _CountPart = 0;
         protected bool _AddIce = false;
         protected Enum_TypeOfCocktail typeOfCocktail;
+        protected int _price = 0;
 
 
         /// Get Methods for properties
@@ -41,6 +43,10 @@ namespace CocktailProject.ClassCocktail
         public Enum_TypeOfCocktail GetTypeOfCocktail()
         {
             return typeOfCocktail;
+        }
+        public int GetPrice()
+        {
+            return _price;
         }
 
         /// <summary>
@@ -86,7 +92,8 @@ namespace CocktailProject.ClassCocktail
                         Enum_Method method,
                         Enum_Glass glass,
                         bool addIce,
-                        Enum_TypeOfCocktail typeOfCocktail)
+                        Enum_TypeOfCocktail typeOfCocktail,
+                        int price)
         {
             _alcoholWithQuantity = alcoholWithQuantity ?? new Dictionary<Enum_Alcohol, int>();
             _mixerWithQuantity = mixerWithQuantity ?? new Dictionary<Enum_Mixer, int>();
@@ -94,6 +101,7 @@ namespace CocktailProject.ClassCocktail
             this.glass = glass;
             _AddIce = addIce;
             this.typeOfCocktail = typeOfCocktail;
+            _price = price;
         }
 
 
@@ -121,6 +129,7 @@ namespace CocktailProject.ClassCocktail
             info += $"Add Ice: {_AddIce}\n";
             info += $"Type of Cocktail: {typeOfCocktail}\n";
             info += $"Total Parts: {_CountPart} / 10\n";
+            info += $"Price: {_price} \n";
 
             //Debug.WriteLine(info); // For debugging purposes
             return info;
@@ -152,6 +161,11 @@ namespace CocktailProject.ClassCocktail
             return _CountPart >= 10;
         }
 
+        public bool IsSameTypeOfCocktail(Cocktail _cocktail)
+        {
+            return typeOfCocktail == _cocktail.typeOfCocktail;
+        }   
+
         public bool IsSameAlcohol(Cocktail _cocktail)
         {
             return DictionariesEqual(_alcoholWithQuantity, _cocktail._alcoholWithQuantity);
@@ -170,6 +184,7 @@ namespace CocktailProject.ClassCocktail
         {
             return _AddIce == _cocktail._AddIce;
         }
+
 
 
         // Helper method to compare dictionaries
