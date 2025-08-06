@@ -33,6 +33,13 @@ public class Game1 : Core
     Panel _summaryPanel;
     int _summaryPanelWidth = 600;
     int _summaryPanelHeight = 700;
+    RichParagraph _summaryPanelText;
+    CheckBox _checkBoxRent;
+    Paragraph p_RentFeeCost;
+    CheckBox _checkBoxAlcoholFee;
+    Paragraph p_AlcoholFeeCost;
+    CheckBox _checkBoxMixerFee;
+    Paragraph p_MixerFeeCost;
 
 
     Panel _UI_Table;
@@ -69,7 +76,6 @@ public class Game1 : Core
 #if DEBUG
     Button _BTN_Randomcocktail;
 #endif
-
 
 
     int width_ReciptPanel = 960;
@@ -121,7 +127,6 @@ public class Game1 : Core
 
         _slime = atlas.CreateAnimatedSprite("slime-animation");
         _slime.Scale = new Vector2(4.0f, 4.0f);
-
 
         #region Init Ui
         UserInterface.Initialize(Content, BuiltinThemes.hd);
@@ -424,17 +429,51 @@ public class Game1 : Core
         #endregion
 
         #endregion
-
+        
         #region SummaryPanel
         _summaryPanelCataory = new Panel(new Vector2(1920, 1080), PanelSkin.None, Anchor.Center);
+        _checkBoxRent = new CheckBox("",Anchor.AutoInline, new Vector2(50,10));
+        _checkBoxRent.OnValueChange = (Entity cb) =>
+        {
+            _summaryPanelText.Text = _checkBoxRent.Checked ? "You have selected to rent the cocktail." : "You have not selected to rent the cocktail.";
+        };
+        p_RentFeeCost = new Paragraph("Rent Fee: 100", Anchor.AutoInline, new Vector2(200, 50));
+
+        _checkBoxAlcoholFee = new CheckBox("", Anchor.AutoInline, new Vector2(50, 10));
+        _checkBoxAlcoholFee.OnValueChange = (Entity cb) =>
+        {
+            _summaryPanelText.Text = _checkBoxAlcoholFee.Checked ? "You have selected to include alcohol fee." : "You have not selected to include alcohol fee.";
+        };
+        p_AlcoholFeeCost = new Paragraph("Alcohol Fee: 50", Anchor.AutoInline, new Vector2(200, 50));
+
+        _checkBoxMixerFee = new CheckBox("Mixer Fee");
+        _checkBoxMixerFee.OnValueChange = (Entity cb) =>
+        {
+            _summaryPanelText.Text = _checkBoxMixerFee.Checked ? "You have selected to include mixer fee." : "You have not selected to include mixer fee.";
+        };
 
         #region SummaryPanel Init
         _summaryPanel = new Panel(new Vector2(_summaryPanelWidth, _summaryPanelHeight), PanelSkin.Default, Anchor.Center);
-
+        _summaryPanelText = new RichParagraph("Summary Panel", Anchor.Center, new Vector2(_summaryPanelWidth, _summaryPanelHeight), new Vector2(0, 0));
+        _summaryPanelText.Text = @"This text will have default color, but {{RED}}this part will be red{{DEFAULT}}. This text will have regular weight, but {{BOLD}}this part will be bold{{DEFAULT}}.";
         #endregion
 
         #region summaryPanel AddChild
-        _summaryPanelCataory.AddChild(_summaryPanel);   
+        _summaryPanelCataory.AddChild(_summaryPanel);
+        //_summaryPanel.AddChild(_summaryPanelText);
+        _summaryPanel.AddChild(_checkBoxRent);
+        _summaryPanel.AddChild(p_RentFeeCost);
+        HorizontalLine hz001 = new HorizontalLine();
+        hz001.Visible = true;
+        _summaryPanel.AddChild(hz001);
+        _summaryPanel.AddChild(_checkBoxAlcoholFee);
+        _summaryPanel.AddChild(p_AlcoholFeeCost);
+        HorizontalLine hz002 = new HorizontalLine();
+        hz001.Visible = true;
+        _summaryPanel.AddChild(hz002);
+
+        //_summaryPanel.AddChild(_checkBoxAlcoholFee);
+        //_summaryPanel.AddChild(_checkBoxMixerFee);
         #endregion
 
         #endregion
@@ -443,7 +482,6 @@ public class Game1 : Core
 
         UserInterface.Active.AddEntity(_UI_Table);
         _UI_Table.SendToBack();
-
 
         UserInterface.Active.AddEntity(p_currentCocktailInfo);
         UserInterface.Active.AddEntity(p_targetCockTailInfo);
