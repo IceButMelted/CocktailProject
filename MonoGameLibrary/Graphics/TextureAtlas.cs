@@ -77,6 +77,11 @@ public class TextureAtlas
         return _regions[name];
     }
 
+    public Dictionary<string, TextureRegion> GetRegions()
+    {
+        return _regions;
+    }
+
     /// <summary>
     /// Removes the region from this texture atlas with the specified name.
     /// </summary>
@@ -164,6 +169,7 @@ public class TextureAtlas
                 //
                 // So we retrieve all of the <Animation> elements then loop through each one
                 // and generate a new Animation instance from it and add it to this atlas.
+
                 var animationElements = root.Element("Animations").Elements("Animation");
 
                 if (animationElements != null)
@@ -240,7 +246,15 @@ public class TextureAtlas
         return new AnimatedSprite(animation);
     }
 
+    public int GetRegionCount()
+    {
+        return _regions.Count;
+    }
 
+    public Texture2D GetTexture2D()
+    {
+        return Texture;
+    }
 
 
 

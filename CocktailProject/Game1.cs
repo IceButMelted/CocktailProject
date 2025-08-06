@@ -20,6 +20,7 @@ namespace CocktailProject;
 
 public class Game1 : Core
 {
+    #region GUI
     Panel _titlePanel;
     Button _startBTN;
     Button _exitBTN;
@@ -40,7 +41,6 @@ public class Game1 : Core
     Paragraph p_AlcoholFeeCost;
     CheckBox _checkBoxMixerFee;
     Paragraph p_MixerFeeCost;
-
 
     Panel _UI_Table;
     Button _BTN_Alcohol;
@@ -65,8 +65,17 @@ public class Game1 : Core
     Button _BTN_Cranberry;
     Button _BTN_Perpermint;
 
+    int BTN_Open_Width = 75;
+    int BTN_Open_Height = 150;
+    int BTN_Open_Padding = 20;
+
     Button _BTN_PaperMakeCocktail;
-    #endregion  
+    #endregion
+
+    #region Image/Sprite
+    Image _CharacterImage;
+
+    #endregion
 
     Paragraph p_currentCocktailInfo;
     Paragraph p_targetCockTailInfo;
@@ -83,9 +92,8 @@ public class Game1 : Core
     int OffsetY_RecipPanel = 50;
     int Padding_ReciptPanel = 80;
 
-    int BTN_Open_Width = 75;
-    int BTN_Open_Height = 150;
-    int BTN_Open_Padding = 20;
+
+    #endregion
 
     bool _isOpenAlcohol = false;
     bool _isOpenMixer = false;
@@ -96,6 +104,11 @@ public class Game1 : Core
     private Cocktail _targetCoctail = new Cocktail();
     private CocktailBuilder _currentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
+    #endregion
+
+    #region Sprite and Image
+    private TextureAtlas _CharacterAtlas;
+
     #endregion
 
     private int attemptCount = 0;
@@ -124,6 +137,7 @@ public class Game1 : Core
     {
         // Create the texture atlas from the XML configuration file.
         TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
+        _CharacterAtlas = TextureAtlas.FromFile(Content, "images/Customer/Customer_Define.xml");
 
         _slime = atlas.CreateAnimatedSprite("slime-animation");
         _slime.Scale = new Vector2(4.0f, 4.0f);
@@ -476,6 +490,8 @@ public class Game1 : Core
         //_summaryPanel.AddChild(_checkBoxMixerFee);
         #endregion
 
+        _summaryPanelCataory.Enabled = false;
+        _summaryPanelCataory.Visible = false;
         #endregion
 
         UserInterface.Active.SetCursor(CursorType.Default);
@@ -491,7 +507,10 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(_inGamePanelCatagory);
         UserInterface.Active.AddEntity(_summaryPanelCataory);
 
+        _CharacterImage = new Image(_CharacterAtlas.GetTexture2D(),new Vector2(128,128),anchor:Anchor.TopLeft);
+        _CharacterImage.SourceRectangle = _CharacterAtlas.GetRegion("NPC3").SourceRectangle;
 
+        UserInterface.Active.AddEntity(_CharacterImage);
         #endregion
 
         base.LoadContent();
@@ -525,7 +544,6 @@ public class Game1 : Core
 
         // TODO: Add your drawing code here
         SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
-
 
         _slime.Draw(SpriteBatch, _slimePosition);
 
@@ -591,6 +609,17 @@ public class Game1 : Core
         str_targetCocktail_Name = GetRandomCocktailName();
         CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
         p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
+        RandomCustomer();
+    }
+
+    protected void RandomCustomer() {
+        // Randomly select a customer from the character atlas
+        var random = new Random();
+        int randomIndex = random.Next(1, _CharacterAtlas.GetRegionCount());
+        string randomCustomerKey = _CharacterAtlas.GetRegions().Keys.ElementAt(randomIndex);
+        _CharacterImage.SourceRectangle = _CharacterAtlas.GetRegion(randomCustomerKey).SourceRectangle;
+        Debug.WriteLine($"Random Customer Selected: {randomCustomerKey}");
+
     }
 
     private string GetRandomCocktailName()
@@ -694,5 +723,9 @@ public class Game1 : Core
         return _price;
     }
 
-
+    protected int Randomize(int min, int max)
+    {
+        Random random = new Random();
+        return random.Next(min, max);
+    }
 }

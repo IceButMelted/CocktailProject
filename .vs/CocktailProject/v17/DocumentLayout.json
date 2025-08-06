@@ -7,6 +7,30 @@
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\graphics\\textureatlas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\graphics\\textureatlas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\graphics\\textureregion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\graphics\\textureregion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\images\\customer\\customer_define.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\images\\customer\\customer_define.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\images\\atlas-definition.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\images\\atlas-definition.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\testimportart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\testimportart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,16 +51,8 @@
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classtime\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\graphics\\textureregion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\graphics\\textureregion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classtime\\time.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classtime\\time.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\images\\atlas-definition.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\content\\images\\atlas-definition.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\regular.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -45,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\graphics\\animatedsprite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\graphics\\animatedsprite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\graphics\\textureatlas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\graphics\\textureatlas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\content\\geonbit.ui\\themes\\hd\\fonts\\bold.spritefont||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -62,24 +74,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TextureRegion.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureRegion.cs",
-              "RelativeDocumentMoniker": "MonoGameLibrary\\Graphics\\TextureRegion.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureRegion.cs",
-              "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureRegion.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAwwCcAAABjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T08:16:30.642Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -88,26 +84,84 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAAM4BAAAAAAAAAAAawN0BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOcBAAAAAAAAAAAowAQCAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T05:30:21.888Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TextureRegion.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureRegion.cs",
+              "RelativeDocumentMoniker": "MonoGameLibrary\\Graphics\\TextureRegion.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureRegion.cs",
+              "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureRegion.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAUwFMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T08:16:30.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CocktailDicMaker.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAowGcAAABKAAAAAAAAAA==",
+              "Title": "TextureAtlas.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureAtlas.cs",
+              "RelativeDocumentMoniker": "MonoGameLibrary\\Graphics\\TextureAtlas.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureAtlas.cs",
+              "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureAtlas.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAcwE8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:40.161Z"
+              "WhenOpened": "2025-07-29T08:16:34.323Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "Customer_Define.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\images\\Customer\\Customer_Define.xml",
+              "RelativeDocumentMoniker": "CocktailProject\\Content\\images\\Customer\\Customer_Define.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\images\\Customer\\Customer_Define.xml",
+              "RelativeToolTip": "CocktailProject\\Content\\images\\Customer\\Customer_Define.xml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-08-06T08:42:21.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TestImportArt.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\TestImportArt.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\TestImportArt.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\TestImportArt.cs",
+              "RelativeToolTip": "CocktailProject\\TestImportArt.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T08:28:05.496Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Program.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\Program.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Program.cs",
+              "RelativeToolTip": "CocktailProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T08:26:17.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "CocktailBuilder.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
               "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailBuilder.cs",
@@ -119,19 +173,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "atlas-definition.xml",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\images\\atlas-definition.xml",
               "RelativeDocumentMoniker": "CocktailProject\\Content\\images\\atlas-definition.xml",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\images\\atlas-definition.xml",
               "RelativeToolTip": "CocktailProject\\Content\\images\\atlas-definition.xml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABUAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-07-29T04:07:02.135Z"
+              "WhenOpened": "2025-07-29T04:07:02.135Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "CocktailDicMaker.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAowGcAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T13:07:40.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Cocktail.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
               "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\Cocktail.cs",
@@ -143,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "EnumElement.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
               "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\EnumElement.cs",
@@ -155,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "Time.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassTime\\Time.cs",
               "RelativeDocumentMoniker": "CocktailProject\\ClassTime\\Time.cs",
@@ -167,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Timer.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassTime\\Timer.cs",
               "RelativeDocumentMoniker": "CocktailProject\\ClassTime\\Timer.cs",
@@ -179,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Regular.spritefont",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
               "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Regular.spritefont",
@@ -191,19 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TextureAtlas.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureAtlas.cs",
-              "RelativeDocumentMoniker": "MonoGameLibrary\\Graphics\\TextureAtlas.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\TextureAtlas.cs",
-              "RelativeToolTip": "MonoGameLibrary\\Graphics\\TextureAtlas.cs",
-              "ViewState": "AgIAAN8AAAAAAAAAAAAtwO0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T08:16:34.323Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "Bold.spritefont",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
               "RelativeDocumentMoniker": "CocktailProject\\Content\\GeonBit.UI\\Themes\\hd\\fonts\\Bold.spritefont",
@@ -215,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "AnimatedSprite.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Graphics\\AnimatedSprite.cs",
               "RelativeDocumentMoniker": "MonoGameLibrary\\Graphics\\AnimatedSprite.cs",
