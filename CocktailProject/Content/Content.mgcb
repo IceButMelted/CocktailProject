@@ -4531,6 +4531,21 @@
 /processorParam:TextureFormat=Color
 /build:images/atlas2.png
 
+#begin images/Customer/Customer_NPC.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Customer/Customer_NPC.png
+
+#begin images/Customer/CustomerNPC_Define.xml
+/copy:images/Customer/CustomerNPC_Define.xml
+
 #begin images/logo.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -78,6 +78,36 @@ public class TextureAtlas
     }
 
     /// <summary>
+    /// Gets the region from this texture atlas with the specified name.
+    /// </summary>
+    /// <returns></returns>
+    public int GetRegionCount()
+    {
+        return _regions.Count;
+    }
+
+    public string GetRegionName(int index)
+    {
+        if (index < 0 || index >= _regions.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+        }
+        // Get the key at the specified index.
+        string name = null;
+        int i = 0;
+        foreach (var kvp in _regions)
+        {
+            if (i == index)
+            {
+                name = kvp.Key;
+                break;
+            }
+            i++;
+        }
+        return name;
+    }
+
+    /// <summary>
     /// Removes the region from this texture atlas with the specified name.
     /// </summary>
     /// <param name="name">The name of the region to remove.</param>
@@ -94,7 +124,6 @@ public class TextureAtlas
     {
         _regions.Clear();
     }
-
 
 
     /// <summary>

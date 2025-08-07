@@ -28,6 +28,7 @@ public class Game1 : Core
     Panel _inGame_Alcohol;
     Panel _inGame_Mixer;
     Panel _inGame_MethodScreen;
+    Image _imgCustomerNPC;
 
     Panel _summaryPanelCataory;
     Panel _summaryPanel;
@@ -98,6 +99,10 @@ public class Game1 : Core
     private int MixPartCount = 0;
     #endregion
 
+    #region Image Sprite Atlas
+    TextureAtlas Atlas_CustomerNPC;
+    #endregion
+
     private int attemptCount = 0;
     private int maxAttempts = 3; // Maximum number of attempts allowed
 
@@ -115,7 +120,7 @@ public class Game1 : Core
     {
         // TODO: Add your initialization logic here
         timer = new Timer(120f);
-        timer.StartStop();
+        //timer.StartStop();
 
         base.Initialize();
     }
@@ -124,6 +129,7 @@ public class Game1 : Core
     {
         // Create the texture atlas from the XML configuration file.
         TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
+        Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/CustomerNPC_Define.xml");
 
         _slime = atlas.CreateAnimatedSprite("slime-animation");
         _slime.Scale = new Vector2(4.0f, 4.0f);
@@ -174,6 +180,9 @@ public class Game1 : Core
 
         _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
         _inGame_MethodScreen = new Panel(new Vector2(width_ReciptPanel - 220, 400), PanelSkin.Default, Anchor.BottomLeft, new Vector2(width_ReciptPanel, 100));
+
+        _imgCustomerNPC = new Image(Atlas_CustomerNPC.GetRegion("NPC1").GetTexture2D(), new Vector2(128, 128), anchor: Anchor.CenterLeft);
+        _imgCustomerNPC.SourceRectangle = Atlas_CustomerNPC.GetRegion("NPC1").SourceRectangle;
 
         /// Create the in-game panel
         _inGamePanelCatagory = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
@@ -429,7 +438,7 @@ public class Game1 : Core
         #endregion
 
         #endregion
-        
+
         #region SummaryPanel
         _summaryPanelCataory = new Panel(new Vector2(1920, 1080), PanelSkin.None, Anchor.Center);
         _checkBoxRent = new CheckBox("",Anchor.AutoInline, new Vector2(50,10));
@@ -474,6 +483,9 @@ public class Game1 : Core
 
         //_summaryPanel.AddChild(_checkBoxAlcoholFee);
         //_summaryPanel.AddChild(_checkBoxMixerFee);
+
+        _summaryPanelCataory.Visible = false;
+        _summaryPanelCataory.Enabled = false;
         #endregion
 
         #endregion
@@ -491,6 +503,8 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(_inGamePanelCatagory);
         UserInterface.Active.AddEntity(_summaryPanelCataory);
 
+        UserInterface.Active.AddEntity(_imgCustomerNPC);
+
 
         #endregion
 
@@ -501,6 +515,10 @@ public class Game1 : Core
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+
+        if (Input.Keyboard.WasKeyJustPressed(Keys.E)) {
+            RandomeTargetCocktail();
+        }
 
         // TODO: Add your update logic here
         _slime.Update(gameTime);
@@ -590,6 +608,8 @@ public class Game1 : Core
     protected void RandomeTargetCocktail() {
         str_targetCocktail_Name = GetRandomCocktailName();
         CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+        string CustomerNPCName = GetRandomNameNPC();
+        _imgCustomerNPC.SourceRectangle = Atlas_CustomerNPC.GetRegion(CustomerNPCName).SourceRectangle;
         p_targetCockTailInfo.Text = "Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info();
     }
 
@@ -694,5 +714,11 @@ public class Game1 : Core
         return _price;
     }
 
-
+    protected string GetRandomNameNPC()
+    {
+        var random = new Random();
+        int randomIndex = random.Next(1, Atlas_CustomerNPC.GetRegionCount());
+        Debug.WriteLine($"Random NPC{randomIndex}");
+        return "NPC" + randomIndex.ToString();
+    }
 }
