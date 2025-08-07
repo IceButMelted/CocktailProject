@@ -52,3 +52,82 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# --------------------------------------------
+# Visual Studio 2022 specific
+# --------------------------------------------
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# VS Code directory
+.vscode/
+
+# Visual Studio working folder
+.vs/
+
+# Backup & report files
+*.bak
+*.Backup
+*.BLOB
+*.tmp
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Rider
+.idea/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# TFS
+$tf/
+
+# Visual Studio for Mac
+.vscode/
+.idea/
+
+# DotCover
+*.dotCover
+
+# Local History for Rider
+.idea/.idea.LocalHistory/
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# IIS Express
+.vsconfig
+/.vs/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider
+.idea/
+
+# Dotnet watch
+**/appsettings.*.json.user
