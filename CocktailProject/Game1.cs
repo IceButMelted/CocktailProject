@@ -7,6 +7,7 @@ using CocktailProject.ClassTime;
 
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using MonoGameLibrary.Input;
 
 // using GeonBit UI elements
 using GeonBit.UI;
@@ -81,6 +82,7 @@ public class Game1 : Core
     Paragraph p_targetCockTailInfo;
     Paragraph p_result;
 
+
     //testing function in editor
 #if DEBUG
     Button _BTN_Randomcocktail;
@@ -119,7 +121,7 @@ public class Game1 : Core
 
     private Timer timer;
 
-    public Game1() : base("CocktialProject", 1920, 1080, false)
+    public Game1() : base("CocktialProject", 1920, 1080, true)
     {
 
     }
@@ -182,6 +184,8 @@ public class Game1 : Core
         _BTN_Randomcocktail.OnMouseDown = (Entity e) =>
         {
             RandomeTargetCocktail();
+            ResetCurrentCocktail();
+            
         };
         UserInterface.Active.AddEntity(_BTN_Randomcocktail);
 #endif
@@ -262,7 +266,7 @@ public class Game1 : Core
             _isOpenMethod = false;
 
             EnableBTNALLInGamePanel();
-            _currentCocktail.ClearAllIngredients();
+            ResetCurrentCocktail();
             MixPartCount = 0;
 
             Debug.WriteLine("Reset button clicked!");
@@ -507,7 +511,7 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(_inGamePanelCatagory);
         UserInterface.Active.AddEntity(_summaryPanelCataory);
 
-        _CharacterImage = new Image(_CharacterAtlas.GetTexture2D(),new Vector2(128,128),anchor:Anchor.TopLeft);
+        _CharacterImage = new Image(_CharacterAtlas.GetTexture2D(),new Vector2(128,128),anchor:Anchor.AutoCenter);
         _CharacterImage.SourceRectangle = _CharacterAtlas.GetRegion("NPC3").SourceRectangle;
 
         UserInterface.Active.AddEntity(_CharacterImage);
@@ -518,15 +522,21 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        //    Exit();
+
+        if (Input.Keyboard.IsKeyDown(Keys.E)) {
+            RandomeTargetCocktail();
+            Debug.WriteLine("E key pressed, random cocktail selected.");
+        }
+
 
         // TODO: Add your update logic here
         _slime.Update(gameTime);
 
         // Update timer
-        Time.Update(gameTime);
-        timer.UpdateTime();
+        //Time.Update(gameTime);
+        //timer.UpdateTime();
 
         PanelInGameLogic();
         GameplayLogic();
@@ -727,5 +737,8 @@ public class Game1 : Core
     {
         Random random = new Random();
         return random.Next(min, max);
+    }
+    protected void ResetCurrentCocktail() { 
+        _currentCocktail.ClearAllIngredients();
     }
 }
