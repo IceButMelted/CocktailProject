@@ -15,6 +15,11 @@ namespace CocktailProject.ClassTime
         private bool _IsActive;
         public bool Repeat { get; set; }
 
+        public string GetText()
+        {
+            return _text;
+        }
+
         public Timer(float timeLength, bool repeat = false)
         {
             _timeLegnth = timeLength;
@@ -31,6 +36,15 @@ namespace CocktailProject.ClassTime
         public void StartStop() { 
             _IsActive = !_IsActive;
         }
+
+        public void Start() {
+            _IsActive = true;
+        }
+
+        public void Stop()
+        {
+            _IsActive = false;
+        }   
 
         public void Reset() { 
             _timeLeft = _timeLegnth;

@@ -20,10 +20,11 @@ namespace CocktailProject;
 
 public class Game1 : Core
 {
+    Paragraph p_timer;
+
     Panel _titlePanel;
     Button _startBTN;
     Button _exitBTN;
-    Button _notuse;
 
     Panel _inGamePanelCatagory;
     Panel _inGame_Alcohol;
@@ -121,7 +122,7 @@ public class Game1 : Core
     {
         // TODO: Add your initialization logic here
         timer = new Timer(120f);
-        //timer.StartStop();
+        timer.Start();
 
         base.Initialize();
     }
@@ -177,6 +178,9 @@ public class Game1 : Core
             RandomeTargetCocktail();
         };
         UserInterface.Active.AddEntity(_BTN_Randomcocktail);
+
+        p_timer = new Paragraph("Timer: " + timer, Anchor.TopCenter, new Vector2(200, 50), new Vector2(0, 0));
+
 #endif
 
         _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
@@ -506,8 +510,12 @@ public class Game1 : Core
 
         UserInterface.Active.AddEntity(_imgCustomerNPC);
 
+#if DEBUG
+        UserInterface.Active.AddEntity(p_timer);
+#endif
 
-        #endregion
+
+#endregion
 
         base.LoadContent();
     }
@@ -532,6 +540,7 @@ public class Game1 : Core
         GameplayLogic();
         // Check if a cocktail is selected
         p_currentCocktailInfo.Text = _currentCocktail.Info();
+        p_timer.Text = "Timer: " + timer.GetText();
 
         //update method
         UserInterface.Active.Update(gameTime);
