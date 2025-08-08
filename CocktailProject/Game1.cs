@@ -23,6 +23,7 @@ public class Game1 : Core
     Panel _titlePanel;
     Button _startBTN;
     Button _exitBTN;
+    Button _notuse;
 
     Panel _inGamePanelCatagory;
     Panel _inGame_Alcohol;
