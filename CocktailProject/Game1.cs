@@ -99,6 +99,8 @@ public class Game1 : Core
     private Cocktail _targetCoctail = new Cocktail();
     private CocktailBuilder _currentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
+
+    private int _currentMoney = 0;
     #endregion
 
     #region Image Sprite Atlas
@@ -121,8 +123,8 @@ public class Game1 : Core
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        timer = new Timer(120f);
-        timer.Start();
+        timer = new Timer(20);
+        
 
         base.Initialize();
     }
@@ -148,7 +150,7 @@ public class Game1 : Core
         _startBTN.OnClick = (Entity entity) =>
         {
             RandomeTargetCocktail();
-
+            timer.Start();
             Debug.WriteLine($"Target Cocktail: {str_targetCocktail_Name}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
@@ -536,7 +538,21 @@ public class Game1 : Core
         Time.Update(gameTime);
         timer.UpdateTime();
 
-        PanelInGameLogic();
+        //check is time ups and show summary panel
+        if (!timer.IsTimeUp()) { 
+            
+        }
+        else
+        {
+            timer.Stop();
+            _summaryPanelCataory.Enabled = true;
+            _summaryPanelCataory.Visible = true;
+            _inGamePanelCatagory.Enabled = false;
+            _inGamePanelCatagory.Visible = false;
+
+        }
+
+            PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
         p_currentCocktailInfo.Text = _currentCocktail.Info();
@@ -679,23 +695,6 @@ public class Game1 : Core
 
         _isOpenAlcohol = false;
         _isOpenMixer = false;
-    }
-
-    protected bool AddandCheckAttemp()
-    {
-        attemptCount++;
-        if (attemptCount >= maxAttempts)
-        {
-            p_result.Text = "You have reached the maximum number of attempts!";
-            return false;
-        }
-        return true;
-    }
-
-    protected void ResetAttemptCount()
-    {
-        attemptCount = 0;
-        p_result.Text = "You can try again!";
     }
 
     protected float CalcualatePrice(Cocktail _targetCocktail) {

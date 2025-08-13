@@ -66,12 +66,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 5,
@@ -92,7 +88,7 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAkwHwAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAwCAAAAAAAAAAAcwB4CAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T05:30:21.888Z",
               "EditorCaption": ""
@@ -155,8 +151,7 @@
               "RelativeToolTip": "CocktailProject\\ClassTime\\Timer.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAwwDAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T08:15:07.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T08:15:07.802Z"
             },
             {
               "$type": "Document",
@@ -168,8 +163,7 @@
               "RelativeToolTip": "CocktailProject\\ClassTime\\Time.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T08:11:03.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T08:11:03.653Z"
             },
             {
               "$type": "Document",
