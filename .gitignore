@@ -4,6 +4,11 @@
 ##   - Visual Studio defaults
 ##   - MonoGame-specific cache ignores
 
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
 ############################
 # Build results
 ############################
