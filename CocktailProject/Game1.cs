@@ -77,9 +77,10 @@ public class Game1 : Core
 
     //testing function in editor
 #if DEBUG
+    TaggedTextRevealer taggedTextRevealer;
     Button _BTN_Randomcocktail;
+    RichParagraph withCustomer;
 #endif
-
 
     int width_ReciptPanel = 960;
     int heigh_ReciptPanel = 550;
@@ -93,6 +94,7 @@ public class Game1 : Core
     bool _isOpenAlcohol = false;
     bool _isOpenMixer = false;
     bool _isOpenMethod = false;
+
 
     #region Cocktail
     private static string str_targetCocktail_Name;
@@ -133,7 +135,7 @@ public class Game1 : Core
     {
         // Create the texture atlas from the XML configuration file.
         TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
-        Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/CustomerNPC_Define.xml");
+        Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
 
         _slime = atlas.CreateAnimatedSprite("slime-animation");
         _slime.Scale = new Vector2(4.0f, 4.0f);
@@ -514,10 +516,20 @@ public class Game1 : Core
 
 #if DEBUG
         UserInterface.Active.AddEntity(p_timer);
+
+        string Astring = @"GAMEER ins isder{{RED}}ashahahah{{DEFAULT}}";
+        RichParagraph simple = new RichParagraph(Astring, Anchor.Center, new Vector2(500, 200), new Vector2(0, 0));
+        withCustomer = new RichParagraph(".", Anchor.Center, new Vector2(500, 200), new Vector2(-500, 0));
+        taggedTextRevealer = new TaggedTextRevealer(Astring, 0.05);
+
+        UserInterface.Active.AddEntity(simple);
+        UserInterface.Active.AddEntity(withCustomer);   
 #endif
 
 
-#endregion
+        #endregion
+
+        taggedTextRevealer.Start();
 
         base.LoadContent();
     }
@@ -526,11 +538,27 @@ public class Game1 : Core
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
+#if DEBUG
         if (Input.Keyboard.WasKeyJustPressed(Keys.E)) {
             RandomeTargetCocktail();
         }
+        if (Input.Keyboard.WasKeyJustPressed(Keys.R))
+        {
+            taggedTextRevealer.Start();
+        }
+        if (Input.Keyboard.WasKeyJustPressed(Keys.F))
+        {
+            taggedTextRevealer.Stop();
+        }
+        if (Input.Keyboard.WasKeyJustPressed(Keys.T))
+        {
+            taggedTextRevealer.Skip();
+        }
+        taggedTextRevealer.Update(gameTime);
 
+        withCustomer.Text = taggedTextRevealer.GetVisibleText();
+
+#endif
         // TODO: Add your update logic here
         _slime.Update(gameTime);
 
