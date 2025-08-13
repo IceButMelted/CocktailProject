@@ -20,6 +20,8 @@ namespace CocktailProject;
 
 public class Game1 : Core
 {
+    Paragraph p_timer;
+
     Panel _titlePanel;
     Button _startBTN;
     Button _exitBTN;
@@ -97,6 +99,8 @@ public class Game1 : Core
     private Cocktail _targetCoctail = new Cocktail();
     private CocktailBuilder _currentCocktail = new CocktailBuilder();
     private int MixPartCount = 0;
+
+    private int _currentMoney = 0;
     #endregion
 
     #region Image Sprite Atlas
@@ -119,8 +123,8 @@ public class Game1 : Core
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        timer = new Timer(120f);
-        //timer.StartStop();
+        timer = new Timer(20);
+        
 
         base.Initialize();
     }
@@ -146,7 +150,7 @@ public class Game1 : Core
         _startBTN.OnClick = (Entity entity) =>
         {
             RandomeTargetCocktail();
-
+            timer.Start();
             Debug.WriteLine($"Target Cocktail: {str_targetCocktail_Name}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
@@ -176,6 +180,9 @@ public class Game1 : Core
             RandomeTargetCocktail();
         };
         UserInterface.Active.AddEntity(_BTN_Randomcocktail);
+
+        p_timer = new Paragraph("Timer: " + timer, Anchor.TopCenter, new Vector2(200, 50), new Vector2(0, 0));
+
 #endif
 
         _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
@@ -505,8 +512,12 @@ public class Game1 : Core
 
         UserInterface.Active.AddEntity(_imgCustomerNPC);
 
+#if DEBUG
+        UserInterface.Active.AddEntity(p_timer);
+#endif
 
-        #endregion
+
+#endregion
 
         base.LoadContent();
     }
@@ -527,10 +538,25 @@ public class Game1 : Core
         Time.Update(gameTime);
         timer.UpdateTime();
 
-        PanelInGameLogic();
+        //check is time ups and show summary panel
+        if (!timer.IsTimeUp()) { 
+            
+        }
+        else
+        {
+            timer.Stop();
+            _summaryPanelCataory.Enabled = true;
+            _summaryPanelCataory.Visible = true;
+            _inGamePanelCatagory.Enabled = false;
+            _inGamePanelCatagory.Visible = false;
+
+        }
+
+            PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
         p_currentCocktailInfo.Text = _currentCocktail.Info();
+        p_timer.Text = "Timer: " + timer.GetText();
 
         //update method
         UserInterface.Active.Update(gameTime);
@@ -669,23 +695,6 @@ public class Game1 : Core
 
         _isOpenAlcohol = false;
         _isOpenMixer = false;
-    }
-
-    protected bool AddandCheckAttemp()
-    {
-        attemptCount++;
-        if (attemptCount >= maxAttempts)
-        {
-            p_result.Text = "You have reached the maximum number of attempts!";
-            return false;
-        }
-        return true;
-    }
-
-    protected void ResetAttemptCount()
-    {
-        attemptCount = 0;
-        p_result.Text = "You can try again!";
     }
 
     protected float CalcualatePrice(Cocktail _targetCocktail) {
