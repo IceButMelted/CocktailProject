@@ -554,6 +554,10 @@ public class Game1 : Core
         {
             taggedTextRevealer.Skip();
         }
+        if(Input.Keyboard.WasKeyJustPressed(Keys.Y))
+        {
+            taggedTextRevealer.Reset();
+        }
         taggedTextRevealer.Update(gameTime);
 
         withCustomer.Text = taggedTextRevealer.GetVisibleText();
