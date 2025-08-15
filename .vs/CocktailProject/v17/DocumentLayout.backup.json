@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\class dialoglogic\\taggedtextrevealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\class dialoglogic\\taggedtextrevealer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\class dialoglogic\\dialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\class dialoglogic\\dialog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktaildicmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,35 +14,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaggedTextRevealer.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Class DialogLogic\\TaggedTextRevealer.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\Class DialogLogic\\TaggedTextRevealer.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Class DialogLogic\\TaggedTextRevealer.cs",
-              "RelativeToolTip": "CocktailProject\\Class DialogLogic\\TaggedTextRevealer.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAADwv4MAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-13T11:13:30.315Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Dialog.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Class DialogLogic\\Dialog.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\Class DialogLogic\\Dialog.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Class DialogLogic\\Dialog.cs",
-              "RelativeToolTip": "CocktailProject\\Class DialogLogic\\Dialog.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-13T10:04:10.709Z"
             },
             {
               "$type": "Document",
@@ -64,22 +28,10 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAABYCAAAAAAAAAAAwwC4CAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAKcAAAAAAAAAAAAawNEAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T05:30:21.888Z",
+              "WhenOpened": "2025-08-14T08:52:28.727Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CocktailDicMaker.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\CocktailDicMaker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T13:07:40.161Z"
             }
           ]
         }

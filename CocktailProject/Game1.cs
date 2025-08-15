@@ -26,11 +26,13 @@ public class Game1 : Core
     Button _startBTN;
     Button _exitBTN;
 
-    Panel _inGamePanelCatagory;
+    Panel _inGamePanelCatagoly;
+    Panel _inGamePanelLeft;
+    Panel _inGamePanelRight;
     Panel _inGame_Alcohol;
     Panel _inGame_Mixer;
     Panel _inGame_MethodScreen;
-    Image _imgCustomerNPC;
+    Image _imgCustomerNPC; 
 
     Panel _summaryPanelCataory;
     Panel _summaryPanel;
@@ -44,6 +46,8 @@ public class Game1 : Core
     CheckBox _checkBoxMixerFee;
     Paragraph p_MixerFeeCost;
 
+    Panel _OrederPanel;
+    RichParagraph _OrederText;
 
     Panel _UI_Table;
     Button _BTN_Alcohol;
@@ -156,8 +160,7 @@ public class Game1 : Core
             Debug.WriteLine($"Target Cocktail: {str_targetCocktail_Name}");
             _titlePanel.Enabled = false;
             _titlePanel.Visible = false;
-            _inGamePanelCatagory.Enabled = true;
-            _inGamePanelCatagory.Visible = true;
+            Enable_InGamePanel();
 
             UserInterface.Active.SetCursor(CursorType.Default);
         };
@@ -167,6 +170,7 @@ public class Game1 : Core
         {
             Exit();
         };
+
 
         _titlePanel.AddChild(_startBTN);
         _titlePanel.AddChild(_exitBTN);
@@ -186,19 +190,27 @@ public class Game1 : Core
         p_timer = new Paragraph("Timer: " + timer, Anchor.TopCenter, new Vector2(200, 50), new Vector2(0, 0));
 
 #endif
-
         _UI_Table = new Panel(new Vector2(2450, 360), PanelSkin.Default, Anchor.BottomCenter);
         _inGame_MethodScreen = new Panel(new Vector2(width_ReciptPanel - 220, 400), PanelSkin.Default, Anchor.BottomLeft, new Vector2(width_ReciptPanel, 100));
 
-        _imgCustomerNPC = new Image(Atlas_CustomerNPC.GetRegion("NPC1").GetTexture2D(), new Vector2(128, 128), anchor: Anchor.CenterLeft);
+        _imgCustomerNPC = new Image(Atlas_CustomerNPC.GetRegion("NPC1").GetTexture2D(), new Vector2(400, 500), anchor: Anchor.Center);
         _imgCustomerNPC.SourceRectangle = Atlas_CustomerNPC.GetRegion("NPC1").SourceRectangle;
 
+        _inGamePanelCatagoly = new Panel(new Vector2(1920, 1080), PanelSkin.None, Anchor.Center);
+        _inGamePanelCatagoly.Padding = new Vector2(0, 0);
+        //_inGamePanelCatagoly.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
+
         /// Create the in-game panel
-        _inGamePanelCatagory = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
-        _inGamePanelCatagory.Padding = new Vector2(0, 0);
-        _inGamePanelCatagory.Enabled = false;
-        _inGamePanelCatagory.Visible = false;
-        _inGamePanelCatagory.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
+        _inGamePanelRight = new Panel(new Vector2(960, 1080), PanelSkin.Default, Anchor.TopRight);
+        _inGamePanelRight.Padding = new Vector2(0, 0);
+        _inGamePanelRight.Enabled = false;
+        _inGamePanelRight.Visible = false;
+        _inGamePanelRight.SetCustomSkin(atlas.GetRegion("slime-1").GetTexture2D());
+
+        _inGamePanelLeft = new Panel(new Vector2(960, 1080-300), PanelSkin.None, Anchor.TopLeft);
+        _inGamePanelLeft.Padding = new Vector2(0, 0);
+        _inGamePanelLeft.Enabled = false;
+        _inGamePanelLeft.Visible = false;
 
         _BTN_AddIce = new Button("AddIce", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(200, 200), new Vector2(0, 200));
         _BTN_AddIce.OnMouseDown = (Entity e) =>
@@ -334,14 +346,6 @@ public class Game1 : Core
             Debug.WriteLine("Vermouth button clicked!");
         };
 
-        _inGame_Alcohol.AddChild(_BTN_Gin);
-        _inGame_Alcohol.AddChild(_BTN_Vodka);
-        _inGame_Alcohol.AddChild(hz);
-        _inGame_Alcohol.AddChild(_BTN_TripleSec);
-        _inGame_Alcohol.AddChild(_BTN_Vermoth);
-        _inGame_Alcohol.AddChild(_BTN_Alcohol);
-
-
         /// Mixer
         _inGame_Mixer = new Panel(new Vector2(width_ReciptPanel, heigh_ReciptPanel), PanelSkin.Default, Anchor.TopLeft, new Vector2(width_ReciptPanel, OffsetY_RecipPanel));
         _inGame_Mixer.Padding = new Vector2(20, 10);
@@ -411,6 +415,28 @@ public class Game1 : Core
             Debug.WriteLine("Paper mint button clicked!");
         };
 
+        p_currentCocktailInfo = new Paragraph(_currentCocktail.Info(), Anchor.TopLeft, new Vector2(300, 500));
+        p_currentCocktailInfo.FillColor = Color.White;
+
+        p_targetCockTailInfo = new Paragraph("Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info(), Anchor.TopLeft, new Vector2(300, 500), new Vector2(300, 0));
+        p_targetCockTailInfo.FillColor = Color.White;
+
+        
+        p_result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0, 0));
+        p_result.FillColor = Color.White;
+
+
+
+        #endregion
+
+        #region AddChild IngamePanel
+        _inGame_Alcohol.AddChild(_BTN_Gin);
+        _inGame_Alcohol.AddChild(_BTN_Vodka);
+        _inGame_Alcohol.AddChild(hz);
+        _inGame_Alcohol.AddChild(_BTN_TripleSec);
+        _inGame_Alcohol.AddChild(_BTN_Vermoth);
+        _inGame_Alcohol.AddChild(_BTN_Alcohol);
+
 
         _inGame_Mixer.AddChild(_BTN_Lemon);
         _inGame_Mixer.AddChild(_BTN_Syrup);
@@ -421,29 +447,22 @@ public class Game1 : Core
         _inGame_Mixer.AddChild(_BTN_Perpermint);
         _inGame_Mixer.AddChild(_BTN_Mixer);
 
-        p_currentCocktailInfo = new Paragraph(_currentCocktail.Info(), Anchor.TopLeft, new Vector2(300, 500));
-        p_currentCocktailInfo.FillColor = Color.White;
 
-        p_targetCockTailInfo = new Paragraph("Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info(), Anchor.TopLeft, new Vector2(300, 500), new Vector2(300, 0));
-        p_targetCockTailInfo.FillColor = Color.White;
+        _inGamePanelRight.AddChild(_BTN_AddIce);
+        _inGamePanelRight.AddChild(_BTN_Shake);
+        _inGamePanelRight.AddChild(_BTN_Mix);
+        _inGamePanelRight.AddChild(_BTN_PaperMakeCocktail);
+        _inGamePanelRight.AddChild(_BTN_Reset);
 
-
-        p_result = new Paragraph("Result: ", Anchor.BottomLeft, new Vector2(500, 200), new Vector2(0, 0));
-        p_result.FillColor = Color.White;
-        #endregion
-
-        #region AddChild IngamePanel
-        _inGamePanelCatagory.AddChild(_BTN_AddIce);
-        _inGamePanelCatagory.AddChild(_BTN_Shake);
-        _inGamePanelCatagory.AddChild(_BTN_Mix);
-        //_inGamePanel.AddChild(_BTN_Serve);
-        _inGamePanelCatagory.AddChild(_BTN_PaperMakeCocktail);
-        _inGamePanelCatagory.AddChild(_BTN_Reset);
-
-        _inGamePanelCatagory.AddChild(_inGame_Alcohol);
-        _inGamePanelCatagory.AddChild(_inGame_Mixer);
+        _inGamePanelRight.AddChild(_inGame_Alcohol);
+        _inGamePanelRight.AddChild(_inGame_Mixer);
         _inGame_MethodScreen.AddChild(_BTN_Serve);
-        _inGamePanelCatagory.AddChild(_inGame_MethodScreen);
+        _inGamePanelRight.AddChild(_inGame_MethodScreen);
+
+        _inGamePanelLeft.AddChild(_imgCustomerNPC);
+
+        _inGamePanelCatagoly.AddChild(_inGamePanelRight);
+        _inGamePanelCatagoly.AddChild(_inGamePanelLeft);
         #endregion
 
         #endregion
@@ -504,29 +523,27 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(_UI_Table);
         _UI_Table.SendToBack();
 
+        UserInterface.Active.AddEntity(_inGamePanelCatagoly);
+        UserInterface.Active.AddEntity(_summaryPanelCataory);
+        UserInterface.Active.AddEntity(_titlePanel);
+       
+
+#if DEBUG
         UserInterface.Active.AddEntity(p_currentCocktailInfo);
         UserInterface.Active.AddEntity(p_targetCockTailInfo);
         UserInterface.Active.AddEntity(p_result);
-
-        UserInterface.Active.AddEntity(_titlePanel);
-        UserInterface.Active.AddEntity(_inGamePanelCatagory);
-        UserInterface.Active.AddEntity(_summaryPanelCataory);
-
-        UserInterface.Active.AddEntity(_imgCustomerNPC);
-
-#if DEBUG
         UserInterface.Active.AddEntity(p_timer);
 
         string Astring = @"GAMEER ins isder{{RED}}ashahahah{{DEFAULT}}";
-        RichParagraph simple = new RichParagraph(Astring, Anchor.Center, new Vector2(500, 200), new Vector2(0, 0));
-        withCustomer = new RichParagraph(".", Anchor.Center, new Vector2(500, 200), new Vector2(-500, 0));
+        RichParagraph simple = new RichParagraph(Astring, Anchor.CenterLeft, new Vector2(500, 200), new Vector2(200, 0));
+        withCustomer = new RichParagraph(".", Anchor.CenterLeft, new Vector2(500, 200), new Vector2(500, 0));
         taggedTextRevealer = new TaggedTextRevealer(Astring, 0.05);
 
         UserInterface.Active.AddEntity(simple);
         UserInterface.Active.AddEntity(withCustomer);   
+
+
 #endif
-
-
         #endregion
 
         taggedTextRevealer.Start();
@@ -579,9 +596,7 @@ public class Game1 : Core
             timer.Stop();
             _summaryPanelCataory.Enabled = true;
             _summaryPanelCataory.Visible = true;
-            _inGamePanelCatagory.Enabled = false;
-            _inGamePanelCatagory.Visible = false;
-
+            Disable_InGamePanel();
         }
 
             PanelInGameLogic();
@@ -727,6 +742,25 @@ public class Game1 : Core
 
         _isOpenAlcohol = false;
         _isOpenMixer = false;
+    }
+
+    protected void Enable_InGamePanel() { 
+        _inGamePanelCatagoly.Enabled = true;
+        _inGamePanelCatagoly.Visible = true;
+        _inGamePanelLeft.Enabled = true;
+        _inGamePanelLeft.Visible = true;
+        _inGamePanelRight.Enabled = true;
+        _inGamePanelRight.Visible = true;
+    }
+
+    protected void Disable_InGamePanel()
+    {
+        _inGamePanelCatagoly.Enabled = false;
+        _inGamePanelCatagoly.Visible = false;
+        _inGamePanelLeft.Enabled = false;
+        _inGamePanelLeft.Visible = false;
+        _inGamePanelRight.Enabled = false;
+        _inGamePanelRight.Visible = false;
     }
 
     protected float CalcualatePrice(Cocktail _targetCocktail) {
