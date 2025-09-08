@@ -123,7 +123,6 @@ namespace CocktailProject.Scenes
             if (openAlcoholPanel) {
                 if (SlidePanel_X_Axis(P_Alcohol, 0, 20, true))
                     openAlcoholPanel = false;
-                    
             }
         }   
 
