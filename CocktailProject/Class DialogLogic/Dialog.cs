@@ -9,10 +9,9 @@ using GeonBit.UI.Entities;
 
 namespace CocktailProject.Class_DialogLogic
 {
-    class Dialog
+    class Dialog 
     {
         protected string CustomerName { get; set; }
         protected string CustomerMessage { get; set; }
-        protected int currentCharIndex = 0;
     }
 }
