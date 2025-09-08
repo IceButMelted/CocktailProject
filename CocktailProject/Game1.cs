@@ -599,7 +599,7 @@ public class Game1 : Core
             Disable_InGamePanel();
         }
 
-            PanelInGameLogic();
+        PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
         p_currentCocktailInfo.Text = _currentCocktail.Info();
