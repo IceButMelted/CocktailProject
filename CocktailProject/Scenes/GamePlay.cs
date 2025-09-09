@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using CocktailProject.ClassCocktail;
 using MonoGameLibrary.Graphics;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CocktailProject.Scenes
 {
@@ -25,6 +26,7 @@ namespace CocktailProject.Scenes
 
         #region Image Sprite Atlas
         TextureAtlas Atlas_CustomerNPC;
+        TextureAtlas atlas;
         #endregion
 
 
@@ -43,37 +45,14 @@ namespace CocktailProject.Scenes
                 public Button Mixer_Syrup;
                 public Button Mixer_PepperMint;
             public Button BTN_Alcohol;
-            public Panel P_Alcohol;
-                public Button Alcohol_Vodka;
+            public Panel P_Alcohol;                 public Texture2D T_Alchohol_Panel;        public Image Img_Alcohol_Panel;
+        public Button Alcohol_Vodka;
                 public Button Alcohol_Gin;
                 public Button Alcohol_Triplesec;
                 public Button Alcohol_Vermouth;
         public Button BTN_steering;
         public Button BTN_Shaking;
         public Button BTN_Reset;
-
-        public void InitUI()
-        {
-            P_Ingredient = new Panel(new Vector2(800,600),anchor:Anchor.TopRight, offset: new Vector2(0,0));
-            P_Ingredient.Padding = Vector2.Zero;
-
-            BTN_Alcohol = new Button("Alcohol",skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(200, 100), offset: Vector2.Zero);
-            BTN_Alcohol.OnMouseDown = (Entity e) =>
-            {
-                openAlcoholPanel = true;
-                Debug.WriteLine("BTN_Alcohol was clicked");
-            };
-
-            P_Alcohol = new Panel(new Vector2(800, 600), anchor:Anchor.TopRight, offset: new Vector2(-800, 0));
-            P_Alcohol.Padding = Vector2.Zero;
-
-            //add child
-            P_Ingredient.AddChild(P_Alcohol);
-            P_Ingredient.AddChild(BTN_Alcohol);
-            // add Entity
-            UserInterface.Active.AddEntity(P_Ingredient);
-        }
-
 
         public override void Initialize()
         {
@@ -86,15 +65,47 @@ namespace CocktailProject.Scenes
         public override void LoadContent()
         {   //Base DO NOT DELETE
             UserInterface.Initialize(Content, BuiltinThemes.hd);
-            InitUI();
+            
 
             //Add Code Here
-            TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
+            atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
+
+            //Load Ui image
+            T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_Alcohol");
+
             //Add Code Above
 
             //Base DO NOT DELETE
+            InitUI();
             base.LoadContent();
+        }
+
+        public void InitUI()
+        {
+            P_Ingredient = new Panel(new Vector2(800, 600), anchor: Anchor.TopRight, offset: new Vector2(0, 0));
+            P_Ingredient.Padding = Vector2.Zero;
+
+            BTN_Alcohol = new Button("Alcohol", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(200, 100), offset: Vector2.Zero);
+            BTN_Alcohol.OnMouseDown = (Entity e) =>
+            {
+                openAlcoholPanel = true;
+                Debug.WriteLine("BTN_Alcohol was clicked");
+            };
+
+            P_Alcohol = new Panel(new Vector2(800, 600), PanelSkin.None, anchor: Anchor.TopRight);
+            P_Alcohol.Offset = new Vector2(-800, 0);
+            P_Alcohol.Padding = Vector2.Zero;
+            P_Alcohol.SetCustomSkin(T_Alchohol_Panel);
+
+
+            //add image to panel
+
+            //add child
+            P_Ingredient.AddChild(P_Alcohol);
+            P_Ingredient.AddChild(BTN_Alcohol);
+            // add Entity
+            UserInterface.Active.AddEntity(P_Ingredient);
         }
 
         public override void Update(GameTime gameTime)
@@ -112,6 +123,12 @@ namespace CocktailProject.Scenes
         public override void Draw(GameTime gameTime)
         {
             Core.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            Core.SpriteBatch.Begin();
+
+            //Core.SpriteBatch.Draw(img_Alchohol_Panel, new Vector2(0, 0), Color.White);
+
+            Core.SpriteBatch.End();
 
             UserInterface.Active.Draw(Core.SpriteBatch);
             base.Draw(gameTime);

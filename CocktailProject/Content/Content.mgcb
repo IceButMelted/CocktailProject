@@ -4570,3 +4570,15 @@
 /processorParam:TextureFormat=Color
 /build:images/pong-atlas.png
 
+#begin images/UI/Img_Panel_Alcohol.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Img_Panel_Alcohol.png
+
