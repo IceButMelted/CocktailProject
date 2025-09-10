@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CocktailProject", "Cocktail
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameLibrary", "MonoGameLibrary\MonoGameLibrary.csproj", "{136C3C93-6D14-C06D-3DBE-468E75475147}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeonBit.UI", "GeonBit.UI\GeonBit.UI.csproj", "{AD0318DD-B6F5-9D19-FA19-7F087469F23D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{136C3C93-6D14-C06D-3DBE-468E75475147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0318DD-B6F5-9D19-FA19-7F087469F23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0318DD-B6F5-9D19-FA19-7F087469F23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0318DD-B6F5-9D19-FA19-7F087469F23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0318DD-B6F5-9D19-FA19-7F087469F23D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
