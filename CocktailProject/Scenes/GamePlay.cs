@@ -1,18 +1,25 @@
 ﻿using GeonBit.UI.Entities;
 using GeonBit.UI;
+
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
+
 using MonoGameLibrary;
 using MonoGameLibrary.Scenes;
+using MonoGameLibrary.Graphics;
+using MonoGameLibrary.Input;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CocktailProject.ClassCocktail;
-using MonoGameLibrary.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
+using GeonBit.UI.Source.Entities;
 
 namespace CocktailProject.Scenes
 {
@@ -45,7 +52,7 @@ namespace CocktailProject.Scenes
                 public Button Mixer_Syrup;
                 public Button Mixer_PepperMint;
             public Button BTN_Alcohol;
-            public Panel P_Alcohol;                 public Texture2D T_Alchohol_Panel;        public Image Img_Alcohol_Panel;
+            public FullImagePanel P_Alcohol;                 public Texture2D T_Alchohol_Panel;        public Image Img_Alcohol_Panel;
         public Button Alcohol_Vodka;
                 public Button Alcohol_Gin;
                 public Button Alcohol_Triplesec;
@@ -93,10 +100,11 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("BTN_Alcohol was clicked");
             };
 
-            P_Alcohol = new Panel(new Vector2(800, 600), PanelSkin.None, anchor: Anchor.TopRight);
+            //P_Alcohol = new Panel(new Vector2(800, 600), PanelSkin.Default, anchor: Anchor.TopRight);
+            P_Alcohol = new FullImagePanel(T_Alchohol_Panel, new Vector2(800, 600), anchor: Anchor.TopRight);
             P_Alcohol.Offset = new Vector2(-800, 0);
             P_Alcohol.Padding = Vector2.Zero;
-            P_Alcohol.SetCustomSkin(T_Alchohol_Panel);
+            //P_Alcohol.SetCustomSkin(T_Alchohol_Panel);
 
 
             //add image to panel
