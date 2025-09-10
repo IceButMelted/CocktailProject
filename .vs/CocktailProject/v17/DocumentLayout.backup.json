@@ -11,24 +11,64 @@
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\enumelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\enumelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\classcocktail\\cocktail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\classcocktail\\cocktail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\scenes\\titlegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\scenes\\titlegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\source\\entities\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\source\\entities\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\source\\entities\\button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\source\\entities\\button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-mousedown.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-mousedown.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\panel-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\panel-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\entity-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\entity-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\paragraph-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\paragraph-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-mousehover.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\button-mousehover.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-mousedown.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-mousedown.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-mousehover.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\buttonparagraph-mousehover.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\source\\resources.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\source\\resources.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|d:\\git\\cocktailproject\\geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\label-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AD0318DD-B6F5-9D19-FA19-7F087469F23D}|GeonBit.UI\\GeonBit.UI.csproj|solutionrelative:geonbit.ui\\content\\geonbit.ui\\themes\\lowres\\styles\\label-default.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\game2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\game2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\scencs\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\scencs\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,6 +77,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\monogamelibrary.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\monogamelibrary.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|d:\\git\\cocktailproject\\cocktailproject\\scenes\\titlegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{603DEABE-0041-4AE6-9764-968CBF968C87}|CocktailProject\\CocktailProject.csproj|solutionrelative:cocktailproject\\scenes\\titlegame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\core.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|d:\\git\\cocktailproject\\monogamelibrary\\scencs\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{136C3C93-6D14-C06D-3DBE-468E75475147}|MonoGameLibrary\\MonoGameLibrary.csproj|solutionrelative:monogamelibrary\\scencs\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -45,12 +97,51 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 220,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 209,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cocktail.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "RelativeToolTip": "CocktailProject\\ClassCocktail\\Cocktail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T19:33:17.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Label-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Label-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Label-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Label-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Label-Default.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T17:46:51.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Resources.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Resources.cs",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Source\\Resources.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Resources.cs",
+              "RelativeToolTip": "GeonBit.UI\\Source\\Resources.cs",
+              "ViewState": "AgIAAPQBAAAAAAAAAAAywCMCAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T17:31:15.547Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -60,14 +151,14 @@
               "RelativeDocumentMoniker": "CocktailProject\\Scenes\\GamePlay.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Scenes\\GamePlay.cs",
               "RelativeToolTip": "CocktailProject\\Scenes\\GamePlay.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAcwHwAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAGkBAAAAAAAAAAAwwHgBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-08T07:38:24.638Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Program.cs",
               "RelativeDocumentMoniker": "CocktailProject\\Program.cs",
@@ -80,33 +171,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 19,
               "Title": "TitleGame.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Scenes\\TitleGame.cs",
               "RelativeDocumentMoniker": "CocktailProject\\Scenes\\TitleGame.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Scenes\\TitleGame.cs",
               "RelativeToolTip": "CocktailProject\\Scenes\\TitleGame.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-08T06:22:15.324Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 16,
               "Title": "Game2.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\Game2.cs",
               "RelativeDocumentMoniker": "CocktailProject\\Game2.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game2.cs",
               "RelativeToolTip": "CocktailProject\\Game2.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAQwCMAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-08T06:55:22.342Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "Scene.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Scencs\\Scene.cs",
               "RelativeDocumentMoniker": "MonoGameLibrary\\Scencs\\Scene.cs",
@@ -114,13 +205,12 @@
               "RelativeToolTip": "MonoGameLibrary\\Scencs\\Scene.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAgwCAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T06:17:37.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-08T06:17:37.152Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MonoGameLibrary",
+              "DocumentIndex": 18,
+              "Title": "MonoGameLibrary.csproj",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\MonoGameLibrary.csproj",
               "RelativeDocumentMoniker": "MonoGameLibrary\\MonoGameLibrary.csproj",
               "ToolTip": "D:\\Git\\CocktailProject\\MonoGameLibrary\\MonoGameLibrary.csproj",
@@ -132,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 20,
               "Title": "Core.cs",
               "DocumentMoniker": "D:\\Git\\CocktailProject\\MonoGameLibrary\\Core.cs",
               "RelativeDocumentMoniker": "MonoGameLibrary\\Core.cs",
@@ -140,26 +230,38 @@
               "RelativeToolTip": "MonoGameLibrary\\Core.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T06:16:25.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-08T06:16:25.176Z"
             }
           ]
         },
         {
-          "DockedWidth": 180,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 191,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EnumElement.cs",
-              "DocumentMoniker": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "RelativeDocumentMoniker": "CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "RelativeToolTip": "CocktailProject\\ClassCocktail\\EnumElement.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAARAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Entities\\Entity.cs",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Source\\Entities\\Entity.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Entities\\Entity.cs",
+              "RelativeToolTip": "GeonBit.UI\\Source\\Entities\\Entity.cs",
+              "ViewState": "AgIAAGICAAAAAAAAAAASwG4CAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T08:18:26.283Z",
+              "WhenOpened": "2025-09-10T18:16:03.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Button.cs",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Entities\\Button.cs",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Source\\Entities\\Button.cs",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Source\\Entities\\Button.cs",
+              "RelativeToolTip": "GeonBit.UI\\Source\\Entities\\Button.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAowF4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T18:15:03.509Z",
               "EditorCaption": ""
             },
             {
@@ -170,9 +272,126 @@
               "RelativeDocumentMoniker": "CocktailProject\\Game1.cs",
               "ToolTip": "D:\\Git\\CocktailProject\\CocktailProject\\Game1.cs",
               "RelativeToolTip": "CocktailProject\\Game1.cs",
-              "ViewState": "AgIAAFsBAAAAAAAAAAAwwIUBAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAP0AAAAAAAAAAAApwBQBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-14T08:52:28.727Z",
+              "WhenOpened": "2025-09-10T19:33:28.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Panel-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Panel-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Panel-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Panel-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Panel-Default.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:12:46.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Entity-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Entity-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Entity-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Entity-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Entity-Default.xml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC4AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:12:29.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Paragraph-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Paragraph-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Paragraph-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Paragraph-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Paragraph-Default.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:10:06.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Button-MouseHover.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseHover.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseHover.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseHover.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseHover.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:09:16.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ButtonParagraph-MouseHover.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseHover.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseHover.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseHover.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseHover.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:08:27.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ButtonParagraph-MouseDown.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseDown.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseDown.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseDown.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-MouseDown.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:06:49.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ButtonParagraph-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\ButtonParagraph-Default.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T17:49:55.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Button-Default.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-Default.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-Default.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-Default.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-Default.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T17:50:50.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Button-MouseDown.xml",
+              "DocumentMoniker": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseDown.xml",
+              "RelativeDocumentMoniker": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseDown.xml",
+              "ToolTip": "D:\\Git\\CocktailProject\\GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseDown.xml",
+              "RelativeToolTip": "GeonBit.UI\\Content\\GeonBit.UI\\Themes\\lowres\\styles\\Button-MouseDown.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-09-10T18:08:59.268Z",
               "EditorCaption": ""
             }
           ]
