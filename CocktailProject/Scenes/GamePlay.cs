@@ -65,6 +65,14 @@ namespace CocktailProject.Scenes
                 public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
                 public Button BTN_Reset_OnTable;
             public Button BTN_Rest_BeforeServe;
+            public Panel P_Minigame;
+                public Panel P_Minigame_Shaking;
+                public Panel P_Minigame_Stiring;
+#if DEBUG
+        public Button BTN_finishMinigame;
+
+#endif
+
 
 
         //BG
@@ -421,13 +429,41 @@ namespace CocktailProject.Scenes
 
 
             #endregion
-            #region Add Child to Panel Making Zone
+    
+    #region Add Child to Panel Making Zone
             P_MakeingZone.AddChild(BTN_Stiring);
             P_MakeingZone.AddChild(BTN_Shaking);
             P_MakeingZone.AddChild(BTN_Reset_OnTable);
             P_MakeingZone.AddChild(Img_CocktailBottle);
 
             #endregion
+
+#region Panel Minigame Zone
+            P_Minigame = new Panel(new Vector2(800, 600), PanelSkin.None, anchor: Anchor.TopRight);
+            P_Minigame.Padding = Vector2.Zero;
+            P_Minigame.Offset = new Vector2(0,0);
+
+            P_Minigame_Shaking = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
+            P_Minigame_Shaking.Padding = Vector2.Zero;
+            P_Minigame_Shaking.Offset = new Vector2(-600, 0);
+
+            P_Minigame_Stiring = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
+            P_Minigame_Stiring.Padding = Vector2.Zero;
+            P_Minigame_Stiring.Offset = new Vector2(-700, 0);
+            P_Minigame_Shaking.FillColor = Color.Red;
+
+    #region Add Child To Panel Minigame Zone
+
+            P_Minigame.AddChild(P_Minigame_Shaking);
+            P_Minigame.AddChild(P_Minigame_Stiring);
+
+    #endregion
+
+#endregion
+
+
+
+
 
 
             #region Add Child And Entites 
@@ -445,7 +481,8 @@ namespace CocktailProject.Scenes
 
             UserInterface.Active.AddEntity(P_Ingredient);
             UserInterface.Active.AddEntity(P_MakeingZone);
-#endregion
+            UserInterface.Active.AddEntity(P_Minigame);
+            #endregion
         }
 
         public override void Update(GameTime gameTime)
