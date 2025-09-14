@@ -457,9 +457,9 @@ namespace CocktailProject.Scenes
             P_Minigame.AddChild(P_Minigame_Shaking);
             P_Minigame.AddChild(P_Minigame_Stiring);
 
-    #endregion
+            #endregion
 
-#endregion
+            #endregion
 
 
 
