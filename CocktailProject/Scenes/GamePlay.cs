@@ -39,6 +39,11 @@ namespace CocktailProject.Scenes
         #region UI Logic Variable
         protected bool openAlcoholPanel = false;
         protected bool openMixerPanel = false;
+        protected bool openMinigamePanel = false;
+        protected bool openBeforeServePanel = false;
+        protected bool openArt1Panel = false;
+        protected bool openArt2Panel = false;
+
         #endregion
 
         #region Panel UI
@@ -59,12 +64,14 @@ namespace CocktailProject.Scenes
                 public Button BTN_Alcohol_Triplesec;
                 public Button BTN_Alcohol_Vermouth;
             public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
-                public Button BTN_AddIce;
                 public Button BTN_Stiring;
                 public Button BTN_Shaking;
                 public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
                 public Button BTN_Reset_OnTable;
-            public Button BTN_Rest_BeforeServe;
+            public Panel P_BeforeServe;
+                public Button BTN_AddIce;
+                public Button BTN_Serve;
+                public Button BTN_Rest_BeforeServe;
             public Panel P_Minigame;
                 public Panel P_Minigame_Shaking;
                 public Panel P_Minigame_Stiring;
@@ -386,6 +393,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Selected Method: Stiring");
                 Debug.WriteLine(_currentCocktail.Info());
 
+                ShowMinigame(Enum_Method.Mixing);
+
                 BTNMethodActive(false);
                 BTNMethodVisible(false);
             };
@@ -402,6 +411,8 @@ namespace CocktailProject.Scenes
 
                 Debug.WriteLine("Selected Method: Shaking");
                 Debug.WriteLine(_currentCocktail.Info());
+
+                ShowMinigame(Enum_Method.Shaking);
 
                 BTNMethodActive(false);
                 BTNMethodVisible(false);
@@ -420,8 +431,12 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Reset On Table");
                 Debug.WriteLine(_currentCocktail.Info());
 
+                ShowMinigame(false);
+
                 BTNIngredeientActive(true);
                 BTNMethodVisible(false);
+
+                ResetUI();
             };
 
             Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(100, 120), anchor: Anchor.Center);
@@ -441,16 +456,40 @@ namespace CocktailProject.Scenes
 #region Panel Minigame Zone
             P_Minigame = new Panel(new Vector2(800, 600), PanelSkin.None, anchor: Anchor.TopRight);
             P_Minigame.Padding = Vector2.Zero;
-            P_Minigame.Offset = new Vector2(0,0);
+            P_Minigame.Offset = new Vector2(800,0);
 
             P_Minigame_Shaking = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Shaking.Padding = Vector2.Zero;
-            P_Minigame_Shaking.Offset = new Vector2(-600, 0);
+            P_Minigame_Shaking.Offset = new Vector2(0, 0);
 
             P_Minigame_Stiring = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Stiring.Padding = Vector2.Zero;
-            P_Minigame_Stiring.Offset = new Vector2(-700, 0);
+            P_Minigame_Stiring.Offset = new Vector2(0, 0);
             P_Minigame_Shaking.FillColor = Color.Red;
+
+#if DEBUG
+            Button FinishString = new Button("Finish Stiring",skin:ButtonSkin.Default, Anchor.Center, new Vector2(200,100));
+            FinishString.OnMouseDown = (Entity e) =>
+            {
+                Debug.WriteLine("Finish Stiring Minigame");
+                openBeforeServePanel = true;    
+                //openMinigamePanel = false;
+                //P_Minigame_Stiring.Offset = new Vector2(-700, 0);
+            };
+
+            Button FinishShake = new Button("Finish Shaking", skin: ButtonSkin.Default, Anchor.Center, new Vector2(200, 100));
+            FinishShake.OnMouseDown = (Entity e) =>
+            {
+                Debug.WriteLine("Finish Shaking Minigame");
+                openBeforeServePanel = true;
+                //openMinigamePanel = false;
+                //P_Minigame_Shaking.Offset = new Vector2(-700, 0);
+            };
+
+            P_Minigame_Shaking.AddChild(FinishShake);
+            P_Minigame_Stiring.AddChild(FinishString);
+#endif
+            #endregion
 
     #region Add Child To Panel Minigame Zone
 
@@ -459,10 +498,67 @@ namespace CocktailProject.Scenes
 
             #endregion
 
+#region Before Serve Panel
+            P_BeforeServe = new Panel(new Vector2(800, 480), PanelSkin.Default, anchor: Anchor.TopRight);
+            P_BeforeServe.Padding = Vector2.Zero;
+            P_BeforeServe.Offset = new Vector2(-600, 600);
+
+            BTN_AddIce = new Button("Add Ice", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(150, 60));
+            BTN_AddIce.Padding = Vector2.Zero;
+            BTN_AddIce.Offset = Vector2.Zero;
+            BTN_AddIce.ButtonParagraph.OutlineWidth = 0;
+            BTN_AddIce.OnMouseDown = (Entity e) =>
+            {
+                _currentCocktail.AddIce(true);
+                Debug.WriteLine("Added Ice");
+                Debug.WriteLine(_currentCocktail.Info());
+                BTN_AddIce.Enabled = false;
+            };
+
+            BTN_Serve = new Button("Serve", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(150, 60));
+            BTN_Serve.Padding = Vector2.Zero;
+            BTN_Serve.Offset = Vector2.Zero;
+            BTN_Serve.ButtonParagraph.OutlineWidth = 0;
+            BTN_Serve.OnMouseDown = (Entity e) =>
+            {
+                Debug.WriteLine("Served Cocktail");
+                Debug.WriteLine(_currentCocktail.Info());
+                float price = CalcualatePrice(_targetCoctail);
+                Debug.WriteLine("Earned Price: " + price);
+
+                _currentCocktail.ClearAllIngredients();
+                RandomTargetCocktail();
+
+                Debug.WriteLine("New Target Cocktail is: " + str_targetCocktail_Name);
+                BTN_AddIce.Enabled = true;
+
+                BTNIngredeientActive(true);
+                BTNMethodVisible(false);
+
+                ResetUI();
+            };
+
+            BTN_Rest_BeforeServe = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(100, 80));
+            BTN_Rest_BeforeServe.Padding = Vector2.Zero;
+            BTN_Rest_BeforeServe.Offset = Vector2.Zero;
+            BTN_Rest_BeforeServe.ButtonParagraph.OutlineWidth = 0;
+            BTN_Rest_BeforeServe.OnMouseDown = (Entity e) =>
+            {
+                _currentCocktail.ClearAllIngredients();
+                openAlcoholPanel = false;
+                openMixerPanel = false;
+
+                ResetUI();
+
+            };
             #endregion
 
+    #region Add Child Before Serve
+            P_BeforeServe.AddChild(BTN_AddIce);
+            P_BeforeServe.AddChild(BTN_Serve);
+            P_BeforeServe.AddChild(BTN_Rest_BeforeServe);
 
-
+    #endregion
 
 
 
@@ -482,6 +578,7 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_Ingredient);
             UserInterface.Active.AddEntity(P_MakeingZone);
             UserInterface.Active.AddEntity(P_Minigame);
+            UserInterface.Active.AddEntity(P_BeforeServe);
             #endregion
         }
 
@@ -534,6 +631,22 @@ namespace CocktailProject.Scenes
             {
                 SlidePanel_X_Axis(FP_Mixer, -800, 20, false);
                 SlidePanel_X_Axis(BTN_Mixer, -100, 20, false);
+            }
+
+            if (openMinigamePanel) { 
+                SlidePanel_X_Axis(P_Minigame, 0, 20, true);
+            }
+            else
+            {
+                SlidePanel_X_Axis(P_Minigame, -800, 20, false);
+            }
+
+            if (openBeforeServePanel) { 
+                SlidePanel_X_Axis(P_BeforeServe, 0, 20, true);
+            }
+            else
+            {
+                SlidePanel_X_Axis(P_BeforeServe, -800, 20, false);
             }
 
         }   
@@ -603,7 +716,6 @@ namespace CocktailProject.Scenes
                 BTNIngredeientActive(false);
             }
         }
-
         protected void BTNIngredeientActive(bool Enable) {
             BTN_Mixer_CanberryJuice.Enabled = Enable;
             BTN_Mixer_GrapefruitJuice.Enabled = Enable;
@@ -622,13 +734,52 @@ namespace CocktailProject.Scenes
             BTN_Shaking.Enabled = Enable;
             BTN_Reset_OnTable.Enabled = Enable;
         }
-
         protected void BTNMethodVisible(bool visible) {
             BTN_Stiring.Visible = visible;
             BTN_Shaking.Visible = visible;
             BTN_Reset_OnTable.Visible = visible;
         }
+        protected void ShowMinigame(Enum_Method method) {
+            openMinigamePanel = true;
 
+            if (method == Enum_Method.Shaking) { 
+                P_Minigame.Enabled = true;
+                P_Minigame.Visible = true;
+
+                P_Minigame_Stiring.Enabled = false;
+                P_Minigame_Stiring.Visible = false;
+
+                P_Minigame_Shaking.Enabled = true;
+                P_Minigame_Shaking.Visible = true;
+            }
+            if (method == Enum_Method.Mixing)
+            {
+                P_Minigame.Enabled = true;
+                P_Minigame.Visible = true;
+
+                P_Minigame_Stiring.Enabled = true;
+                P_Minigame_Stiring.Visible = true;
+
+                P_Minigame_Shaking.Enabled = false;
+                P_Minigame_Shaking.Visible = false;
+            }
+        }
+        protected void ShowMinigame(bool enable) { 
+            
+        }
+        protected void ResetUI()
+        {
+            openAlcoholPanel = false;
+            openMixerPanel = false;
+            openMinigamePanel = false;
+            openBeforeServePanel = false;
+            BTNIngredeientActive(true);
+            BTNMethodActive(false);
+            BTNMethodVisible(false);
+            _currentCocktail.ClearAllIngredients();
+        }
+
+        // ----------------------Slide Panel-----------------------
         public bool SlidePanel_X_Axis(Entity _panel,int _endPoint, int _speed, bool _moreThan ) {
             if (_moreThan)
             {
