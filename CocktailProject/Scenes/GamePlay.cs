@@ -47,6 +47,10 @@ namespace CocktailProject.Scenes
         #region Conversation Logic Variable
         public TaggedTextRevealer AnimationText;
 
+        protected bool canSkipConversation = false;
+        protected bool canGoNextConversation = false;
+        protected bool haveDoneOrder = false;
+
         protected bool inStartConversation = false;
         protected bool inOrderConversation = false;
         protected bool inServerComplain = false;
@@ -115,7 +119,11 @@ namespace CocktailProject.Scenes
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
             inStartConversation = true;
-
+            string welcomeText = "Welcome! Please make me a {{RED}}cocktail.";
+            canSkipConversation = true;
+            haveDoneOrder = true;
+            AnimationText = new TaggedTextRevealer(welcomeText, 0.1);
+            AnimationText.Start();
 
 
             //Base DO NOT DELETE
@@ -479,7 +487,7 @@ namespace CocktailProject.Scenes
 #region Panel Minigame Zone
             P_Minigame = new Panel(new Vector2(800, 600), PanelSkin.None, anchor: Anchor.TopRight);
             P_Minigame.Padding = Vector2.Zero;
-            P_Minigame.Offset = new Vector2(800,0);
+            P_Minigame.Offset = new Vector2(-800,0);
 
             P_Minigame_Shaking = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Shaking.Padding = Vector2.Zero;
@@ -558,6 +566,8 @@ namespace CocktailProject.Scenes
                 BTNIngredeientActive(true);
                 BTNMethodVisible(false);
 
+                haveDoneOrder = true;
+
                 ResetUI();
             };
 
@@ -624,6 +634,7 @@ namespace CocktailProject.Scenes
 
             //Add Code Here
             UpdateUILogic();
+            AnimationText.Update(gameTime);
             //Add Code Above
 
             //base DO NOT DELETE
@@ -649,7 +660,29 @@ namespace CocktailProject.Scenes
         // _____________________main funciton__________________
         protected void UpdateUILogic() {
             CheckCurrentCountPart();
+            
+            //updat Textanimation
+            RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+            if (AnimationText.IsFinished()) {
+                canSkipConversation = false;
+                canGoNextConversation = true;
+                AnimationText.Stop();
+            }
+            if (!AnimationText.IsFinished() && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canSkipConversation) {
+                AnimationText.Skip();
+                canSkipConversation = false;
+                canGoNextConversation = true;
+            }
+            if(haveDoneOrder)
+                if (canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left)) {
+                    Debug.WriteLine("Go Next Conversation");
+                    AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.1);
+                    AnimationText.Start();
+                    canSkipConversation = true;
+                    haveDoneOrder = false;
+                }
 
+            //update panel
             HandlePanel_X_Axis(openAlcoholPanel, FP_Alcohol, 0, -800, 20);
             HandlePanel_X_Axis(openAlcoholPanel, BTN_Alcohol, 0, -100, 20);
 
@@ -788,6 +821,10 @@ namespace CocktailProject.Scenes
             BTNMethodActive(false);
             BTNMethodVisible(false);
             _currentCocktail.ClearAllIngredients();
+        }
+
+        protected void SetNewTextForConversation(TaggedTextRevealer _animationText,string _txt) {
+            _animationText = new TaggedTextRevealer(_txt, 0.05);
         }
 
         // ----------------------Slide Panel-----------------------

@@ -534,7 +534,7 @@ public class Game1 : Core
         UserInterface.Active.AddEntity(p_result);
         UserInterface.Active.AddEntity(p_timer);
 
-        string Astring = @"GAMEER ins isder{{RED}}ashahahah{{DEFAULT}}";
+        string Astring = @"GAMEER ins isder {{RED}} ashahahah{{DEFAULT}}";
         RichParagraph simple = new RichParagraph(Astring, Anchor.CenterLeft, new Vector2(500, 200), new Vector2(200, 0));
         withCustomer = new RichParagraph(".", Anchor.CenterLeft, new Vector2(500, 200), new Vector2(500, 0));
         taggedTextRevealer = new TaggedTextRevealer(Astring, 0.05);
