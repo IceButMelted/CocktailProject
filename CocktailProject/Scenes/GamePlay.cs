@@ -22,6 +22,7 @@ using MonoGameLibrary.Input;
 using CocktailProject.ClassCocktail;
 using CocktailProject.ClassTime;
 using CocktailProject.NPC;
+using CocktailProject.Class_DialogLogic;
 
 
 
@@ -46,6 +47,7 @@ namespace CocktailProject.Scenes
 
         #region Conversation Logic Variable
         public TaggedTextRevealer AnimationText;
+        ConversationPhase currentPhase = ConversationPhase.SmallTalkBeforeOrder;
 
         protected bool canSkipConversation = false;
         protected bool canGoNextConversation = false;
@@ -118,11 +120,13 @@ namespace CocktailProject.Scenes
             RandomTargetCocktail();
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
+            
+            string welcomeText = "Welcome! To Project Cocktail";
+
             inStartConversation = true;
-            string welcomeText = "Welcome! Please make me a {{RED}}cocktail.";
             canSkipConversation = true;
-            haveDoneOrder = true;
-            AnimationText = new TaggedTextRevealer(welcomeText, 0.1);
+
+            AnimationText = new TaggedTextRevealer(welcomeText, 0.05);
             AnimationText.Start();
 
 
@@ -557,8 +561,19 @@ namespace CocktailProject.Scenes
                 float price = CalcualatePrice(_targetCoctail);
                 Debug.WriteLine("Earned Price: " + price);
 
-                _currentCocktail.ClearAllIngredients();
-                RandomTargetCocktail();
+                //_currentCocktail.ClearAllIngredients();
+                //RandomTargetCocktail();\
+
+                //--------- from conversation phase Order to Small Talk After Order --------------
+                //apply text and change conversation phase
+                Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
+                AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                canSkipConversation = true;
+                canGoNextConversation = false;
+                haveDoneOrder = false; // reset
+                currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                AnimationText.Start();
+                //-------------------------------------------------------------------------------
 
                 Debug.WriteLine("New Target Cocktail is: " + str_targetCocktail_Name);
                 BTN_AddIce.Enabled = true;
@@ -634,6 +649,7 @@ namespace CocktailProject.Scenes
 
             //Add Code Here
             UpdateUILogic();
+            UpdateConversation();
             AnimationText.Update(gameTime);
             //Add Code Above
 
@@ -660,27 +676,6 @@ namespace CocktailProject.Scenes
         // _____________________main funciton__________________
         protected void UpdateUILogic() {
             CheckCurrentCountPart();
-            
-            //updat Textanimation
-            RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
-            if (AnimationText.IsFinished()) {
-                canSkipConversation = false;
-                canGoNextConversation = true;
-                AnimationText.Stop();
-            }
-            if (!AnimationText.IsFinished() && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canSkipConversation) {
-                AnimationText.Skip();
-                canSkipConversation = false;
-                canGoNextConversation = true;
-            }
-            if(haveDoneOrder)
-                if (canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left)) {
-                    Debug.WriteLine("Go Next Conversation");
-                    AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.1);
-                    AnimationText.Start();
-                    canSkipConversation = true;
-                    haveDoneOrder = false;
-                }
 
             //update panel
             HandlePanel_X_Axis(openAlcoholPanel, FP_Alcohol, 0, -800, 20);
@@ -693,7 +688,73 @@ namespace CocktailProject.Scenes
 
             HandlePanel_X_Axis(openBeforeServePanel, P_BeforeServe, 0, -800, 20);
 
-        }   
+        }
+
+
+        protected void UpdateConversation()
+        {
+            RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+
+            // --- Skip text animation if left-click while animating ---
+            if (!AnimationText.IsFinished() &&
+                Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) &&
+                canSkipConversation)
+            {
+                AnimationText.Skip();
+                canSkipConversation = false;
+                canGoNextConversation = true;
+                return;
+            }
+
+            // --- When text animation finishes by itself ---
+            if (AnimationText.IsFinished())
+            {
+                canSkipConversation = false;
+                canGoNextConversation = true;
+            }
+
+            // --- Handle advancing conversation ---
+            if (canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left))
+            {
+                switch (currentPhase)
+                {
+                    case ConversationPhase.SmallTalkBeforeOrder:
+                        // Move into ordering phase
+                        Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
+                        _currentCocktail.ClearAllIngredients();
+                        AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                        currentPhase = ConversationPhase.Ordering;
+                        break;
+
+                    case ConversationPhase.Ordering:
+                        if (haveDoneOrder) // only advance after serving cocktail
+                        {
+                            //Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
+                            //AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                            //AnimationText.Start();
+                            //canSkipConversation = true;
+                            //canGoNextConversation = false;
+                            //haveDoneOrder = false; // reset
+                            //currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                        }
+                        break;
+
+                    case ConversationPhase.SmallTalkAfterOrder:
+                        // Loop back to small talk before order
+                        Debug.WriteLine("Looping back to Small Talk Before Order.");
+                        AnimationText = new TaggedTextRevealer("So, how's your day going?", 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                        currentPhase = ConversationPhase.SmallTalkBeforeOrder;
+                        RandomTargetCocktail();
+                        break;
+                }
+            }
+        }
 
         // ----------------------Fucntion-----------------------
         protected string GetRandomCocktailName()
@@ -737,6 +798,28 @@ namespace CocktailProject.Scenes
             }
 
             return _price;
+        }
+
+        protected int CalculateAccurateCocktail() { 
+            int accurate = 100;
+            if (_targetCoctail.Equals(_currentCocktail))
+                return accurate = 100;
+            else
+            {
+                if (!_targetCoctail.IsSameTypeOfCocktail(_currentCocktail))
+                {
+                    accurate -= 50;
+                }
+                if (!_targetCoctail.IsSameMethod(_currentCocktail))
+                {
+                    accurate -= 30;
+                }
+                if (!_targetCoctail.IsAddIceBoth(_currentCocktail))
+                {
+                    accurate -= 20;
+                }
+            }
+            return accurate;
         }
         protected void CheckCurrentCountPart()
         {
