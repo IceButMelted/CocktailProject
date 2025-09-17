@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CocktailProject.Class_DialogLogic
 {
-    enum ConversationPhase
+    public enum ConversationPhase
     {
         SmallTalkBeforeOrder,
         Ordering,
