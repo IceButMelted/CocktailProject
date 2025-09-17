@@ -37,9 +37,8 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region NPC
-        protected NPCBase customer;
-        ConversationManager conversation;
-        #endregion
+        protected
+        #endregion  
 
         #region Image Sprite Atlas
         TextureAtlas Atlas_CustomerNPC;
@@ -55,6 +54,8 @@ namespace CocktailProject.Scenes
         protected bool haveDoneOrder = false;
 
         protected bool inStartConversation = false;
+        protected bool inOrderConversation = false;
+        protected bool inServerComplain = false;
         #endregion
 
         #region UI Logic Variable
@@ -121,45 +122,12 @@ namespace CocktailProject.Scenes
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
             
             string welcomeText = "Welcome! To Project Cocktail";
-            AnimationText = new TaggedTextRevealer(welcomeText, 0.05);
-            AnimationText.Start();
 
             inStartConversation = true;
             canSkipConversation = true;
 
-            var npc1Dialogues = new Dictionary<ConversationPhase, List<string>>()
-{
-    {
-        ConversationPhase.SmallTalkBeforeOrder, new List<string>()
-        {
-            "Hey bartender, how's it going?",
-            "Busy night today, huh?"
-        }
-    },
-    {
-        ConversationPhase.Ordering, new List<string>()
-        {
-            "Please make me a {{RED}}Mojito{{WHITE}}."
-        }
-    },
-    {
-        ConversationPhase.SmallTalkAfterOrder, new List<string>()
-        {
-            "That was amazing, thanks!",
-        }
-    },
-    {
-        ConversationPhase.Complain, new List<string>()
-        {
-            "Though… maybe a little less sugar next time."
-        }
-    }
-};
-
-            NPCBase customer = new NPCBase("John", null, "Mojito", "Please make me a Mojito.", 1, npc1Dialogues);
-
-            conversation = new ConversationManager();
-            conversation.SetActiveNPC(customer);
+            AnimationText = new TaggedTextRevealer(welcomeText, 0.05);
+            AnimationText.Start();
 
 
             //Base DO NOT DELETE
@@ -681,9 +649,8 @@ namespace CocktailProject.Scenes
 
             //Add Code Here
             UpdateUILogic();
-            //AnimationText.Update(gameTime);
-            conversation.Update(gameTime);
-            RP_ConversationCustomer.Text = conversation.GetCurrentText();
+            UpdateConversation();
+            AnimationText.Update(gameTime);
             //Add Code Above
 
             //base DO NOT DELETE
@@ -721,6 +688,72 @@ namespace CocktailProject.Scenes
 
             HandlePanel_X_Axis(openBeforeServePanel, P_BeforeServe, 0, -800, 20);
 
+        }
+
+
+        protected void UpdateConversation()
+        {
+            RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+
+            // --- Skip text animation if left-click while animating ---
+            if (!AnimationText.IsFinished() &&
+                Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) &&
+                canSkipConversation)
+            {
+                AnimationText.Skip();
+                canSkipConversation = false;
+                canGoNextConversation = true;
+                return;
+            }
+
+            // --- When text animation finishes by itself ---
+            if (AnimationText.IsFinished())
+            {
+                canSkipConversation = false;
+                canGoNextConversation = true;
+            }
+
+            // --- Handle advancing conversation ---
+            if (canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left))
+            {
+                switch (currentPhase)
+                {
+                    case ConversationPhase.SmallTalkBeforeOrder:
+                        // Move into ordering phase
+                        Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
+                        _currentCocktail.ClearAllIngredients();
+                        AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                        currentPhase = ConversationPhase.Ordering;
+                        break;
+
+                    case ConversationPhase.Ordering:
+                        if (haveDoneOrder) // only advance after serving cocktail
+                        {
+                            //Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
+                            //AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                            //AnimationText.Start();
+                            //canSkipConversation = true;
+                            //canGoNextConversation = false;
+                            //haveDoneOrder = false; // reset
+                            //currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                        }
+                        break;
+
+                    case ConversationPhase.SmallTalkAfterOrder:
+                        // Loop back to small talk before order
+                        Debug.WriteLine("Looping back to Small Talk Before Order.");
+                        AnimationText = new TaggedTextRevealer("So, how's your day going?", 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                        currentPhase = ConversationPhase.SmallTalkBeforeOrder;
+                        RandomTargetCocktail();
+                        break;
+                }
+            }
         }
 
         // ----------------------Fucntion-----------------------
