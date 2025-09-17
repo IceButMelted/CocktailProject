@@ -185,7 +185,7 @@ namespace CocktailProject.ClassCocktail
             return _AddIce == _cocktail._AddIce;
         }
 
-
+        
 
         // Helper method to compare dictionaries
         protected bool DictionariesEqual<TKey, TValue>(Dictionary<TKey, TValue> dict1, Dictionary<TKey, TValue> dict2)

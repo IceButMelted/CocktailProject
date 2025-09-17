@@ -1,25 +1,29 @@
-﻿using GeonBit.UI.Entities;
-using GeonBit.UI;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
+using System.Diagnostics;
+using Microsoft.Xna.Framework.Graphics;
+
+using GeonBit.UI.Entities;
+using GeonBit.UI.Source.Entities;
+using GeonBit.UI;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 
 using MonoGameLibrary;
 using MonoGameLibrary.Scenes;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CocktailProject.ClassCocktail;
-using System.Diagnostics;
-using Microsoft.Xna.Framework.Graphics;
-using GeonBit.UI.Source.Entities;
+using CocktailProject.ClassTime;
+using CocktailProject.NPC;
+
+
 
 namespace CocktailProject.Scenes
 {
@@ -31,9 +35,21 @@ namespace CocktailProject.Scenes
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
         #endregion
 
+        #region NPC
+        protected 
+        #endregion  
+
         #region Image Sprite Atlas
         TextureAtlas Atlas_CustomerNPC;
         TextureAtlas atlas;
+        #endregion
+
+        #region Conversation Logic Variable
+        public TaggedTextRevealer AnimationText;
+
+        protected bool inStartConversation = false;
+        protected bool inOrderConversation = false;
+        protected bool inServerComplain = false;
         #endregion
 
         #region UI Logic Variable
@@ -49,32 +65,35 @@ namespace CocktailProject.Scenes
         #region Panel UI
         // Panel
         public Panel P_Ingredient;
-            public Button BTN_Mixer;
-            public FullImagePanel FP_Mixer;         public Texture2D T_Mixer_Panel;
-                public Button BTN_Mixer_CanberryJuice;
-                public Button BTN_Mixer_GrapefruitJuice;
-                public Button BTN_Mixer_LemonJuice;
-                public Button BTN_Mixer_Soda;
-                public Button BTN_Mixer_Syrup;
-                public Button BTN_Mixer_PepperMint;
-            public Button BTN_Alcohol;
-            public FullImagePanel FP_Alcohol;        public Texture2D T_Alchohol_Panel;
-                public Button BTN_Alcohol_Vodka;
-                public Button BTN_Alcohol_Gin;
-                public Button BTN_Alcohol_Triplesec;
-                public Button BTN_Alcohol_Vermouth;
-            public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
-                public Button BTN_Stiring;
-                public Button BTN_Shaking;
-                public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
-                public Button BTN_Reset_OnTable;
-            public Panel P_BeforeServe;
-                public Button BTN_AddIce;
-                public Button BTN_Serve;
-                public Button BTN_Rest_BeforeServe;
-            public Panel P_Minigame;
-                public Panel P_Minigame_Shaking;
-                public Panel P_Minigame_Stiring;
+        public Button BTN_Mixer;
+        public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
+        public Button BTN_Mixer_CanberryJuice;
+        public Button BTN_Mixer_GrapefruitJuice;
+        public Button BTN_Mixer_LemonJuice;
+        public Button BTN_Mixer_Soda;
+        public Button BTN_Mixer_Syrup;
+        public Button BTN_Mixer_PepperMint;
+        public Button BTN_Alcohol;
+        public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
+        public Button BTN_Alcohol_Vodka;
+        public Button BTN_Alcohol_Gin;
+        public Button BTN_Alcohol_Triplesec;
+        public Button BTN_Alcohol_Vermouth;
+        public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
+        public Button BTN_Stiring;
+        public Button BTN_Shaking;
+        public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
+        public Button BTN_Reset_OnTable;
+        public Panel P_BeforeServe;
+        public Button BTN_AddIce;
+        public Button BTN_Serve;
+        public Button BTN_Rest_BeforeServe;
+        public Panel P_Minigame;
+        public Panel P_Minigame_Shaking;
+        public Panel P_Minigame_Stiring;
+
+        public Panel P_OrderPanel;
+        public RichParagraph RP_ConversationCustomer;
 #if DEBUG
         public Button BTN_finishMinigame;
 
@@ -92,7 +111,12 @@ namespace CocktailProject.Scenes
         {
             //Add Code Here
 
-            
+            RandomTargetCocktail();
+
+            Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
+            inStartConversation = true;
+
+
 
             //Base DO NOT DELETE
             base.Initialize();
@@ -126,7 +150,6 @@ namespace CocktailProject.Scenes
 
         public void InitUI()
         {
-
 
             P_Ingredient = new Panel(new Vector2(800, 600),PanelSkin.None, anchor: Anchor.TopRight, offset: new Vector2(0, 0));
             P_Ingredient.Padding = Vector2.Zero;
@@ -558,9 +581,24 @@ namespace CocktailProject.Scenes
             P_BeforeServe.AddChild(BTN_Serve);
             P_BeforeServe.AddChild(BTN_Rest_BeforeServe);
 
-    #endregion
+            #endregion
 
-#region Add Child And Entites
+#region Oreder Panel
+            P_OrderPanel = new Panel(new Vector2(500, 200), PanelSkin.Default, anchor: Anchor.CenterLeft);
+            P_OrderPanel.Padding = Vector2.Zero;
+            P_OrderPanel.Offset = new Vector2(400, 225);
+
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(470, 100));
+            RP_ConversationCustomer.OutlineWidth = 0;
+            #endregion
+
+    #region Add Child Order Panel
+
+            P_OrderPanel.AddChild(RP_ConversationCustomer);
+
+            #endregion
+
+    #region Add Child And Entites
             //add child
             P_Ingredient.AddChild(FP_Alcohol);
             P_Ingredient.AddChild(FP_Mixer);
@@ -577,6 +615,7 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_MakeingZone);
             UserInterface.Active.AddEntity(P_Minigame);
             UserInterface.Active.AddEntity(P_BeforeServe);
+            UserInterface.Active.AddEntity(P_OrderPanel);
             #endregion
         }
 
