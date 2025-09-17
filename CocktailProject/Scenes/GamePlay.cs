@@ -560,9 +560,7 @@ namespace CocktailProject.Scenes
 
     #endregion
 
-
-
-            #region Add Child And Entites 
+#region Add Child And Entites
             //add child
             P_Ingredient.AddChild(FP_Alcohol);
             P_Ingredient.AddChild(FP_Mixer);
@@ -612,42 +610,16 @@ namespace CocktailProject.Scenes
         // _____________________main funciton__________________
         protected void UpdateUILogic() {
             CheckCurrentCountPart();
-            if (openAlcoholPanel)
-            {
-                SlidePanel_X_Axis(FP_Alcohol, 0, 20, true);
-                SlidePanel_X_Axis(BTN_Alcohol, 0, 20, true);
-            }
-            else { 
-                SlidePanel_X_Axis(FP_Alcohol, -800, 20, false);
-                SlidePanel_X_Axis(BTN_Alcohol, -100, 20, false);
-            }
 
-            if (openMixerPanel)
-            {
-                SlidePanel_X_Axis(FP_Mixer, 0, 20, true);
-                SlidePanel_X_Axis(BTN_Mixer, 0, 20, true);
-            }
-            else
-            {
-                SlidePanel_X_Axis(FP_Mixer, -800, 20, false);
-                SlidePanel_X_Axis(BTN_Mixer, -100, 20, false);
-            }
+            HandlePanel_X_Axis(openAlcoholPanel, FP_Alcohol, 0, -800, 20);
+            HandlePanel_X_Axis(openAlcoholPanel, BTN_Alcohol, 0, -100, 20);
 
-            if (openMinigamePanel) { 
-                SlidePanel_X_Axis(P_Minigame, 0, 20, true);
-            }
-            else
-            {
-                SlidePanel_X_Axis(P_Minigame, -800, 20, false);
-            }
+            HandlePanel_X_Axis(openMixerPanel, FP_Mixer, 0, -800, 20);
+            HandlePanel_X_Axis(openMixerPanel, BTN_Mixer, 0, -100, 20);
 
-            if (openBeforeServePanel) { 
-                SlidePanel_X_Axis(P_BeforeServe, 0, 20, true);
-            }
-            else
-            {
-                SlidePanel_X_Axis(P_BeforeServe, -800, 20, false);
-            }
+            HandlePanel_X_Axis(openMinigamePanel, P_Minigame, 0, -800, 20);
+
+            HandlePanel_X_Axis(openBeforeServePanel, P_BeforeServe, 0, -800, 20);
 
         }   
 
@@ -780,6 +752,13 @@ namespace CocktailProject.Scenes
         }
 
         // ----------------------Slide Panel-----------------------
+        private void HandlePanel_X_Axis(bool isOpen, Entity panel, int openEndPoint, int closedEndPoint, int speed)
+        {
+            if (isOpen)
+                SlidePanel_X_Axis(panel, openEndPoint, speed, true);
+            else
+                SlidePanel_X_Axis(panel, closedEndPoint, speed, false);
+        }
         public bool SlidePanel_X_Axis(Entity _panel,int _endPoint, int _speed, bool _moreThan ) {
             if (_moreThan)
             {
