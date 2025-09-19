@@ -37,7 +37,9 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region NPC
+        protected int numbercustomer = 0;
         protected string _NPC_Name;
+        protected string _tmp_NPC_Name;
         #endregion  
 
         #region Image Sprite Atlas
@@ -71,7 +73,7 @@ namespace CocktailProject.Scenes
         #region Panel UI
         // Panel
         public Panel P_Ingredient;
-        public Button BTN_Mixer;
+        public Button BTN_Mixer; public Texture2D T_BTN_Mixer;
         public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
         public Button BTN_Mixer_CanberryJuice;
         public Button BTN_Mixer_GrapefruitJuice;
@@ -79,7 +81,7 @@ namespace CocktailProject.Scenes
         public Button BTN_Mixer_Soda;
         public Button BTN_Mixer_Syrup;
         public Button BTN_Mixer_PepperMint;
-        public Button BTN_Alcohol;
+        public Button BTN_Alcohol; public Texture2D T_BTN_Alchol;
         public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
         public Button BTN_Alcohol_Vodka;
         public Button BTN_Alcohol_Gin;
@@ -151,8 +153,11 @@ namespace CocktailProject.Scenes
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
 
             //Load Ui image
-            T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_Alcohol");
-            T_Mixer_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_Alcohol");
+            T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
+            T_Mixer_Panel = Content.Load<Texture2D>("images/UI/Shelf");
+
+            T_BTN_Alchol = Content.Load<Texture2D>("images/UI/BTN_Icon_Alcohol");
+            T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
 
             T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
             T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
@@ -177,8 +182,9 @@ namespace CocktailProject.Scenes
             FP_Alcohol.Offset = new Vector2(-800, 0);
             FP_Alcohol.Padding = Vector2.Zero;
 
-            BTN_Alcohol = new Button("Alcohol", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(200, 130));
-            BTN_Alcohol.Offset = new Vector2(-100, 100);
+            BTN_Alcohol = new Button("Alcohol", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
+            BTN_Alcohol.Offset = new Vector2(-50, 172);
+            BTN_Alcohol.SetCustomSkin(T_BTN_Alchol, T_BTN_Alchol, T_BTN_Alchol);
             BTN_Alcohol.OnMouseDown = (Entity e) =>
             {
                 if (openAlcoholPanel)
@@ -271,8 +277,9 @@ namespace CocktailProject.Scenes
             FP_Mixer.Offset = new Vector2(-800, 0);
             FP_Mixer.Padding = Vector2.Zero;
 
-            BTN_Mixer = new Button("Mixer", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(200, 130));
-            BTN_Mixer.Offset = new Vector2(-100, 400);
+            BTN_Mixer = new Button("Mixer", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
+            BTN_Mixer.Offset = new Vector2(-50, 400);
+            BTN_Mixer.SetCustomSkin(T_BTN_Mixer, T_BTN_Mixer, T_BTN_Mixer);
             BTN_Mixer.OnMouseDown = (Entity e) =>
             {
                 if (openMixerPanel)
@@ -701,6 +708,10 @@ namespace CocktailProject.Scenes
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
 #endif
 
+            if (numbercustomer > 6) {
+                Core.ChangeScene(new Scenes.Thanks());
+            }
+
             //base DO NOT DELETE
             base.Update(gameTime);
             UserInterface.Active.Update(gameTime);
@@ -727,10 +738,10 @@ namespace CocktailProject.Scenes
 
             //update panel
             HandlePanel_X_Axis(openAlcoholPanel, FP_Alcohol, 0, -800, 20);
-            HandlePanel_X_Axis(openAlcoholPanel, BTN_Alcohol, 0, -100, 20);
+            HandlePanel_X_Axis(openAlcoholPanel, BTN_Alcohol, 0, -50, 20);
 
             HandlePanel_X_Axis(openMixerPanel, FP_Mixer, 0, -800, 20);
-            HandlePanel_X_Axis(openMixerPanel, BTN_Mixer, 0, -100, 20);
+            HandlePanel_X_Axis(openMixerPanel, BTN_Mixer, 0, -50, 20);
 
             HandlePanel_X_Axis(openMinigamePanel, P_Minigame, 0, -800, 20);
 
@@ -800,7 +811,9 @@ namespace CocktailProject.Scenes
                         currentPhase = ConversationPhase.SmallTalkBeforeOrder;
                         RandomTargetCocktail();
                         //set new npc image
+
                         _NPC_Name = RandomNPC();
+                        numbercustomer++;
                         Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
                         break;
                 }
@@ -825,7 +838,8 @@ namespace CocktailProject.Scenes
         protected string RandomNPC() {
             Random random = new Random();
             int numberNPC = random.Next(1, 5);
-            return "NPC_0"+(int)numberNPC;
+            string _NPC_Name = "NPC_0" + (int)numberNPC;
+            return _NPC_Name;
         }
         protected float CalcualatePrice(Cocktail _targetCocktail)
         {
