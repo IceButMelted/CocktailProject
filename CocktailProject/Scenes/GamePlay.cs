@@ -98,6 +98,8 @@ namespace CocktailProject.Scenes
         public Panel P_Minigame_Shaking;
         public Panel P_Minigame_Stiring;
 
+        public Image Img_Customer;
+
         public Panel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 #if DEBUG
@@ -135,7 +137,7 @@ namespace CocktailProject.Scenes
         }
 
         public override void LoadContent()
-        {   //Base DO NOT DELETE
+        {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.lowres);
             UserInterface.Active.ShowCursor = false;
             SpriteFont myFont = Content.Load<SpriteFont>("Fonts/MyUIFont");
@@ -623,7 +625,14 @@ namespace CocktailProject.Scenes
 
             #endregion
 
-    #region Add Child And Entites
+#region Customer Image
+        
+            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion("NPC_01_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
+            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion("NPC_01_default").SourceRectangle;
+
+            #endregion
+
+            #region Add Child And Entites
             //add child
             P_Ingredient.AddChild(FP_Alcohol);
             P_Ingredient.AddChild(FP_Mixer);
@@ -634,6 +643,7 @@ namespace CocktailProject.Scenes
             Img_BG_Background = new Image(T_BG_Background, new Vector2(1920, 1080), anchor: Anchor.Center);
             Img_BG_Foreground = new Image(T_BG_Foreground, new Vector2(1920, 1080), anchor: Anchor.Center);
             UserInterface.Active.AddEntity(Img_BG_Background);
+            UserInterface.Active.AddEntity(Img_Customer);
             UserInterface.Active.AddEntity(Img_BG_Foreground);
 
             UserInterface.Active.AddEntity(P_Ingredient);
@@ -769,6 +779,11 @@ namespace CocktailProject.Scenes
         protected void RandomTargetCocktail() {
             str_targetCocktail_Name = GetRandomCocktailName();
             CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+        }
+
+        protected string RandomNPC() {
+
+            return "";
         }
         protected float CalcualatePrice(Cocktail _targetCocktail)
         {

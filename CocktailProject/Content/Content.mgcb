@@ -98,6 +98,18 @@
 #begin images/Customer/CustomerNPC_Define.xml
 /copy:images/Customer/CustomerNPC_Define.xml
 
+#begin images/Customer/NPC_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Customer/NPC_Atlas.png;images/Customer/NPC_Atlas
+
 #begin images/logo.png
 /importer:TextureImporter
 /processor:TextureProcessor
