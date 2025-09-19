@@ -104,16 +104,16 @@ namespace CocktailProject.Scenes
 
         public Panel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
+
 #if DEBUG
         public Paragraph P_Debug_targetCocktail;
         public Paragraph P_Debug_CurrentCocktail;
 
 #endif
 
-
-
         //BG
         public Image Img_BG_Foreground; public Texture2D T_BG_Foreground;
+        public Image Img_BG_Midground; public Texture2D T_BG_Midgroud;
         public Image Img_BG_Background; public Texture2D T_BG_Background;
         #endregion
 
@@ -160,7 +160,10 @@ namespace CocktailProject.Scenes
             T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
 
             T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
+            T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");   
             T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
+
+
             T_CocktailBase = Content.Load<Texture2D>("images/Cocktail/BaseCocktailGlass");
 
             //Add Code Above
@@ -183,7 +186,7 @@ namespace CocktailProject.Scenes
             FP_Alcohol.Padding = Vector2.Zero;
 
             BTN_Alcohol = new Button("Alcohol", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
-            BTN_Alcohol.Offset = new Vector2(-50, 172);
+            BTN_Alcohol.Offset = new Vector2(0, 172);
             BTN_Alcohol.SetCustomSkin(T_BTN_Alchol, T_BTN_Alchol, T_BTN_Alchol);
             BTN_Alcohol.OnMouseDown = (Entity e) =>
             {
@@ -278,7 +281,7 @@ namespace CocktailProject.Scenes
             FP_Mixer.Padding = Vector2.Zero;
 
             BTN_Mixer = new Button("Mixer", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
-            BTN_Mixer.Offset = new Vector2(-50, 400);
+            BTN_Mixer.Offset = new Vector2(0, 400);
             BTN_Mixer.SetCustomSkin(T_BTN_Mixer, T_BTN_Mixer, T_BTN_Mixer);
             BTN_Mixer.OnMouseDown = (Entity e) =>
             {
@@ -678,7 +681,10 @@ namespace CocktailProject.Scenes
             // add Entity
             Img_BG_Background = new Image(T_BG_Background, new Vector2(1920, 1080), anchor: Anchor.Center);
             Img_BG_Foreground = new Image(T_BG_Foreground, new Vector2(1920, 1080), anchor: Anchor.Center);
+            Img_BG_Midground = new Image(T_BG_Midgroud, new Vector2(1920, 1080), anchor: Anchor.Center);
+
             UserInterface.Active.AddEntity(Img_BG_Background);
+            UserInterface.Active.AddEntity(Img_BG_Midground);   
             UserInterface.Active.AddEntity(Img_Customer);
             UserInterface.Active.AddEntity(Img_BG_Foreground);
 #if DEBUG
@@ -738,10 +744,10 @@ namespace CocktailProject.Scenes
 
             //update panel
             HandlePanel_X_Axis(openAlcoholPanel, FP_Alcohol, 0, -800, 20);
-            HandlePanel_X_Axis(openAlcoholPanel, BTN_Alcohol, 0, -50, 20);
+            HandlePanel_X_Axis(!openAlcoholPanel, BTN_Alcohol, -25, -125, 20);
 
             HandlePanel_X_Axis(openMixerPanel, FP_Mixer, 0, -800, 20);
-            HandlePanel_X_Axis(openMixerPanel, BTN_Mixer, 0, -50, 20);
+            HandlePanel_X_Axis(!openMixerPanel, BTN_Mixer, -25, -125, 20);
 
             HandlePanel_X_Axis(openMinigamePanel, P_Minigame, 0, -800, 20);
 
@@ -837,7 +843,7 @@ namespace CocktailProject.Scenes
 
         protected string RandomNPC() {
             Random random = new Random();
-            int numberNPC = random.Next(1, 5);
+            int numberNPC = random.Next(1,5);
             string _NPC_Name = "NPC_0" + (int)numberNPC;
             return _NPC_Name;
         }
