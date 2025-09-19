@@ -13,6 +13,7 @@ using GeonBit.UI;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 
 
@@ -53,6 +54,8 @@ namespace CocktailProject.Scenes
         public override void Draw(GameTime gameTime)
         {
             Core.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            
 
             UserInterface.Active.Draw(Core.SpriteBatch);
             base.Draw(gameTime);
