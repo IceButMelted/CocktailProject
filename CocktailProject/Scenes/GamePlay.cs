@@ -37,7 +37,7 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region NPC
-        protected
+        protected string _NPC_Name;
         #endregion  
 
         #region Image Sprite Atlas
@@ -103,7 +103,8 @@ namespace CocktailProject.Scenes
         public Panel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 #if DEBUG
-        public Button BTN_finishMinigame;
+        public Paragraph P_Debug_targetCocktail;
+        public Paragraph P_Debug_CurrentCocktail;
 
 #endif
 
@@ -120,6 +121,8 @@ namespace CocktailProject.Scenes
             //Add Code Here
 
             RandomTargetCocktail();
+            _NPC_Name = RandomNPC();
+           
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
             
@@ -504,28 +507,7 @@ namespace CocktailProject.Scenes
             P_Minigame_Stiring.Offset = new Vector2(0, 0);
             P_Minigame_Shaking.FillColor = Color.Red;
 
-#if DEBUG
-            Button FinishString = new Button("Finish Stiring",skin:ButtonSkin.Default, Anchor.Center, new Vector2(200,100));
-            FinishString.OnMouseDown = (Entity e) =>
-            {
-                Debug.WriteLine("Finish Stiring Minigame");
-                openBeforeServePanel = true;    
-                //openMinigamePanel = false;
-                //P_Minigame_Stiring.Offset = new Vector2(-700, 0);
-            };
 
-            Button FinishShake = new Button("Finish Shaking", skin: ButtonSkin.Default, Anchor.Center, new Vector2(200, 100));
-            FinishShake.OnMouseDown = (Entity e) =>
-            {
-                Debug.WriteLine("Finish Shaking Minigame");
-                openBeforeServePanel = true;
-                //openMinigamePanel = false;
-                //P_Minigame_Shaking.Offset = new Vector2(-700, 0);
-            };
-
-            P_Minigame_Shaking.AddChild(FinishShake);
-            P_Minigame_Stiring.AddChild(FinishString);
-#endif
             #endregion
 
     #region Add Child To Panel Minigame Zone
@@ -558,6 +540,7 @@ namespace CocktailProject.Scenes
             BTN_Serve.ButtonParagraph.OutlineWidth = 0;
             BTN_Serve.OnMouseDown = (Entity e) =>
             {
+                _currentCocktail.SetTypeOfCocktailBySearch();
                 Debug.WriteLine("Served Cocktail");
                 Debug.WriteLine(_currentCocktail.Info());
                 float price = CalcualatePrice(_targetCoctail);
@@ -569,7 +552,22 @@ namespace CocktailProject.Scenes
                 //--------- from conversation phase Order to Small Talk After Order --------------
                 //apply text and change conversation phase
                 Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
-                AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+
+                if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Success)
+                {
+                    AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                }
+                else if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Aceptable)
+                {
+                    AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{WHITE}} i knew but it was okay I guess.", 0.05);
+                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                }
+                else
+                {
+                    AnimationText = new TaggedTextRevealer("Ugh, this is not  {{BLUE}}" + str_targetCocktail_Name + "{{WHITE}}, i have ordered ", 0.05);
+                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                }
                 canSkipConversation = true;
                 canGoNextConversation = false;
                 haveDoneOrder = false; // reset
@@ -619,7 +617,37 @@ namespace CocktailProject.Scenes
             RP_ConversationCustomer.OutlineWidth = 0;
             #endregion
 
-    #region Add Child Order Panel
+
+#if DEBUG
+            Button FinishString = new Button("Finish Stiring", skin: ButtonSkin.Default, Anchor.Center, new Vector2(200, 100));
+            FinishString.OnMouseDown = (Entity e) =>
+            {
+                Debug.WriteLine("Finish Stiring Minigame");
+                openBeforeServePanel = true;
+                //openMinigamePanel = false;
+                //P_Minigame_Stiring.Offset = new Vector2(-700, 0);
+            };
+
+            Button FinishShake = new Button("Finish Shaking", skin: ButtonSkin.Default, Anchor.Center, new Vector2(200, 100));
+            FinishShake.OnMouseDown = (Entity e) =>
+            {
+                Debug.WriteLine("Finish Shaking Minigame");
+                openBeforeServePanel = true;
+                //openMinigamePanel = false;
+                //P_Minigame_Shaking.Offset = new Vector2(-700, 0);
+            };
+
+            P_Minigame_Shaking.AddChild(FinishShake);
+            P_Minigame_Stiring.AddChild(FinishString);
+
+
+            P_Debug_targetCocktail = new Paragraph("Target Cocktail: " + str_targetCocktail_Name + _targetCoctail.Info(), anchor: Anchor.TopLeft, size: new Vector2(300, 500));
+            P_Debug_targetCocktail.Offset = new Vector2(0, 0);
+
+            P_Debug_CurrentCocktail = new Paragraph("Current Cocktail: " + _currentCocktail.Info(), anchor: Anchor.TopLeft, size: new Vector2(300, 500));
+            P_Debug_CurrentCocktail.Offset = new Vector2(300, 0);
+#endif
+            #region Add Child Order Panel
 
             P_OrderPanel.AddChild(RP_ConversationCustomer);
 
@@ -627,8 +655,9 @@ namespace CocktailProject.Scenes
 
 #region Customer Image
         
-            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion("NPC_01_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
-            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion("NPC_01_default").SourceRectangle;
+            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(_NPC_Name+"_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
+            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+            Img_Customer.Offset = new Vector2(450, -150);
 
             #endregion
 
@@ -645,6 +674,10 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(Img_BG_Background);
             UserInterface.Active.AddEntity(Img_Customer);
             UserInterface.Active.AddEntity(Img_BG_Foreground);
+#if DEBUG
+            UserInterface.Active.AddEntity(P_Debug_CurrentCocktail);
+            UserInterface.Active.AddEntity(P_Debug_targetCocktail);
+#endif 
 
             UserInterface.Active.AddEntity(P_Ingredient);
             UserInterface.Active.AddEntity(P_MakeingZone);
@@ -662,6 +695,11 @@ namespace CocktailProject.Scenes
             UpdateConversation();
             AnimationText.Update(gameTime);
             //Add Code Above
+
+#if DEBUG
+            P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
+            P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
+#endif
 
             //base DO NOT DELETE
             base.Update(gameTime);
@@ -761,6 +799,9 @@ namespace CocktailProject.Scenes
                         canGoNextConversation = false;
                         currentPhase = ConversationPhase.SmallTalkBeforeOrder;
                         RandomTargetCocktail();
+                        //set new npc image
+                        _NPC_Name = RandomNPC();
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
                         break;
                 }
             }
@@ -782,8 +823,9 @@ namespace CocktailProject.Scenes
         }
 
         protected string RandomNPC() {
-
-            return "";
+            Random random = new Random();
+            int numberNPC = random.Next(1, 5);
+            return "NPC_0"+(int)numberNPC;
         }
         protected float CalcualatePrice(Cocktail _targetCocktail)
         {
@@ -802,11 +844,7 @@ namespace CocktailProject.Scenes
                     _price = 0;
                     return _price;
                 }
-                if (!_targetCocktail.IsSameMethod(_currentCocktail))
-                {
-                    _price = _price * 0.8f;
-                }
-                if (!_targetCocktail.IsAddIceBoth(_currentCocktail))
+                if (!_targetCocktail.IsSameMethod(_currentCocktail)! || _targetCocktail.IsAddIceBoth(_currentCocktail))
                 {
                     _price = _price * 0.8f;
                 }
@@ -815,26 +853,19 @@ namespace CocktailProject.Scenes
             return _price;
         }
 
-        protected int CalculateAccurateCocktail() { 
-            int accurate = 100;
+        protected Enum_CocktaillResualt CalculateAccurateCocktail() { 
             if (_targetCoctail.Equals(_currentCocktail))
-                return accurate = 100;
-            else
+                return Enum_CocktaillResualt.Success;
+            else if (!_targetCoctail.IsSameTypeOfCocktail(_currentCocktail))
             {
-                if (!_targetCoctail.IsSameTypeOfCocktail(_currentCocktail))
-                {
-                    accurate -= 50;
-                }
-                if (!_targetCoctail.IsSameMethod(_currentCocktail))
-                {
-                    accurate -= 30;
-                }
-                if (!_targetCoctail.IsAddIceBoth(_currentCocktail))
-                {
-                    accurate -= 20;
-                }
+                return Enum_CocktaillResualt.Fail;
             }
-            return accurate;
+            else if (!_targetCoctail.IsSameMethod(_currentCocktail) || !_targetCoctail.IsAddIceBoth(_currentCocktail))
+            {
+                return Enum_CocktaillResualt.Aceptable;
+            }
+            return Enum_CocktaillResualt.Fail;
+
         }
         protected void CheckCurrentCountPart()
         {
