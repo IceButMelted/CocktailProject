@@ -113,7 +113,7 @@ namespace CocktailProject.MiniGame
         public static void Stop()
         {
             Start = false;
-            Reset();
+            //Reset();
         }
         public static void StartGame()
         {

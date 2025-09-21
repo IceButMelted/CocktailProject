@@ -58,7 +58,7 @@ namespace CocktailProject.Scenes
         {
             ShakingMinigame.Update(gameTime);
 
-            UpdateMiniGame();
+            UpdateMiniGameShaking();
             UserInterface.Active.Update(gameTime);
             base.Update(gameTime);
         }
@@ -101,6 +101,7 @@ namespace CocktailProject.Scenes
 
             Paragraph PR_TargetZone_Min = new Paragraph("TargetZone MinSize");
             PR_TargetZone_Min.Anchor = Anchor.AutoInline;
+            
 
             TxtInput_TargetZone_MinSize = new TextInput(false);
             TxtInput_TargetZone_MinSize.Size = new Vector2(100, 30);
@@ -322,7 +323,7 @@ namespace CocktailProject.Scenes
             base.LoadContent();
         }
 
-        public void UpdateMiniGame()
+        public void UpdateMiniGameShaking()
         {
             if(ShakingMinigame.CurrentValue != 0)
                 Pointing.Size = new Vector2(40, (int)(SizeBar * (ShakingMinigame.CurrentValue / 100)) );

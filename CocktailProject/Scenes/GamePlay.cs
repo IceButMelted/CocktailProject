@@ -23,6 +23,7 @@ using CocktailProject.ClassCocktail;
 using CocktailProject.ClassTime;
 using CocktailProject.NPC;
 using CocktailProject.Class_DialogLogic;
+using CocktailProject.MiniGame;
 
 
 
@@ -68,6 +69,7 @@ namespace CocktailProject.Scenes
         protected bool openArt1Panel = false;
         protected bool openArt2Panel = false;
 
+        protected bool playingMinigameShaking = false;
         #endregion
 
         #region Panel UI
@@ -75,30 +77,35 @@ namespace CocktailProject.Scenes
         public Panel P_Ingredient;
         public Button BTN_Mixer; public Texture2D T_BTN_Mixer;
         public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
-        public Button BTN_Mixer_CanberryJuice;
-        public Button BTN_Mixer_GrapefruitJuice;
-        public Button BTN_Mixer_LemonJuice;
-        public Button BTN_Mixer_Soda;
-        public Button BTN_Mixer_Syrup;
-        public Button BTN_Mixer_PepperMint;
+            public Button BTN_Mixer_CanberryJuice;
+            public Button BTN_Mixer_GrapefruitJuice;
+            public Button BTN_Mixer_LemonJuice;
+            public Button BTN_Mixer_Soda;
+            public Button BTN_Mixer_Syrup;
+            public Button BTN_Mixer_PepperMint;
         public Button BTN_Alcohol; public Texture2D T_BTN_Alchol;
         public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
-        public Button BTN_Alcohol_Vodka;
-        public Button BTN_Alcohol_Gin;
-        public Button BTN_Alcohol_Triplesec;
-        public Button BTN_Alcohol_Vermouth;
+            public Button BTN_Alcohol_Vodka;
+            public Button BTN_Alcohol_Gin;
+            public Button BTN_Alcohol_Triplesec;
+            public Button BTN_Alcohol_Vermouth;
         public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
-        public Button BTN_Stiring;
-        public Button BTN_Shaking;
+            public Button BTN_Stiring;
+            public Button BTN_Shaking;
         public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
-        public Button BTN_Reset_OnTable;
+            public Button BTN_Reset_OnTable;
         public Panel P_BeforeServe;
-        public Button BTN_AddIce;
-        public Button BTN_Serve;
-        public Button BTN_Rest_BeforeServe;
+            public Button BTN_AddIce;
+            public Button BTN_Serve;
+            public Button BTN_Rest_BeforeServe;
         public Panel P_Minigame;
-        public Panel P_Minigame_Shaking;
-        public Panel P_Minigame_Stiring;
+            public Panel P_Minigame_Shaking;
+                public Panel BG_ProgressBar;
+                public Panel ProgressBar;
+                public Panel BG_TargetZone;
+                public Panel TargetZone;
+                public Panel Pointing;
+            public Panel P_Minigame_Stiring;
 
         public Image Img_Customer;
 
@@ -185,7 +192,7 @@ namespace CocktailProject.Scenes
             FP_Alcohol.Offset = new Vector2(-800, 0);
             FP_Alcohol.Padding = Vector2.Zero;
 
-            BTN_Alcohol = new Button("Alcohol", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
+            BTN_Alcohol = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
             BTN_Alcohol.Offset = new Vector2(0, 172);
             BTN_Alcohol.SetCustomSkin(T_BTN_Alchol, T_BTN_Alchol, T_BTN_Alchol);
             BTN_Alcohol.OnMouseDown = (Entity e) =>
@@ -280,7 +287,7 @@ namespace CocktailProject.Scenes
             FP_Mixer.Offset = new Vector2(-800, 0);
             FP_Mixer.Padding = Vector2.Zero;
 
-            BTN_Mixer = new Button("Mixer", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
+            BTN_Mixer = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopRight, size: new Vector2(198, 128));
             BTN_Mixer.Offset = new Vector2(0, 400);
             BTN_Mixer.SetCustomSkin(T_BTN_Mixer, T_BTN_Mixer, T_BTN_Mixer);
             BTN_Mixer.OnMouseDown = (Entity e) =>
@@ -464,6 +471,9 @@ namespace CocktailProject.Scenes
 
                 ShowMinigame(Enum_Method.Shaking);
 
+                playingMinigameShaking = true;
+                ShakingMinigame.StartGame();
+
                 BTNMethodActive(false);
                 BTNMethodVisible(false);
             };
@@ -511,6 +521,7 @@ namespace CocktailProject.Scenes
             P_Minigame_Shaking = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Shaking.Padding = Vector2.Zero;
             P_Minigame_Shaking.Offset = new Vector2(0, 0);
+            InitShakingMinigameUI();
 
             P_Minigame_Stiring = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Stiring.Padding = Vector2.Zero;
@@ -581,6 +592,7 @@ namespace CocktailProject.Scenes
                 canSkipConversation = true;
                 canGoNextConversation = false;
                 haveDoneOrder = false; // reset
+                openBeforeServePanel = false;
                 currentPhase = ConversationPhase.SmallTalkAfterOrder;
                 AnimationText.Start();
                 //-------------------------------------------------------------------------------
@@ -592,6 +604,7 @@ namespace CocktailProject.Scenes
                 BTNMethodVisible(false);
 
                 haveDoneOrder = true;
+                
 
                 ResetUI();
             };
@@ -617,6 +630,7 @@ namespace CocktailProject.Scenes
             P_BeforeServe.AddChild(BTN_Rest_BeforeServe);
 
             #endregion
+
 
 #region Oreder Panel
             P_OrderPanel = new Panel(new Vector2(500, 200), PanelSkin.Default, anchor: Anchor.CenterLeft);
@@ -647,7 +661,7 @@ namespace CocktailProject.Scenes
                 //P_Minigame_Shaking.Offset = new Vector2(-700, 0);
             };
 
-            P_Minigame_Shaking.AddChild(FinishShake);
+            //P_Minigame_Shaking.AddChild(FinishShake);
             P_Minigame_Stiring.AddChild(FinishString);
 
 
@@ -700,11 +714,26 @@ namespace CocktailProject.Scenes
             #endregion
         }
 
+        
         public override void Update(GameTime gameTime)
         {
 
             //Add Code Here
             UpdateUILogic();
+
+            //update minigame Shaking
+            if (playingMinigameShaking) { 
+                ShakingMinigame.Update(gameTime);
+                UpdateMiniGameShakingUI();
+                if (ShakingMinigame.IsComplete()) {
+                    ShakingMinigame.Stop();
+                    playingMinigameShaking = false;
+                    openBeforeServePanel = true;
+                    //playingMinigameShaking = false;
+                }
+            }
+
+
             UpdateConversation();
             AnimationText.Update(gameTime);
             //Add Code Above
@@ -754,8 +783,6 @@ namespace CocktailProject.Scenes
             HandlePanel_X_Axis(openBeforeServePanel, P_BeforeServe, 0, -800, 20);
 
         }
-
-
         protected void UpdateConversation()
         {
             RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
@@ -840,7 +867,6 @@ namespace CocktailProject.Scenes
             str_targetCocktail_Name = GetRandomCocktailName();
             CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
         }
-
         protected string RandomNPC() {
             Random random = new Random();
             int numberNPC = random.Next(1,5);
@@ -872,7 +898,6 @@ namespace CocktailProject.Scenes
 
             return _price;
         }
-
         protected Enum_CocktaillResualt CalculateAccurateCocktail() { 
             if (_targetCoctail.Equals(_currentCocktail))
                 return Enum_CocktaillResualt.Success;
@@ -971,10 +996,64 @@ namespace CocktailProject.Scenes
             BTNMethodVisible(false);
             _currentCocktail.ClearAllIngredients();
         }
-
+        //-------------------------Conversation---------------------
         protected void SetNewTextForConversation(TaggedTextRevealer _animationText,string _txt) {
             _animationText = new TaggedTextRevealer(_txt, 0.05);
         }
+        //-------------------------Mini Gaem---------------------
+        public void InitShakingMinigameUI()
+        {
+            int SizeBar = 600;
+
+            BG_TargetZone = new Panel(new Vector2(50, SizeBar), PanelSkin.Simple, Anchor.CenterLeft);
+            BG_TargetZone.FillColor = Color.DarkGray;
+            BG_TargetZone.Offset = new Vector2(0, 0);
+            BG_TargetZone.Padding = Vector2.Zero;
+
+            BG_ProgressBar = new Panel(new Vector2(50, SizeBar), PanelSkin.Simple, Anchor.CenterLeft);
+            BG_ProgressBar.FillColor = Color.Gray;
+            BG_ProgressBar.Offset = new Vector2(50, 0);
+            BG_ProgressBar.Padding = Vector2.Zero;
+
+            ProgressBar = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
+            ProgressBar.FillColor = Color.Green;
+
+            TargetZone = new Panel(new Vector2(40, 50), PanelSkin.Simple, Anchor.BottomCenter);
+            TargetZone.FillColor = Color.Red;
+            TargetZone.Opacity = 100;
+
+            Pointing = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
+
+            BG_TargetZone.AddChild(Pointing);
+            BG_TargetZone.AddChild(TargetZone);
+            P_Minigame_Shaking.AddChild(BG_TargetZone);
+
+            BG_ProgressBar.AddChild(ProgressBar);
+            BG_TargetZone.AddChild(BG_ProgressBar);
+        }
+        public void UpdateMiniGameShakingUI()
+        {
+            int SizeBar = 600;
+
+            if (ShakingMinigame.CurrentValue != 0)
+                Pointing.Size = new Vector2(40, (int)(SizeBar * (ShakingMinigame.CurrentValue / 100)));
+            else
+                Pointing.Size = new Vector2(40, 1);
+
+            TargetZone.Size = new Vector2(40, (int)(SizeBar * (ShakingMinigame.TargetZone_CurrentSize / 100)));
+
+            //cal offset targetZone
+            int offsetX = (int)((ShakingMinigame.InitTargetZone) - (ShakingMinigame.TargetZone_CurrentSize / 2));
+
+            TargetZone.Offset = new Vector2(0, (int)(SizeBar * (offsetX) / 100));
+
+            ProgressBar.Size = new Vector2(40, (int)(SizeBar * (ShakingMinigame.ProgressBar_CurrentValue / 100)));
+
+            //if (ShakingMinigame.IsComplete())
+            //    ShakingMinigame.Reset();
+            //Debug.WriteLine(ShakingMinigame.CurrentValue);
+        }
+
 
         // ----------------------Slide Panel-----------------------
         private void HandlePanel_X_Axis(bool isOpen, Entity panel, int openEndPoint, int closedEndPoint, int speed)
@@ -1025,5 +1104,6 @@ namespace CocktailProject.Scenes
 
             return true;
         }
+    
     }
 }
