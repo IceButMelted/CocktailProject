@@ -21,7 +21,7 @@ namespace CocktailProject
 {
     class Game2 : Core
     {
-        public Game2() : base("CocktialProject", 1920, 1080, false)
+        public Game2() : base("CocktialProject", 1920/2, 1080, false)
         {
 
         }
@@ -30,7 +30,7 @@ namespace CocktailProject
         {
             base.Initialize();
 
-            ChangeScene(new Scenes.GamePlay());
+            ChangeScene(new Scenes.MiniGameTesting_Shakinge());
         }
 
         protected override void LoadContent() {
