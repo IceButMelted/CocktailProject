@@ -152,6 +152,7 @@ namespace CocktailProject.Scenes
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.lowres);
             UserInterface.Active.ShowCursor = false;
+
             SpriteFont myFont = Content.Load<SpriteFont>("Fonts/MyUIFont");
 
             //Add Code Here
