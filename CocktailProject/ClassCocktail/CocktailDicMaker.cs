@@ -86,10 +86,10 @@ namespace CocktailProject.ClassCocktail
             /// None Alcohol
             _cocktails.Add("Nojito", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { },
-                new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 1 },
-                                                  { Enum_Mixer.Syrup, 1 },
+                new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 3 },
+                                                  { Enum_Mixer.Syrup, 2 },
                                                   { Enum_Mixer.PepperMint, 1 },
-                                                  { Enum_Mixer.Soda, 1 }},
+                                                  { Enum_Mixer.Soda, 4 }},
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 true,

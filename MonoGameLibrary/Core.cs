@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Input;
+using MonoGameLibrary.Scenes;
 
 namespace MonoGameLibrary;
 
@@ -15,6 +16,12 @@ public class Core : Game
     /// Gets a reference to the Core instance.
     /// </summary>
     public static Core Instance => s_instance;
+
+    // The scene that is currently active.
+    private static Scene s_activeScene;
+
+    // The next scene to switch to, if there is one.
+    private static Scene s_nextScene;
 
     /// <summary>
     /// Gets the graphics device manager to control the presentation of graphics.
@@ -37,15 +44,7 @@ public class Core : Game
     public static new ContentManager Content { get; private set; }
 
     /// <summary>
-    /// Creates a new Core instance.
-    /// </summary>
-    /// <param name="title">The title to display in the title bar of the game window.</param>
-    /// <param name="width">The initial width, in pixels, of the game window.</param>
-    /// <param name="height">The initial height, in pixels, of the game window.</param>
-    /// <param name="fullScreen">Indicates if the game should start in fullscreen mode.</param>
-
-    /// <summary>
-    /// Gets a reference to the input management system.
+    /// Gets a reference to to the input management system.
     /// </summary>
     public static InputManager Input { get; private set; }
 
@@ -54,6 +53,14 @@ public class Core : Game
     /// </summary>
     public static bool ExitOnEscape { get; set; }
 
+
+    /// <summary>
+    /// Creates a new Core instance.
+    /// </summary>
+    /// <param name="title">The title to display in the title bar of the game window.</param>
+    /// <param name="width">The initial width, in pixels, of the game window.</param>
+    /// <param name="height">The initial height, in pixels, of the game window.</param>
+    /// <param name="fullScreen">Indicates if the game should start in fullscreen mode.</param>
     public Core(string title, int width, int height, bool fullScreen)
     {
         // Ensure that multiple cores are not created.
@@ -68,7 +75,7 @@ public class Core : Game
         // Create a new graphics device manager.
         Graphics = new GraphicsDeviceManager(this);
 
-        // Set the graphics defaults.
+        // Set the graphics defaults
         Graphics.PreferredBackBufferWidth = width;
         Graphics.PreferredBackBufferHeight = height;
         Graphics.IsFullScreen = fullScreen;
@@ -76,7 +83,7 @@ public class Core : Game
         // Apply the graphic presentation changes.
         Graphics.ApplyChanges();
 
-        // Set the window title.
+        // Set the window title
         Window.Title = title;
 
         // Set the core's content manager to a reference of the base Game's
@@ -88,6 +95,9 @@ public class Core : Game
 
         // Mouse is visible by default.
         IsMouseVisible = true;
+
+        // Exit on escape is true by default
+        ExitOnEscape = true;
     }
 
     protected override void Initialize()
@@ -103,6 +113,13 @@ public class Core : Game
 
         // Create a new input manager.
         Input = new InputManager();
+
+    }
+
+    protected override void UnloadContent()
+    {
+
+        base.UnloadContent();
     }
 
     protected override void Update(GameTime gameTime)
@@ -110,11 +127,72 @@ public class Core : Game
         // Update the input manager.
         Input.Update(gameTime);
 
-        if (ExitOnEscape && Input.Keyboard.IsKeyDown(Keys.Escape))
+        
+        if (ExitOnEscape && Input.Keyboard.WasKeyJustPressed(Keys.Escape))
         {
             Exit();
         }
 
+        // if there is a next scene waiting to be switch to, then transition
+        // to that scene.
+        if (s_nextScene != null)
+        {
+            TransitionScene();
+        }
+
+        // If there is an active scene, update it.
+        if (s_activeScene != null)
+        {
+            s_activeScene.Update(gameTime);
+        }
+
         base.Update(gameTime);
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        // If there is an active scene, draw it.
+        if (s_activeScene != null)
+        {
+            s_activeScene.Draw(gameTime);
+        }
+
+        base.Draw(gameTime);
+    }
+
+    public static void ChangeScene(Scene next)
+    {
+        // Only set the next scene value if it is not the same
+        // instance as the currently active scene.
+        if (s_activeScene != next)
+        {
+            s_nextScene = next;
+        }
+    }
+
+    private static void TransitionScene()
+    {
+        // If there is an active scene, dispose of it.
+        if (s_activeScene != null)
+        {
+            s_activeScene.Dispose();
+        }
+
+        // Force the garbage collector to collect to ensure memory is cleared.
+        GC.Collect();
+
+        // Change the currently active scene to the new scene.
+        s_activeScene = s_nextScene;
+
+        // Null out the next scene value so it does not trigger a change over and over.
+        s_nextScene = null;
+
+        // If the active scene now is not null, initialize it.
+        // Remember, just like with Game, the Initialize call also calls the
+        // Scene.LoadContent
+        if (s_activeScene != null)
+        {
+            s_activeScene.Initialize();
+        }
     }
 }

@@ -1,56 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
-	<Texture>images/Customer/Customer_NPC</Texture>
+	<Texture>images/Customer/NPC_Atlas</Texture>
 	<Regions>
-		<Region name="NPC1" x="0" y="0" width="64" height="64" />
-		<Region name="NPC2" x="64" y="0" width="64" height="64" />
-		<Region name="NPC3" x="128" y="0" width="64" height="64" />
-		<Region name="NPC4" x="192" y="0" width="64" height="64" />
-		<Region name="NPC5" x="256" y="0" width="64" height="64" />
-		<Region name="NPC6" x="320" y="0" width="64" height="64" />
-		<Region name="NPC7" x="384" y="0" width="64" height="64" />
-		<Region name="NPC8" x="0" y="64" width="64" height="64" />
-		<Region name="NPC9" x="64" y="64" width="64" height="64" />
-		<Region name="NPC10" x="128" y="64" width="64" height="64" />
-		<Region name="NPC11" x="192" y="64" width="64" height="64" />
-		<Region name="NPC12" x="256" y="64" width="64" height="64" />
-		<Region name="NPC13" x="320" y="64" width="64" height="64" />
-		<Region name="NPC14" x="384" y="64" width="64" height="64" />
-		<Region name="NPC15" x="0" y="128" width="64" height="64" />
-		<Region name="NPC16" x="64" y="128" width="64" height="64" />
-		<Region name="NPC17" x="128" y="128" width="64" height="64" />
-		<Region name="NPC18" x="192" y="128" width="64" height="64" />
-		<Region name="NPC19" x="256" y="128" width="64" height="64" />
-		<Region name="NPC20" x="320" y="128" width="64" height="64" />
-		<Region name="NPC21" x="384" y="128" width="64" height="64" />
-		<Region name="NPC22" x="0" y="192" width="64" height="64" />
-		<Region name="NPC23" x="64" y="192" width="64" height="64" />
-		<Region name="NPC24" x="128" y="192" width="64" height="64" />
-		<Region name="NPC25" x="192" y="192" width="64" height="64" />
-		<Region name="NPC26" x="256" y="192" width="64" height="64" />
-		<Region name="NPC27" x="320" y="192" width="64" height="64" />
-		<Region name="NPC28" x="384" y="192" width="64" height="64" />
-		<Region name="NPC29" x="0" y="256" width="64" height="64" />
-		<Region name="NPC30" x="64" y="256" width="64" height="64" />
-		<Region name="NPC31" x="128" y="256" width="64" height="64" />
-		<Region name="NPC32" x="192" y="256" width="64" height="64" />
-		<Region name="NPC33" x="256" y="256" width="64" height="64" />
-		<Region name="NPC34" x="320" y="256" width="64" height="64" />
-		<Region name="NPC35" x="384" y="256" width="64" height="64" />
-		<Region name="NPC36" x="0" y="320" width="64" height="64" />
-		<Region name="NPC37" x="64" y="320" width="64" height="64" />
-		<Region name="NPC38" x="128" y="320" width="64" height="64" />
-		<Region name="NPC39" x="192" y="320" width="64" height="64" />
-		<Region name="NPC40" x="256" y="320" width="64" height="64" />
-		<Region name="NPC41" x="320" y="320" width="64" height="64" />
-		<Region name="NPC42" x="384" y="320" width="64" height="64" />
-		<Region name="NPC43" x="0" y="384" width="64" height="64" />
-		<Region name="NPC44" x="64" y="384" width="64" height="64" />
-		<Region name="NPC45" x="128" y="384" width="64" height="64" />
-		<Region name="NPC46" x="192" y="384" width="64" height="64" />
-		<Region name="NPC47" x="256" y="384" width="64" height="64" />
-		<Region name="NPC48" x="320" y="384" width="64" height="64" />
-		<Region name="NPC49" x="384" y="384" width="64" height="64" />
+		<!-- NPC 01 -->
+		<Region name="NPC_01_default" x="0" y="0" width="450" height="650" />
+		<Region name="NPC_01_happy"   x="450" y="0" width="450" height="650" />
+		<Region name="NPC_01_upset"   x="900" y="0" width="450" height="650" />
+
+		<!-- NPC 02 -->
+		<Region name="NPC_02_default" x="0" y="650" width="450" height="650" />
+		<Region name="NPC_02_happy"   x="450" y="650" width="450" height="650" />
+		<Region name="NPC_02_upset"   x="900" y="650" width="450" height="650" />
+
+		<!-- NPC 03 -->
+		<Region name="NPC_03_default" x="0" y="1300" width="450" height="650" />
+		<Region name="NPC_03_happy"   x="450" y="1300" width="450" height="650" />
+		<Region name="NPC_03_upset"   x="900" y="1300" width="450" height="650" />
+
+		<!-- NPC 04 -->
+		<Region name="NPC_04_default" x="0" y="1950" width="450" height="650" />
+		<Region name="NPC_04_happy"   x="450" y="1950" width="450" height="650" />
+		<Region name="NPC_04_upset"   x="900" y="1950" width="450" height="650" />
+
+		<!-- NPC 05 -->
+		<Region name="NPC_05_default" x="0" y="2600" width="450" height="650" />
+		<Region name="NPC_05_happy"   x="450" y="2600" width="450" height="650" />
+		<Region name="NPC_05_upset"   x="900" y="2600" width="450" height="650" />
 	</Regions>
 	<Animations>
 	</Animations>

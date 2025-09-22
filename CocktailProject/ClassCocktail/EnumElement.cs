@@ -65,4 +65,17 @@ namespace CocktailProject.ClassCocktail
         NonAlcoholic,
         NotMatch
     }
+
+    public enum Enum_CocktaillResualt : byte
+    {
+        Success,
+        Aceptable,
+        Fail,
+    }
+
+    public enum Enum_Direction
+    {
+        Left,
+        Right
+    }
 }
