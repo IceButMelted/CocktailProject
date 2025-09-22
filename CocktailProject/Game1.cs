@@ -20,7 +20,7 @@ namespace CocktailProject;
 
 public class Game1 : Core
 {
-    Paragraph p_timer;
+    
 
     Panel _titlePanel;
     Button _startBTN;
@@ -84,6 +84,7 @@ public class Game1 : Core
     TaggedTextRevealer taggedTextRevealer;
     Button _BTN_Randomcocktail;
     RichParagraph withCustomer;
+    Paragraph p_timer;
 #endif
 
     int width_ReciptPanel = 960;
@@ -129,7 +130,7 @@ public class Game1 : Core
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        timer = new Timer(20);
+        timer = new Timer(4000);
         
 
         base.Initialize();
@@ -602,9 +603,10 @@ public class Game1 : Core
         PanelInGameLogic();
         GameplayLogic();
         // Check if a cocktail is selected
+#if DEBUG
         p_currentCocktailInfo.Text = _currentCocktail.Info();
         p_timer.Text = "Timer: " + timer.GetText();
-
+#endif
         //update method
         UserInterface.Active.Update(gameTime);
         base.Update(gameTime);
