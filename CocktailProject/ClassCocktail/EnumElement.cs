@@ -72,4 +72,10 @@ namespace CocktailProject.ClassCocktail
         Aceptable,
         Fail,
     }
+
+    public enum Enum_Direction
+    {
+        Left,
+        Right
+    }
 }
