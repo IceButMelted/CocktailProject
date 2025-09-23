@@ -77,18 +77,18 @@ namespace CocktailProject.Scenes
         public Panel P_Ingredient;
         public Button BTN_Mixer; public Texture2D T_BTN_Mixer;
         public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
-            public Button BTN_Mixer_CanberryJuice;
-            public Button BTN_Mixer_GrapefruitJuice;
-            public Button BTN_Mixer_LemonJuice;
-            public Button BTN_Mixer_Soda;
-            public Button BTN_Mixer_Syrup;
-            public Button BTN_Mixer_PepperMint;
+            public Button BTN_Mixer_CanberryJuice;      public Texture2D T_BTN_Mixer_CanberryJuice;
+            public Button BTN_Mixer_GrapefruitJuice;    public Texture2D T_BTN_Mixer_GrapefruitJuice;
+            public Button BTN_Mixer_LemonJuice;         public Texture2D T_BTN_Mixer_LemonJuice;
+            public Button BTN_Mixer_Soda;               public Texture2D T_BTN_Mixer_Soda;
+            public Button BTN_Mixer_Syrup;              public Texture2D T_BTN_Mixer_Syrup;
+            public Button BTN_Mixer_PepperMint;         public Texture2D T_BTN_Mixer_PepperMint;
         public Button BTN_Alcohol; public Texture2D T_BTN_Alchol;
         public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
-            public Button BTN_Alcohol_Vodka;
-            public Button BTN_Alcohol_Gin;
-            public Button BTN_Alcohol_Triplesec;
-            public Button BTN_Alcohol_Vermouth;
+            public Button BTN_Alcohol_Vodka;            public Texture2D T_BTN_Alcohol_Vodka;
+            public Button BTN_Alcohol_Gin;              public Texture2D T_BTN_Alcohol_Gin;
+            public Button BTN_Alcohol_Triplesec;        public Texture2D T_BTN_Alcohol_Triplesec;
+            public Button BTN_Alcohol_Vermouth;         public Texture2D T_BTN_Alcohol_Vermouth;
         public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
             public Button BTN_Stiring;
             public Button BTN_Shaking;
@@ -132,6 +132,7 @@ namespace CocktailProject.Scenes
             RandomTargetCocktail();
             _NPC_Name = RandomNPC();
            
+            
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
             
@@ -150,13 +151,24 @@ namespace CocktailProject.Scenes
 
         public override void LoadContent()
         {   //Base DO NOT DELETE 
-            UserInterface.Initialize(Content, BuiltinThemes.lowres);
+            UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = false;
 
             SpriteFont myFont = Content.Load<SpriteFont>("Fonts/MyUIFont");
 
             //Add Code Here
             //Load Image with Batch
+
+            LoadImageAndAtlas();
+            //Add Code Above
+
+            //This is Base DO NOT DELETE
+            InitUI();
+            base.LoadContent();
+        }
+
+        public void LoadImageAndAtlas()
+        {
             atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
 
@@ -168,17 +180,18 @@ namespace CocktailProject.Scenes
             T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
 
             T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
-            T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");   
+            T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");
             T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
+
+            //load image button alcohol
+            T_BTN_Alcohol_Gin = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160");
+            T_BTN_Alcohol_Vodka = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160");
+            T_BTN_Alcohol_Triplesec = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160");
+            T_BTN_Alcohol_Vermouth = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160");
+
 
 
             T_CocktailBase = Content.Load<Texture2D>("images/Cocktail/BaseCocktailGlass");
-
-            //Add Code Above
-
-            //This is Base DO NOT DELETE
-            InitUI();
-            base.LoadContent();
         }
 
         public void InitUI()
@@ -213,6 +226,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Vodka = new Button("Vodka", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Vodka.Padding = Vector2.Zero;
                 BTN_Alcohol_Vodka.Offset = new Vector2((50*1), 50);
+                BTN_Alcohol_Vodka.SetCustomSkin(T_BTN_Alcohol_Vodka, T_BTN_Alcohol_Vodka, T_BTN_Alcohol_Vodka);
                 BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
                 {
                     if (_currentCocktail.GetCountPart() < 10)
@@ -231,6 +245,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Gin = new Button("Gin", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Gin.Padding = Vector2.Zero;
                 BTN_Alcohol_Gin.Offset = new Vector2(160+(50*2), 50);
+                BTN_Alcohol_Gin.SetCustomSkin(T_BTN_Alcohol_Gin, T_BTN_Alcohol_Gin, T_BTN_Alcohol_Gin);
                 BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
                 {
                     if (_currentCocktail.GetCountPart() < 10)
@@ -248,6 +263,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Triplesec = new Button("Triplesec", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Triplesec.Padding = Vector2.Zero;
                 BTN_Alcohol_Triplesec.Offset = new Vector2(50,160+(50*2));
+                BTN_Alcohol_Triplesec.SetCustomSkin(T_BTN_Alcohol_Triplesec, T_BTN_Alcohol_Triplesec, T_BTN_Alcohol_Triplesec);
                 BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
                 {
                     if (_currentCocktail.GetCountPart() < 10)
@@ -265,6 +281,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Vermouth = new Button("Vermouth", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Vermouth.Padding = Vector2.Zero;
                 BTN_Alcohol_Vermouth.Offset = new Vector2(160 + (50 * 2), 160 + (50 * 2));
+                BTN_Alcohol_Vermouth.SetCustomSkin(T_BTN_Alcohol_Vermouth, T_BTN_Alcohol_Vermouth, T_BTN_Alcohol_Vermouth);
                 BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
                 {
                     if (_currentCocktail.GetCountPart() < 10)
@@ -1012,7 +1029,7 @@ namespace CocktailProject.Scenes
             BG_TargetZone.Padding = Vector2.Zero;
 
             BG_ProgressBar = new Panel(new Vector2(50, SizeBar), PanelSkin.Simple, Anchor.CenterLeft);
-            BG_ProgressBar.FillColor = Color.Gray;
+            BG_ProgressBar.FillColor = Color.Blue;
             BG_ProgressBar.Offset = new Vector2(50, 0);
             BG_ProgressBar.Padding = Vector2.Zero;
 
@@ -1025,8 +1042,8 @@ namespace CocktailProject.Scenes
 
             Pointing = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
 
-            BG_TargetZone.AddChild(Pointing);
             BG_TargetZone.AddChild(TargetZone);
+            BG_TargetZone.AddChild(Pointing);
             P_Minigame_Shaking.AddChild(BG_TargetZone);
 
             BG_ProgressBar.AddChild(ProgressBar);
