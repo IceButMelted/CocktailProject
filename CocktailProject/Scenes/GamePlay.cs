@@ -215,9 +215,20 @@ namespace CocktailProject.Scenes
 
             //load image button alcohol
             T_BTN_Alcohol_Gin_Default = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160");
+            T_BTN_Alcohol_Gin_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160_Hover");
+            T_BTN_Alcohol_Gin_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160_Pressed");
+
             T_BTN_Alcohol_Vodka_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160");
+            T_BTN_Alcohol_Vodka_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160_Hover");
+            T_BTN_Alcohol_Vodka_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160_Pressed");
+
             T_BTN_Alcohol_Triplesec_Default = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160");
+            T_BTN_Alcohol_Triplesec_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160_Hover");
+            T_BTN_Alcohol_Triplesec_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160_Pressed");
+
             T_BTN_Alcohol_Vermouth_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160");
+            T_BTN_Alcohol_Vermouth_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160_Hover");
+            T_BTN_Alcohol_Vermouth_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160_Pressed");
 
 
 
@@ -256,7 +267,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Vodka = new Button("Vodka", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Vodka.Padding = Vector2.Zero;
                 BTN_Alcohol_Vodka.Offset = new Vector2((50*1), 50);
-                BTN_Alcohol_Vodka.SetCustomSkin(T_BTN_Alcohol_Vodka_Default, T_BTN_Alcohol_Vodka_Default, T_BTN_Alcohol_Vodka_Default);
+                BTN_Alcohol_Vodka.SetCustomSkin(T_BTN_Alcohol_Vodka_Default, T_BTN_Alcohol_Vodka_Hover, T_BTN_Alcohol_Vodka_Pressed);
                 BTN_Alcohol_Vodka.ButtonParagraph.Anchor = Anchor.BottomCenter;
                 BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
                 {
@@ -276,7 +287,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Gin = new Button("Gin", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Gin.Padding = Vector2.Zero;
                 BTN_Alcohol_Gin.Offset = new Vector2(160+(50*2), 50);
-                BTN_Alcohol_Gin.SetCustomSkin(T_BTN_Alcohol_Gin_Default, T_BTN_Alcohol_Gin_Default, T_BTN_Alcohol_Gin_Default);
+                BTN_Alcohol_Gin.SetCustomSkin(T_BTN_Alcohol_Gin_Default, T_BTN_Alcohol_Gin_Hover, T_BTN_Alcohol_Gin_Pressed);
                 BTN_Alcohol_Gin.ButtonParagraph.Anchor = Anchor.BottomCenter;
                 BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
                 {
@@ -295,7 +306,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Triplesec = new Button("Triplesec", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Triplesec.Padding = Vector2.Zero;
                 BTN_Alcohol_Triplesec.Offset = new Vector2(50,160+(50*2));
-                BTN_Alcohol_Triplesec.SetCustomSkin(T_BTN_Alcohol_Triplesec_Default, T_BTN_Alcohol_Triplesec_Default, T_BTN_Alcohol_Triplesec_Default);
+                BTN_Alcohol_Triplesec.SetCustomSkin(T_BTN_Alcohol_Triplesec_Default, T_BTN_Alcohol_Triplesec_Hover, T_BTN_Alcohol_Triplesec_Pressed);
                 BTN_Alcohol_Triplesec.ButtonParagraph.Anchor = Anchor.BottomCenter;
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
                 {
@@ -314,7 +325,7 @@ namespace CocktailProject.Scenes
                 BTN_Alcohol_Vermouth = new Button("Vermouth", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
                 BTN_Alcohol_Vermouth.Padding = Vector2.Zero;
                 BTN_Alcohol_Vermouth.Offset = new Vector2(160 + (50 * 2), 160 + (50 * 2));
-                BTN_Alcohol_Vermouth.SetCustomSkin(T_BTN_Alcohol_Vermouth_Default, T_BTN_Alcohol_Vermouth_Default, T_BTN_Alcohol_Vermouth_Default);
+                BTN_Alcohol_Vermouth.SetCustomSkin(T_BTN_Alcohol_Vermouth_Default, T_BTN_Alcohol_Vermouth_Hover, T_BTN_Alcohol_Vermouth_Pressed);
                 BTN_Alcohol_Vermouth.ButtonParagraph.Anchor = Anchor.BottomCenter;
                 BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
                 {
