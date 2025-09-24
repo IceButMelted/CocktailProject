@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using System.Diagnostics;
-using Microsoft.Xna.Framework.Graphics;
-
+using CocktailProject.Class_DialogLogic;
+using CocktailProject.ClassCocktail;
+using CocktailProject.ClassMotion;
+using CocktailProject.ClassTime;
+using CocktailProject.MiniGame;
+using CocktailProject.NPC;
+using GeonBit.UI;
 using GeonBit.UI.Entities;
 using GeonBit.UI.Source.Entities;
-using GeonBit.UI;
-
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using MonoGameLibrary;
-using MonoGameLibrary.Scenes;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
-
-using CocktailProject.ClassCocktail;
-using CocktailProject.ClassTime;
-using CocktailProject.NPC;
-using CocktailProject.Class_DialogLogic;
-using CocktailProject.MiniGame;
+using MonoGameLibrary.Scenes;
 
 
 
@@ -156,7 +152,11 @@ namespace CocktailProject.Scenes
         public Image Img_BG_Background; public Texture2D T_BG_Background;
         #endregion
 
-
+        #region BG NPC
+        public Image Img_BG_NPC; public Texture2D moving_BG_NPC;
+        private List<BG_NPC> movingnpcs = new List<BG_NPC>();
+        private int npcCount = 5; //NPC Counts
+        #endregion
         public override void Initialize()
         {
             //Add Code Here
@@ -192,6 +192,7 @@ namespace CocktailProject.Scenes
             //Load Image with Batch
 
             LoadImageAndAtlas();
+
             //Add Code Above
 
             //This is Base DO NOT DELETE
@@ -214,6 +215,14 @@ namespace CocktailProject.Scenes
             T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
             T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");
             T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
+            //Create BGNPC
+            moving_BG_NPC = Content.Load<Texture2D>("images/Background/BG_NPC");
+            movingnpcs.Clear();
+            for (int i = 0; i < npcCount; i++)
+            {
+                movingnpcs.Add(new BG_NPC(moving_BG_NPC, new Rectangle(0, 0, 450, 650), BG_NPC.MovementMode.PingPong));
+            }
+
 
             #region Load Image Button Alcohol
             //load image button alcohol
@@ -264,6 +273,7 @@ namespace CocktailProject.Scenes
             #endregion
 
             T_CocktailBase = Content.Load<Texture2D>("images/Cocktail/BaseCocktailGlass");
+
         }
 
         public void InitUI()
@@ -859,7 +869,9 @@ namespace CocktailProject.Scenes
                 }
             }
 
-
+            //Update movingNPC
+            foreach (var movnpc in movingnpcs)
+                movnpc.Update(gameTime);
 
             UpdateConversation();
             AnimationText.Update(gameTime);
@@ -886,6 +898,8 @@ namespace CocktailProject.Scenes
             Core.SpriteBatch.Begin();
 
             //Core.SpriteBatch.Draw(img_Alchohol_Panel, new Vector2(0, 0), Color.White);
+            foreach (var movnpc in movingnpcs)
+                movnpc.Draw(Core.SpriteBatch);
 
             Core.SpriteBatch.End();
 
