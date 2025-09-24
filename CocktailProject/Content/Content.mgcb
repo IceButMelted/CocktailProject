@@ -83,6 +83,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Background/BG_MidGround.png
 
+#begin images/Background/BG_NPC.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Background/BG_NPC.png
+
 #begin images/Cocktail/BaseCocktailGlass.png
 /importer:TextureImporter
 /processor:TextureProcessor
