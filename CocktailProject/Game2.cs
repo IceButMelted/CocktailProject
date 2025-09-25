@@ -30,7 +30,7 @@ namespace CocktailProject
         {
             base.Initialize();
 
-            ChangeScene(new Scenes.GamePlay());
+            ChangeScene(new Scenes.MiniGameTesting_Stiring());
         }
 
         protected override void LoadContent() {
