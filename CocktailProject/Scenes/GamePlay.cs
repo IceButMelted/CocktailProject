@@ -215,14 +215,6 @@ namespace CocktailProject.Scenes
             T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
             T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");
             T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
-            //Create BGNPC
-            moving_BG_NPC = Content.Load<Texture2D>("images/Background/BG_NPC");
-            movingnpcs.Clear();
-            for (int i = 0; i < npcCount; i++)
-            {
-                movingnpcs.Add(new BG_NPC(moving_BG_NPC, new Rectangle(0, 0, 450, 650), BG_NPC.MovementMode.PingPong));
-            }
-
 
             #region Load Image Button Alcohol
             //load image button alcohol
@@ -834,14 +826,26 @@ namespace CocktailProject.Scenes
             Img_BG_Midground = new Image(T_BG_Midgroud, new Vector2(1920, 1080), anchor: Anchor.Center);
 
             UserInterface.Active.AddEntity(Img_BG_Background);
-            UserInterface.Active.AddEntity(Img_BG_Midground);   
+            #region Image BGNPC
+            //Create BGNPC
+            moving_BG_NPC = Content.Load<Texture2D>("images/Background/BG_NPC");
+            movingnpcs.Clear();
+            for (int i = 0; i < npcCount; i++)
+            {
+                Image BGNPC = new Image(moving_BG_NPC,new Vector2(450,650));
+                BGNPC.Scale = 0.25f;
+                BGNPC.Anchor = Anchor.TopLeft;
+                UserInterface.Active.AddEntity(BGNPC);
+                movingnpcs.Add(new BG_NPC(BGNPC, new Rectangle(0, 0, 450, 650), BG_NPC.MovementMode.PingPong));
+            }
+            #endregion
+              UserInterface.Active.AddEntity(Img_BG_Midground);
             UserInterface.Active.AddEntity(Img_Customer);
             UserInterface.Active.AddEntity(Img_BG_Foreground);
 #if DEBUG
             UserInterface.Active.AddEntity(P_Debug_CurrentCocktail);
             UserInterface.Active.AddEntity(P_Debug_targetCocktail);
 #endif 
-
             UserInterface.Active.AddEntity(P_Ingredient);
             UserInterface.Active.AddEntity(P_MakeingZone);
             UserInterface.Active.AddEntity(P_Minigame);
@@ -898,8 +902,8 @@ namespace CocktailProject.Scenes
             Core.SpriteBatch.Begin();
 
             //Core.SpriteBatch.Draw(img_Alchohol_Panel, new Vector2(0, 0), Color.White);
-            foreach (var movnpc in movingnpcs)
-                movnpc.Draw(Core.SpriteBatch);
+            //foreach (var movnpc in movingnpcs)
+            //    movnpc.Draw(Core.SpriteBatch);
 
             Core.SpriteBatch.End();
 
