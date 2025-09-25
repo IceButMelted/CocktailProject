@@ -39,6 +39,8 @@ namespace CocktailProject.MiniGame
         public static int ProgressBar_SuccessTimeToWin = 6;
         public static int ProgressBar_Success = 0;
 
+        //is hit on correct value
+        public static bool IsHitCorrectValue = false;
 
         public static void InitTargetZone()
         {
@@ -94,6 +96,7 @@ namespace CocktailProject.MiniGame
                     if(PointingArrow_Speed < PointingArrow_SpeedCap)
                         PointingArrow_Speed += PointingArrow_SpeedIncreaseRate; // Increase arrow speed
                     InitNewTargetZone(); // Reinitialize target zone position
+                    IsHitCorrectValue = true;
                 }
                 else
                 {
@@ -103,6 +106,7 @@ namespace CocktailProject.MiniGame
 
                     PointingArrow_Speed = PointingArrow_InitSpeed; // Decrease arrow speed
                     InitTargetZone();
+                    IsHitCorrectValue = false;
                 }
             }
 
@@ -127,8 +131,6 @@ namespace CocktailProject.MiniGame
                 }
             }
 
-            
-
         }
 
         public static bool IsComplated()
@@ -150,7 +152,7 @@ namespace CocktailProject.MiniGame
             Reset();
         }
 
-        public static void StopGame()
+        public static void Stop()
         {
             Start = false;
         }

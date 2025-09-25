@@ -78,7 +78,7 @@ namespace CocktailProject.Scenes
             base.LoadContent();
         }
 
-        public static void UpdateMiniGameShaking(GameTime gameTime)
+        public static void UpdateMiniGameShaking()
         {
             Stiring_TargetZone.Opacity = 128;
 
@@ -104,7 +104,7 @@ namespace CocktailProject.Scenes
 
             UserInterface.Active.Update(gameTime);
             StiringMinigame.Update(gameTime);
-            UpdateMiniGameShaking(gameTime);
+            UpdateMiniGameShaking();
             base.Update(gameTime);
         }
 
