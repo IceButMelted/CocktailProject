@@ -216,7 +216,7 @@ namespace CocktailProject.Scenes
 
         public override void LoadContent()
         {   //Base DO NOT DELETE 
-            UserInterface.Initialize(Content, BuiltinThemes.lowres);
+            UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = false;
 
             //Add Code Here
@@ -911,6 +911,8 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_Minigame);
             UserInterface.Active.AddEntity(P_BeforeServe);
             UserInterface.Active.AddEntity(P_OrderPanel);
+
+            InitBookRecipes();
             UserInterface.Active.AddEntity(P_BGBookRecipes);
             #endregion
 
@@ -1360,7 +1362,6 @@ namespace CocktailProject.Scenes
             Recipes_Atlas = TextureAtlas.FromFile(Content, "images/UI/RecipeBook/Recipes_Define.xml");
             TotalPages = Recipes_Atlas.GetRegionCount() / 2;
 
-            UserInterface.Initialize(Content, BuiltinThemes.hd);
             P_BGBookRecipes = new Panel(new Vector2(1920, 1080), PanelSkin.Default, Anchor.Center);
             P_BGBookRecipes.FillColor = Color.Green * 0.5f;
 
@@ -1387,13 +1388,22 @@ namespace CocktailProject.Scenes
                 UpdatePageView();
             };
 
+            Button BTN_CloseBookRecipes = new Button("X", ButtonSkin.Default, Anchor.TopRight, new Vector2(50, 50));
+            BTN_CloseBookRecipes.OnClick += (Entity e) =>
+            {
+                EnableBookRecipes(false);
+            };
+
             Img_BookRecipes.AddChild(Img_LeftPage);
             Img_BookRecipes.AddChild(Img_RightPage);
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
+            Img_BookRecipes.AddChild(BTN_CloseBookRecipes);
             P_BGBookRecipes.AddChild(Img_BookRecipes);
 
             EnableBookRecipes(false);
+
+            
 
         }
         public enum Enum_Page
