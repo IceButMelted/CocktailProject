@@ -1263,7 +1263,7 @@ namespace CocktailProject.Scenes
         }
         public void InitStiringMinigameUI()
         {
-            PB_Stiring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessTimeToWin, new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), null, null, Anchor.BottomCenter);
+            PB_Stiring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessCountToWin, new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), null, null, Anchor.BottomCenter);
             PB_Stiring.Value = (int)StiringMinigame.PointingArrow_CurrentValue;
             PB_Stiring.Locked = true;
             PB_Stiring.Offset = new Vector2(0, 70);

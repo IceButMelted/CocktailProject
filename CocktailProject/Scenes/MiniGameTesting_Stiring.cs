@@ -45,7 +45,7 @@ namespace CocktailProject.Scenes
             UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             P_Minigame_Stiring = new Panel(new Vector2(XSizeBar, 600), PanelSkin.Simple, Anchor.Center);
-            PB_Stiring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessTimeToWin, new Vector2(XSizeBar - 100, 50), null, null, Anchor.Center);
+            PB_Stiring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessCountToWin, new Vector2(XSizeBar - 100, 50), null, null, Anchor.Center);
             PB_Stiring.Value = (int)StiringMinigame.PointingArrow_CurrentValue;
             PB_Stiring.Locked = true;
             PB_Stiring.SliderSkin = SliderSkin.Default;

@@ -36,7 +36,7 @@ namespace CocktailProject.MiniGame
         //progress bar
         public const float ProgressBar_MaxValue = 100;
         public static float ProgressBar_CurrentValue = 1;
-        public static int ProgressBar_SuccessTimeToWin = 6;
+        public static int ProgressBar_SuccessCountToWin = 6;
         public static int ProgressBar_Success = 0;
 
         //is hit on correct value
@@ -135,7 +135,7 @@ namespace CocktailProject.MiniGame
 
         public static bool IsComplated()
         {
-            return ProgressBar_Success >= ProgressBar_SuccessTimeToWin;
+            return ProgressBar_Success >= ProgressBar_SuccessCountToWin;
         }
 
         public static void Reset()
