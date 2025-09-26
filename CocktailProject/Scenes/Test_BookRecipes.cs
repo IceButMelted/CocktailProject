@@ -25,11 +25,9 @@ namespace CocktailProject.Scenes
         private const String COCKTAIL_TEXT = "Cocktail : 410";
         public Panel P_BGBookRecipes;
         public Image Img_BookRecipes;     public Texture2D T_BookRecipes;
-
         public TextureAtlas Recipes_Atlas;
         public Image Img_LeftPage;
         public Image Img_RightPage;
-
         public Button BTN_PreviousPage;
         public Button BTN_NextPage;
 
@@ -150,6 +148,7 @@ namespace CocktailProject.Scenes
         public void EnableBookRecipes(bool _Enable)
         {
             P_BGBookRecipes.Visible = _Enable;
+            P_BGBookRecipes.Enabled = _Enable;
         }
 
         

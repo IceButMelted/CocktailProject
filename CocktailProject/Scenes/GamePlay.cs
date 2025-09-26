@@ -20,6 +20,7 @@ using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 using MonoGameLibrary.Scenes;
+using static CocktailProject.Scenes.Test_BookRecipes;
 
 
 
@@ -41,6 +42,7 @@ namespace CocktailProject.Scenes
 
         #region Image Sprite Atlas
         TextureAtlas Atlas_CustomerNPC;
+        TextureAtlas Recipes_Atlas;
         TextureAtlas atlas;
         #endregion
 
@@ -69,6 +71,9 @@ namespace CocktailProject.Scenes
 
         protected int TextUIOffeset_BTN = -30;
 
+        public int CurrentPage = 1;
+        public int TotalPages = 0;
+
         protected SpriteFont RegularFont;
         protected SpriteFont BoldFont;
         protected SpriteFont ItalicFont;
@@ -77,71 +82,86 @@ namespace CocktailProject.Scenes
         #region Panel UI
         // Panel
         public Panel P_Ingredient;
+        // Mixer
         public Button BTN_Mixer; public Texture2D T_BTN_Mixer;
-        public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
-        public Button BTN_Mixer_CanberryJuice;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Default;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Hover;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Pressed;
-        public Button BTN_Mixer_GrapefruitJuice;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Default;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Hover;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Pressed;
-        public Button BTN_Mixer_LemonJuice;
-        public Texture2D T_BTN_Mixer_LemonJuice_Default;
-        public Texture2D T_BTN_Mixer_LemonJuice_Hover;
-        public Texture2D T_BTN_Mixer_LemonJuice_Pressed;
-        public Button BTN_Mixer_Soda;
-        public Texture2D T_BTN_Mixer_Soda_Default;
-        public Texture2D T_BTN_Mixer_Soda_Hover;
-        public Texture2D T_BTN_Mixer_Soda_Pressed;
-        public Button BTN_Mixer_Syrup;
-        public Texture2D T_BTN_Mixer_Syrup_Default;
-        public Texture2D T_BTN_Mixer_Syrup_Hover;
-        public Texture2D T_BTN_Mixer_Syrup_Pressed;
-        public Button BTN_Mixer_PepperMint;
-        public Texture2D T_BTN_Mixer_PepperMint_Default;
-        public Texture2D T_BTN_Mixer_PepperMint_Hover;
-        public Texture2D T_BTN_Mixer_PepperMint_Pressed;
+            public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
+                public Button BTN_Mixer_CanberryJuice;
+                    public Texture2D T_BTN_Mixer_CanberryJuice_Default;
+                    public Texture2D T_BTN_Mixer_CanberryJuice_Hover;
+                    public Texture2D T_BTN_Mixer_CanberryJuice_Pressed;
+                public Button BTN_Mixer_GrapefruitJuice;
+                    public Texture2D T_BTN_Mixer_GrapefruitJuice_Default;
+                    public Texture2D T_BTN_Mixer_GrapefruitJuice_Hover;
+                    public Texture2D T_BTN_Mixer_GrapefruitJuice_Pressed;
+                public Button BTN_Mixer_LemonJuice;
+                    public Texture2D T_BTN_Mixer_LemonJuice_Default;
+                    public Texture2D T_BTN_Mixer_LemonJuice_Hover;
+                    public Texture2D T_BTN_Mixer_LemonJuice_Pressed;
+                public Button BTN_Mixer_Soda;
+                    public Texture2D T_BTN_Mixer_Soda_Default;
+                    public Texture2D T_BTN_Mixer_Soda_Hover;
+                    public Texture2D T_BTN_Mixer_Soda_Pressed;
+                public Button BTN_Mixer_Syrup;
+                    public Texture2D T_BTN_Mixer_Syrup_Default;
+                    public Texture2D T_BTN_Mixer_Syrup_Hover;
+                    public Texture2D T_BTN_Mixer_Syrup_Pressed;
+                public Button BTN_Mixer_PepperMint;
+                    public Texture2D T_BTN_Mixer_PepperMint_Default;
+                    public Texture2D T_BTN_Mixer_PepperMint_Hover;
+                    public Texture2D T_BTN_Mixer_PepperMint_Pressed;
+        // Alcohol
         public Button BTN_Alcohol; public Texture2D T_BTN_Alchol;
-        public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
-        public Button BTN_Alcohol_Vodka;
-        public Texture2D T_BTN_Alcohol_Vodka_Default;
-        public Texture2D T_BTN_Alcohol_Vodka_Hover;
-        public Texture2D T_BTN_Alcohol_Vodka_Pressed;
-        public Button BTN_Alcohol_Gin;
-        public Texture2D T_BTN_Alcohol_Gin_Default;
-        public Texture2D T_BTN_Alcohol_Gin_Hover;
-        public Texture2D T_BTN_Alcohol_Gin_Pressed;
-        public Button BTN_Alcohol_Triplesec;
-        public Texture2D T_BTN_Alcohol_Triplesec_Default;
-        public Texture2D T_BTN_Alcohol_Triplesec_Hover;
-        public Texture2D T_BTN_Alcohol_Triplesec_Pressed;
-        public Button BTN_Alcohol_Vermouth;
-        public Texture2D T_BTN_Alcohol_Vermouth_Default;
-        public Texture2D T_BTN_Alcohol_Vermouth_Hover;
-        public Texture2D T_BTN_Alcohol_Vermouth_Pressed;
+            public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
+                public Button BTN_Alcohol_Vodka;
+                    public Texture2D T_BTN_Alcohol_Vodka_Default;
+                    public Texture2D T_BTN_Alcohol_Vodka_Hover;
+                    public Texture2D T_BTN_Alcohol_Vodka_Pressed;
+                public Button BTN_Alcohol_Gin;
+                    public Texture2D T_BTN_Alcohol_Gin_Default;
+                    public Texture2D T_BTN_Alcohol_Gin_Hover;
+                    public Texture2D T_BTN_Alcohol_Gin_Pressed;
+                public Button BTN_Alcohol_Triplesec;
+                    public Texture2D T_BTN_Alcohol_Triplesec_Default;
+                    public Texture2D T_BTN_Alcohol_Triplesec_Hover;
+                    public Texture2D T_BTN_Alcohol_Triplesec_Pressed;
+                public Button BTN_Alcohol_Vermouth;
+                    public Texture2D T_BTN_Alcohol_Vermouth_Default;
+                    public Texture2D T_BTN_Alcohol_Vermouth_Hover;
+                    public Texture2D T_BTN_Alcohol_Vermouth_Pressed;
+        // Making Zone
         public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
-        public Button BTN_Stiring;
-        public Button BTN_Shaking;
-        public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
-        public Button BTN_Reset_OnTable;
+            public Button BTN_Stiring;
+            public Button BTN_Shaking;
+            public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
+            public Button BTN_Reset_OnTable;
+            public Button BTN_BookRecipes;
+        // Before Serve
         public Panel P_BeforeServe;
-        public Button BTN_AddIce;
-        public Button BTN_Serve;
-        public Button BTN_Rest_BeforeServe;
+            public Button BTN_AddIce;
+            public Button BTN_Serve;
+            public Button BTN_Rest_BeforeServe;
+        // Minigame
         public Panel P_Minigame;
-        public Panel P_Minigame_Shaking;
-        public Panel BG_ProgressBar;
-        public Panel ProgressBar;
-        public Panel BG_TargetZone;
-        public Panel TargetZone;
-        public Panel Pointing;
-        public Panel P_Minigame_Stiring;
-        public CustomProgressBar PB_Stiring;
-        public Panel BG_Stiring_TargetZone;
-        public Panel Stiring_TargetZone;
-        public Panel Arrow_Stiring;
+            // Minigame Shaking
+            public Panel P_Minigame_Shaking;
+                public Panel BG_ProgressBar;
+                public Panel ProgressBar;
+                public Panel BG_TargetZone;
+                public Panel TargetZone;
+                public Panel Pointing;
+            // Minigame Stiring
+            public Panel P_Minigame_Stiring;
+                public CustomProgressBar PB_Stiring;
+                public Panel BG_Stiring_TargetZone;
+                public Panel Stiring_TargetZone;
+                public Panel Arrow_Stiring;
+        // Book Recipe
+        public Panel P_BGBookRecipes;
+            public Image Img_BookRecipes; public Texture2D T_BookRecipes;
+                public Image Img_LeftPage;
+                public Image Img_RightPage;
+                public Button BTN_PreviousPage;
+                public Button BTN_NextPage;
 
         public Image Img_Customer;
 
@@ -891,8 +911,9 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_Minigame);
             UserInterface.Active.AddEntity(P_BeforeServe);
             UserInterface.Active.AddEntity(P_OrderPanel);
+            UserInterface.Active.AddEntity(P_BGBookRecipes);
             #endregion
-         
+
         }
 
 
@@ -1332,6 +1353,81 @@ namespace CocktailProject.Scenes
             PB_Stiring.Value = StiringMinigame.ProgressBar_Success;
         }
 
+        //------------------------ Book Recipes-------------------
+        public void InitBookRecipes()
+        {
+            T_BookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Book_Base");
+            Recipes_Atlas = TextureAtlas.FromFile(Content, "images/UI/RecipeBook/Recipes_Define.xml");
+            TotalPages = Recipes_Atlas.GetRegionCount() / 2;
+
+            UserInterface.Initialize(Content, BuiltinThemes.hd);
+            P_BGBookRecipes = new Panel(new Vector2(1920, 1080), PanelSkin.Default, Anchor.Center);
+            P_BGBookRecipes.FillColor = Color.Green * 0.5f;
+
+            Img_BookRecipes = new Image(T_BookRecipes, new Vector2(1033, 755), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_BookRecipes.Offset = new Vector2(66, 63);
+
+            Img_LeftPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_LeftPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_L").SourceRectangle;
+            Img_LeftPage.Offset = new Vector2(11, 24);
+
+            Img_RightPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_RightPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_R").SourceRectangle;
+            Img_RightPage.Offset = new Vector2(491, 24);
+
+            BTN_PreviousPage = new Button("<", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(50, 50));
+            BTN_PreviousPage.OnClick += (Entity e) => {
+                ChangePage(Enum_Page.PreviousPage);
+                UpdatePageView();
+            };
+
+            BTN_NextPage = new Button(">", ButtonSkin.Default, Anchor.BottomRight, new Vector2(50, 50));
+            BTN_NextPage.OnClick += (Entity e) => {
+                ChangePage(Enum_Page.NextPage);
+                UpdatePageView();
+            };
+
+            Img_BookRecipes.AddChild(Img_LeftPage);
+            Img_BookRecipes.AddChild(Img_RightPage);
+            Img_BookRecipes.AddChild(BTN_PreviousPage);
+            Img_BookRecipes.AddChild(BTN_NextPage);
+            P_BGBookRecipes.AddChild(Img_BookRecipes);
+
+            EnableBookRecipes(false);
+
+        }
+        public enum Enum_Page
+        {
+            LeftPage,
+            RightPage,
+            PreviousPage,
+            NextPage
+        }
+        public void ChangePage(Enum_Page _Page)
+        {
+            if (_Page == Enum_Page.NextPage && CurrentPage < TotalPages)
+            {
+                CurrentPage++;
+                UpdatePageView();
+            }
+            if (_Page == Enum_Page.PreviousPage && CurrentPage > 1)
+            {
+                CurrentPage--;
+                UpdatePageView();
+            }
+        }
+        private void UpdatePageView()
+        {
+            string leftKey = $"Recipe_{CurrentPage:D2}_L";
+            string rightKey = $"Recipe_{CurrentPage:D2}_R";
+            Img_LeftPage.SourceRectangle = Recipes_Atlas.GetRegion(leftKey).SourceRectangle;
+            Img_RightPage.SourceRectangle = Recipes_Atlas.GetRegion(rightKey).SourceRectangle;
+        }
+        public void EnableBookRecipes(bool _Enable)
+        {
+            P_BGBookRecipes.Visible = _Enable;
+            P_BGBookRecipes.Enabled = _Enable;
+        }
         // ----------------------Slide Panel-----------------------
         private void HandlePanel_X_Axis(bool isOpen, Entity panel, int openEndPoint, int closedEndPoint, int speed)
         {
