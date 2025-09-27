@@ -1243,6 +1243,7 @@ namespace CocktailProject.Scenes
             openMixerPanel = false;
             openMinigamePanel = false;
             openBeforeServePanel = false;
+            BTN_AddIce.Enabled = true;
             BTNIngredeientActive(true);
             BTNMethodActive(false);
             BTNMethodVisible(false);
