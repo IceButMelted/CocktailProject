@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/UI/RecipeBook/Recipes_Atlas</Texture>
+	<Regions>
+		<Region name="Recipe_01_L" x="0" y="0" width="480" height="700" />
+		<Region name="Recipe_01_R" x="480" y="0" width="480" height="700" />
+		<Region name="Recipe_02_L" x="0" y="700" width="480" height="700" />
+		<Region name="Recipe_02_R" x="480" y="700" width="480" height="700" />
+		<Region name="Recipe_03_L" x="0" y="1400" width="480" height="700" />
+		<Region name="Recipe_03_R" x="480" y="1400" width="480" height="700" />
+		
+	</Regions>
+	<Animations>
+	</Animations>
+</TextureAtlas>
