@@ -66,6 +66,9 @@ namespace CocktailProject.Scenes
 
         protected Enum_PanelState openMinigamePanel = Enum_PanelState.InitPosWarp;
         protected Enum_PanelState stateBeforeServePanel = Enum_PanelState.InitPosWarp;
+        protected Enum_PanelState stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
+        protected float timeToCloseBeforeAndAfteServePanel = 3f;
+
 
         protected bool openArt1Panel = false;
         protected bool openArt2Panel = false;
@@ -76,6 +79,8 @@ namespace CocktailProject.Scenes
 
         public int CurrentPage = 1;
         public int TotalPages = 0;
+
+
 
         protected SpriteFont RegularFont;
         protected SpriteFont BoldFont;
@@ -810,6 +815,7 @@ namespace CocktailProject.Scenes
                 ResetUI();
                 EnableBTNBeforeServe(false);
                 stateBeforeServePanel = Enum_PanelState.Pos1;
+                stateArtAfterServePanel = Enum_PanelState.Pos1;
             };
 
             BTN_Rest_BeforeServe = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(100, 80));
@@ -982,7 +988,7 @@ namespace CocktailProject.Scenes
         {
 
             //Add Code Here
-            UpdateUILogic();
+            UpdateUILogic(gameTime);
 
             //update minigame Shaking
             if (currentMinigame == Enum_MiniGameType.Shaking)
@@ -1051,7 +1057,7 @@ namespace CocktailProject.Scenes
         }
 
         // _____________________main funciton__________________
-        protected void UpdateUILogic()
+        protected void UpdateUILogic(GameTime gameTime)
         {
             CheckCurrentCountPart();
 
@@ -1107,10 +1113,52 @@ namespace CocktailProject.Scenes
                 SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left);
             else if (stateBeforeServePanel == Enum_PanelState.Pos1)
                 SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Up);
+            if(stateBeforeServePanel == Enum_PanelState.Pos2)
+                if(SlidePanel(P_BeforeServe,-600,20,Enum_SlideDirection.Left))
+                    stateBeforeServePanel = Enum_PanelState.InitPosWarp;
 
             //Animation After Serve Panel
-            
+            if (stateArtAfterServePanel == Enum_PanelState.InitPosWarp)
+                P_ArtAfterServe.Offset = new Vector2(0, 1080);
+            else if (stateArtAfterServePanel == Enum_PanelState.Pos1)
+                SlidePanel(P_ArtAfterServe, 480, 20, Enum_SlideDirection.Up);
+            else if(stateArtAfterServePanel == Enum_PanelState.Pos2)
+                if (SlidePanel(P_ArtAfterServe, -600, 20, Enum_SlideDirection.Left))
+                    stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
 
+            if (stateArtAfterServePanel == Enum_PanelState.Pos1 && stateBeforeServePanel == Enum_PanelState.Pos1)
+            {
+                timeToCloseBeforeAndAfteServePanel -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (timeToCloseBeforeAndAfteServePanel < 0)
+                {
+                    stateArtAfterServePanel = Enum_PanelState.Pos2;
+                    stateBeforeServePanel = Enum_PanelState.Pos2;
+                    timeToCloseBeforeAndAfteServePanel = 3.0f;
+
+                    // change state conversation
+                    if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Success)
+                    {
+                        AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                    }
+                    else if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Aceptable)
+                    {
+                        AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{WHITE}} i knew but it was okay I guess.", 0.05);
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                    }
+                    else
+                    {
+                        AnimationText = new TaggedTextRevealer("Ugh, this is not  {{BLUE}}" + str_targetCocktail_Name + "{{WHITE}}, i have ordered ", 0.05);
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                    }
+                    canSkipConversation = false;
+                    canGoNextConversation = false;
+                    currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                    AnimationText.Start();
+                    haveDoneOrder = true;
+                }
+                Debug.WriteLine("Time to close: " + timeToCloseBeforeAndAfteServePanel);
+            }
 
 
         }
