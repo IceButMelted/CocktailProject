@@ -34,19 +34,27 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/MyUIFont.spritefont
 
-#begin Fonts/MyUIFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Fonts/MyUIFont.spritefont
-
 #begin Fonts/Regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Regular.spritefont
+
+#begin images/ArtAfterServe/ArtAfterServe_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/ArtAfterServe/ArtAfterServe_Atlas.png
+
+#begin images/ArtAfterServe/ArtAfterServe_Define.xml
+/copy:images/ArtAfterServe/ArtAfterServe_Define.xml
 
 #begin images/atlas-definition.xml
 /copy:images/atlas-definition.xml
@@ -632,6 +640,33 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/UI/Mixer/Syrup_160x160.png
+
+#begin images/UI/RecipeBook/Book_Base.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Book_Base.png
+
+#begin images/UI/RecipeBook/Recipes_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipes_Atlas.png;images/UI/RecipeBook/Recipes_Atlas
+
+#begin images/UI/RecipeBook/Recipes_Define.xml
+/copy:images/UI/RecipeBook/Recipes_Define.xml
 
 #begin images/UI/Shelf.png
 /importer:TextureImporter
