@@ -21,7 +21,7 @@ namespace CocktailProject
 {
     class Game2 : Core
     {
-        public Game2() : base("CocktialProject", 1080, 1080, false)
+        public Game2() : base("CocktialProject", 1920, 1080, true)
         {
 
         }
