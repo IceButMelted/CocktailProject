@@ -893,15 +893,17 @@ namespace CocktailProject.Scenes
             #region Art After Serve Panel
             ArtAfterServe_Atlas = TextureAtlas.FromFile(Content, "images/ArtAfterServe/ArtAfterServe_Define.xml");
 
-            P_ArtAfterServe = new Panel(new Vector2(800, 1080), PanelSkin.Default, anchor: Anchor.TopRight);
+            P_ArtAfterServe = new Panel(new Vector2(800, 600), PanelSkin.Default, anchor: Anchor.TopRight);
             P_ArtAfterServe.Padding = Vector2.Zero;
-            P_ArtAfterServe.Offset = new Vector2(0, 480);
+            P_ArtAfterServe.Offset = new Vector2(0, 1080);
 
             Img_Art1 = new Image(ArtAfterServe_Atlas.Texture);
+            Img_Art1.Size = new Vector2(400,600);
             Img_Art1.Anchor = Anchor.TopLeft;
             Img_Art1.SourceRectangle = ArtAfterServe_Atlas.GetRegion("ArtAfterServe_Art01").SourceRectangle;
 
             Img_Art2 = new Image(ArtAfterServe_Atlas.Texture);
+            Img_Art2.Size = new Vector2(400, 600);
             Img_Art2.Anchor = Anchor.TopRight;
             Img_Art2.SourceRectangle = ArtAfterServe_Atlas.GetRegion("ArtAfterServe_Art02").SourceRectangle;
 
