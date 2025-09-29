@@ -14,8 +14,10 @@ using GeonBit.UI;
 using GeonBit.UI.Entities;
 using GeonBit.UI.Source.Entities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
@@ -45,6 +47,21 @@ namespace CocktailProject.Scenes
         TextureAtlas Recipes_Atlas;
         TextureAtlas ArtAfterServe_Atlas;
         TextureAtlas atlas;
+        #endregion
+
+        #region SoundVariable
+        Song BGM_themeSong01;
+
+        SoundEffect SFX_PressedBTN;
+        SoundEffect SFX_Serve;
+        SoundEffect SFX_Shaking;
+        SoundEffect SFX_Stiring;
+        SoundEffect SFX_Pouring;
+        SoundEffect SFX_Peppermint;
+        SoundEffect SFX_AddIce;
+        SoundEffect SFX_Lemon;
+        SoundEffect SFX_Book_Turnpage;
+        SoundEffect SFX_Book_Open_Close;
         #endregion
 
         #region Conversation Logic Variable
@@ -1810,6 +1827,15 @@ namespace CocktailProject.Scenes
             return true;
         }
 
+        //---------------Sound and BGM----------------
+        public void InitSFX() 
+        {
+            
+        }
+
+        public void InitBGM() { 
+               
+        }
     }
 
     public enum Enum_MiniGameType
