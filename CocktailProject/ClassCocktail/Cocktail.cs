@@ -22,6 +22,28 @@ namespace CocktailProject.ClassCocktail
         protected Enum_TypeOfCocktail typeOfCocktail;
         protected int _price = 0;
 
+        public struct IngredientPart
+        {
+            // If IsAlcohol == true -> Alcohol is valid; otherwise Mixer is valid
+            public bool IsAlcohol;
+            public Enum_Alcohol Alcohol;
+            public Enum_Mixer Mixer;
+
+            public IngredientPart(Enum_Alcohol alcohol)
+            {
+                IsAlcohol = true;
+                Alcohol = alcohol;
+                Mixer = default;
+            }
+
+            public IngredientPart(Enum_Mixer mixer)
+            {
+                IsAlcohol = false;
+                Mixer = mixer;
+                Alcohol = default;
+            }
+        }
+
 
         /// Get Methods for properties
         public Dictionary<Enum_Alcohol, int> GetDicAlcohol()
@@ -164,7 +186,7 @@ namespace CocktailProject.ClassCocktail
         public bool IsSameTypeOfCocktail(Cocktail _cocktail)
         {
             return typeOfCocktail == _cocktail.typeOfCocktail;
-        }   
+        }
 
         public bool IsSameAlcohol(Cocktail _cocktail)
         {
@@ -176,7 +198,8 @@ namespace CocktailProject.ClassCocktail
             return DictionariesEqual(_mixerWithQuantity, _cocktail._mixerWithQuantity);
         }
 
-        public bool IsSameMethod(Cocktail _cocktail) { 
+        public bool IsSameMethod(Cocktail _cocktail)
+        {
             return method == _cocktail.method;
         }
 
@@ -185,7 +208,7 @@ namespace CocktailProject.ClassCocktail
             return _AddIce == _cocktail._AddIce;
         }
 
-        
+
 
         // Helper method to compare dictionaries
         protected bool DictionariesEqual<TKey, TValue>(Dictionary<TKey, TValue> dict1, Dictionary<TKey, TValue> dict2)
@@ -202,5 +225,68 @@ namespace CocktailProject.ClassCocktail
             return true;
         }
 
+
+        /// <summary>
+        /// Reset the cocktail to empty state.
+        /// </summary>
+        public void Reset()
+        {
+            _alcoholWithQuantity.Clear();
+            _mixerWithQuantity.Clear();
+            method = default;
+            glass = default;
+            _AddIce = false;
+            typeOfCocktail = default;
+            _price = 0;
+            RecalculateParts();
+        }
+
+        /// <summary>
+        /// Recalculate total parts count from current alcohols + mixers (not capped; UI will display only the first N parts).
+        /// </summary>
+        private void RecalculateParts()
+        {
+            _CountPart = 0;
+            if (_alcoholWithQuantity != null) _CountPart += _alcoholWithQuantity.Values.Sum();
+            if (_mixerWithQuantity != null) _CountPart += _mixerWithQuantity.Values.Sum();
+        }
+
+        /// <summary>
+        /// Return a flattened list of ingredient parts limited to maxParts.
+        /// Order: alcohols first (sorted by quantity desc), then mixers (sorted by quantity desc).
+        /// Each ingredient is expanded into repeated IngredientPart entries equal to its quantity.
+        /// </summary>
+        public List<IngredientPart> GetFlattenedParts(int maxParts = 10)
+        {
+            var parts = new List<IngredientPart>();
+
+            // alcohols first, sorted by quantity descending (most common first)
+            if (_alcoholWithQuantity != null)
+            {
+                foreach (var kvp in _alcoholWithQuantity)
+                {
+                    for (int i = 0; i < kvp.Value; i++)
+                    {
+                        parts.Add(new IngredientPart(kvp.Key));
+                        if (parts.Count >= maxParts) return parts;
+                    }
+                }
+            }
+
+            // then mixers, sorted by quantity descending
+            if (_mixerWithQuantity != null)
+            {
+                foreach (var kvp in _mixerWithQuantity.OrderByDescending(k => k.Value))
+                {
+                    for (int i = 0; i < kvp.Value; i++)
+                    {
+                        parts.Add(new IngredientPart(kvp.Key));
+                        if (parts.Count >= maxParts) return parts;
+                    }
+                }
+            }
+
+            return parts;
+        }
     }
 }

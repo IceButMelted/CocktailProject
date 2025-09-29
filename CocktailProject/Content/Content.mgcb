@@ -425,6 +425,138 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Img_Panel_Alcohol.png
 
+#begin images/UI/Making_Cocktail_Visual/Bar01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar01.png;images/UI/Making_Cocktail_Visual/Bar01
+
+#begin images/UI/Making_Cocktail_Visual/Bar02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar02.png;images/UI/Making_Cocktail_Visual/Bar02
+
+#begin images/UI/Making_Cocktail_Visual/Bar03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar03.png;images/UI/Making_Cocktail_Visual/Bar03
+
+#begin images/UI/Making_Cocktail_Visual/Bar04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar04.png;images/UI/Making_Cocktail_Visual/Bar04
+
+#begin images/UI/Making_Cocktail_Visual/Bar05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar05.png;images/UI/Making_Cocktail_Visual/Bar05
+
+#begin images/UI/Making_Cocktail_Visual/Bar06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar06.png;images/UI/Making_Cocktail_Visual/Bar06
+
+#begin images/UI/Making_Cocktail_Visual/Bar07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar07.png;images/UI/Making_Cocktail_Visual/Bar07
+
+#begin images/UI/Making_Cocktail_Visual/Bar08.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar08.png;images/UI/Making_Cocktail_Visual/Bar08
+
+#begin images/UI/Making_Cocktail_Visual/Bar09.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar09.png;images/UI/Making_Cocktail_Visual/Bar09
+
+#begin images/UI/Making_Cocktail_Visual/Bar10.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/Bar10.png;images/UI/Making_Cocktail_Visual/Bar10
+
+#begin images/UI/Making_Cocktail_Visual/MakingCocktail_Bar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Making_Cocktail_Visual/MakingCocktail_Bar.png;images/UI/Making_Cocktail_Visual/MakingCocktail_Bar
+
 #begin images/UI/Mixer/CanberryJuice_160x160_Hover.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -90,6 +90,25 @@ namespace CocktailProject.Scenes
         #region Variable UI
         int XSizeBar_Stiring = 800;
         int PaddingLR_Bar_Stiring = 50;
+
+        //visual Cocktail on table
+        private List<Image> AllBars;
+        private readonly Dictionary<Enum_Alcohol, Color> AlcoholColors = new Dictionary<Enum_Alcohol, Color>()
+        {
+            { Enum_Alcohol.Vodka, Color.LightBlue },
+            { Enum_Alcohol.Gin, Color.MediumPurple },
+            { Enum_Alcohol.Triplesec, Color.Orange },
+            { Enum_Alcohol.Vermouth, Color.Goldenrod }
+        };
+        private readonly Dictionary<Enum_Mixer, Color> MixerColors = new Dictionary<Enum_Mixer, Color>()
+        {
+            { Enum_Mixer.CanberryJuice, Color.Red },
+            { Enum_Mixer.GrapefruitJuice, Color.Pink },
+            { Enum_Mixer.LemonJuice, Color.Yellow },
+            { Enum_Mixer.Soda, Color.LightGray },
+            { Enum_Mixer.Syrup, Color.Brown },
+            { Enum_Mixer.PepperMint, Color.Green }
+        };
         #endregion
 
         #region Panel UI
@@ -180,6 +199,21 @@ namespace CocktailProject.Scenes
         public Panel P_ArtAfterServe;
         public Image Img_Art1; public Texture2D T_Art1;
         public Image Img_Art2; public Texture2D T_Art2;
+        //visual Cocktail on table
+        protected Panel P_CocktailVisual;
+        protected Panel P_MakingCocktailVisual;
+        protected Image Img_MainDisplay;
+        protected Image Img_Visual01;
+        protected Image Img_Visual02;
+        protected Image Img_Visual03;
+        protected Image Img_Visual04;
+        protected Image Img_Visual05;
+        protected Image Img_Visual06;
+        protected Image Img_Visual07;
+        protected Image Img_Visual08;
+        protected Image Img_Visual09;
+        protected Image Img_Visual10;
+
 
         public Image Img_Customer;
 
@@ -357,17 +391,10 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vodka.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
-                    Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
-
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Gin = new Button("Gin", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -380,16 +407,10 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Gin.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
-                    Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Triplesec = new Button("Triplesec", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -402,16 +423,10 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Triplesec.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
-                    Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Vermouth = new Button("Vermouth", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -424,16 +439,10 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vermouth.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
-                    Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             #endregion
@@ -473,16 +482,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_CanberryJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_CanberryJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
-                    Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_GrapefruitJuice = new Button("Grapefruit Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -495,16 +498,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_GrapefruitJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
-                    Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_LemonJuice = new Button("Lemon Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -517,16 +514,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_LemonJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_LemonJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
-                    Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             //new row
@@ -540,16 +531,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Soda.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Soda.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
-                    Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_Syrup = new Button("Syrup", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -562,16 +547,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Syrup.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Syrup.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
-                    Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_PepperMint = new Button("Pepper Mint", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -584,16 +563,10 @@ namespace CocktailProject.Scenes
             BTN_Mixer_PepperMint.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_PepperMint.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
-                    Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
+                UpdateCocktailBars();
+                Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
 
@@ -693,10 +666,14 @@ namespace CocktailProject.Scenes
                 BTNMethodVisible(false);
 
                 ResetUI();
+                UpdateCocktailBars();
             };
 
             Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(100, 120), anchor: Anchor.Center);
             Img_CocktailBottle.Offset = new Vector2(-100, 0);
+
+            //visual cocktail
+            InitMakingVisualCocktail();
 
             BTN_BookRecipes = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomLeft, size: new Vector2(128, 128));
             BTN_BookRecipes.Offset = new Vector2(-50, 75);
@@ -714,6 +691,7 @@ namespace CocktailProject.Scenes
             P_MakeingZone.AddChild(BTN_Shaking);
             P_MakeingZone.AddChild(BTN_Reset_OnTable);
             P_MakeingZone.AddChild(Img_CocktailBottle);
+            P_MakeingZone.AddChild(P_MakingCocktailVisual);
             P_MakeingZone.AddChild(BTN_BookRecipes);
 
             #endregion
@@ -1156,6 +1134,8 @@ namespace CocktailProject.Scenes
                     currentPhase = ConversationPhase.SmallTalkAfterOrder;
                     AnimationText.Start();
                     haveDoneOrder = true;
+                    _currentCocktail.ClearAllIngredients();
+                    UpdateCocktailBars();
                 }
                 Debug.WriteLine("Time to close: " + timeToCloseBeforeAndAfteServePanel);
             }
@@ -1192,7 +1172,7 @@ namespace CocktailProject.Scenes
                     case ConversationPhase.SmallTalkBeforeOrder:
                         // Move into ordering phase
                         Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
-                        _currentCocktail.ClearAllIngredients();
+
                         AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
                         AnimationText.Start();
 
@@ -1610,6 +1590,135 @@ namespace CocktailProject.Scenes
             P_BGBookRecipes.Visible = _Enable;
             P_BGBookRecipes.Enabled = _Enable;
         }
+
+        //---------------------- Making Cocktail Visual On table-----------------------
+        public void InitMakingVisualCocktail() {
+            P_MakingCocktailVisual = new Panel(new Vector2(300, 200), PanelSkin.None, Anchor.TopCenter);
+            P_MakingCocktailVisual.Padding = new Vector2(0, 0);
+            P_MakingCocktailVisual.Offset = new Vector2(-100, -75);
+
+            //load and init image
+            Img_Visual01 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar01"));
+            Img_Visual01.Size = new Vector2(Img_Visual01.Texture.Width, Img_Visual01.Texture.Height);
+            Img_Visual01.Anchor = Anchor.BottomCenter;
+            Img_Visual01.Offset = new Vector2(-Img_Visual01.Texture.Width / 2, 0);
+
+            Img_Visual02 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar02"));
+            Img_Visual02.Size = new Vector2(Img_Visual02.Texture.Width, Img_Visual02.Texture.Height);
+            Img_Visual02.Anchor = Anchor.BottomCenter;
+            Img_Visual02.Offset = new Vector2(-Img_Visual02.Texture.Width / 2, 0);
+
+            Img_Visual03 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar03"));
+            Img_Visual03.Size = new Vector2(Img_Visual03.Texture.Width, Img_Visual03.Texture.Height);
+            Img_Visual03.Anchor = Anchor.BottomCenter;
+            Img_Visual03.Offset = new Vector2(-Img_Visual03.Texture.Width / 2, 0);
+
+            Img_Visual04 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar04"));
+            Img_Visual04.Size = new Vector2(Img_Visual04.Texture.Width, Img_Visual04.Texture.Height);
+            Img_Visual04.Anchor = Anchor.BottomCenter;
+            Img_Visual04.Offset = new Vector2(-Img_Visual04.Texture.Width / 2, 0);
+
+            Img_Visual05 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar05"));
+            Img_Visual05.Size = new Vector2(Img_Visual05.Texture.Width, Img_Visual05.Texture.Height);
+            Img_Visual05.Anchor = Anchor.BottomCenter;
+            Img_Visual05.Offset = new Vector2(-Img_Visual05.Texture.Width / 2, 0);
+
+            Img_Visual06 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar06"));
+            Img_Visual06.Size = new Vector2(Img_Visual06.Texture.Width, Img_Visual06.Texture.Height);
+            Img_Visual06.Anchor = Anchor.BottomCenter;
+            Img_Visual06.Offset = new Vector2(Img_Visual06.Texture.Width / 2, 0);
+
+            Img_Visual07 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar07"));
+            Img_Visual07.Size = new Vector2(Img_Visual07.Texture.Width, Img_Visual07.Texture.Height);
+            Img_Visual07.Anchor = Anchor.BottomCenter;
+            Img_Visual07.Offset = new Vector2(Img_Visual07.Texture.Width / 2, 0);
+
+            Img_Visual08 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar08"));
+            Img_Visual08.Size = new Vector2(Img_Visual08.Texture.Width, Img_Visual08.Texture.Height);
+            Img_Visual08.Anchor = Anchor.BottomCenter;
+            Img_Visual08.Offset = new Vector2(Img_Visual08.Texture.Width / 2, 0);
+
+            Img_Visual09 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar09"));
+            Img_Visual09.Size = new Vector2(Img_Visual09.Texture.Width, Img_Visual09.Texture.Height);
+            Img_Visual09.Anchor = Anchor.BottomCenter;
+            Img_Visual09.Offset = new Vector2(Img_Visual09.Texture.Width / 2, 0);
+
+            Img_Visual10 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar10"));
+            Img_Visual10.Size = new Vector2(Img_Visual10.Texture.Width, Img_Visual10.Texture.Height);
+            Img_Visual10.Anchor = Anchor.BottomCenter;
+            Img_Visual10.Offset = new Vector2(Img_Visual10.Texture.Width / 2, 0);
+
+            Img_MainDisplay = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/MakingCocktail_Bar"));
+            Img_MainDisplay.Size = new Vector2(Img_MainDisplay.Texture.Width, Img_MainDisplay.Texture.Height);
+            Img_MainDisplay.Anchor = Anchor.BottomCenter;
+            Img_MainDisplay.Offset = new Vector2(0, 0);
+
+            AllBars = new List<Image>
+            {
+                Img_Visual01, Img_Visual02, Img_Visual03, Img_Visual04, Img_Visual05,
+                Img_Visual06, Img_Visual07, Img_Visual08, Img_Visual09, Img_Visual10
+            };
+
+            foreach (var bar in AllBars)
+            {
+                bar.Size = new Vector2(bar.Texture.Width, bar.Texture.Height);
+                bar.Opacity = 0; // start hidden
+                bar.Locked = true;
+            }
+
+            P_MakingCocktailVisual.AddChild(Img_Visual01);
+            P_MakingCocktailVisual.AddChild(Img_Visual02);
+            P_MakingCocktailVisual.AddChild(Img_Visual03);
+            P_MakingCocktailVisual.AddChild(Img_Visual04);
+            P_MakingCocktailVisual.AddChild(Img_Visual05);
+            P_MakingCocktailVisual.AddChild(Img_Visual06);
+            P_MakingCocktailVisual.AddChild(Img_Visual07);
+            P_MakingCocktailVisual.AddChild(Img_Visual08);
+            P_MakingCocktailVisual.AddChild(Img_Visual09);
+            P_MakingCocktailVisual.AddChild(Img_Visual10);
+            P_MakingCocktailVisual.AddChild(Img_MainDisplay);
+
+        }
+        private void UpdateCocktailBars()
+        {
+            if (_currentCocktail == null) return;
+
+            // get flattened parts from model (type depends on your model/wrapper)
+            List<Cocktail.IngredientPart> parts;
+
+            // if using CocktailBuilder wrapper:
+            // parts = _currentCocktail.GetFlattenedParts(10);
+
+            // if using Cocktail directly:
+            parts = _currentCocktail.GetFlattenedParts(10);
+
+            for (int i = 0; i < AllBars.Count; i++)
+            {
+                if (i < parts.Count)
+                {
+                    var p = parts[i];
+                    if (p.IsAlcohol)
+                    {
+                        Color c = AlcoholColors.ContainsKey(p.Alcohol) ? AlcoholColors[p.Alcohol] : Color.White;
+                        AllBars[i].FillColor = c;
+                        AllBars[i].Opacity = 255;
+                    }
+                    else
+                    {
+                        Color c = MixerColors.ContainsKey(p.Mixer) ? MixerColors[p.Mixer] : Color.White;
+                        AllBars[i].FillColor = c;
+                        AllBars[i].Opacity = 255;
+                    }
+                }
+                else
+                {
+                    // empty bars
+                    AllBars[i].FillColor = Color.Transparent;
+                    // AllBars[i].Opacity = 128; // optional: dim empty bars instead of hide
+                }
+            }
+        }
+
         // ----------------------Slide Panel-----------------------
         private void HandlePanel_X_Axis(bool isOpen, Entity panel, int openEndPoint, int closedEndPoint, int speed)
         {
