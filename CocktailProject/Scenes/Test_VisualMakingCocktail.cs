@@ -25,6 +25,27 @@ namespace CocktailProject.Scenes
     {
         private CocktailBuilder _currentCocktail;
 
+        private List<Image> AllBars;
+
+        // map model enums -> UI colors (use any colors you like)
+        private readonly Dictionary<Enum_Alcohol, Color> AlcoholColors = new Dictionary<Enum_Alcohol, Color>()
+        {
+            { Enum_Alcohol.Vodka, Color.LightBlue },
+            { Enum_Alcohol.Gin, Color.MediumPurple },
+            { Enum_Alcohol.Triplesec, Color.Orange },
+            { Enum_Alcohol.Vermouth, Color.Goldenrod }
+        };
+
+        private readonly Dictionary<Enum_Mixer, Color> MixerColors = new Dictionary<Enum_Mixer, Color>()
+        {
+            { Enum_Mixer.CanberryJuice, Color.Red },
+            { Enum_Mixer.GrapefruitJuice, Color.Pink },
+            { Enum_Mixer.LemonJuice, Color.Yellow },
+            { Enum_Mixer.Soda, Color.LightGray },
+            { Enum_Mixer.Syrup, Color.Brown },
+            { Enum_Mixer.PepperMint, Color.Green }
+        };
+
         protected Panel P_CocktailVisual;
         protected Panel P_MakingCocktailVisual;
         protected Image Img_MainDisplay;
@@ -39,6 +60,9 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual09;
         protected Image Img_Visual10;
 
+
+
+
         public override void Initialize()
         {
 
@@ -51,6 +75,7 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            UserInterface.Active.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -120,6 +145,12 @@ namespace CocktailProject.Scenes
             Img_MainDisplay.Anchor = Anchor.BottomCenter;
             Img_MainDisplay.Offset = new Vector2(0, 0);
 
+            AllBars = new List<Image>
+            {
+                Img_Visual01, Img_Visual02, Img_Visual03, Img_Visual04, Img_Visual05,
+                Img_Visual06, Img_Visual07, Img_Visual08, Img_Visual09, Img_Visual10
+            };
+
             P_MakingCocktailVisual.AddChild(Img_Visual01);
             P_MakingCocktailVisual.AddChild(Img_Visual02);
             P_MakingCocktailVisual.AddChild(Img_Visual03);
@@ -143,6 +174,7 @@ namespace CocktailProject.Scenes
             BTN_al_Gin.OnClick += (Entity btn) =>
             {    
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_al_Gin);
 
@@ -151,6 +183,7 @@ namespace CocktailProject.Scenes
             BTN_al_Vodka.OnClick += (Entity btn) =>
             {
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_al_Vodka);
 
@@ -158,7 +191,8 @@ namespace CocktailProject.Scenes
             BTN_al_Triplesec.Size = new Vector2(200, 100);
             BTN_al_Triplesec.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 2);
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_al_Triplesec);
 
@@ -167,6 +201,7 @@ namespace CocktailProject.Scenes
             BTN_al_Vermouth.OnClick += (Entity btn) =>
             {
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_al_Vermouth);
 
@@ -174,7 +209,8 @@ namespace CocktailProject.Scenes
             BTN_mx_LemonJuice.Size = new Vector2(200, 100);
             BTN_mx_LemonJuice.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_mx_LemonJuice);
 
@@ -182,7 +218,8 @@ namespace CocktailProject.Scenes
             BTN_mx_CanberryJuice.Size = new Vector2(200, 100);
             BTN_mx_CanberryJuice.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_mx_CanberryJuice);
 
@@ -190,7 +227,8 @@ namespace CocktailProject.Scenes
             BTN_mx_GrapefruitJuice.Size = new Vector2(200, 100);
             BTN_mx_GrapefruitJuice.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_mx_GrapefruitJuice);
             
@@ -198,7 +236,8 @@ namespace CocktailProject.Scenes
             BTN_mx_Soda.Size = new Vector2(200, 100);
             BTN_mx_Soda.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+                UpdateCocktailBars();
             };
 
             SamplePanel.AddChild(BTN_mx_Soda);
@@ -206,7 +245,8 @@ namespace CocktailProject.Scenes
             BTN_mx_Syrup.Size = new Vector2(200, 100);
             BTN_mx_Syrup.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_mx_Syrup);
 
@@ -214,7 +254,8 @@ namespace CocktailProject.Scenes
             BTN_mx_PepperMint.Size = new Vector2(200, 100);
             BTN_mx_PepperMint.OnClick += (Entity btn) =>
             {
-                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 2);
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_mx_PepperMint);
 
@@ -222,7 +263,8 @@ namespace CocktailProject.Scenes
             BTN_reset.Size = new Vector2(200, 100);
             BTN_reset.OnClick += (Entity btn) =>
             {
-                _currentCocktail = new CocktailBuilder();
+                _currentCocktail.ClearAllIngredients();
+                UpdateCocktailBars();
             };
             SamplePanel.AddChild(BTN_reset);
 
@@ -241,6 +283,46 @@ namespace CocktailProject.Scenes
             UserInterface.Active.Draw(Core.SpriteBatch);
             base.Draw(gameTime);
 
+        }
+
+        private void UpdateCocktailBars()
+        {
+            if (_currentCocktail == null) return;
+
+            // get flattened parts from model (type depends on your model/wrapper)
+            List<Cocktail.IngredientPart> parts;
+
+            // if using CocktailBuilder wrapper:
+            // parts = _currentCocktail.GetFlattenedParts(10);
+
+            // if using Cocktail directly:
+            parts = _currentCocktail.GetFlattenedParts(10);
+
+            for (int i = 0; i < AllBars.Count; i++)
+            {
+                if (i < parts.Count)
+                {
+                    var p = parts[i];
+                    if (p.IsAlcohol)
+                    {
+                        Color c = AlcoholColors.ContainsKey(p.Alcohol) ? AlcoholColors[p.Alcohol] : Color.White;
+                        AllBars[i].FillColor = c;
+                        AllBars[i].Opacity = 255;
+                    }
+                    else
+                    {
+                        Color c = MixerColors.ContainsKey(p.Mixer) ? MixerColors[p.Mixer] : Color.White;
+                        AllBars[i].FillColor = c;
+                        AllBars[i].Opacity = 255;
+                    }
+                }
+                else
+                {
+                    // empty bars
+                    AllBars[i].FillColor = Color.Transparent;
+                    // AllBars[i].Opacity = 128; // optional: dim empty bars instead of hide
+                }
+            }
         }
     }
 }

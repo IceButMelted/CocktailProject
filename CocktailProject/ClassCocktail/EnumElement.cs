@@ -78,4 +78,6 @@ namespace CocktailProject.ClassCocktail
         Left,
         Right
     }
+
+
 }

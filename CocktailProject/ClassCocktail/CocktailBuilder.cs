@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace CocktailProject.ClassCocktail
         /// <param name="quantity">The amount to add in ml.</param>
         public void AddOrUpdateAlcohol(Enum_Alcohol type, int quantity)
         {
+            if (_CountPart >= 10) return; // Limite a 10 parts
             if (_alcoholWithQuantity.ContainsKey(type))
             {
                 _alcoholWithQuantity[type] += quantity; // Add to existing amount
@@ -37,6 +39,7 @@ namespace CocktailProject.ClassCocktail
         /// <param name="quantity">The amount to add in ml.</param>
         public void AddOrUpdateMixer(Enum_Mixer type, int quantity)
         {
+            if (_CountPart >= 10) return; // Limite a 10 parts
             if (_mixerWithQuantity.ContainsKey(type))
             {
                 _mixerWithQuantity[type] += quantity;
@@ -82,11 +85,12 @@ namespace CocktailProject.ClassCocktail
         {
             _alcoholWithQuantity.Clear();
             _mixerWithQuantity.Clear();
-            method = Enum_Method.None;
-            glass = Enum_Glass.None;
+            method = default;
+            glass = default;
             _AddIce = false;
             _CountPart = 0;
-            typeOfCocktail = Enum_TypeOfCocktail.None;
+            _price = 0;
+            typeOfCocktail = default;
         }
 
         /// <summary>

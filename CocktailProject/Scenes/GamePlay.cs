@@ -357,17 +357,9 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vodka.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
-                    Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
-
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
+                Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Gin = new Button("Gin", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -380,16 +372,9 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Gin.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
-                    Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
+                Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Triplesec = new Button("Triplesec", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -402,16 +387,9 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Triplesec.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
-                    Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
+                Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Alcohol_Vermouth = new Button("Vermouth", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -424,16 +402,9 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vermouth.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
-                    Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
+                Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             #endregion
@@ -473,16 +444,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_CanberryJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_CanberryJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
-                    Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
+                Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_GrapefruitJuice = new Button("Grapefruit Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -495,16 +459,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_GrapefruitJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
-                    Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
+                Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_LemonJuice = new Button("Lemon Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -517,16 +474,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_LemonJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_LemonJuice.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
-                    Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
+                Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             //new row
@@ -540,16 +490,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Soda.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Soda.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
-                    Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
+                Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_Syrup = new Button("Syrup", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -562,16 +505,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Syrup.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Syrup.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
-                    Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
+                Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
             BTN_Mixer_PepperMint = new Button("Pepper Mint", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
@@ -584,16 +520,9 @@ namespace CocktailProject.Scenes
             BTN_Mixer_PepperMint.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_PepperMint.OnMouseDown = (Entity e) =>
             {
-                if (_currentCocktail.GetCountPart() < 10)
-                {
-                    _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
-                    Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
-                    Debug.WriteLine(_currentCocktail.Info());
-                }
-                else
-                {
-                    Debug.WriteLine("Cannot add more ingredients. Cocktail is full.");
-                }
+                _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
+                Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
+                Debug.WriteLine(_currentCocktail.Info());
             };
 
 
