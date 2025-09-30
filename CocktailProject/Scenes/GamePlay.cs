@@ -20,6 +20,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using MonoGameLibrary.Audio;
 using MonoGameLibrary.Input;
 using MonoGameLibrary.Scenes;
 using static CocktailProject.Scenes.Test_BookRecipes;
@@ -293,6 +294,7 @@ namespace CocktailProject.Scenes
             LoadImageAndAtlas();
 
             //Add Code Above
+            InitBGM();
 
             //This is Base DO NOT DELETE
             InitUI();
@@ -1830,11 +1832,12 @@ namespace CocktailProject.Scenes
         //---------------Sound and BGM----------------
         public void InitSFX() 
         {
-            
+            //SFX_AddIce = Content.Load<SoundEffect>("Sound/");
         }
 
         public void InitBGM() { 
-               
+            BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
+            Core.Audio.PlaySong(BGM_themeSong01,true);
         }
     }
 

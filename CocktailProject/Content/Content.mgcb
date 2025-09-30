@@ -813,7 +813,9 @@
 /build:images/UI/Shelf.png
 
 #begin Sound/Background_Music/BGM_MockUp.mp3
-/copy:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
+/importer:
+/processor:
+/build:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
 
 #begin Sound/Sound_Effect/Book_Open_Close.mp3
 /copy:Sound/Sound_Effect/Book_Open_Close.mp3;Sound/Sound_Effect/Book_Open_Close
