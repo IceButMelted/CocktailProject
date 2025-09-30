@@ -812,3 +812,30 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Shelf.png
 
+#begin Sound/Background_Music/BGM_MockUp.mp3
+/copy:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
+
+#begin Sound/Sound_Effect/Book_Open_Close.mp3
+/copy:Sound/Sound_Effect/Book_Open_Close.mp3;Sound/Sound_Effect/Book_Open_Close
+
+#begin Sound/Sound_Effect/Book_Turnpage.mp3
+/copy:Sound/Sound_Effect/Book_Turnpage.mp3;Sound/Sound_Effect/Book_Turnpage
+
+#begin Sound/Sound_Effect/Ice.mp3
+/copy:Sound/Sound_Effect/Ice.mp3;Sound/Sound_Effect/Ice
+
+#begin Sound/Sound_Effect/Lemon.mp3
+/copy:Sound/Sound_Effect/Lemon.mp3;Sound/Sound_Effect/Lemon
+
+#begin Sound/Sound_Effect/Peppermint.mp3
+/copy:Sound/Sound_Effect/Peppermint.mp3;Sound/Sound_Effect/Peppermint
+
+#begin Sound/Sound_Effect/Pouring.mp3
+/copy:Sound/Sound_Effect/Pouring.mp3;Sound/Sound_Effect/Pouring
+
+#begin Sound/Sound_Effect/Shaking.mp3
+/copy:Sound/Sound_Effect/Shaking.mp3;Sound/Sound_Effect/Shaking
+
+#begin Sound/Sound_Effect/Stiring.mp3
+/copy:Sound/Sound_Effect/Stiring.mp3;Sound/Sound_Effect/Stiring
+
