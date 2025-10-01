@@ -10,7 +10,7 @@ using CocktailProject.ClassCocktail;
 using CocktailProject.ClassMotion;
 using CocktailProject.ClassTime;
 using CocktailProject.MiniGame;
-using CocktailProject.NPC;
+using CocktailProject.ClassNPC;
 
 using GeonBit.UI;
 using GeonBit.UI.Entities;
@@ -41,10 +41,13 @@ namespace CocktailProject.Scenes
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
         #endregion
 
+       
+
         #region NPC
         protected int numbercustomer = 0;
         protected string _NPC_Name;
         protected string _tmp_NPC_Name;
+        protected List<BaseCharacter> Customers = new List<BaseCharacter>();
         #endregion  
 
         #region Image Sprite Atlas
@@ -265,7 +268,7 @@ namespace CocktailProject.Scenes
 
             RandomTargetCocktail();
             _NPC_Name = RandomNPC();
-
+            InitNpc();
 
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
@@ -1213,62 +1216,92 @@ namespace CocktailProject.Scenes
                 switch (currentPhase)
                 {
                     case ConversationPhase.SmallTalkBeforeOrder:
-                        // Move into ordering phase
-                        Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
+                        // Get line from NPC (Day = 1 here, but you can make it dynamic)
+                        string beforeOrderLine = Customers[0].GetCoversationBeforeOrder(1);
 
-                        AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
-                        AnimationText.Start();
+                        if (beforeOrderLine != null)
+                        {
+                            AnimationText = new TaggedTextRevealer(beforeOrderLine, 0.05);
+                            AnimationText.Start();
+                            canSkipConversation = true;
+                            canGoNextConversation = false;
+                        }
+                        else
+                        {
+                            // No more before-order text, move into ordering
+                            Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
 
-                        canSkipConversation = true;
-                        canGoNextConversation = false;
+                            AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
+                            AnimationText.Start();
 
-                        //change phase
-                        currentPhase = ConversationPhase.Ordering;
-                        ActiveMixerAndAlcholButton(false);
+                            canSkipConversation = true;
+                            canGoNextConversation = false;
+                            currentPhase = ConversationPhase.Ordering;
+
+                            ActiveMixerAndAlcholButton(false);
+                        }
                         break;
 
                     case ConversationPhase.Ordering:
-
                         if (AnimationText.IsFinished())
                             ActiveMixerAndAlcholButton(true);
 
-                        if (haveDoneOrder) // only advance after serving cocktail
+                        if (haveDoneOrder)
                         {
-                            //Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
-                            //AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
-                            //AnimationText.Start();
-                            //canSkipConversation = true;
-                            //canGoNextConversation = false;
+                            //// Pull AfterServe line
+                            //string afterServeLine = Customers[0].GetConversationAfterServe(1);
+
+                            //if (afterServeLine != null)
+                            //{
+                            //    AnimationText = new TaggedTextRevealer(afterServeLine, 0.05);
+                            //    AnimationText.Start();
+
+                            //    canSkipConversation = true;
+                            //    canGoNextConversation = false;
+
+                            //    currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                            //}
+
                             //haveDoneOrder = false; // reset
-                            //currentPhase = ConversationPhase.SmallTalkAfterOrder;
                         }
                         break;
 
                     case ConversationPhase.SmallTalkAfterOrder:
+                        // Pull chit chat
+                        string chitChatLine = Customers[0].GetConversationChitChat(1);
 
-                        // Loop back to small talk before order
-                        Debug.WriteLine("Looping back to Small Talk Before Order.");
-                        AnimationText = new TaggedTextRevealer("So, how's your day going?", 0.05);
-                        AnimationText.Start();
-                        canSkipConversation = true;
-                        canGoNextConversation = false;
+                        if (chitChatLine != null)
+                        {
+                            AnimationText = new TaggedTextRevealer(chitChatLine, 0.05);
+                            AnimationText.Start();
+                            canSkipConversation = true;
+                            canGoNextConversation = false;
+                        }
+                        else
+                        {
+                            if (AnimationText.IsFinished())
+                            {
+                                // If no chit-chat left, cycle back
+                                Debug.WriteLine("Looping back to Small Talk Before Order.");
 
-                        //change phase
-                        currentPhase = ConversationPhase.SmallTalkBeforeOrder;
+                                currentPhase = ConversationPhase.SmallTalkBeforeOrder;
 
-                        //randome new cocktail
-                        RandomTargetCocktail();
+                                RandomTargetCocktail();
+                                ActiveMixerAndAlcholButton(false);
 
-                        //Disable Mixer And Alcohol
-                        ActiveMixerAndAlcholButton(false);
+                                _NPC_Name = RandomNPC();
+                                numbercustomer++;
 
-                        //set new npc image
-                        _NPC_Name = RandomNPC();
-                        numbercustomer++;
-                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                                AnimationText = new TaggedTextRevealer("", 0.05);
+                                RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+
+                            }
+                        }
                         break;
                 }
             }
+
         }
 
         // ----------------------Fucntion-----------------------
@@ -1870,6 +1903,55 @@ namespace CocktailProject.Scenes
         public void InitBGM() { 
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
             Core.Audio.PlaySong(BGM_themeSong01,true);
+        }
+
+        //----------------NPC Init-------------------
+        private void InitNpc()
+        {
+            BaseCharacter npc = new BaseCharacter
+            {
+                _Name = "Alice",
+                _DayConversations = new SortedList<int, DayConversation>(),
+                _FavoriteTypeOfCocktail = new HashSet<Enum_TypeOfCocktail>()
+            };
+
+            DayConversation day1 = new DayConversation
+            {
+                BeforeOrder = new List<TextConversation>(),
+                AfterServe = new List<TextConversation>(),
+                ChitChat = new List<TextConversation>()
+            };
+
+            day1.BeforeOrder.Add(new TextConversation
+            {
+                Conversation = new List<string>
+            {
+                "Hi there, bartender!",
+                "It's been a long day. I really need a drink."
+            }
+            });
+
+            day1.AfterServe.Add(new TextConversation
+            {
+                Conversation = new List<string>
+            {
+                "Mmm, this is perfect!",
+                "You always make the best cocktails."
+            }
+            });
+
+            day1.ChitChat.Add(new TextConversation
+            {
+                Conversation = new List<string>
+            {
+                "Did you hear about the jazz concert downtown?",
+                "I'm thinking of going this weekend."
+            }
+            });
+
+            npc.AddConversation(1, day1);
+
+            Customers.Add(npc);
         }
     }
 
