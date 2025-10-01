@@ -73,23 +73,44 @@ namespace CocktailProject.ClassNPC
         }
 
 
-        public string GetConversationAfterServe(int Day)
+        //After Serve Conversation must have 3 things and will get 1 
+        public string GetConversationAfterServe(int Day, Enum_CocktaillResualt result)
         {
             if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
             {
-                if (dayConversation.AfterServe.Count > 0)
+                int index = 0;
+
+                switch (result)
                 {
-                    var convo = dayConversation.AfterServe[0]; // pick the first conversation
+                    case Enum_CocktaillResualt.Success:
+                        index = 0;
+                        break;
+                    case Enum_CocktaillResualt.Aceptable:
+                        index = 1;
+                        break;
+                    case Enum_CocktaillResualt.Fail:
+                        index = 2;
+                        break;
+                }
+
+                if (index < dayConversation.AfterServe.Count)
+                {
+                    var convo = dayConversation.AfterServe[index];
+
                     if (convo.CurrentIndex < convo.Conversation.Count)
                     {
                         string text = convo.Conversation[convo.CurrentIndex];
                         convo.CurrentIndex++;
-                        dayConversation.AfterServe[0] = convo; // put back updated struct
+
+                        // update back
+                        dayConversation.AfterServe[index] = convo;
                         _DayConversations[Day] = dayConversation;
+
                         return text;
                     }
                 }
             }
+
             return null;
         }
 

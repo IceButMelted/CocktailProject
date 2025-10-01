@@ -1160,21 +1160,26 @@ namespace CocktailProject.Scenes
                     timeToCloseBeforeAndAfteServePanel = 3.0f;
 
                     // change state conversation
-                    if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Success)
+                    var result = CalculateAccurateCocktail();
+
+                    string afterServe = Customers[0].GetConversationAfterServe(1, result) ?? "Thanks anyway!";
+
+                    switch (result)
                     {
-                        AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
-                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                        case Enum_CocktaillResualt.Success:
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                            break;
+                        case Enum_CocktaillResualt.Aceptable:
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                            break;
+                        case Enum_CocktaillResualt.Fail:
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                            break;
                     }
-                    else if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Aceptable)
-                    {
-                        AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{WHITE}} i knew but it was okay I guess.", 0.05);
-                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
-                    }
-                    else
-                    {
-                        AnimationText = new TaggedTextRevealer("Ugh, this is not  {{BLUE}}" + str_targetCocktail_Name + "{{WHITE}}, i have ordered ", 0.05);
-                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
-                    }
+
+                    AnimationText = new TaggedTextRevealer(afterServe ?? "…", 0.05);
+
+                    AnimationText.Start();
                     canSkipConversation = false;
                     canGoNextConversation = false;
                     currentPhase = ConversationPhase.SmallTalkAfterOrder;
@@ -1935,8 +1940,9 @@ namespace CocktailProject.Scenes
             {
                 Conversation = new List<string>
             {
-                "Mmm, this is perfect!",
-                "You always make the best cocktails."
+                "What was absolutely lovely, I really appreciate it thank you.",
+                "It's not exactly my order, but I appreciate it.",
+                "NOOOOOOOOOOOOOO"
             }
             });
 
