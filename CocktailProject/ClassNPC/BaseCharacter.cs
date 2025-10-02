@@ -8,12 +8,31 @@ using CocktailProject.ClassCocktail;
 
 namespace CocktailProject.ClassNPC
 {
+    public struct DayConversation
+    {
+        public List<TextConversation> BeforeOrder;
+        public List<TextConversation> AfterServe;
+        public List<TextConversation> ChitChat;
+    }
+    public struct TextConversation
+    {
+        public List<string> Conversation;
+        public byte CurrentIndex;
+    }
+
+    public enum Enum_Mood
+    {
+        BeforeOrder,
+        AfterServe,
+        ChitChat
+    }
     public class BaseCharacter
     {
         public SortedList<int, DayConversation> _DayConversations;
         protected int _currentConversationIndex;
         public string _Name;
         public bool HadMetPlayer;
+        public byte MetPlayerTimes;
         public HashSet<Enum_TypeOfCocktail> _FavoriteTypeOfCocktail;
         protected Rectangle _SourceRectangle;
 
@@ -95,19 +114,17 @@ namespace CocktailProject.ClassNPC
 
                 if (index < dayConversation.AfterServe.Count)
                 {
-                    var convo = dayConversation.AfterServe[index];
+                    var convo = dayConversation.AfterServe[0];
 
-                    if (convo.CurrentIndex < convo.Conversation.Count)
-                    {
-                        string text = convo.Conversation[convo.CurrentIndex];
-                        convo.CurrentIndex++;
+                    
+                    string text = convo.Conversation[convo.CurrentIndex];
 
-                        // update back
-                        dayConversation.AfterServe[index] = convo;
-                        _DayConversations[Day] = dayConversation;
+                    // update back
+                    dayConversation.AfterServe[index] = convo;
+                    _DayConversations[Day] = dayConversation;
 
-                        return text;
-                    }
+                    return text;
+                    
                 }
             }
 
@@ -166,22 +183,5 @@ namespace CocktailProject.ClassNPC
     }
 
 
-    public struct DayConversation
-    {
-        public List<TextConversation> BeforeOrder;
-        public List<TextConversation> AfterServe;
-        public List<TextConversation> ChitChat;
-    }
-    public struct TextConversation
-    {
-        public List<string> Conversation;
-        public byte CurrentIndex;
-    }
-
-    public enum Enum_Mood
-    {
-        BeforeOrder,
-        AfterServe,
-        ChitChat
-    }
+    
 }

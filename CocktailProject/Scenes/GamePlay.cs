@@ -1472,7 +1472,6 @@ namespace CocktailProject.Scenes
             BTNIngredeientActive(true);
             BTNMethodActive(false);
             BTNMethodVisible(false);
-            _currentCocktail.ClearAllIngredients();
         }
         protected void EnableBTNBeforeServe(bool eneble) { 
             BTN_AddIce.Enabled = eneble;
