@@ -2,18 +2,8 @@
 <TextureAtlas>
 	<Texture>images/ArtAfterServe/ArtAfterServe_Atlas</Texture>
 	<Regions>
-		<Region name="ArtAfterServe_Art01" x="0" y="0" width="400" height="600" />
-		<Region name="ArtAfterServe_Art02" x="400" y="0" width="400" height="600" />
-		<Region name="ArtAfterServe_Art03" x="800" y="0" width="400" height="600" />
-		
-		<Region name="ArtAfterServe_Art04" x="0" y="600" width="400" height="600" />
-		<Region name="ArtAfterServe_Art05" x="400" y="600" width="400" height="600" />
-		<Region name="ArtAfterServe_Art06" x="800" y="600" width="400" height="600" />
-
-		<Region name="ArtAfterServe_Art07" x="0" y="1200" width="400" height="600" />
-		<Region name="ArtAfterServe_Art08" x="400" y="1200" width="400" height="600" />
-		<Region name="ArtAfterServe_Art09" x="800" y="1200" width="400" height="600" />
-		
+		<Region name="ArtAfterServe_Art01" x="0" y="0" width="400" height="503" />
+		<Region name="ArtAfterServe_Art02" x="400" y="0" width="400" height="503" />		
 	</Regions>
 	<Animations>
 	</Animations>

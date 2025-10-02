@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/Intro_Atlas</Texture>
+	<Regions>
+		<Region name="introatlas-1" x="0" y="0" width="1000" height="200" />
+		<Region name="introatlas-2" x="0" y="200" width="1000" height="200" />
+		<Region name="introatlas-3" x="0" y="400" width="1000" height="400" />
+	</Regions>
+	<Animations>
+		<Animation>
+		</Animation>
+	</Animations>
+</TextureAtlas>
