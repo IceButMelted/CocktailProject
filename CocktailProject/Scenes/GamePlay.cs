@@ -264,7 +264,7 @@ namespace CocktailProject.Scenes
         public override void LoadContent()
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
-            UserInterface.Active.ShowCursor = false;
+            UserInterface.Active.ShowCursor = true;
 
             //Add Code Here
 
@@ -753,6 +753,7 @@ namespace CocktailProject.Scenes
                 float price = CalcualatePrice(_targetCoctail);
                 Debug.WriteLine("Earned Price: " + price);
 
+                #region not used code
                 //_currentCocktail.ClearAllIngredients();
                 //RandomTargetCocktail();\
 
@@ -783,6 +784,7 @@ namespace CocktailProject.Scenes
                 //haveDoneOrder = true;
 
                 //-------------------------------------------------------------------------------
+                #endregion
 
                 Debug.WriteLine("New Target Cocktail is: " + str_targetCocktail_Name);
 
@@ -1513,7 +1515,7 @@ namespace CocktailProject.Scenes
             TotalPages = Recipes_Atlas.GetRegionCount() / 2;
 
             P_BGBookRecipes = new Panel(new Vector2(1920, 1080), PanelSkin.Default, Anchor.Center);
-            P_BGBookRecipes.FillColor = Color.Green * 0.5f;
+            P_BGBookRecipes.FillColor = Color.Black * 0.75f;
 
             Img_BookRecipes = new Image(T_BookRecipes, new Vector2(1033, 755), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_BookRecipes.Offset = new Vector2(66, 63);
