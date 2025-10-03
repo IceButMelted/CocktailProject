@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 using CocktailProject.Class_DialogLogic;
 using CocktailProject.ClassCocktail;
@@ -27,6 +28,7 @@ using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Audio;
 using MonoGameLibrary.Input;
 using MonoGameLibrary.Scenes;
+using System.Text.Json;
 
 
 
@@ -39,9 +41,8 @@ namespace CocktailProject.Scenes
         private static string str_targetCocktail_Name;
         private Cocktail _targetCoctail = new Cocktail();
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
+        private Enum_CocktaillResualt cocktaillResualt = Enum_CocktaillResualt.None;
         #endregion
-
-       
 
         #region NPC
         protected int numbercustomer = 0;
@@ -262,6 +263,7 @@ namespace CocktailProject.Scenes
         private List<BG_NPC> movingnpcs = new List<BG_NPC>();
         private int npcCount = 5; //NPC Counts
         #endregion
+
         public override void Initialize()
         {
             //Add Code Here
@@ -869,9 +871,13 @@ namespace CocktailProject.Scenes
             P_OrderPanel.Padding = Vector2.Zero;
             P_OrderPanel.Offset = new Vector2(400, 225);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(470, 100));
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(350, 100));
             RP_ConversationCustomer.OutlineWidth = 0;
+            RP_ConversationCustomer.OutlineOpacity = 0;
             RP_ConversationCustomer.FontOverride = RegularFont;
+            RP_ConversationCustomer.AlignToCenter = true;
+            
+
             #endregion
 
             #region Debug Part for dev
@@ -1131,6 +1137,8 @@ namespace CocktailProject.Scenes
             //open before serve panel
             if (stateBeforeServePanel == Enum_PanelState.InitPosWarp)
                 P_BeforeServe.Offset = new Vector2(-800, 600);
+            else if (stateBeforeServePanel == Enum_PanelState.InitPosSlide)
+                SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
             else if (stateBeforeServePanel == Enum_PanelState.Open)
                 SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right);
             else if (stateBeforeServePanel == Enum_PanelState.Close)
@@ -1159,34 +1167,36 @@ namespace CocktailProject.Scenes
                     stateBeforeServePanel = Enum_PanelState.Pos2;
                     timeToCloseBeforeAndAfteServePanel = 3.0f;
 
-                    // change state conversation
-                    var result = CalculateAccurateCocktail();
+                    //// change state conversation
+                    //var result = CalculateAccurateCocktail();
 
-                    string afterServe = Customers[0].GetConversationAfterServe(1, result) ?? "Thanks anyway!";
+                    //string afterServe = Customers[0].GetConversationAfterServe(result) ?? "Thanks anyway!";
 
-                    switch (result)
-                    {
-                        case Enum_CocktaillResualt.Success:
-                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
-                            break;
-                        case Enum_CocktaillResualt.Aceptable:
-                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
-                            break;
-                        case Enum_CocktaillResualt.Fail:
-                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
-                            break;
-                    }
+                    //switch (result)
+                    //{
+                    //    case Enum_CocktaillResualt.Success:
+                    //        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                    //        break;
+                    //    case Enum_CocktaillResualt.Aceptable:
+                    //        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                    //        break;
+                    //    case Enum_CocktaillResualt.Fail:
+                    //        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                    //        break;
+                    //}
 
-                    AnimationText = new TaggedTextRevealer(afterServe ?? "…", 0.05);
+                    //AnimationText = new TaggedTextRevealer(afterServe ?? "…", 0.05);
 
-                    AnimationText.Start();
-                    canSkipConversation = false;
-                    canGoNextConversation = false;
-                    currentPhase = ConversationPhase.SmallTalkAfterOrder;
-                    AnimationText.Start();
+                    //AnimationText.Start();
+                    //canSkipConversation = false;
+                    canGoNextConversation = true;
+                    //currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                    //AnimationText.Start();
                     haveDoneOrder = true;
-                    _currentCocktail.ClearAllIngredients();
-                    UpdateCocktailBars();
+                    //_currentCocktail.ClearAllIngredients();
+                    //UpdateCocktailBars();
+
+
                 }
                 Debug.WriteLine("Time to close: " + timeToCloseBeforeAndAfteServePanel);
             }
@@ -1196,6 +1206,7 @@ namespace CocktailProject.Scenes
         protected void UpdateConversation()
         {
             RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+            RP_ConversationCustomer.AlignToCenter = true;
 
             // --- Skip text animation if left-click while animating ---
             if (!AnimationText.IsFinished() &&
@@ -1216,13 +1227,13 @@ namespace CocktailProject.Scenes
             }
 
             // --- Handle advancing conversation ---
-            if (canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left))
+            if ((canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) || haveDoneOrder))
             {
                 switch (currentPhase)
                 {
                     case ConversationPhase.SmallTalkBeforeOrder:
                         // Get line from NPC (Day = 1 here, but you can make it dynamic)
-                        string beforeOrderLine = Customers[0].GetCoversationBeforeOrder(1);
+                        string beforeOrderLine = Customers[0].GetConversationBeforeOrder(1);
 
                         if (beforeOrderLine != null)
                         {
@@ -1251,24 +1262,72 @@ namespace CocktailProject.Scenes
                         if (AnimationText.IsFinished())
                             ActiveMixerAndAlcholButton(true);
 
-                        if (haveDoneOrder)
+                        // Wait for player click before moving to after-serve
+                        if (haveDoneOrder && canGoNextConversation)
                         {
-                            //// Pull AfterServe line
-                            //string afterServeLine = Customers[0].GetConversationAfterServe(1);
+                            if(cocktaillResualt == Enum_CocktaillResualt.None)
+                            cocktaillResualt = CalculateAccurateCocktail();
 
-                            //if (afterServeLine != null)
-                            //{
-                            //    AnimationText = new TaggedTextRevealer(afterServeLine, 0.05);
-                            //    AnimationText.Start();
+                            // Get the after-serve line
+                            string afterServe1 = Customers[0].GetConversationAfterServe(cocktaillResualt);
 
-                            //    canSkipConversation = true;
-                            //    canGoNextConversation = false;
+                            if (afterServe1 != null)
+                            {
+                                // Show NPC reaction text, but do NOT auto-skip
+                                switch (cocktaillResualt)
+                                {
+                                    case Enum_CocktaillResualt.Success:
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                                        break;
+                                    case Enum_CocktaillResualt.Aceptable:
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                                        break;
+                                    case Enum_CocktaillResualt.Fail:
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                                        break;
+                                }
 
-                            //    currentPhase = ConversationPhase.SmallTalkAfterOrder;
-                            //}
+                                AnimationText = new TaggedTextRevealer(afterServe1, 0.05);
+                                AnimationText.Start();
 
-                            //haveDoneOrder = false; // reset
+                                canSkipConversation = true;
+                                canGoNextConversation = false;
+                            }
+
+                            haveDoneOrder = false;
+                            currentPhase = ConversationPhase.AfterServe;
+                            _currentCocktail.ClearAllIngredients();
+                            UpdateCocktailBars();
                         }
+                        break;
+
+
+                    case ConversationPhase.AfterServe:
+
+                        // If we haven’t calculated result yet, do it
+                        if (cocktaillResualt == Enum_CocktaillResualt.None)
+                            cocktaillResualt = CalculateAccurateCocktail();
+
+                        // Get the after-serve line
+                        string afterServe = Customers[0].GetConversationAfterServe(cocktaillResualt);
+
+                        if (afterServe != null)
+                        {
+                            AnimationText = new TaggedTextRevealer(afterServe, 0.05);
+                            AnimationText.Start();
+
+                            canSkipConversation = true;
+                            canGoNextConversation = false;
+                        }
+                        else
+                        {
+                            // No after-serve, go directly to chit-chat
+                            currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                            cocktaillResualt = Enum_CocktaillResualt.None;
+                            haveDoneOrder = false;
+                            
+                        }
+
                         break;
 
                     case ConversationPhase.SmallTalkAfterOrder:
@@ -1284,6 +1343,7 @@ namespace CocktailProject.Scenes
                         }
                         else
                         {
+                            Customers[0].InceaseNumberOfVisitTodya();
                             if (AnimationText.IsFinished())
                             {
                                 // If no chit-chat left, cycle back
@@ -1300,7 +1360,6 @@ namespace CocktailProject.Scenes
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
                                 AnimationText = new TaggedTextRevealer("", 0.05);
                                 RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
-
                             }
                         }
                         break;
@@ -1912,51 +1971,34 @@ namespace CocktailProject.Scenes
         //----------------NPC Init-------------------
         private void InitNpc()
         {
-            BaseCharacter npc = new BaseCharacter
-            {
-                _Name = "Alice",
-                _DayConversations = new SortedList<int, DayConversation>(),
-                _FavoriteTypeOfCocktail = new HashSet<Enum_TypeOfCocktail>()
-            };
+            BaseCharacter Walter = new BaseCharacter("Walter");
+            Walter.AddDayConversationFromJson("Content/Conversation/Walter_Conversation.json");
+            Walter.SetID("NPC_01");
 
-            DayConversation day1 = new DayConversation
-            {
-                BeforeOrder = new List<TextConversation>(),
-                AfterServe = new List<TextConversation>(),
-                ChitChat = new List<TextConversation>()
-            };
+            //Debug.WriteLine("-------- info ------");
+            //Debug.WriteLine("Character Name: " + Walter._Name);
+            //Debug.WriteLine("Character ID: " + Walter.GetID());
+            //Debug.WriteLine("Favorite Cocktails: " + string.Join(", ", Walter._FavoriteTypeOfCocktail));
+            //Debug.WriteLine("-------- Conversation ------");
+            //Debug.WriteLine("AfterServe : ");
+            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Success));
+            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Aceptable));
+            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Fail));
+            //Debug.WriteLine("Bfore Serve 1 : ");
+            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
+            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
+            //Debug.WriteLine("ChitChat 1");
+            //Debug.WriteLine(Walter.GetConversationChitChat(1));
+            //Debug.WriteLine(Walter.GetConversationChitChat(1));
+            //Debug.WriteLine(Walter.GetConversationChitChat(1));
+            //Debug.WriteLine("DeforeServe 2 :");
+            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
+            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
+            //Debug.WriteLine("ChitChat 2");
+            //Debug.WriteLine(Walter.GetConversationChitChat(1));
+            //Debug.WriteLine(Walter.GetConversationChitChat(1));
 
-            day1.BeforeOrder.Add(new TextConversation
-            {
-                Conversation = new List<string>
-            {
-                "Hi there, bartender!",
-                "It's been a long day. I really need a drink."
-            }
-            });
-
-            day1.AfterServe.Add(new TextConversation
-            {
-                Conversation = new List<string>
-            {
-                "What was absolutely lovely, I really appreciate it thank you.",
-                "It's not exactly my order, but I appreciate it.",
-                "NOOOOOOOOOOOOOO"
-            }
-            });
-
-            day1.ChitChat.Add(new TextConversation
-            {
-                Conversation = new List<string>
-            {
-                "Did you hear about the jazz concert downtown?",
-                "I'm thinking of going this weekend."
-            }
-            });
-
-            npc.AddConversation(1, day1);
-
-            Customers.Add(npc);
+            Customers.Add(Walter);
         }
     }
 

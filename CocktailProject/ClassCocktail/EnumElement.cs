@@ -71,6 +71,7 @@ namespace CocktailProject.ClassCocktail
         Success = 0,
         Aceptable,
         Fail,
+        None
     }
 
     public enum Enum_Direction

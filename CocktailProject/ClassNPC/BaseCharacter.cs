@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using CocktailProject.ClassCocktail;
 
 namespace CocktailProject.ClassNPC
 {
     public struct DayConversation
     {
-        public List<TextConversation> BeforeOrder;
-        public List<TextConversation> AfterServe;
-        public List<TextConversation> ChitChat;
+        public List<TextConversation> BeforeOrder { get; set; }
+        public List<TextConversation> ChitChat { get; set; }
     }
+
     public struct TextConversation
     {
-        public List<string> Conversation;
-        public byte CurrentIndex;
+        public List<string> Conversation { get; set; }
+        public byte CurrentIndex { get; set; }
     }
 
     public enum Enum_Mood
@@ -26,162 +28,179 @@ namespace CocktailProject.ClassNPC
         AfterServe,
         ChitChat
     }
+
     public class BaseCharacter
     {
-        public SortedList<int, DayConversation> _DayConversations;
+        public SortedList<int, DayConversation> _DayConversations { get; set; }
+            = new SortedList<int, DayConversation>();
+
+        // Instead of one TextConversation → keep 3 slots by result
+        public Dictionary<Enum_CocktaillResualt, TextConversation> AfterServe
+            = new Dictionary<Enum_CocktaillResualt, TextConversation>();
+
         protected int _currentConversationIndex;
-        public string _Name;
-        public bool HadMetPlayer;
-        public byte MetPlayerTimes;
-        public HashSet<Enum_TypeOfCocktail> _FavoriteTypeOfCocktail;
-        protected Rectangle _SourceRectangle;
+        public string _Name { get; set; }
 
-        public void SetSourceRectangle(Rectangle SouuceRec)
-        {
-            _SourceRectangle = new Rectangle();
-        }
+        [JsonIgnore] protected string _CharaterID;
+        [JsonIgnore] public bool HadMetPlayer { get; set; }
+        [JsonIgnore] public byte NumberOfVisitsToDay { get; set; } // increments after finishing chit chat
+        [JsonIgnore]
+        public HashSet<Enum_TypeOfCocktail> _FavoriteTypeOfCocktail { get; set; }
+            = new HashSet<Enum_TypeOfCocktail>();
 
+        // -------------------- Add methods --------------------
         public void AddConversation(int Day, DayConversation conversation)
         {
-            _DayConversations.Add(Day, conversation);
+            _DayConversations[Day] = conversation;
         }
 
-        public void AddTextBeforeOrder(int Day, TextConversation conversation)
+        public BaseCharacter() { }
+
+        public BaseCharacter(string Name)
         {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                dayConversation.BeforeOrder.Add(conversation);
-                _DayConversations[Day] = dayConversation;
-            }
-        }
-        public void AddTextAfterServe(int Day, TextConversation conversation)
-        {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                dayConversation.AfterServe.Add(conversation);
-                _DayConversations[Day] = dayConversation;
-            }
-        }
-        public void AddTextChitChat(int Day, TextConversation conversation)
-        {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                dayConversation.ChitChat.Add(conversation);
-                _DayConversations[Day] = dayConversation;
-            }
+            this._Name = Name;
+            _DayConversations = new SortedList<int, DayConversation>();
+            AfterServe = new Dictionary<Enum_CocktaillResualt, TextConversation>();
+            _FavoriteTypeOfCocktail = new HashSet<Enum_TypeOfCocktail>();
         }
 
-        public string GetCoversationBeforeOrder(int Day)
+        public void AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail TypeOfCocktail)
         {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
+            this._FavoriteTypeOfCocktail.Add(TypeOfCocktail);
+        }
+
+        public string GetID()
+        {
+            return this._CharaterID;
+        }
+
+        public string SetID(string ID)
+        {
+            this._CharaterID = ID;
+            return this._CharaterID;
+        }
+
+        public void AddDayConversationFromJson(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            // Load day conversations
+            if (root.TryGetProperty("_DayConversations", out var dayConvObj))
             {
-                if (dayConversation.BeforeOrder.Count > 0)
+                foreach (var day in dayConvObj.EnumerateObject())
                 {
-                    var convo = dayConversation.BeforeOrder[0]; // pick the first conversation
-                    if (convo.CurrentIndex < convo.Conversation.Count)
+                    int dayNum = int.Parse(day.Name);
+                    var conv = JsonSerializer.Deserialize<DayConversation>(
+                        day.Value.GetRawText()
+                    );
+                    _DayConversations[dayNum] = conv;
+                }
+            }
+
+            // 🔹 Load AfterServe conversations
+            if (root.TryGetProperty("AfterServe", out var afterServeObj))
+            {
+                foreach (var item in afterServeObj.EnumerateObject())
+                {
+                    if (Enum.TryParse<Enum_CocktaillResualt>(item.Name, out var result))
                     {
-                        string text = convo.Conversation[convo.CurrentIndex];
-                        convo.CurrentIndex++;
-                        dayConversation.BeforeOrder[0] = convo; // put back updated struct
-                        _DayConversations[Day] = dayConversation;
-                        return text;
+                        var convo = JsonSerializer.Deserialize<TextConversation>(
+                            item.Value.GetRawText()
+                        );
+                        AfterServe[result] = convo;
                     }
                 }
             }
-            return null;
         }
 
 
-        //After Serve Conversation must have 3 things and will get 1 
-        public string GetConversationAfterServe(int Day, Enum_CocktaillResualt result)
+        public void AddTextBeforeOrder(int Day, TextConversation conversation)
         {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                int index = 0;
+            if (!_DayConversations.ContainsKey(Day))
+                _DayConversations[Day] = new DayConversation { BeforeOrder = new List<TextConversation>(), ChitChat = new List<TextConversation>() };
 
-                switch (result)
-                {
-                    case Enum_CocktaillResualt.Success:
-                        index = 0;
-                        break;
-                    case Enum_CocktaillResualt.Aceptable:
-                        index = 1;
-                        break;
-                    case Enum_CocktaillResualt.Fail:
-                        index = 2;
-                        break;
-                }
+            _DayConversations[Day].BeforeOrder.Add(conversation);
+        }
 
-                if (index < dayConversation.AfterServe.Count)
-                {
-                    var convo = dayConversation.AfterServe[0];
+        public void AddTextAfterServe(Enum_CocktaillResualt result, TextConversation conversation)
+        {
+            AfterServe[result] = conversation;
+        }
 
-                    
-                    string text = convo.Conversation[convo.CurrentIndex];
+        public void AddTextChitChat(int Day, TextConversation conversation)
+        {
+            if (!_DayConversations.ContainsKey(Day))
+                _DayConversations[Day] = new DayConversation { BeforeOrder = new List<TextConversation>(), ChitChat = new List<TextConversation>() };
 
-                    // update back
-                    dayConversation.AfterServe[index] = convo;
-                    _DayConversations[Day] = dayConversation;
+            _DayConversations[Day].ChitChat.Add(conversation);
+        }
 
-                    return text;
-                    
-                }
-            }
+        // -------------------- Get methods --------------------
+        public string GetConversationBeforeOrder(int Day)
+        {
+            if (!_DayConversations.ContainsKey(Day)) return null;
+            var dayConv = _DayConversations[Day];
+            if (dayConv.BeforeOrder == null || dayConv.BeforeOrder.Count == 0) return null;
 
-            return null;
+            int index = Math.Min(NumberOfVisitsToDay, (byte)(dayConv.BeforeOrder.Count - 1));
+            var convo = dayConv.BeforeOrder[index];
+
+            if (convo.CurrentIndex >= convo.Conversation.Count) return null;
+            string line = convo.Conversation[convo.CurrentIndex];
+            convo.CurrentIndex++;
+
+            dayConv.BeforeOrder[index] = convo;
+            _DayConversations[Day] = dayConv;
+
+            return line;
+        }
+
+        public string GetConversationAfterServe(Enum_CocktaillResualt result)
+        {
+            if (!AfterServe.ContainsKey(result)) return null;
+
+            var convo = AfterServe[result];
+            if (convo.CurrentIndex >= convo.Conversation.Count) return null;
+
+            string line = convo.Conversation[convo.CurrentIndex];
+            convo.CurrentIndex++;
+            AfterServe[result] = convo;
+
+            return line;
         }
 
         public string GetConversationChitChat(int Day)
         {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                if (dayConversation.ChitChat.Count > 0)
-                {
-                    var convo = dayConversation.ChitChat[0]; // pick the first conversation
-                    if (convo.CurrentIndex < convo.Conversation.Count)
-                    {
-                        string text = convo.Conversation[convo.CurrentIndex];
-                        convo.CurrentIndex++;
-                        dayConversation.ChitChat[0] = convo; // put back updated struct
-                        _DayConversations[Day] = dayConversation;
-                        return text;
-                    }
-                }
-            }
-            return null;
+            if (!_DayConversations.ContainsKey(Day)) return null;
+            var dayConv = _DayConversations[Day];
+            if (dayConv.ChitChat == null || dayConv.ChitChat.Count == 0) return null;
+
+            int index = Math.Min(NumberOfVisitsToDay, (byte)(dayConv.ChitChat.Count - 1));
+            var convo = dayConv.ChitChat[index];
+
+            if (convo.CurrentIndex >= convo.Conversation.Count) { return null; }
+            string line = convo.Conversation[convo.CurrentIndex];
+            convo.CurrentIndex++;
+
+            dayConv.ChitChat[index] = convo;
+            _DayConversations[Day] = dayConv;
+
+            
+            return line;
         }
 
 
-        public byte GetCurrentConversationIndex() { return (byte)_currentConversationIndex; }
-        public byte GetBeforeServeConversationCount(int Day)
+        public void InceaseNumberOfVisitTodya() {
+            NumberOfVisitsToDay++;
+        }
+        public void ResetNumberOfVisitTodya()
         {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                return (byte)dayConversation.BeforeOrder.Count;
-            }
-            return 0;
-        }
-        public byte GetAfterServeConversationCount(int Day)
-        {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                return (byte)dayConversation.AfterServe.Count;
-            }
-            return 0;
-        }
-        public byte GetChitChatConversationCount(int Day)
-        {
-            if (_DayConversations.TryGetValue(Day, out DayConversation dayConversation))
-            {
-                return (byte)dayConversation.ChitChat.Count;
-            }
-            return 0;
-        }
+            NumberOfVisitsToDay = 0;
+        }   
 
-        public float IsLastConversation() { return 0; }
-
+        public byte GetCurrentConversationIndex() => (byte)_currentConversationIndex;
     }
-
-
-    
 }
