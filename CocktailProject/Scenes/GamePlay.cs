@@ -199,20 +199,22 @@ namespace CocktailProject.Scenes
         public Panel P_Minigame;
         // Minigame Shaking
         public Panel P_Minigame_Shaking;
+        public Image Img_Minigame_Shaking;      TextureAtlas MiniGame_Shaking_Atlas; AnimatedSprite Shaking_Anim;
         public Panel BG_ProgressBar;
         public Panel ProgressBar;
         public Panel BG_TargetZone;
         public Panel TargetZone;
         public Panel Pointing;
         // Minigame Stiring
-        public Panel P_Minigame_Stiring;
-        public CustomProgressBar PB_Stiring;
-        public Panel BG_Stiring_TargetZone;
-        public Panel Stiring_TargetZone;
-        public Panel Arrow_Stiring;
+        public Panel P_Minigame_Stirring;
+        public Image Img_MiniGame_Stirring;     TextureAtlas MinGame_Stirring_Atlas; AnimatedSprite Stirring_Anim;
+        public CustomProgressBar PB_Stirring;
+        public Panel BG_Stirring_TargetZone;
+        public Panel Stirring_TargetZone;
+        public Panel Arrow_Stirring;
         // Book Recipe
         public Panel P_BGBookRecipes;
-        public Image Img_BookRecipes; public Texture2D T_BookRecipes;
+        public Image Img_BookRecipes;           public Texture2D T_BookRecipes;
         public Image Img_LeftPage;
         public Image Img_RightPage;
         public Button BTN_PreviousPage;
@@ -744,12 +746,26 @@ namespace CocktailProject.Scenes
             P_Minigame_Shaking = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
             P_Minigame_Shaking.Padding = Vector2.Zero;
             P_Minigame_Shaking.Offset = new Vector2(0, 0);
+
+            MiniGame_Shaking_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Shake_Define.xml");
+            Shaking_Anim = MiniGame_Shaking_Atlas.CreateAnimatedSprite("Shaking_Animation");
+            Img_Minigame_Shaking = new Image(MiniGame_Shaking_Atlas.Texture, new Vector2(800, 480), anchor: Anchor.TopCenter);
+            Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
+            P_Minigame_Shaking.AddChild(Img_Minigame_Shaking);
+
             InitShakingMinigameUI();
 
-            P_Minigame_Stiring = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
-            P_Minigame_Stiring.Padding = Vector2.Zero;
-            P_Minigame_Stiring.Offset = new Vector2(0, 0);
+            P_Minigame_Stirring = new Panel(new Vector2(800, 600), PanelSkin.Fancy, anchor: Anchor.TopRight);
+            P_Minigame_Stirring.Padding = Vector2.Zero;
+            P_Minigame_Stirring.Offset = new Vector2(0, 0);
             P_Minigame_Shaking.FillColor = Color.Red;
+
+            MinGame_Stirring_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Stir_Define.xml");
+            Stirring_Anim = MinGame_Stirring_Atlas.CreateAnimatedSprite("Stirring_Animation");
+            Img_MiniGame_Stirring = new Image(MinGame_Stirring_Atlas.Texture, new Vector2(800, 480), anchor: Anchor.TopCenter);
+            Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
+            P_Minigame_Stirring.AddChild(Img_MiniGame_Stirring);
+
             InitStiringMinigameUI();
 
 
@@ -758,7 +774,7 @@ namespace CocktailProject.Scenes
             #region Add Child To Panel Minigame Zone
 
             P_Minigame.AddChild(P_Minigame_Shaking);
-            P_Minigame.AddChild(P_Minigame_Stiring);
+            P_Minigame.AddChild(P_Minigame_Stirring);
 
             #endregion
 
@@ -1009,7 +1025,8 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
-
+            Shaking_Anim.Update(gameTime);
+            Stirring_Anim.Update(gameTime);
             //Add Code Here
             UpdateUILogic(gameTime);
 
@@ -1018,9 +1035,12 @@ namespace CocktailProject.Scenes
             {
                 ShakingMinigame.Update(gameTime);
                 UpdateMiniGameShakingUI();
+                Shaking_Anim.Play();
+                Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
                 if (ShakingMinigame.IsComplete())
                 {
                     ShakingMinigame.Stop();
+                    Shaking_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
                     //playingMinigameShaking = false;
@@ -1030,9 +1050,12 @@ namespace CocktailProject.Scenes
             {
                 StiringMinigame.Update(gameTime);
                 UpdateMiniGameStiringUI();
+                Stirring_Anim.Play();
+                Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();   
                 if (StiringMinigame.IsComplated())
                 {
                     StiringMinigame.Stop();
+                    Stirring_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
                 }
@@ -1130,6 +1153,8 @@ namespace CocktailProject.Scenes
             //open before serve panel
             if (stateBeforeServePanel == Enum_PanelState.InitPosWarp)
                 P_BeforeServe.Offset = new Vector2(-800, 600);
+            if(stateBeforeServePanel == Enum_PanelState.InitPosSlide)
+                SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
             else if (stateBeforeServePanel == Enum_PanelState.Open)
                 SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right);
             else if (stateBeforeServePanel == Enum_PanelState.Close)
@@ -1161,17 +1186,17 @@ namespace CocktailProject.Scenes
                     // change state conversation
                     if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Success)
                     {
-                        AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
+                        AnimationText = new TaggedTextRevealer("Thanks for the {{GREEN}}" + str_targetCocktail_Name + "{{DEFAULT}}, it was great!", 0.05);
                         Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
                     }
                     else if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Aceptable)
                     {
-                        AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{WHITE}} i knew but it was okay I guess.", 0.05);
+                        AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{DEFAULT}} i knew but it was okay I guess.", 0.05);
                         Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
                     }
                     else
                     {
-                        AnimationText = new TaggedTextRevealer("Ugh, this is not  {{BLUE}}" + str_targetCocktail_Name + "{{WHITE}}, i have ordered ", 0.05);
+                        AnimationText = new TaggedTextRevealer("Ugh, this is not  {{RED}}" + str_targetCocktail_Name + "{{DEFAULT}}, i have ordered ", 0.05);
                         Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
                     }
                     canSkipConversation = false;
@@ -1218,7 +1243,7 @@ namespace CocktailProject.Scenes
                         // Move into ordering phase
                         Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
 
-                        AnimationText = new TaggedTextRevealer("Please make me a {{RED}}" + str_targetCocktail_Name + "{{WHITE}}.", 0.05);
+                        AnimationText = new TaggedTextRevealer("Please make me a {{YELLOW}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
                         AnimationText.Start();
 
                         canSkipConversation = true;
@@ -1396,8 +1421,8 @@ namespace CocktailProject.Scenes
                 P_Minigame.Enabled = true;
                 P_Minigame.Visible = true;
 
-                P_Minigame_Stiring.Enabled = false;
-                P_Minigame_Stiring.Visible = false;
+                P_Minigame_Stirring.Enabled = false;
+                P_Minigame_Stirring.Visible = false;
 
                 P_Minigame_Shaking.Enabled = true;
                 P_Minigame_Shaking.Visible = true;
@@ -1407,16 +1432,16 @@ namespace CocktailProject.Scenes
                 P_Minigame.Enabled = true;
                 P_Minigame.Visible = true;
 
-                P_Minigame_Stiring.Enabled = true;
-                P_Minigame_Stiring.Visible = true;
+                P_Minigame_Stirring.Enabled = true;
+                P_Minigame_Stirring.Visible = true;
 
                 P_Minigame_Shaking.Enabled = false;
                 P_Minigame_Shaking.Visible = false;
             }
             if (method == Enum_MiniGameType.None)
             {
-                P_Minigame_Stiring.Enabled = false;
-                P_Minigame_Stiring.Visible = false;
+                P_Minigame_Stirring.Enabled = false;
+                P_Minigame_Stirring.Visible = false;
 
                 P_Minigame_Shaking.Enabled = false;
                 P_Minigame_Shaking.Visible = false;
@@ -1436,7 +1461,6 @@ namespace CocktailProject.Scenes
             BTNIngredeientActive(true);
             BTNMethodActive(false);
             BTNMethodVisible(false);
-            _currentCocktail.ClearAllIngredients();
         }
         protected void EnableBTNBeforeServe(bool eneble) { 
             BTN_AddIce.Enabled = eneble;
@@ -1481,34 +1505,34 @@ namespace CocktailProject.Scenes
         }
         public void InitStiringMinigameUI()
         {
-            PB_Stiring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessTimeToWin, new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), null, null, Anchor.BottomCenter);
-            PB_Stiring.Value = (int)StiringMinigame.PointingArrow_CurrentValue;
-            PB_Stiring.Locked = true;
-            PB_Stiring.Offset = new Vector2(0, 70);
-            PB_Stiring.SliderSkin = SliderSkin.Default;
-            PB_Stiring.ProgressFill.FillColor = Color.Yellow;
+            PB_Stirring = new CustomProgressBar(0, (int)StiringMinigame.ProgressBar_SuccessTimeToWin, new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), null, null, Anchor.BottomCenter);
+            PB_Stirring.Value = (int)StiringMinigame.PointingArrow_CurrentValue;
+            PB_Stirring.Locked = true;
+            PB_Stirring.Offset = new Vector2(0, 70);
+            PB_Stirring.SliderSkin = SliderSkin.Default;
+            PB_Stirring.ProgressFill.FillColor = Color.Yellow;
 
 
-            BG_Stiring_TargetZone = new Panel(new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), PanelSkin.Simple, Anchor.BottomCenter);
-            BG_Stiring_TargetZone.Offset = new Vector2(0, 10);
-            BG_Stiring_TargetZone.FillColor = Color.Gray;
-            BG_Stiring_TargetZone.Padding = new Vector2(0, 0);
+            BG_Stirring_TargetZone = new Panel(new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), PanelSkin.Simple, Anchor.BottomCenter);
+            BG_Stirring_TargetZone.Offset = new Vector2(0, 10);
+            BG_Stirring_TargetZone.FillColor = Color.Gray;
+            BG_Stirring_TargetZone.Padding = new Vector2(0, 0);
 
-            Stiring_TargetZone = new Panel(new Vector2((StiringMinigame.TargetZone_CurrentSize / (StiringMinigame.MaxSize - StiringMinigame.MinSize)) * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50), PanelSkin.Simple, Anchor.CenterLeft);
-            Stiring_TargetZone.FillColor = Color.Red;
-            Stiring_TargetZone.Padding = Vector2.Zero;
-            Stiring_TargetZone.Opacity = 128;
+            Stirring_TargetZone = new Panel(new Vector2((StiringMinigame.TargetZone_CurrentSize / (StiringMinigame.MaxSize - StiringMinigame.MinSize)) * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50), PanelSkin.Simple, Anchor.CenterLeft);
+            Stirring_TargetZone.FillColor = Color.Red;
+            Stirring_TargetZone.Padding = Vector2.Zero;
+            Stirring_TargetZone.Opacity = 128;
 
-            Arrow_Stiring = new Panel(new Vector2(2, 50), PanelSkin.Simple, Anchor.CenterLeft);
-            Arrow_Stiring.Offset = new Vector2((StiringMinigame.PointingArrow_CurrentValue) - 5, 0);
-            Arrow_Stiring.FillColor = Color.Blue;
+            Arrow_Stirring = new Panel(new Vector2(2, 50), PanelSkin.Simple, Anchor.CenterLeft);
+            Arrow_Stirring.Offset = new Vector2((StiringMinigame.PointingArrow_CurrentValue) - 5, 0);
+            Arrow_Stirring.FillColor = Color.Blue;
 
-            BG_Stiring_TargetZone.AddChild(Stiring_TargetZone);
-            BG_Stiring_TargetZone.AddChild(Arrow_Stiring);
+            BG_Stirring_TargetZone.AddChild(Stirring_TargetZone);
+            BG_Stirring_TargetZone.AddChild(Arrow_Stirring);
 
 
-            P_Minigame_Stiring.AddChild(PB_Stiring);
-            P_Minigame_Stiring.AddChild(BG_Stiring_TargetZone);
+            P_Minigame_Stirring.AddChild(PB_Stirring);
+            P_Minigame_Stirring.AddChild(BG_Stirring_TargetZone);
         }
         public void UpdateMiniGameShakingUI()
         {
@@ -1539,15 +1563,15 @@ namespace CocktailProject.Scenes
             float normalizedWidth = (StiringMinigame.TargetZone_CurrentSize)
                                     / (StiringMinigame.MaxSize - StiringMinigame.MinSize);
 
-            Stiring_TargetZone.Offset = new Vector2((XSizeBar_Stiring - PaddingLR_Bar_Stiring) * (normalizedMin / 100), 0);
-            Stiring_TargetZone.Size = new Vector2(normalizedWidth * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50);
+            Stirring_TargetZone.Offset = new Vector2((XSizeBar_Stiring - PaddingLR_Bar_Stiring) * (normalizedMin / 100), 0);
+            Stirring_TargetZone.Size = new Vector2(normalizedWidth * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50);
 
             float normalizedArrow = (StiringMinigame.PointingArrow_CurrentValue - StiringMinigame.MinSize)
                                     / (StiringMinigame.MaxSize - StiringMinigame.MinSize);
 
-            Arrow_Stiring.Offset = new Vector2(normalizedArrow * (XSizeBar_Stiring - PaddingLR_Bar_Stiring) - (Arrow_Stiring.Size.X / 2), 0);
+            Arrow_Stirring.Offset = new Vector2(normalizedArrow * (XSizeBar_Stiring - PaddingLR_Bar_Stiring) - (Arrow_Stirring.Size.X / 2), 0);
 
-            PB_Stiring.Value = StiringMinigame.ProgressBar_Success;
+            PB_Stirring.Value = StiringMinigame.ProgressBar_Success;
         }
 
         //------------------------ Book Recipes-------------------
@@ -1872,6 +1896,7 @@ namespace CocktailProject.Scenes
         public void InitBGM() { 
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
             Core.Audio.PlaySong(BGM_themeSong01,true);
+            Core.Audio.SongVolume = 0.5f;
         }
     }
 

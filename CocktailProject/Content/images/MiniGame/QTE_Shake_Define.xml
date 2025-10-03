@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/MiniGame/QTE_shake</Texture>
+	<Regions>
+		<Region name="QTE_shake01" x="0" y="0" width="800" height="480" />
+		<Region name="QTE_shake02" x="0" y="480" width="800" height="480" />
+		<Region name="QTE_shake03" x="0" y="960" width="800" height="480" />
+	</Regions>
+	<Animations>
+		<Animation name="Shaking_Animation" delay="100">
+			<Frame region="QTE_shake01" />
+			<Frame region="QTE_shake02" />
+			<Frame region="QTE_shake03" />
+		</Animation>
+	</Animations>
+</TextureAtlas>
