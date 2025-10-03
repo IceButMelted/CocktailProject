@@ -68,9 +68,10 @@ namespace CocktailProject.ClassCocktail
 
     public enum Enum_CocktaillResualt : byte
     {
-        Success,
+        Success = 0,
         Aceptable,
         Fail,
+        None
     }
 
     public enum Enum_Direction

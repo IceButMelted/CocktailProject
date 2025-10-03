@@ -10,7 +10,7 @@ namespace CocktailProject.Class_DialogLogic
     {
         SmallTalkBeforeOrder,
         Ordering,
-        Complain,
+        AfterServe,
         SmallTalkAfterOrder
 
     }
