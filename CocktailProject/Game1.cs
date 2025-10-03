@@ -547,7 +547,7 @@ public class Game1 : Core
 #endif
         #endregion
 
-        taggedTextRevealer.Start();
+       // taggedTextRevealer.Start();
 
         base.LoadContent();
     }

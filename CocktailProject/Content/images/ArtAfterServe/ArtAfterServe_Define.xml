@@ -2,8 +2,8 @@
 <TextureAtlas>
 	<Texture>images/ArtAfterServe/ArtAfterServe_Atlas</Texture>
 	<Regions>
-		<Region name="ArtAfterServe_Art01" x="0" y="0" width="400" height="503" />
-		<Region name="ArtAfterServe_Art02" x="400" y="0" width="400" height="503" />		
+		<Region name="ArtAfterServe_Art01" x="0" y="0" width="400" height="600" />
+		<Region name="ArtAfterServe_Art02" x="400" y="0" width="400" height="600" />		
 	</Regions>
 	<Animations>
 	</Animations>

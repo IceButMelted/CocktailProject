@@ -245,6 +245,36 @@
 /processorParam:TextureFormat=Color
 /build:images/logo.png
 
+#begin images/MiniGame/QTE_Shake_Define.xml
+/copy:images/MiniGame/QTE_Shake_Define.xml
+
+#begin images/MiniGame/QTE_shake.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/MiniGame/QTE_shake.PNG;images/MiniGame/QTE_shake
+
+#begin images/MiniGame/QTE_Stir_Define.xml
+/copy:images/MiniGame/QTE_Stir_Define.xml
+
+#begin images/MiniGame/QTE_stir.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/MiniGame/QTE_stir.PNG;images/MiniGame/QTE_stir
+
 #begin images/pong-atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor

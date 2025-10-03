@@ -20,6 +20,13 @@ namespace MonoGameLibrary.Graphics
             set => SetAnimation(value, true);
         }
 
+
+        public Rectangle GetRectangleCurrentFrame()
+        {
+            if (_animation == null || _animation.Frames.Count == 0)
+                return Rectangle.Empty;
+            return _animation.Frames[_currentFrame].SourceRectangle;
+        }
         /// <summary>
         /// Whether the animation is currently playing.
         /// </summary>
