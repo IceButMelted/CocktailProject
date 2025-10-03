@@ -1386,7 +1386,7 @@ namespace CocktailProject.Scenes
         {
             BTN_Alcohol.Enabled = Enable;
             BTN_Mixer.Enabled = Enable;
-        }
+        }                                                                                                            
         protected void BTNIngredeientActive(bool Enable)
         {
             BTN_Mixer_CanberryJuice.Enabled = Enable;
