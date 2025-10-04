@@ -674,6 +674,7 @@ namespace CocktailProject.Scenes
                 BTNMethodActive(false);
                 BTNMethodVisible(false);
                 EnableBTNBeforeServe(true);
+                EnableBookRecipes(false);
             };
 
             BTN_Shaking = new Button("Shaking", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(150, 60));
@@ -698,6 +699,7 @@ namespace CocktailProject.Scenes
                 BTNMethodActive(false);
                 BTNMethodVisible(false);
                 EnableBTNBeforeServe(true);
+                EnableBookRecipes(false);
             };
 
             BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100, 80));
@@ -1306,8 +1308,8 @@ namespace CocktailProject.Scenes
                             // No more before-order text, move into ordering
                             Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
 
-                        AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
-                        AnimationText.Start();
+                            AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
+                            AnimationText.Start();
 
                             canSkipConversation = true;
                             canGoNextConversation = false;
@@ -1324,8 +1326,9 @@ namespace CocktailProject.Scenes
                         // Wait for player click before moving to after-serve
                         if (haveDoneOrder && canGoNextConversation)
                         {
-                            if(cocktaillResualt == Enum_CocktaillResualt.None)
-                            cocktaillResualt = CalculateAccurateCocktail();
+                            ActiveMixerAndAlcholButton(false);
+                            if (cocktaillResualt == Enum_CocktaillResualt.None)
+                                cocktaillResualt = CalculateAccurateCocktail();
 
                             // Get the after-serve line
                             string afterServe1 = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
@@ -1348,15 +1351,19 @@ namespace CocktailProject.Scenes
 
                                 AnimationText = new TaggedTextRevealer(afterServe1, 0.05);
                                 AnimationText.Start();
+                                canSkipConversation = true;
+                                canGoNextConversation = true;
+                            }
+                            else
+                            {
 
+                                haveDoneOrder = false;
                                 canSkipConversation = true;
                                 canGoNextConversation = false;
+                                currentPhase = ConversationPhase.AfterServe;
+                                _currentCocktail.ClearAllIngredients();
+                                UpdateCocktailBars();
                             }
-
-                            haveDoneOrder = false;
-                            currentPhase = ConversationPhase.AfterServe;
-                            _currentCocktail.ClearAllIngredients();
-                            UpdateCocktailBars();
                         }
                         break;
 
@@ -1367,6 +1374,7 @@ namespace CocktailProject.Scenes
                         if (cocktaillResualt == Enum_CocktaillResualt.None)
                             cocktaillResualt = CalculateAccurateCocktail();
 
+
                         // Get the after-serve line
                         string afterServe = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
 
@@ -1376,7 +1384,7 @@ namespace CocktailProject.Scenes
                             AnimationText.Start();
 
                             canSkipConversation = true;
-                            canGoNextConversation = false;
+                            canGoNextConversation = true;
                         }
                         else
                         {
@@ -1385,7 +1393,9 @@ namespace CocktailProject.Scenes
                             cocktaillResualt = Enum_CocktaillResualt.None;
                             
                             haveDoneOrder = false;
-                            
+                            canSkipConversation = true;
+                            canGoNextConversation = false;
+
                         }
 
                         break;
