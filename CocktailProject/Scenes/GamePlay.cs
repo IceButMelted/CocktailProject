@@ -715,8 +715,8 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
             };
 
-            Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(100, 120), anchor: Anchor.Center);
-            Img_CocktailBottle.Offset = new Vector2(-100, 0);
+            Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(80, 140), anchor: Anchor.Center);
+            Img_CocktailBottle.Offset = new Vector2(-100, -20);
 
             //visual cocktail
             InitMakingVisualCocktail();
