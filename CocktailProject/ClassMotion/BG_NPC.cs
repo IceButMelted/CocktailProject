@@ -15,46 +15,68 @@ namespace CocktailProject.ClassMotion
         private double cooldownTime;
         private double cooldownTimer = 0;
         private bool waiting = false;
+        private bool spawned = false; // New: track if NPC has spawned
+        private double spawnTimer = 0; // New: spawn delay timer
         private Rectangle drawSize;
+        private Rectangle faceLeftRect;
+        private Rectangle faceRightRect;
+
         public enum MovementMode { Warp, PingPong }
         private MovementMode mode;
         private static Random rng = new Random();
 
-        public BG_NPC(Image imageEntity, Rectangle size, MovementMode mode)
+        public BG_NPC(Image imageEntity, Rectangle size, MovementMode mode, Rectangle faceLeft, Rectangle faceRight, float spawnDelay = 0f)
         {
             rng = new Random();
             npcImage = imageEntity;
             drawSize = size;
             this.mode = mode;
+            faceLeftRect = faceLeft;
+            faceRightRect = faceRight;
+            spawnTimer = spawnDelay;
 
-            movingToB = rng.Next(2) == 0; // true = A->B, false = B->A
+            movingToB = rng.Next(2) == 0;
             position = movingToB ? pointA : pointB;
 
-            // Set initial position & size for GeonBit image
-            //npcImage.Anchor = Anchor.TopLeft;
+            UpdateFaceDirection();
+
             npcImage.Size = new Vector2(drawSize.Width, drawSize.Height);
             npcImage.Offset = position;
+            npcImage.Visible = (spawnDelay == 0); // Hide until spawn time
 
-            // Random Values
-            speed = rng.Next(80, 100);
-            cooldownTime = rng.NextDouble() * 2 + 2; // Cooldown Time
+            speed = rng.Next(80, 120);
+            cooldownTime = rng.NextDouble() * 2 + 2;
+        }
+
+        private void UpdateFaceDirection()
+        {
+            npcImage.SourceRectangle = movingToB ? faceRightRect : faceLeftRect;
         }
 
         public void Update(GameTime gameTime)
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            // Handle spawn delay
+            if (!spawned)
+            {
+                spawnTimer -= delta;
+                if (spawnTimer <= 0)
+                {
+                    spawned = true;
+                    npcImage.Visible = true;
+                }
+                return; // Don't update movement until spawned
+            }
+
             if (!waiting)
             {
                 Vector2 target = movingToB ? pointB : pointA;
                 Vector2 direction = target - position;
-
                 if (direction.Length() > 1f)
                 {
                     direction.Normalize();
                     position += direction * speed * delta;
-
-                    // Update GeonBit image position
                     npcImage.Offset = position;
                 }
                 else
@@ -79,6 +101,7 @@ namespace CocktailProject.ClassMotion
                     else if (mode == MovementMode.PingPong)
                     {
                         movingToB = !movingToB;
+                        UpdateFaceDirection();
                     }
                 }
             }

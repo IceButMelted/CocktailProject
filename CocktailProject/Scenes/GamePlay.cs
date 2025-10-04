@@ -56,6 +56,7 @@ namespace CocktailProject.Scenes
         TextureAtlas Recipes_Atlas;
         TextureAtlas ArtAfterServe_Atlas;
         TextureAtlas atlas;
+        TextureAtlas Atlas_BGNPC;
         #endregion
 
         #region SoundVariable
@@ -265,7 +266,7 @@ namespace CocktailProject.Scenes
         #region BG NPC
         public Image Img_BG_NPC; public Texture2D moving_BG_NPC;
         private List<BG_NPC> movingnpcs = new List<BG_NPC>();
-        private int npcCount = 5; //NPC Counts
+        private int npcCount = 8; //NPC Counts
         #endregion
 
         public override void Initialize()
@@ -320,6 +321,7 @@ namespace CocktailProject.Scenes
         {
             atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
+            Atlas_BGNPC = TextureAtlas.FromFile(Content, "images/Background/BG_NPC_Define.xml");
 
             //Load Ui image
             T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
@@ -948,6 +950,12 @@ namespace CocktailProject.Scenes
 
             #endregion
 
+            #region BGNPC Image Atlas
+
+            Img_BG_NPC = new Image(Atlas_BGNPC.GetRegion("FaceRight").GetTexture2D(), new Vector2(300, 650), anchor: Anchor.CenterLeft);
+            Img_BG_NPC.SourceRectangle = Atlas_BGNPC.GetRegion("FaceRight").SourceRectangle;
+            #endregion
+
             #region Art After Serve Panel
             ArtAfterServe_Atlas = TextureAtlas.FromFile(Content, "images/ArtAfterServe/ArtAfterServe_Define.xml");
 
@@ -986,16 +994,23 @@ namespace CocktailProject.Scenes
 
             #region Image BGNPC
             //Create BGNPC
-            moving_BG_NPC = Content.Load<Texture2D>("images/Background/BG_NPC");
+            Atlas_BGNPC = TextureAtlas.FromFile(Content, "images/Background/BG_NPC_Define.xml");
             movingnpcs.Clear();
+
+            // Get both regions once
+            var regionLeft = Atlas_BGNPC.GetRegion("FaceLeft");
+            var regionRight = Atlas_BGNPC.GetRegion("FaceRight");
+
             for (int i = 0; i < npcCount; i++)
             {
-                Image BGNPC = new Image(moving_BG_NPC, new Vector2(450, 650));
+                Image BGNPC = new Image(regionRight.GetTexture2D(), new Vector2(300, 650));
+                BGNPC.SourceRectangle = regionRight.SourceRectangle;
                 BGNPC.Scale = 0.25f;
                 BGNPC.Anchor = Anchor.TopLeft;
-                //UserInterface.Active.AddEntity(BGNPC);
                 P_MainGame.AddChild(BGNPC);
-                movingnpcs.Add(new BG_NPC(BGNPC, new Rectangle(0, 0, 450, 650), BG_NPC.MovementMode.PingPong));
+
+                float initialDelay = (float)(new Random().NextDouble() * 5.0); // Random delay for NPC spawning
+                movingnpcs.Add(new BG_NPC(BGNPC, new Rectangle(0, 0, 300, 650), BG_NPC.MovementMode.PingPong, regionLeft.SourceRectangle, regionRight.SourceRectangle));
             }
             #endregion
 
