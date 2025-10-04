@@ -124,19 +124,19 @@ namespace CocktailProject.Scenes
         private List<Image> AllBars;
         private readonly Dictionary<Enum_Alcohol, Color> AlcoholColors = new Dictionary<Enum_Alcohol, Color>()
         {
-            { Enum_Alcohol.Vodka, Color.LightBlue },
-            { Enum_Alcohol.Gin, Color.MediumPurple },
-            { Enum_Alcohol.Triplesec, Color.Orange },
-            { Enum_Alcohol.Vermouth, Color.Goldenrod }
+            { Enum_Alcohol.Vodka, Color.OrangeRed },
+            { Enum_Alcohol.Gin, Color.OrangeRed },
+            { Enum_Alcohol.Triplesec, Color.OrangeRed },
+            { Enum_Alcohol.Vermouth, Color.OrangeRed }
         };
         private readonly Dictionary<Enum_Mixer, Color> MixerColors = new Dictionary<Enum_Mixer, Color>()
         {
-            { Enum_Mixer.CanberryJuice, Color.Red },
-            { Enum_Mixer.GrapefruitJuice, Color.Pink },
-            { Enum_Mixer.LemonJuice, Color.Yellow },
-            { Enum_Mixer.Soda, Color.LightGray },
-            { Enum_Mixer.Syrup, Color.Brown },
-            { Enum_Mixer.PepperMint, Color.Green }
+            { Enum_Mixer.CanberryJuice, Color.Olive },
+            { Enum_Mixer.GrapefruitJuice, Color.Olive },
+            { Enum_Mixer.LemonJuice, Color.Olive },
+            { Enum_Mixer.Soda, Color.Olive },
+            { Enum_Mixer.Syrup, Color.Olive },
+            { Enum_Mixer.PepperMint, Color.Olive }
         };
         #endregion
 
@@ -250,7 +250,7 @@ namespace CocktailProject.Scenes
 
         public Image Img_Customer;
 
-        public RichParagraph RP_CutomerName;
+        public RichParagraph RP_CustomerName;
         public FullImagePanel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 
@@ -277,7 +277,7 @@ namespace CocktailProject.Scenes
             //Add Code Here
 
             RandomTargetCocktail();
-            _NPC_Name = RandomNPC();
+            //_NPC_Name = RandomNPC();
             InitNpc();
             ShuffleCustomers();
 
@@ -301,6 +301,8 @@ namespace CocktailProject.Scenes
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = true;
+            RichParagraphStyleInstruction.AddInstruction("MENU_TEXT", new RichParagraphStyleInstruction(fillColor: new Color(192, 130, 30)));
+
 
             //Add Code Here
 
@@ -341,21 +343,21 @@ namespace CocktailProject.Scenes
 
             #region Load Image Button Alcohol
             //load image button alcohol
-            T_BTN_Alcohol_Gin_Default = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160");
-            T_BTN_Alcohol_Gin_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160_Hover");
-            T_BTN_Alcohol_Gin_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x160_Pressed");
+            T_BTN_Alcohol_Gin_Default = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175");
+            T_BTN_Alcohol_Gin_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Hover");
+            T_BTN_Alcohol_Gin_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Pressed");
 
-            T_BTN_Alcohol_Vodka_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160");
-            T_BTN_Alcohol_Vodka_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160_Hover");
-            T_BTN_Alcohol_Vodka_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x160_Pressed");
+            T_BTN_Alcohol_Vodka_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175");
+            T_BTN_Alcohol_Vodka_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Hover");
+            T_BTN_Alcohol_Vodka_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Pressed");
 
-            T_BTN_Alcohol_Triplesec_Default = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160");
-            T_BTN_Alcohol_Triplesec_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160_Hover");
-            T_BTN_Alcohol_Triplesec_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x160_Pressed");
+            T_BTN_Alcohol_Triplesec_Default = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175");
+            T_BTN_Alcohol_Triplesec_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Hover");
+            T_BTN_Alcohol_Triplesec_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Pressed");
 
-            T_BTN_Alcohol_Vermouth_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160");
-            T_BTN_Alcohol_Vermouth_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160_Hover");
-            T_BTN_Alcohol_Vermouth_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x160_Pressed");
+            T_BTN_Alcohol_Vermouth_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175");
+            T_BTN_Alcohol_Vermouth_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Hover");
+            T_BTN_Alcohol_Vermouth_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Pressed");
             #endregion
 
             #region Load Image Button Mixer
@@ -422,7 +424,7 @@ namespace CocktailProject.Scenes
             //Add Button Alcohol to P_Alcohol
             #region BTN Alcohol UI
 
-            BTN_Alcohol_Vodka = new Button("Vodka", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Alcohol_Vodka = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Vodka.Padding = Vector2.Zero;
             BTN_Alcohol_Vodka.Offset = new Vector2((50 * 1), 38);
             BTN_Alcohol_Vodka.SetCustomSkin(T_BTN_Alcohol_Vodka_Default, T_BTN_Alcohol_Vodka_Hover, T_BTN_Alcohol_Vodka_Pressed);
@@ -439,7 +441,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Alcohol_Gin = new Button("Gin", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Alcohol_Gin = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Gin.Padding = Vector2.Zero;
             BTN_Alcohol_Gin.Offset = new Vector2(160 + (50 * 2), 38);
             BTN_Alcohol_Gin.SetCustomSkin(T_BTN_Alcohol_Gin_Default, T_BTN_Alcohol_Gin_Hover, T_BTN_Alcohol_Gin_Pressed);
@@ -456,7 +458,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Alcohol_Triplesec = new Button("Triplesec", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Alcohol_Triplesec = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Triplesec.Padding = Vector2.Zero;
             BTN_Alcohol_Triplesec.Offset = new Vector2(50, 257);
             BTN_Alcohol_Triplesec.SetCustomSkin(T_BTN_Alcohol_Triplesec_Default, T_BTN_Alcohol_Triplesec_Hover, T_BTN_Alcohol_Triplesec_Pressed);
@@ -473,7 +475,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Alcohol_Vermouth = new Button("Vermouth", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Alcohol_Vermouth = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Vermouth.Padding = Vector2.Zero;
             BTN_Alcohol_Vermouth.Offset = new Vector2(160 + (50 * 2), 257);
             BTN_Alcohol_Vermouth.SetCustomSkin(T_BTN_Alcohol_Vermouth_Default, T_BTN_Alcohol_Vermouth_Hover, T_BTN_Alcohol_Vermouth_Pressed);
@@ -518,7 +520,7 @@ namespace CocktailProject.Scenes
 
             #region BTN Mixer UI
 
-            BTN_Mixer_CanberryJuice = new Button("Canberry Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_CanberryJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_CanberryJuice.Padding = Vector2.Zero;
             BTN_Mixer_CanberryJuice.Offset = new Vector2((50 * 1) + (160 * 0), 38);
             BTN_Mixer_CanberryJuice.SetCustomSkin(T_BTN_Mixer_CanberryJuice_Default, T_BTN_Mixer_CanberryJuice_Hover, T_BTN_Mixer_CanberryJuice_Pressed);
@@ -535,7 +537,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Mixer_GrapefruitJuice = new Button("Grapefruit Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_GrapefruitJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_GrapefruitJuice.Padding = Vector2.Zero;
             BTN_Mixer_GrapefruitJuice.Offset = new Vector2((50 * 2) + (160 * 1), 38);
             BTN_Mixer_GrapefruitJuice.SetCustomSkin(T_BTN_Mixer_GrapefruitJuice_Default, T_BTN_Mixer_GrapefruitJuice_Hover, T_BTN_Mixer_GrapefruitJuice_Pressed);
@@ -552,7 +554,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Mixer_LemonJuice = new Button("Lemon Juice", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_LemonJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_LemonJuice.Padding = Vector2.Zero;
             BTN_Mixer_LemonJuice.Offset = new Vector2((50 * 3) + (160 * 2), 38);
             BTN_Mixer_LemonJuice.SetCustomSkin(T_BTN_Mixer_LemonJuice_Default, T_BTN_Mixer_LemonJuice_Hover, T_BTN_Mixer_LemonJuice_Pressed);
@@ -570,7 +572,7 @@ namespace CocktailProject.Scenes
             };
 
             //new row
-            BTN_Mixer_Soda = new Button("Soda", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_Soda = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_Soda.Padding = Vector2.Zero;
             BTN_Mixer_Soda.Offset = new Vector2((50 * 1) + (160 * 0), 257);
             BTN_Mixer_Soda.SetCustomSkin(T_BTN_Mixer_Soda_Default, T_BTN_Mixer_Soda_Hover, T_BTN_Mixer_Soda_Pressed);
@@ -587,7 +589,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Mixer_Syrup = new Button("Syrup", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_Syrup = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_Syrup.Padding = Vector2.Zero;
             BTN_Mixer_Syrup.Offset = new Vector2((50 * 2) + (160 * 1), 257);
             BTN_Mixer_Syrup.SetCustomSkin(T_BTN_Mixer_Syrup_Default, T_BTN_Mixer_Syrup_Hover, T_BTN_Mixer_Syrup_Pressed);
@@ -604,7 +606,7 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
             };
 
-            BTN_Mixer_PepperMint = new Button("Pepper Mint", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 160));
+            BTN_Mixer_PepperMint = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Mixer_PepperMint.Padding = Vector2.Zero;
             BTN_Mixer_PepperMint.Offset = new Vector2((50 * 3) + (160 * 2), 257);
             BTN_Mixer_PepperMint.SetCustomSkin(T_BTN_Mixer_PepperMint_Default, T_BTN_Mixer_PepperMint_Hover, T_BTN_Mixer_PepperMint_Pressed);
@@ -700,7 +702,7 @@ namespace CocktailProject.Scenes
 
             BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100, 80));
             BTN_Reset_OnTable.Padding = Vector2.Zero;
-            BTN_Reset_OnTable.Offset = new Vector2(-100, 120);
+            BTN_Reset_OnTable.Offset = new Vector2(-100, 150);
             BTN_Reset_OnTable.ButtonParagraph.OutlineWidth = 0;
             BTN_Reset_OnTable.OnMouseDown = (Entity e) =>
             {
@@ -725,7 +727,7 @@ namespace CocktailProject.Scenes
             };
 
             Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(80, 140), anchor: Anchor.Center);
-            Img_CocktailBottle.Offset = new Vector2(-100, -20);
+            Img_CocktailBottle.Offset = new Vector2(-100, 25);
 
             //visual cocktail
             InitMakingVisualCocktail();
@@ -894,23 +896,26 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Oreder Panel
-            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.CenterLeft);
+            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.TopLeft);
             P_OrderPanel.SetCustomSkin(T_DialogBG_Panel);
             P_OrderPanel.Padding = Vector2.Zero;
-            P_OrderPanel.Offset = new Vector2(400, 225);
+            P_OrderPanel.Offset = new Vector2(375, 620);
 
-            RP_CutomerName = new RichParagraph(Customers[numbercustomer]._Name, anchor: Anchor.TopCenter, size: new Vector2(350, 50));
-            RP_CutomerName.OutlineWidth = 0;
-            RP_CutomerName.OutlineOpacity = 0;
-            RP_CutomerName.FontOverride = BoldFont;
-            RP_CutomerName.AlignToCenter = true;
+            RP_CustomerName = new RichParagraph(Customers[numbercustomer]._Name, anchor: Anchor.TopCenter, size: new Vector2(300, 50));
+            RP_CustomerName.OutlineWidth = 0;
+            RP_CustomerName.Offset = new Vector2(-5, 20);
+            RP_CustomerName.OutlineOpacity = 0;
+            RP_CustomerName.FontOverride = BoldFont;
+            RP_CustomerName.FillColor = new Color(218, 180, 120);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(350, 100));
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
+            RP_ConversationCustomer.Offset = new Vector2(0, 70);
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
             RP_ConversationCustomer.FontOverride = RegularFont;
             RP_ConversationCustomer.AlignToCenter = true;
-            
+            RP_ConversationCustomer.FillColor = new Color(235, 228, 202);
+
 
             #endregion
 
@@ -949,15 +954,15 @@ namespace CocktailProject.Scenes
             #region Add Child Order Panel
 
             P_OrderPanel.AddChild(RP_ConversationCustomer);
-            P_OrderPanel.AddChild(RP_CutomerName);
+            P_OrderPanel.AddChild(RP_CustomerName);
 
             #endregion
 
             #region Customer Image
 
-            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
+            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.TopLeft);
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-            Img_Customer.Offset = new Vector2(450, -150);
+            Img_Customer.Offset = new Vector2(450, 27);
 
             #endregion
 
@@ -1053,7 +1058,7 @@ namespace CocktailProject.Scenes
 
             InitBookRecipes();
             //UserInterface.Active.AddEntity(P_BGBookRecipes);
-            P_MainGame.AddChild(P_BGBookRecipes);
+            P_MainGame.AddChild(Img_BookRecipes);
 
             
 
@@ -1123,7 +1128,6 @@ namespace CocktailProject.Scenes
             base.Update(gameTime);
             UserInterface.Active.Update(gameTime);
         }
-
         public override void Draw(GameTime gameTime)
         {
             Core.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -1302,7 +1306,7 @@ namespace CocktailProject.Scenes
                             // No more before-order text, move into ordering
                             Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
 
-                        AnimationText = new TaggedTextRevealer("Please make me a {{YELLOW}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
+                        AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
                         AnimationText.Start();
 
                             canSkipConversation = true;
@@ -1379,6 +1383,7 @@ namespace CocktailProject.Scenes
                             // No after-serve, go directly to chit-chat
                             currentPhase = ConversationPhase.SmallTalkAfterOrder;
                             cocktaillResualt = Enum_CocktaillResualt.None;
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                             haveDoneOrder = false;
                             
                         }
@@ -1411,15 +1416,15 @@ namespace CocktailProject.Scenes
 
                                 numbercustomer++;
 
-                                if (numbercustomer > 5)
+                                if (numbercustomer > 4)
                                 {
                                     Core.ChangeScene(new Scenes.Thanks());
-                                    return;
+                                    break;
                                 }
 
 
-                                RP_CutomerName.Text = Customers[numbercustomer]._Name;
-                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                                RP_CustomerName.Text = Customers[numbercustomer]._Name;
+                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                                 AnimationText = new TaggedTextRevealer("", 0.05);
                                 RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
                             }
@@ -1752,7 +1757,7 @@ namespace CocktailProject.Scenes
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
             Img_BookRecipes.AddChild(BTN_CloseBookRecipes);
-            UserInterface.Active.AddEntity(Img_BookRecipes);
+            //UserInterface.Active.AddEntity(Img_BookRecipes);
             //P_BGBookRecipes.AddChild(Img_BookRecipes);
 
             EnableBookRecipes(false);
@@ -1789,15 +1794,15 @@ namespace CocktailProject.Scenes
         }
         public void EnableBookRecipes(bool _Enable)
         {
-            P_BGBookRecipes.Visible = _Enable;
-            P_BGBookRecipes.Enabled = _Enable;
+            Img_BookRecipes.Visible = _Enable;
+            Img_BookRecipes.Enabled = _Enable;
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
         public void InitMakingVisualCocktail() {
             P_MakingCocktailVisual = new Panel(new Vector2(300, 200), PanelSkin.None, Anchor.TopCenter);
             P_MakingCocktailVisual.Padding = new Vector2(0, 0);
-            P_MakingCocktailVisual.Offset = new Vector2(-100, -75);
+            P_MakingCocktailVisual.Offset = new Vector2(-100, -25);
 
             //load and init image
             Img_Visual01 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar01"));
