@@ -45,10 +45,12 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region NPC
+        protected byte Day = 1;
         protected int numbercustomer = 0;
         protected string _NPC_Name;
         protected string _tmp_NPC_Name;
         protected List<BaseCharacter> Customers = new List<BaseCharacter>();
+        
         #endregion  
 
         #region Image Sprite Atlas
@@ -246,6 +248,7 @@ namespace CocktailProject.Scenes
         public Image Img_Customer;
 
         public Panel P_OrderPanel;
+        public RichParagraph RP_CutomerName;
         public RichParagraph RP_ConversationCustomer;
 
 #if DEBUG
@@ -273,6 +276,7 @@ namespace CocktailProject.Scenes
             RandomTargetCocktail();
             _NPC_Name = RandomNPC();
             InitNpc();
+            ShuffleCustomers();
 
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
@@ -889,6 +893,12 @@ namespace CocktailProject.Scenes
             P_OrderPanel.Padding = Vector2.Zero;
             P_OrderPanel.Offset = new Vector2(400, 225);
 
+            RP_CutomerName = new RichParagraph(Customers[numbercustomer]._Name, anchor: Anchor.TopCenter, size: new Vector2(350, 50));
+            RP_CutomerName.OutlineWidth = 0;
+            RP_CutomerName.OutlineOpacity = 0;
+            RP_CutomerName.FontOverride = BoldFont;
+            RP_CutomerName.AlignToCenter = true;
+
             RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(350, 100));
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
@@ -933,6 +943,7 @@ namespace CocktailProject.Scenes
             #region Add Child Order Panel
 
             P_OrderPanel.AddChild(RP_ConversationCustomer);
+            P_OrderPanel.AddChild(RP_CutomerName);
 
             #endregion
 
@@ -1084,7 +1095,7 @@ namespace CocktailProject.Scenes
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
 #endif
 
-            if (numbercustomer > 6)
+            if (numbercustomer > 5)
             {
                 Core.ChangeScene(new Scenes.Thanks());
             }
@@ -1258,7 +1269,7 @@ namespace CocktailProject.Scenes
                 {
                     case ConversationPhase.SmallTalkBeforeOrder:
                         // Get line from NPC (Day = 1 here, but you can make it dynamic)
-                        string beforeOrderLine = Customers[0].GetConversationBeforeOrder(1);
+                        string beforeOrderLine = Customers[numbercustomer].GetConversationBeforeOrder(1);
 
                         if (beforeOrderLine != null)
                         {
@@ -1294,7 +1305,7 @@ namespace CocktailProject.Scenes
                             cocktaillResualt = CalculateAccurateCocktail();
 
                             // Get the after-serve line
-                            string afterServe1 = Customers[0].GetConversationAfterServe(cocktaillResualt);
+                            string afterServe1 = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
 
                             if (afterServe1 != null)
                             {
@@ -1302,13 +1313,13 @@ namespace CocktailProject.Scenes
                                 switch (cocktaillResualt)
                                 {
                                     case Enum_CocktaillResualt.Success:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
                                         break;
                                     case Enum_CocktaillResualt.Aceptable:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                                         break;
                                     case Enum_CocktaillResualt.Fail:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
+                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
                                         break;
                                 }
 
@@ -1334,7 +1345,7 @@ namespace CocktailProject.Scenes
                             cocktaillResualt = CalculateAccurateCocktail();
 
                         // Get the after-serve line
-                        string afterServe = Customers[0].GetConversationAfterServe(cocktaillResualt);
+                        string afterServe = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
 
                         if (afterServe != null)
                         {
@@ -1357,7 +1368,7 @@ namespace CocktailProject.Scenes
 
                     case ConversationPhase.SmallTalkAfterOrder:
                         // Pull chit chat
-                        string chitChatLine = Customers[0].GetConversationChitChat(1);
+                        string chitChatLine = Customers[numbercustomer].GetConversationChitChat(1);
 
                         if (chitChatLine != null)
                         {
@@ -1368,7 +1379,7 @@ namespace CocktailProject.Scenes
                         }
                         else
                         {
-                            Customers[0].InceaseNumberOfVisitTodya();
+                            Customers[numbercustomer].InceaseNumberOfVisitTodya();
                             if (AnimationText.IsFinished())
                             {
                                 // If no chit-chat left, cycle back
@@ -1379,9 +1390,16 @@ namespace CocktailProject.Scenes
                                 RandomTargetCocktail();
                                 ActiveMixerAndAlcholButton(false);
 
-                                _NPC_Name = RandomNPC();
                                 numbercustomer++;
 
+                                if (numbercustomer > 5)
+                                {
+                                    Core.ChangeScene(new Scenes.Thanks());
+                                    return;
+                                }
+
+
+                                RP_CutomerName.Text = Customers[numbercustomer]._Name;
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
                                 AnimationText = new TaggedTextRevealer("", 0.05);
                                 RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
@@ -1715,7 +1733,8 @@ namespace CocktailProject.Scenes
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
             Img_BookRecipes.AddChild(BTN_CloseBookRecipes);
-            P_BGBookRecipes.AddChild(Img_BookRecipes);
+            UserInterface.Active.AddEntity(Img_BookRecipes);
+            //P_BGBookRecipes.AddChild(Img_BookRecipes);
 
             EnableBookRecipes(false);
 
@@ -1987,7 +2006,6 @@ namespace CocktailProject.Scenes
             //SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
             //SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
         }
-
         public void InitBGM() { 
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
             Core.Audio.PlaySong(BGM_themeSong01,true);
@@ -2000,6 +2018,22 @@ namespace CocktailProject.Scenes
             BaseCharacter Walter = new BaseCharacter("Walter");
             Walter.AddDayConversationFromJson("Content/Conversation/Walter_Conversation.json");
             Walter.SetID("NPC_01");
+
+            BaseCharacter Owen = new BaseCharacter("Owen");
+            Owen.AddDayConversationFromJson("Content/Conversation/Owen_Conversation.json");
+            Owen.SetID("NPC_02");
+
+            BaseCharacter Freya = new BaseCharacter("Freya");
+            Freya.AddDayConversationFromJson("Content/Conversation/Freya_Conversation.json");
+            Freya.SetID("NPC_03");
+
+            BaseCharacter Isla = new BaseCharacter("Isla");
+            Isla.AddDayConversationFromJson("Content/Conversation/Isla_Conversation.json");
+            Isla.SetID("NPC_04");
+
+            BaseCharacter Cole = new BaseCharacter("Cole");
+            Cole.AddDayConversationFromJson("Content/Conversation/Cole_Conversation.json");
+            Cole.SetID("NPC_05");
 
             //Debug.WriteLine("-------- info ------");
             //Debug.WriteLine("Character Name: " + Walter._Name);
@@ -2025,6 +2059,22 @@ namespace CocktailProject.Scenes
             //Debug.WriteLine(Walter.GetConversationChitChat(1));
 
             Customers.Add(Walter);
+            Customers.Add(Owen);
+            Customers.Add(Freya);
+            Customers.Add(Isla);
+            Customers.Add(Cole);
+        }
+        public void ShuffleCustomers()
+        {
+            Random rng = new Random();
+            int n = Customers.Count;
+            while (n > 1)
+            {
+                int k = rng.Next(n--);
+                var temp = Customers[n];
+                Customers[n] = Customers[k];
+                Customers[k] = temp;
+            }
         }
     }
 
