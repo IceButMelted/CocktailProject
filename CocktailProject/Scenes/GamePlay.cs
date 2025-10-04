@@ -700,7 +700,7 @@ namespace CocktailProject.Scenes
 
             BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100, 80));
             BTN_Reset_OnTable.Padding = Vector2.Zero;
-            BTN_Reset_OnTable.Offset = new Vector2(-100, 120);
+            BTN_Reset_OnTable.Offset = new Vector2(-100, 150);
             BTN_Reset_OnTable.ButtonParagraph.OutlineWidth = 0;
             BTN_Reset_OnTable.OnMouseDown = (Entity e) =>
             {
@@ -725,7 +725,7 @@ namespace CocktailProject.Scenes
             };
 
             Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(80, 140), anchor: Anchor.Center);
-            Img_CocktailBottle.Offset = new Vector2(-100, -20);
+            Img_CocktailBottle.Offset = new Vector2(-100, 25);
 
             //visual cocktail
             InitMakingVisualCocktail();
@@ -894,18 +894,20 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Oreder Panel
-            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.CenterLeft);
+            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.TopLeft);
             P_OrderPanel.SetCustomSkin(T_DialogBG_Panel);
             P_OrderPanel.Padding = Vector2.Zero;
-            P_OrderPanel.Offset = new Vector2(400, 225);
+            P_OrderPanel.Offset = new Vector2(375, 620);
 
-            RP_CutomerName = new RichParagraph(Customers[numbercustomer]._Name, anchor: Anchor.TopCenter, size: new Vector2(350, 50));
+            RP_CutomerName = new RichParagraph(Customers[numbercustomer]._Name, anchor: Anchor.TopCenter, size: new Vector2(500, 50));
             RP_CutomerName.OutlineWidth = 0;
+            RP_CutomerName.Offset = new Vector2(0, 20);
             RP_CutomerName.OutlineOpacity = 0;
             RP_CutomerName.FontOverride = BoldFont;
             RP_CutomerName.AlignToCenter = true;
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(350, 100));
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
+            RP_ConversationCustomer.Offset = new Vector2(0, 70);
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
             RP_ConversationCustomer.FontOverride = RegularFont;
@@ -955,9 +957,9 @@ namespace CocktailProject.Scenes
 
             #region Customer Image
 
-            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
+            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.TopLeft);
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-            Img_Customer.Offset = new Vector2(450, -150);
+            Img_Customer.Offset = new Vector2(450, 27);
 
             #endregion
 
@@ -1053,7 +1055,7 @@ namespace CocktailProject.Scenes
 
             InitBookRecipes();
             //UserInterface.Active.AddEntity(P_BGBookRecipes);
-            P_MainGame.AddChild(P_BGBookRecipes);
+            P_MainGame.AddChild(Img_BookRecipes);
 
             
 
@@ -1752,7 +1754,7 @@ namespace CocktailProject.Scenes
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
             Img_BookRecipes.AddChild(BTN_CloseBookRecipes);
-            UserInterface.Active.AddEntity(Img_BookRecipes);
+            //UserInterface.Active.AddEntity(Img_BookRecipes);
             //P_BGBookRecipes.AddChild(Img_BookRecipes);
 
             EnableBookRecipes(false);
@@ -1789,15 +1791,15 @@ namespace CocktailProject.Scenes
         }
         public void EnableBookRecipes(bool _Enable)
         {
-            P_BGBookRecipes.Visible = _Enable;
-            P_BGBookRecipes.Enabled = _Enable;
+            Img_BookRecipes.Visible = _Enable;
+            Img_BookRecipes.Enabled = _Enable;
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
         public void InitMakingVisualCocktail() {
             P_MakingCocktailVisual = new Panel(new Vector2(300, 200), PanelSkin.None, Anchor.TopCenter);
             P_MakingCocktailVisual.Padding = new Vector2(0, 0);
-            P_MakingCocktailVisual.Offset = new Vector2(-100, -75);
+            P_MakingCocktailVisual.Offset = new Vector2(-100, -25);
 
             //load and init image
             Img_Visual01 = new Image(Content.Load<Texture2D>("images/UI/Making_Cocktail_Visual/Bar01"));
