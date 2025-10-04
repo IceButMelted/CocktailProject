@@ -5,15 +5,8 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Hi bartender, it's been a long day.",
-            "How have you been? Oh sorry, you can call me Cole."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "We meet again after just a minute, hahaha.",
-            "You know that girl? She's very popular in this town."
+            ".....................",
+            "So you're the new one around here"
           ],
           "CurrentIndex": 0
         }
@@ -21,17 +14,8 @@
       "ChitChat": [
         {
           "Conversation": [
-            "HAHAHAHAHA.... I love how you decorated your bar.",
-            "So you're new here, right? Don't worry, this town always welcomes newcomers.",
-            "You'll be fine, people here are very kind."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "My man, you're handsome, aren't you?",
-            "Arhhh, I heard that girl has 3 boyfriends.",
-            "You know what, she's a doctor."
+            "By the way i'm officer Cole.",
+            "Any trouble, you know where the station is."
           ],
           "CurrentIndex": 0
         }
@@ -41,15 +25,8 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Oh hey, you're back again today.",
-            "You must really like this place, huh?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "Second day in town already?",
-            "Let me guess—you've met some interesting people."
+            "Evening.",
+            "What are you staring at?"
           ],
           "CurrentIndex": 0
         }
@@ -57,15 +34,8 @@
       "ChitChat": [
         {
           "Conversation": [
-            "So… did you sleep well last night?",
-            "This town gets quiet after dark, doesn't it?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "People here talk a lot, you know.",
-            "Sometimes it's fun just listening to their stories."
+            "Decent place. Quiet. I like that.",
+            "Alright. I'm out. Might be back tomorrow night."
           ],
           "CurrentIndex": 0
         }
@@ -75,22 +45,19 @@
   "AfterServe": {
     "Success": {
       "Conversation": [
-        "Wow, this cocktail is amazing!",
-        "You really know what you're doing."
+        "Just what I needed. Thank."
       ],
       "CurrentIndex": 0
     },
     "Aceptable": {
       "Conversation": [
-        "Hmm, not bad...",
-        "I've had better, but this works."
+        "Not quite right but I'll manage."
       ],
       "CurrentIndex": 0
     },
     "Fail": {
       "Conversation": [
-        "Ugh, what is this?",
-        "Sorry, I can't drink that."
+        "................"
       ],
       "CurrentIndex": 0
     }

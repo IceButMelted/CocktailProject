@@ -323,7 +323,7 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Alcohol/Alcohol_Pressed_Atlas.png
 
-#begin images/UI/Alcohol/Gin_160x160_Hover.png
+#begin images/UI/Alcohol/Gin_160x175_Hover.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -333,9 +333,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Gin_160x160_Hover.png;images/UI/Alcohol/Gin_160x160_Hover
+/build:images/UI/Alcohol/Gin_160x175_Hover.png;images/UI/Alcohol/Gin_160x175_Hover
 
-#begin images/UI/Alcohol/Gin_160x160_Pressed.png
+#begin images/UI/Alcohol/Gin_160x175_Pressed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -345,9 +345,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Gin_160x160_Pressed.png;images/UI/Alcohol/Gin_160x160_Pressed
+/build:images/UI/Alcohol/Gin_160x175_Pressed.png;images/UI/Alcohol/Gin_160x175_Pressed
 
-#begin images/UI/Alcohol/Gin_160x160.png
+#begin images/UI/Alcohol/Gin_160x175.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -357,7 +357,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Gin_160x160.png;images/UI/Alcohol/Gin_160x160
+/build:images/UI/Alcohol/Gin_160x175.png;images/UI/Alcohol/Gin_160x175
 
 #begin images/UI/Alcohol/Gin_320x320.png
 /importer:TextureImporter
@@ -371,7 +371,7 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Alcohol/Gin_320x320.png;images/UI/Alcohol/Gin_320x320
 
-#begin images/UI/Alcohol/TripleSec_160x160_Hover.png
+#begin images/UI/Alcohol/TripleSec_160x175_Hover.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -381,9 +381,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/TripleSec_160x160_Hover.png;images/UI/Alcohol/TripleSec_160x160_Hover
+/build:images/UI/Alcohol/TripleSec_160x175_Hover.png;images/UI/Alcohol/TripleSec_160x175_Hover
 
-#begin images/UI/Alcohol/TripleSec_160x160_Pressed.png
+#begin images/UI/Alcohol/TripleSec_160x175_Pressed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -393,9 +393,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/TripleSec_160x160_Pressed.png;images/UI/Alcohol/TripleSec_160x160_Pressed
+/build:images/UI/Alcohol/TripleSec_160x175_Pressed.png;images/UI/Alcohol/TripleSec_160x175_Pressed
 
-#begin images/UI/Alcohol/TripleSec_160x160.png
+#begin images/UI/Alcohol/TripleSec_160x175.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -405,7 +405,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/TripleSec_160x160.png;images/UI/Alcohol/TripleSec_160x160
+/build:images/UI/Alcohol/TripleSec_160x175.png;images/UI/Alcohol/TripleSec_160x175
 
 #begin images/UI/Alcohol/TripleSec_320x320.png
 /importer:TextureImporter
@@ -419,7 +419,7 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Alcohol/TripleSec_320x320.png;images/UI/Alcohol/TripleSec_320x320
 
-#begin images/UI/Alcohol/Vermouth_160x160_Hover.png
+#begin images/UI/Alcohol/Vermouth_160x175_Hover.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -429,9 +429,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vermouth_160x160_Hover.png;images/UI/Alcohol/Vermouth_160x160_Hover
+/build:images/UI/Alcohol/Vermouth_160x175_Hover.png;images/UI/Alcohol/Vermouth_160x175_Hover
 
-#begin images/UI/Alcohol/Vermouth_160x160_Pressed.png
+#begin images/UI/Alcohol/Vermouth_160x175_Pressed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -441,9 +441,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vermouth_160x160_Pressed.png;images/UI/Alcohol/Vermouth_160x160_Pressed
+/build:images/UI/Alcohol/Vermouth_160x175_Pressed.png;images/UI/Alcohol/Vermouth_160x175_Pressed
 
-#begin images/UI/Alcohol/Vermouth_160x160.png
+#begin images/UI/Alcohol/Vermouth_160x175.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -453,7 +453,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vermouth_160x160.png;images/UI/Alcohol/Vermouth_160x160
+/build:images/UI/Alcohol/Vermouth_160x175.png;images/UI/Alcohol/Vermouth_160x175
 
 #begin images/UI/Alcohol/Vermouth_320x320.png
 /importer:TextureImporter
@@ -467,7 +467,7 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Alcohol/Vermouth_320x320.png;images/UI/Alcohol/Vermouth_320x320
 
-#begin images/UI/Alcohol/Vodka_160x160_Hover.png
+#begin images/UI/Alcohol/Vodka_160x175_Hover.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -477,9 +477,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vodka_160x160_Hover.png;images/UI/Alcohol/Vodka_160x160_Hover
+/build:images/UI/Alcohol/Vodka_160x175_Hover.png;images/UI/Alcohol/Vodka_160x175_Hover
 
-#begin images/UI/Alcohol/Vodka_160x160_Pressed.png
+#begin images/UI/Alcohol/Vodka_160x175_Pressed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -489,9 +489,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vodka_160x160_Pressed.png;images/UI/Alcohol/Vodka_160x160_Pressed
+/build:images/UI/Alcohol/Vodka_160x175_Pressed.png;images/UI/Alcohol/Vodka_160x175_Pressed
 
-#begin images/UI/Alcohol/Vodka_160x160.png
+#begin images/UI/Alcohol/Vodka_160x175.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -501,7 +501,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/UI/Alcohol/Vodka_160x160.png;images/UI/Alcohol/Vodka_160x160
+/build:images/UI/Alcohol/Vodka_160x175.png;images/UI/Alcohol/Vodka_160x175
 
 #begin images/UI/Alcohol/Vodka_320x320.png
 /importer:TextureImporter

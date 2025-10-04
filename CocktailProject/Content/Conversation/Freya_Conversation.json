@@ -5,15 +5,9 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Hi bartender, it's been a long day.",
-            "How have you been? Oh sorry, you can call me Freya."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "We meet again after just a minute, hahaha.",
-            "You know that girl? She's very popular in this town."
+            "A new bar with a new face. How refreshing.",
+            "Let's see if you can actually deliver something worth my time.",
+            "I'm Freya. I run the boutique that actually matters in this town"
           ],
           "CurrentIndex": 0
         }
@@ -21,17 +15,8 @@
       "ChitChat": [
         {
           "Conversation": [
-            "HAHAHAHAHA.... I love how you decorated your bar.",
-            "So you're new here, right? Don't worry, this town always welcomes newcomers.",
-            "You'll be fine, people here are very kind."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "My man, you're handsome, aren't you?",
-            "Arhhh, I heard that girl has 3 boyfriends.",
-            "You know what, she's a doctor."
+            "I'm curious about your story. Most people who end up here are running from something or gave up on bigger dreams.",
+            "Anyway, this has been... interesting. I might actually come back if you keep up the good work."
           ],
           "CurrentIndex": 0
         }
@@ -41,15 +26,9 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Oh hey, you're back again today.",
-            "You must really like this place, huh?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "Second day in town already?",
-            "Let me guess—you've met some interesting people."
+            "Here I am again - I suppose that says something about the potential of this place, doesn't it?",
+            "I had a fashion shoot yesterday, then spent today managing my store.",
+            "Most people can't handle juggling modeling and retail, but I'm not most people."
           ],
           "CurrentIndex": 0
         }
@@ -57,15 +36,9 @@
       "ChitChat": [
         {
           "Conversation": [
-            "So… did you sleep well last night?",
-            "This town gets quiet after dark, doesn't it?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "People here talk a lot, you know.",
-            "Sometimes it's fun just listening to their stories."
+            "You know, this place grows on you. There's something refreshing about being the trendsetter instead of following someone else's lead.",
+            "Despite what people think, this town is actually perfect for starting something new.",
+            "Well, this has been acceptable. I'll probably be back when I need a proper drink again."
           ],
           "CurrentIndex": 0
         }
@@ -75,22 +48,19 @@
   "AfterServe": {
     "Success": {
       "Conversation": [
-        "Wow, this cocktail is amazing!",
-        "You really know what you're doing."
+        "Now that's more like it. Finally, someone who understands what quality actually means."
       ],
       "CurrentIndex": 0
     },
     "Aceptable": {
       "Conversation": [
-        "Hmm, not bad...",
-        "I've had better, but this works."
+        "Not what I asked for but I can work with this."
       ],
       "CurrentIndex": 0
     },
     "Fail": {
       "Conversation": [
-        "Ugh, what is this?",
-        "Sorry, I can't drink that."
+        "Seriously? This is what passes for bartending here? I've had better drinks at gas stations."
       ],
       "CurrentIndex": 0
     }

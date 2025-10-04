@@ -5,15 +5,9 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Hi bartender, it's been a long day.",
-            "How have you been? Oh sorry, you can call me Owen."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "We meet again after just a minute, hahaha.",
-            "You know that girl? She's very popular in this town."
+            "Hey there! Owen from conservation. and I have to say, this place already has a better vibe than anywhere else around here!",
+            "Welcome to our little slice of paradise! You're going to love it here once you get settled in!",
+            "Alright enough chitchat. Let me see. hmmm."
           ],
           "CurrentIndex": 0
         }
@@ -21,17 +15,10 @@
       "ChitChat": [
         {
           "Conversation": [
-            "HAHAHAHAHA.... I love how you decorated your bar.",
-            "So you're new here, right? Don't worry, this town always welcomes newcomers.",
-            "You'll be fine, people here are very kind."
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "My man, you're handsome, aren't you?",
-            "Arhhh, I heard that girl has 3 boyfriends.",
-            "You know what, she's a doctor."
+            "You should come out to the nature center sometime! I'd love to show you around.",
+            "we've got some beautiful trails and amazing wildlife!",
+            "Well, I've taken up enough of your time tonight!",
+            "just remember, if you see any raccoons looking suspicious around here, Owen's your man!"
           ],
           "CurrentIndex": 0
         }
@@ -41,15 +28,10 @@
       "BeforeOrder": [
         {
           "Conversation": [
-            "Oh hey, you're back again today.",
-            "You must really like this place, huh?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "Second day in town already?",
-            "Let me guess—you've met some interesting people."
+            "Well hey there, my friend! Owen's back for another round of good conversation and even better drinks!",
+            "I swear these raccoons are getting smarter! Had to climb way up into an old barn loft today.",
+            "Just to catch one that figured out how to open feed container.",
+            "But anyway, that's what brought me straight to your door!"
           ],
           "CurrentIndex": 0
         }
@@ -57,15 +39,12 @@
       "ChitChat": [
         {
           "Conversation": [
-            "So… did you sleep well last night?",
-            "This town gets quiet after dark, doesn't it?"
-          ],
-          "CurrentIndex": 0
-        },
-        {
-          "Conversation": [
-            "People here talk a lot, you know.",
-            "Sometimes it's fun just listening to their stories."
+            "I bet you didn't just stumble into this job, did you?",
+            "I can tell this was something you really wanted to do - there's passion behind every drink you make",
+            "You know, I had this crazy dream once when I was younger about adventure but ah...",
+            "forget it! That was a lifetime ago, different person entirely!",
+            "Alright my friend, time for me to call it a night!",
+            "I'll be back real soon - this place is becoming a habit I don't want to break!"
           ],
           "CurrentIndex": 0
         }
@@ -75,22 +54,19 @@
   "AfterServe": {
     "Success": {
       "Conversation": [
-        "Wow, this cocktail is amazing!",
-        "You really know what you're doing."
+        "Now that's what I'm talking about! You really know your craft, don't you friend!"
       ],
       "CurrentIndex": 0
     },
     "Aceptable": {
       "Conversation": [
-        "Hmm, not bad...",
-        "I've had better, but this works."
+        "Different than what I asked for, but hey, I'm always up for trying new things."
       ],
       "CurrentIndex": 0
     },
     "Fail": {
       "Conversation": [
-        "Ugh, what is this?",
-        "Sorry, I can't drink that."
+        "That's a little rough, buddy! But don't worry about it - I've had worse camping with the wildlife crew"
       ],
       "CurrentIndex": 0
     }
