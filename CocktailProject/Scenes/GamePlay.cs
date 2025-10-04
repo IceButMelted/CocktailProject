@@ -1383,7 +1383,7 @@ namespace CocktailProject.Scenes
                             // No after-serve, go directly to chit-chat
                             currentPhase = ConversationPhase.SmallTalkAfterOrder;
                             cocktaillResualt = Enum_CocktaillResualt.None;
-                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                            
                             haveDoneOrder = false;
                             
                         }
@@ -1398,6 +1398,7 @@ namespace CocktailProject.Scenes
                         {
                             AnimationText = new TaggedTextRevealer(chitChatLine, 0.05);
                             AnimationText.Start();
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                             canSkipConversation = true;
                             canGoNextConversation = false;
                         }
