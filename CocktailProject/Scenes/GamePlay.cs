@@ -949,8 +949,8 @@ namespace CocktailProject.Scenes
 
             #region Customer Image
 
-            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
-            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
+            Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.CenterLeft);
+            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
             Img_Customer.Offset = new Vector2(450, -150);
 
             #endregion
