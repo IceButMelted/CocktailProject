@@ -1383,6 +1383,7 @@ namespace CocktailProject.Scenes
                             // No after-serve, go directly to chit-chat
                             currentPhase = ConversationPhase.SmallTalkAfterOrder;
                             cocktaillResualt = Enum_CocktaillResualt.None;
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                             haveDoneOrder = false;
                             
                         }
@@ -1415,10 +1416,10 @@ namespace CocktailProject.Scenes
 
                                 numbercustomer++;
 
-                                if (numbercustomer > 5)
+                                if (numbercustomer > 4)
                                 {
                                     Core.ChangeScene(new Scenes.Thanks());
-                                    return;
+                                    break;
                                 }
 
 
