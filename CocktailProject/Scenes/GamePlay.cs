@@ -247,7 +247,7 @@ namespace CocktailProject.Scenes
 
         public Image Img_Customer;
 
-        public Panel P_OrderPanel;
+        public FullImagePanel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 
 #if DEBUG
@@ -888,12 +888,12 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Oreder Panel
-            P_OrderPanel = new Panel(new Vector2(600, 250), PanelSkin.Default, anchor: Anchor.CenterLeft);
+            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.CenterLeft);
             P_OrderPanel.SetCustomSkin(T_DialogBG_Panel);
             P_OrderPanel.Padding = Vector2.Zero;
             P_OrderPanel.Offset = new Vector2(400, 225);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(375, 260));
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(500, 260));
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
             RP_ConversationCustomer.FontOverride = RegularFont;
