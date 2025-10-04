@@ -139,6 +139,8 @@ namespace CocktailProject.Scenes
 
         #region Panel UI
         public Panel P_MainGame;
+        public Texture2D T_DialogBG_Panel;
+
         // Panel ingredient
         public Panel P_Ingredient;
         // Mixer
@@ -245,7 +247,7 @@ namespace CocktailProject.Scenes
 
         public Image Img_Customer;
 
-        public Panel P_OrderPanel;
+        public FullImagePanel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 
 #if DEBUG
@@ -322,6 +324,7 @@ namespace CocktailProject.Scenes
             //Load Ui image
             T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
             T_Mixer_Panel = Content.Load<Texture2D>("images/UI/Shelf");
+            T_DialogBG_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_DialogBG");
 
             T_BTN_Alchol = Content.Load<Texture2D>("images/UI/BTN_Icon_Alcohol");
             T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
@@ -715,8 +718,8 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
             };
 
-            Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(100, 120), anchor: Anchor.Center);
-            Img_CocktailBottle.Offset = new Vector2(-100, 0);
+            Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(80, 140), anchor: Anchor.Center);
+            Img_CocktailBottle.Offset = new Vector2(-100, -20);
 
             //visual cocktail
             InitMakingVisualCocktail();
@@ -885,11 +888,12 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Oreder Panel
-            P_OrderPanel = new Panel(new Vector2(500, 200), PanelSkin.Default, anchor: Anchor.CenterLeft);
+            P_OrderPanel = new FullImagePanel(T_DialogBG_Panel, new Vector2(600, 250), anchor: Anchor.CenterLeft);
+            P_OrderPanel.SetCustomSkin(T_DialogBG_Panel);
             P_OrderPanel.Padding = Vector2.Zero;
             P_OrderPanel.Offset = new Vector2(400, 225);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(350, 100));
+            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.Center, size: new Vector2(500, 260));
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
             RP_ConversationCustomer.FontOverride = RegularFont;

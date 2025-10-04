@@ -551,6 +551,30 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Img_Panel_Alcohol.png
 
+#begin images/UI/Img_Panel_DialogBG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Img_Panel_DialogBG.png
+
+#begin images/UI/Img_Text_NextButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Img_Text_NextButton.png;images/UI/Img_Text_NextButton
+
 #begin images/UI/Making_Cocktail_Visual/Bar01.png
 /importer:TextureImporter
 /processor:TextureProcessor
