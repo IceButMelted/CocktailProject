@@ -4,7 +4,7 @@
 	<Regions>
 		<!-- BG_NPC_Atlas -->
 		<Region name="FaceLeft" x="0" y="0" width="300" height="650" />
-		<Region name="FacRight" x="300" y="0" width="300" height="650" />
+		<Region name="FaceRight" x="300" y="0" width="300" height="650" />
 	</Regions>
 	<Animations>
 	</Animations>
