@@ -12,6 +12,7 @@ using CocktailProject.ClassMotion;
 using CocktailProject.ClassTime;
 using CocktailProject.MiniGame;
 using CocktailProject.ClassNPC;
+using CocktailProject.Utilities;
 
 using GeonBit.UI;
 using GeonBit.UI.Entities;
@@ -119,6 +120,11 @@ namespace CocktailProject.Scenes
         #region Variable UI
         int XSizeBar_Stiring = 800;
         int PaddingLR_Bar_Stiring = 50;
+
+        //fade panel
+        private float fadeTimer = 0f;
+        private bool shouldFadeIn = true;
+        private bool shouldFadeOut = false;
 
         //visual Cocktail on table
         private List<Image> AllBars;
@@ -246,10 +252,13 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual08;
         protected Image Img_Visual09;
         protected Image Img_Visual10;
+        // Fading Close Visual
+        protected Panel P_Fade;
+        protected Paragraph Pr_TextFade;
+        protected RichParagraph RP_Fade;
 
-
+        // customer and order panel
         public Image Img_Customer;
-
         public RichParagraph RP_CustomerName;
         public FullImagePanel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
@@ -434,7 +443,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vodka.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -451,7 +460,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Gin.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -468,7 +477,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Triplesec.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -485,7 +494,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vermouth.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -530,7 +539,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_CanberryJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_CanberryJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -547,7 +556,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_GrapefruitJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -564,7 +573,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_LemonJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_LemonJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_Lemon);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -582,7 +591,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Soda.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Soda.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -599,7 +608,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Syrup.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Syrup.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -616,7 +625,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_PepperMint.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_PepperMint.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Peppermint);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -734,12 +743,13 @@ namespace CocktailProject.Scenes
             //visual cocktail
             InitMakingVisualCocktail();
 
+            //Book Recipe Button
             BTN_BookRecipes = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomLeft, size: new Vector2(128, 128));
             BTN_BookRecipes.Offset = new Vector2(-50, 75);
             BTN_BookRecipes.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
-                EnableBookRecipes(true);
+                Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
+                ToggleBookRecipes();
 
             };
 
@@ -886,6 +896,8 @@ namespace CocktailProject.Scenes
                 openMixerPanel = false;
 
                 ResetUI();
+                MiniGame.ShakingMinigame.Reset();
+                MiniGame.StiringMinigame.Reset();
 
             };
             #endregion
@@ -910,7 +922,7 @@ namespace CocktailProject.Scenes
             RP_CustomerName.FontOverride = BoldFont;
             RP_CustomerName.FillColor = new Color(218, 180, 120);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
+            RP_ConversationCustomer = new RichParagraph("", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
             RP_ConversationCustomer.Offset = new Vector2(0, 70);
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
@@ -1007,7 +1019,6 @@ namespace CocktailProject.Scenes
             Img_BG_Foreground = new Image(T_BG_Foreground, new Vector2(1920, 1080), anchor: Anchor.Center);
             Img_BG_Midground = new Image(T_BG_Midgroud, new Vector2(1920, 1080), anchor: Anchor.Center);
 
-            //UserInterface.Active.AddEntity(Img_BG_Background);
             P_MainGame.AddChild(Img_BG_Background);
 
             #region Image BGNPC
@@ -1032,9 +1043,6 @@ namespace CocktailProject.Scenes
             }
             #endregion
 
-            //UserInterface.Active.AddEntity(Img_BG_Midground);
-            //UserInterface.Active.AddEntity(Img_Customer);
-            //UserInterface.Active.AddEntity(Img_BG_Foreground);
             P_MainGame.AddChild(Img_BG_Midground);
             P_MainGame.AddChild(Img_Customer);
             P_MainGame.AddChild(Img_BG_Foreground);
@@ -1045,11 +1053,6 @@ namespace CocktailProject.Scenes
             P_MainGame.AddChild(P_Debug_CurrentCocktail);
             P_MainGame.AddChild(P_Debug_targetCocktail);
 #endif 
-            //UserInterface.Active.AddEntity(P_Ingredient);
-            //UserInterface.Active.AddEntity(P_MakeingZone);
-            //UserInterface.Active.AddEntity(P_Minigame);
-            //UserInterface.Active.AddEntity(P_BeforeServe);
-            //UserInterface.Active.AddEntity(P_OrderPanel;
             P_MainGame.AddChild(P_Ingredient);
             P_MainGame.AddChild(P_MakeingZone);
             P_MainGame.AddChild(P_Minigame);
@@ -1062,15 +1065,36 @@ namespace CocktailProject.Scenes
             //UserInterface.Active.AddEntity(P_BGBookRecipes);
             P_MainGame.AddChild(Img_BookRecipes);
 
-            
 
+            //add UI to UserInterface
             UserInterface.Active.AddEntity(P_MainGame);
+            InitFadePanel();
             #endregion
 
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (shouldFadeIn) {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    EnableFadePanel(false);
+                    shouldFadeIn = false;
+                }
+                UpdateUILogic(gameTime);
+                
+                return; 
+            }
+
+            if (shouldFadeOut)
+            {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    shouldFadeOut = false;
+                    Core.ChangeScene(new Thanks());
+                }
+            }
+
             Shaking_Anim.Update(gameTime);
             Stirring_Anim.Update(gameTime);
             //Add Code Here
@@ -1089,7 +1113,6 @@ namespace CocktailProject.Scenes
                     Shaking_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
-                    //playingMinigameShaking = false;
                 }
             }
             if (currentMinigame == Enum_MiniGameType.Stiring)
@@ -1120,11 +1143,6 @@ namespace CocktailProject.Scenes
             P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
 #endif
-
-            if (numbercustomer > 5)
-            {
-                Core.ChangeScene(new Scenes.Thanks());
-            }
 
             //base DO NOT DELETE
             base.Update(gameTime);
@@ -1356,7 +1374,6 @@ namespace CocktailProject.Scenes
                             }
                             else
                             {
-
                                 haveDoneOrder = false;
                                 canSkipConversation = true;
                                 canGoNextConversation = false;
@@ -1429,7 +1446,15 @@ namespace CocktailProject.Scenes
 
                                 if (numbercustomer > 4)
                                 {
-                                    Core.ChangeScene(new Scenes.Thanks());
+                                    //Core.ChangeScene(new Scenes.Thanks());
+                                    Day++;
+                                    if (Day > 2)
+                                    {
+                                        EnableFadePanel(true);
+                                        shouldFadeOut = true;
+                                        break;
+                                    }
+                                    numbercustomer = 0;
                                     break;
                                 }
 
@@ -1748,6 +1773,7 @@ namespace CocktailProject.Scenes
             {
                 ChangePage(Enum_Page.PreviousPage);
                 UpdatePageView();
+                Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
 
             BTN_NextPage = new Button(">", ButtonSkin.Default, Anchor.BottomRight, new Vector2(50, 50));
@@ -1755,12 +1781,14 @@ namespace CocktailProject.Scenes
             {
                 ChangePage(Enum_Page.NextPage);
                 UpdatePageView();
+                Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
 
             Button BTN_CloseBookRecipes = new Button("X", ButtonSkin.Default, Anchor.TopRight, new Vector2(50, 50));
             BTN_CloseBookRecipes.OnClick += (Entity e) =>
             {
-                EnableBookRecipes(false);
+                ToggleBookRecipes();
+                Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
             };
 
             Img_BookRecipes.AddChild(Img_LeftPage);
@@ -1807,6 +1835,12 @@ namespace CocktailProject.Scenes
         {
             Img_BookRecipes.Visible = _Enable;
             Img_BookRecipes.Enabled = _Enable;
+        }
+
+        public void ToggleBookRecipes()
+        {
+            bool isActive = Img_BookRecipes.Visible;
+            EnableBookRecipes(!isActive);
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
@@ -2031,20 +2065,20 @@ namespace CocktailProject.Scenes
         //---------------Sound and BGM----------------
         public void InitSFX() 
         {
-            //SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
-            //SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
-            SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/BTN_Click_Mock_test");
-            //SFX_Book_Turnpage = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Turnpage");
-            //SFX_Lemon = Content.Load<SoundEffect>("Sound/Sound_Effect/Lemon");
-            //SFX_Peppermint = Content.Load<SoundEffect>("Sound/Sound_Effect/Peppermint");
-            //SFX_Pouring = Content.Load<SoundEffect>("Sound/Sound_Effect/Pouring");
-            //SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
-            //SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
+            SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
+            SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/Interface_Selection");
+            SFX_Book_Turnpage = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Turnpage.");
+            SFX_Lemon = Content.Load<SoundEffect>("Sound/Sound_Effect/Lemon");
+            SFX_Peppermint = Content.Load<SoundEffect>("Sound/Sound_Effect/Peppermint");
+            SFX_Pouring = Content.Load<SoundEffect>("Sound/Sound_Effect/Pouring");
+            SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
+            SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
+            SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
         }
         public void InitBGM() { 
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
             Core.Audio.PlaySong(BGM_themeSong01,true);
-            Core.Audio.SongVolume = 0.5f;
+            Core.Audio.SongVolume = 0.25f;
         }
 
         //----------------NPC Init-------------------
@@ -2110,6 +2144,44 @@ namespace CocktailProject.Scenes
                 Customers[n] = Customers[k];
                 Customers[k] = temp;
             }
+        }
+        private void PlaySoundEffectWithRandomPitch(SoundEffect sfx)
+        {
+            var instance = sfx.CreateInstance();
+
+            // Define 3 possible pitch values
+            float[] pitches = { -0.5f, 0.0f, 0.5f };
+
+            // Pick one at random
+            instance.Pitch = pitches[new Random().Next(pitches.Length)];
+
+
+            instance.Play();
+        }
+        private void PlaySoundEffectWithRandomPitch(SoundEffect sfx, float Volume)
+        {
+            var instance = sfx.CreateInstance();
+            // Define 3 possible pitch values
+            float[] pitches = { -0.5f, 0.0f, 0.5f };
+            // Pick one at random
+            instance.Pitch = pitches[new Random().Next(pitches.Length)];
+            instance.Volume = Volume;
+            instance.Play();
+        }
+
+
+        //--------------- Fade ----------------------
+        public void InitFadePanel()
+        {
+            P_Fade = new Panel(new Vector2(2300, 1200), PanelSkin.Simple, Anchor.Center);
+            P_Fade.FillColor = Color.Black;
+            P_Fade.Opacity = 255;
+            UserInterface.Active.AddEntity(P_Fade);
+        }
+        public void EnableFadePanel(bool enable)
+        {
+            P_Fade.Enabled = enable;
+            P_Fade.Visible = enable;
         }
     }
 

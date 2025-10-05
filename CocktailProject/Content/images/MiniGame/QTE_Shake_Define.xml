@@ -7,7 +7,7 @@
 		<Region name="QTE_shake03" x="0" y="960" width="800" height="480" />
 	</Regions>
 	<Animations>
-		<Animation name="Shaking_Animation" delay="100">
+		<Animation name="Shaking_Animation" delay="120">
 			<Frame region="QTE_shake01" />
 			<Frame region="QTE_shake02" />
 			<Frame region="QTE_shake03" />
