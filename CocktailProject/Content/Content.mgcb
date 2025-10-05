@@ -1004,63 +1004,57 @@
 /processorParam:Quality=Best
 /build:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
 
-#begin Sound/Sound_Effect/Book_Open_Close.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sound/Sound_Effect/Book_Open_Close.mp3;Sound/Sound_Effect/Book_Open_Close
-
-#begin Sound/Sound_Effect/Book_Turnpage.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sound/Sound_Effect/Book_Turnpage.mp3;Sound/Sound_Effect/Book_Turnpage
-
-#begin Sound/Sound_Effect/BTN_Click_Mock_test.wav
+#begin Sound/Sound_Effect/Book_Open_Close.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/BTN_Click_Mock_test.wav;Sound/Sound_Effect/BTN_Click_Mock_test
+/build:Sound/Sound_Effect/Book_Open_Close.wav;Sound/Sound_Effect/Book_Open_Close
 
-#begin Sound/Sound_Effect/BTN_Click_Mock.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Book_Turnpage..wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/BTN_Click_Mock.mp3;Sound/Sound_Effect/BTN_Click_Mock
+/build:Sound/Sound_Effect/Book_Turnpage..wav;Sound/Sound_Effect/Book_Turnpage.
 
-#begin Sound/Sound_Effect/Ice.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Ice.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Ice.mp3;Sound/Sound_Effect/Ice
+/build:Sound/Sound_Effect/Ice.wav;Sound/Sound_Effect/Ice
 
-#begin Sound/Sound_Effect/Lemon.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Interface_Selection.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Lemon.mp3;Sound/Sound_Effect/Lemon
+/build:Sound/Sound_Effect/Interface_Selection.wav;Sound/Sound_Effect/Interface_Selection
 
-#begin Sound/Sound_Effect/Peppermint.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Lemon.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Peppermint.mp3;Sound/Sound_Effect/Peppermint
+/build:Sound/Sound_Effect/Lemon.wav;Sound/Sound_Effect/Lemon
 
-#begin Sound/Sound_Effect/Pouring.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Peppermint.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Pouring.mp3;Sound/Sound_Effect/Pouring
+/build:Sound/Sound_Effect/Peppermint.wav;Sound/Sound_Effect/Peppermint
 
-#begin Sound/Sound_Effect/Shaking.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Pouring.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Shaking.mp3;Sound/Sound_Effect/Shaking
+/build:Sound/Sound_Effect/Pouring.wav;Sound/Sound_Effect/Pouring
 
-#begin Sound/Sound_Effect/Stiring.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sound/Sound_Effect/Shaking.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/Sound_Effect/Stiring.mp3;Sound/Sound_Effect/Stiring
+/build:Sound/Sound_Effect/Shaking.wav;Sound/Sound_Effect/Shaking
+
+#begin Sound/Sound_Effect/Stiring.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Stiring.wav;Sound/Sound_Effect/Stiring
 

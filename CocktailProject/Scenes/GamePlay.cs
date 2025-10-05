@@ -439,7 +439,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vodka.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vodka, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -456,7 +456,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Gin.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Gin, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -473,7 +473,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Triplesec.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Triplesec, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -490,7 +490,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vermouth.ButtonParagraph.FontOverride = BoldFont;
             BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateAlcohol(Enum_Alcohol.Vermouth, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -535,7 +535,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_CanberryJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_CanberryJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.CanberryJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -552,7 +552,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_GrapefruitJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.GrapefruitJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -569,7 +569,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_LemonJuice.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_LemonJuice.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_Lemon);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.LemonJuice, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -587,7 +587,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Soda.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Soda.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Soda, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -604,7 +604,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Syrup.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_Syrup.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Pouring);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.Syrup, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -621,7 +621,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_PepperMint.ButtonParagraph.FontOverride = BoldFont;
             BTN_Mixer_PepperMint.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                PlaySoundEffectWithRandomPitch(SFX_Peppermint);
                 _currentCocktail.AddOrUpdateMixer(Enum_Mixer.PepperMint, 1);
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
@@ -744,7 +744,7 @@ namespace CocktailProject.Scenes
             BTN_BookRecipes.Offset = new Vector2(-50, 75);
             BTN_BookRecipes.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
                 ToggleBookRecipes();
 
             };
@@ -1756,6 +1756,7 @@ namespace CocktailProject.Scenes
             {
                 ChangePage(Enum_Page.PreviousPage);
                 UpdatePageView();
+                Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
 
             BTN_NextPage = new Button(">", ButtonSkin.Default, Anchor.BottomRight, new Vector2(50, 50));
@@ -1763,12 +1764,14 @@ namespace CocktailProject.Scenes
             {
                 ChangePage(Enum_Page.NextPage);
                 UpdatePageView();
+                Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
 
             Button BTN_CloseBookRecipes = new Button("X", ButtonSkin.Default, Anchor.TopRight, new Vector2(50, 50));
             BTN_CloseBookRecipes.OnClick += (Entity e) =>
             {
                 ToggleBookRecipes();
+                Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
             };
 
             Img_BookRecipes.AddChild(Img_LeftPage);
@@ -2045,20 +2048,20 @@ namespace CocktailProject.Scenes
         //---------------Sound and BGM----------------
         public void InitSFX() 
         {
-            //SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
-            //SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
-            SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/BTN_Click_Mock_test");
-            //SFX_Book_Turnpage = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Turnpage");
-            //SFX_Lemon = Content.Load<SoundEffect>("Sound/Sound_Effect/Lemon");
-            //SFX_Peppermint = Content.Load<SoundEffect>("Sound/Sound_Effect/Peppermint");
-            //SFX_Pouring = Content.Load<SoundEffect>("Sound/Sound_Effect/Pouring");
-            //SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
-            //SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
+            SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
+            SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/Interface_Selection");
+            SFX_Book_Turnpage = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Turnpage.");
+            SFX_Lemon = Content.Load<SoundEffect>("Sound/Sound_Effect/Lemon");
+            SFX_Peppermint = Content.Load<SoundEffect>("Sound/Sound_Effect/Peppermint");
+            SFX_Pouring = Content.Load<SoundEffect>("Sound/Sound_Effect/Pouring");
+            SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
+            SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
+            SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
         }
         public void InitBGM() { 
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
             Core.Audio.PlaySong(BGM_themeSong01,true);
-            Core.Audio.SongVolume = 0.5f;
+            Core.Audio.SongVolume = 0.25f;
         }
 
         //----------------NPC Init-------------------
@@ -2125,6 +2128,32 @@ namespace CocktailProject.Scenes
                 Customers[k] = temp;
             }
         }
+
+        private void PlaySoundEffectWithRandomPitch(SoundEffect sfx)
+        {
+            var instance = sfx.CreateInstance();
+
+            // Define 3 possible pitch values
+            float[] pitches = { -0.5f, 0.0f, 0.5f };
+
+            // Pick one at random
+            instance.Pitch = pitches[new Random().Next(pitches.Length)];
+
+
+            instance.Play();
+        }
+
+        private void PlaySoundEffectWithRandomPitch(SoundEffect sfx, float Volume)
+        {
+            var instance = sfx.CreateInstance();
+            // Define 3 possible pitch values
+            float[] pitches = { -0.5f, 0.0f, 0.5f };
+            // Pick one at random
+            instance.Pitch = pitches[new Random().Next(pitches.Length)];
+            instance.Volume = Volume;
+            instance.Play();
+        }
+
 
         //--------------- Fade ----------------------
         public void InitFadePanel()
