@@ -28,6 +28,14 @@ public class TaggedTextRevealer
         timer = 0;
     }
 
+    public void Clear()
+    {
+        segments.Clear();
+        visibleCount = 0;
+        isRunning = false;
+        timer = 0;
+    }
+
     private List<Segment> ParseSegments(string input)
     {
         var segments = new List<Segment>();

@@ -12,6 +12,7 @@ using CocktailProject.ClassMotion;
 using CocktailProject.ClassTime;
 using CocktailProject.MiniGame;
 using CocktailProject.ClassNPC;
+using CocktailProject.Utilities;
 
 using GeonBit.UI;
 using GeonBit.UI.Entities;
@@ -119,6 +120,11 @@ namespace CocktailProject.Scenes
         #region Variable UI
         int XSizeBar_Stiring = 800;
         int PaddingLR_Bar_Stiring = 50;
+
+        //fade panel
+        private float fadeTimer = 0f;
+        private bool shouldFadeIn = true;
+        private bool shouldFadeOut = false;
 
         //visual Cocktail on table
         private List<Image> AllBars;
@@ -248,13 +254,11 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual10;
         // Fading Close Visual
         protected Panel P_Fade;
+        protected Paragraph Pr_TextFade;
         protected RichParagraph RP_Fade;
-        protected float timeToFade = 1f;
-        protected bool isFadeIn = false;
-        protected bool isFadeOut = false;
 
+        // customer and order panel
         public Image Img_Customer;
-
         public RichParagraph RP_CustomerName;
         public FullImagePanel P_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
@@ -892,6 +896,8 @@ namespace CocktailProject.Scenes
                 openMixerPanel = false;
 
                 ResetUI();
+                MiniGame.ShakingMinigame.Reset();
+                MiniGame.StiringMinigame.Reset();
 
             };
             #endregion
@@ -916,7 +922,7 @@ namespace CocktailProject.Scenes
             RP_CustomerName.FontOverride = BoldFont;
             RP_CustomerName.FillColor = new Color(218, 180, 120);
 
-            RP_ConversationCustomer = new RichParagraph("Welcome! Please make me a cocktail.", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
+            RP_ConversationCustomer = new RichParagraph("", anchor: Anchor.TopCenter, size: new Vector2(500, 200));
             RP_ConversationCustomer.Offset = new Vector2(0, 70);
             RP_ConversationCustomer.OutlineWidth = 0;
             RP_ConversationCustomer.OutlineOpacity = 0;
@@ -1013,7 +1019,6 @@ namespace CocktailProject.Scenes
             Img_BG_Foreground = new Image(T_BG_Foreground, new Vector2(1920, 1080), anchor: Anchor.Center);
             Img_BG_Midground = new Image(T_BG_Midgroud, new Vector2(1920, 1080), anchor: Anchor.Center);
 
-            //UserInterface.Active.AddEntity(Img_BG_Background);
             P_MainGame.AddChild(Img_BG_Background);
 
             #region Image BGNPC
@@ -1038,9 +1043,6 @@ namespace CocktailProject.Scenes
             }
             #endregion
 
-            //UserInterface.Active.AddEntity(Img_BG_Midground);
-            //UserInterface.Active.AddEntity(Img_Customer);
-            //UserInterface.Active.AddEntity(Img_BG_Foreground);
             P_MainGame.AddChild(Img_BG_Midground);
             P_MainGame.AddChild(Img_Customer);
             P_MainGame.AddChild(Img_BG_Foreground);
@@ -1051,11 +1053,6 @@ namespace CocktailProject.Scenes
             P_MainGame.AddChild(P_Debug_CurrentCocktail);
             P_MainGame.AddChild(P_Debug_targetCocktail);
 #endif 
-            //UserInterface.Active.AddEntity(P_Ingredient);
-            //UserInterface.Active.AddEntity(P_MakeingZone);
-            //UserInterface.Active.AddEntity(P_Minigame);
-            //UserInterface.Active.AddEntity(P_BeforeServe);
-            //UserInterface.Active.AddEntity(P_OrderPanel;
             P_MainGame.AddChild(P_Ingredient);
             P_MainGame.AddChild(P_MakeingZone);
             P_MainGame.AddChild(P_Minigame);
@@ -1068,15 +1065,36 @@ namespace CocktailProject.Scenes
             //UserInterface.Active.AddEntity(P_BGBookRecipes);
             P_MainGame.AddChild(Img_BookRecipes);
 
-            
 
+            //add UI to UserInterface
             UserInterface.Active.AddEntity(P_MainGame);
+            InitFadePanel();
             #endregion
 
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (shouldFadeIn) {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    EnableFadePanel(false);
+                    shouldFadeIn = false;
+                }
+                UpdateUILogic(gameTime);
+                
+                return; 
+            }
+
+            if (shouldFadeOut)
+            {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    shouldFadeOut = false;
+                    Core.ChangeScene(new Thanks());
+                }
+            }
+
             Shaking_Anim.Update(gameTime);
             Stirring_Anim.Update(gameTime);
             //Add Code Here
@@ -1095,7 +1113,6 @@ namespace CocktailProject.Scenes
                     Shaking_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
-                    //playingMinigameShaking = false;
                 }
             }
             if (currentMinigame == Enum_MiniGameType.Stiring)
@@ -1126,11 +1143,6 @@ namespace CocktailProject.Scenes
             P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
 #endif
-
-            if (numbercustomer > 5)
-            {
-                Core.ChangeScene(new Scenes.Thanks());
-            }
 
             //base DO NOT DELETE
             base.Update(gameTime);
@@ -1362,7 +1374,6 @@ namespace CocktailProject.Scenes
                             }
                             else
                             {
-
                                 haveDoneOrder = false;
                                 canSkipConversation = true;
                                 canGoNextConversation = false;
@@ -1437,6 +1448,12 @@ namespace CocktailProject.Scenes
                                 {
                                     //Core.ChangeScene(new Scenes.Thanks());
                                     Day++;
+                                    if (Day > 2)
+                                    {
+                                        EnableFadePanel(true);
+                                        shouldFadeOut = true;
+                                        break;
+                                    }
                                     numbercustomer = 0;
                                     break;
                                 }
@@ -2128,7 +2145,6 @@ namespace CocktailProject.Scenes
                 Customers[k] = temp;
             }
         }
-
         private void PlaySoundEffectWithRandomPitch(SoundEffect sfx)
         {
             var instance = sfx.CreateInstance();
@@ -2142,7 +2158,6 @@ namespace CocktailProject.Scenes
 
             instance.Play();
         }
-
         private void PlaySoundEffectWithRandomPitch(SoundEffect sfx, float Volume)
         {
             var instance = sfx.CreateInstance();
@@ -2163,24 +2178,11 @@ namespace CocktailProject.Scenes
             P_Fade.Opacity = 255;
             UserInterface.Active.AddEntity(P_Fade);
         }
-        public bool FadeIn(GameTime gametime, byte Speed) {
-            if (P_Fade.Opacity > 0)
-            {
-                P_Fade.Opacity -= Speed;
-                return false;
-            }
-            return true;
-        }
-        public bool FadeOut(GameTime gametime, byte Speed)
+        public void EnableFadePanel(bool enable)
         {
-            if (P_Fade.Opacity < 255)
-            {
-                P_Fade.Opacity += Speed;
-                return false;
-            }
-            return true;
+            P_Fade.Enabled = enable;
+            P_Fade.Visible = enable;
         }
-
     }
 
     public enum Enum_MiniGameType
