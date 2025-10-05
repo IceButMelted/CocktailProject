@@ -246,7 +246,12 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual08;
         protected Image Img_Visual09;
         protected Image Img_Visual10;
-
+        // Fading Close Visual
+        protected Panel P_Fade;
+        protected RichParagraph RP_Fade;
+        protected float timeToFade = 1f;
+        protected bool isFadeIn = false;
+        protected bool isFadeOut = false;
 
         public Image Img_Customer;
 
@@ -734,12 +739,13 @@ namespace CocktailProject.Scenes
             //visual cocktail
             InitMakingVisualCocktail();
 
+            //Book Recipe Button
             BTN_BookRecipes = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomLeft, size: new Vector2(128, 128));
             BTN_BookRecipes.Offset = new Vector2(-50, 75);
             BTN_BookRecipes.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
-                EnableBookRecipes(true);
+                ToggleBookRecipes();
 
             };
 
@@ -1429,7 +1435,9 @@ namespace CocktailProject.Scenes
 
                                 if (numbercustomer > 4)
                                 {
-                                    Core.ChangeScene(new Scenes.Thanks());
+                                    //Core.ChangeScene(new Scenes.Thanks());
+                                    Day++;
+                                    numbercustomer = 0;
                                     break;
                                 }
 
@@ -1760,7 +1768,7 @@ namespace CocktailProject.Scenes
             Button BTN_CloseBookRecipes = new Button("X", ButtonSkin.Default, Anchor.TopRight, new Vector2(50, 50));
             BTN_CloseBookRecipes.OnClick += (Entity e) =>
             {
-                EnableBookRecipes(false);
+                ToggleBookRecipes();
             };
 
             Img_BookRecipes.AddChild(Img_LeftPage);
@@ -1807,6 +1815,12 @@ namespace CocktailProject.Scenes
         {
             Img_BookRecipes.Visible = _Enable;
             Img_BookRecipes.Enabled = _Enable;
+        }
+
+        public void ToggleBookRecipes()
+        {
+            bool isActive = Img_BookRecipes.Visible;
+            EnableBookRecipes(!isActive);
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
@@ -2111,6 +2125,33 @@ namespace CocktailProject.Scenes
                 Customers[k] = temp;
             }
         }
+
+        //--------------- Fade ----------------------
+        public void InitFadePanel()
+        {
+            P_Fade = new Panel(new Vector2(2300, 1200), PanelSkin.Simple, Anchor.Center);
+            P_Fade.FillColor = Color.Black;
+            P_Fade.Opacity = 255;
+            UserInterface.Active.AddEntity(P_Fade);
+        }
+        public bool FadeIn(GameTime gametime, byte Speed) {
+            if (P_Fade.Opacity > 0)
+            {
+                P_Fade.Opacity -= Speed;
+                return false;
+            }
+            return true;
+        }
+        public bool FadeOut(GameTime gametime, byte Speed)
+        {
+            if (P_Fade.Opacity < 255)
+            {
+                P_Fade.Opacity += Speed;
+                return false;
+            }
+            return true;
+        }
+
     }
 
     public enum Enum_MiniGameType
