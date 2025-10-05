@@ -191,8 +191,20 @@
 /processorParam:TextureFormat=Color
 /build:images/Cocktail/BaseCocktailGlass.png
 
-#begin images/Cocktail/hello_Define.xml
-/copy:images/Cocktail/hello_Define.xml
+#begin images/Cocktail/CocktailResult_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Cocktail/CocktailResult_Atlas.png;images/Cocktail/CocktailResult_Atlas
+
+#begin images/Cocktail/CocktailResult_Define.xml
+/copy:images/Cocktail/CocktailResult_Define.xml
 
 #begin images/Customer/Customer_NPC.png
 /importer:TextureImporter

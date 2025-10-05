@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/Cocktail/CocktailResult_Atlas</Texture>
+	<Regions>
+		<!-- Gird is 4 row 3 column-->
+		<Region name="Cosmopolitan"			x="0" y="0" width="160" height="160" />
+		<Region name="Cranberry Fizz"		x="160" y="0" width="160" height="160" />
+		<Region name="Gin Fizz"				x="320" y="0" width="160" height="160" />
+		<Region name="Grapefruit Spritz"	x="0" y="160" width="160" height="160" />
+		<Region name="Greyhound"			x="160" y="160" width="160" height="160" />
+		<Region name="Martini"				x="320" y="160" width="160" height="160" />
+		<Region name="Nojito"				x="0" y="320" width="160" height="160" />
+		<Region name="Sea Breeze"			x="160" y="320" width="160" height="160" />
+		<Region name="White Lady"			x="320" y="320" width="160" height="160" />
+		
+	</Regions>
+	<Animations>
+	</Animations>
+</TextureAtlas>

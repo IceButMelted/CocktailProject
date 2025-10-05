@@ -252,6 +252,11 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual08;
         protected Image Img_Visual09;
         protected Image Img_Visual10;
+        // Image Cocktil Resuilt
+
+        protected Image Img_CocktailResult; protected TextureAtlas CocktailResult_Atlas;
+        protected Dictionary<string, Rectangle> Dic_Sourcerec = new Dictionary<string, Rectangle>();
+
         // Fading Close Visual
         protected Panel P_Fade;
         protected Paragraph Pr_TextFade;
@@ -448,6 +453,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Alcohol_Gin = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -465,6 +471,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Alcohol_Triplesec = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -482,6 +489,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Alcohol_Vermouth = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -499,6 +507,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             #endregion
@@ -544,6 +553,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Mixer_GrapefruitJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -561,6 +571,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Mixer_LemonJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -578,6 +589,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             //new row
@@ -596,6 +608,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Mixer_Syrup = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -613,6 +626,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
             BTN_Mixer_PepperMint = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -630,6 +644,7 @@ namespace CocktailProject.Scenes
                 UpdateCocktailBars();
                 Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
+                VisibleMakingCocktailVisual(true);
             };
 
 
@@ -1046,14 +1061,19 @@ namespace CocktailProject.Scenes
             P_MainGame.AddChild(Img_BG_Midground);
             P_MainGame.AddChild(Img_Customer);
             P_MainGame.AddChild(Img_BG_Foreground);
+            InitCocktailResultEntity();
+            P_MainGame.AddChild(Img_CocktailResult);
 
 #if DEBUG
             //UserInterface.Active.AddEntity(P_Debug_CurrentCocktail);
             //UserInterface.Active.AddEntity(P_Debug_targetCocktail);
             P_MainGame.AddChild(P_Debug_CurrentCocktail);
             P_MainGame.AddChild(P_Debug_targetCocktail);
-#endif 
+#endif
+
             P_MainGame.AddChild(P_Ingredient);
+            
+
             P_MainGame.AddChild(P_MakeingZone);
             P_MainGame.AddChild(P_Minigame);
             P_MainGame.AddChild(P_BeforeServe);
@@ -1634,6 +1654,7 @@ namespace CocktailProject.Scenes
             BTNIngredeientActive(true);
             BTNMethodActive(false);
             BTNMethodVisible(false);
+            VisibleMakingCocktailVisual(false);
         }
         protected void EnableBTNBeforeServe(bool eneble) { 
             BTN_AddIce.Enabled = eneble;
@@ -1747,6 +1768,17 @@ namespace CocktailProject.Scenes
             PB_Stirring.Value = StiringMinigame.ProgressBar_Success;
         }
 
+        //------------------- Initi Cocktail Result
+        public void InitCocktailResultEntity()
+        {
+            CocktailResult_Atlas = TextureAtlas.FromFile(Content, "images/Cocktail/CocktailResult_Define.xml");
+            Img_CocktailResult = new Image(CocktailResult_Atlas.Texture, new Vector2(160, 160), anchor: Anchor.CenterLeft);
+            Img_CocktailResult.SourceRectangle = CocktailResult_Atlas.GetRegion("Cosmopolitan").SourceRectangle;
+            Img_CocktailResult.Offset = new Vector2(200, 75);
+
+
+        }
+
         //------------------------ Book Recipes-------------------
         public void InitBookRecipes()
         {
@@ -1836,7 +1868,6 @@ namespace CocktailProject.Scenes
             Img_BookRecipes.Visible = _Enable;
             Img_BookRecipes.Enabled = _Enable;
         }
-
         public void ToggleBookRecipes()
         {
             bool isActive = Img_BookRecipes.Visible;
@@ -1929,6 +1960,7 @@ namespace CocktailProject.Scenes
             P_MakingCocktailVisual.AddChild(Img_Visual09);
             P_MakingCocktailVisual.AddChild(Img_Visual10);
             P_MakingCocktailVisual.AddChild(Img_MainDisplay);
+            VisibleMakingCocktailVisual(false);
 
         }
         private void UpdateCocktailBars()
@@ -1969,6 +2001,9 @@ namespace CocktailProject.Scenes
                     // AllBars[i].Opacity = 128; // optional: dim empty bars instead of hide
                 }
             }
+        }
+        public void VisibleMakingCocktailVisual(bool visible) {
+            P_MakingCocktailVisual.Visible = visible;
         }
 
         // ----------------------Slide Panel-----------------------
