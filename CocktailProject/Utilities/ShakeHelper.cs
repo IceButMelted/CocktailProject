@@ -61,6 +61,28 @@ namespace CocktailProject.Utilities
         }
 
         /// <summary>
+        /// Toggle shake direction (horizontal ↔ vertical) for an active entity.
+        /// </summary>
+        /// <param name="entity">Target entity currently shaking</param>
+        public static void ToggleShakeDirection(Entity entity)
+        {
+            foreach (var s in activeShakes)
+            {
+                if (s.Entity == entity)
+                {
+                    s.ShakeX = !s.ShakeX;
+                    s.Timer = 0f; // reset for smooth transition
+                    s.BaseOffset = entity.Offset;
+                    return;
+                }
+            }
+
+            // If entity not shaking, optionally start new default shake
+            // You can comment this out if you only want to toggle existing shakes
+            ShakingEntity(entity, 10, true);
+        }
+
+        /// <summary>
         /// Stop shaking a specific UI entity.
         /// </summary>
         public static void StopShake(Entity entity)
@@ -107,7 +129,7 @@ namespace CocktailProject.Utilities
 
                 s.Timer += delta;
 
-                // Re-sync base offset (important if entity is moving elsewhere)
+                // Re-sync base offset if entity moves
                 s.BaseOffset = s.Entity.Offset;
 
                 float offset = (float)Math.Sin(s.Timer * s.Speed) * s.Amplitude;
@@ -117,7 +139,7 @@ namespace CocktailProject.Utilities
                 else
                     s.Entity.Offset = s.BaseOffset + new Vector2(0, offset);
 
-                // Stop if duration reached (duration <= 0 means infinite)
+                // Stop if timed shake finished
                 if (s.Duration > 0 && s.Timer >= s.Duration)
                 {
                     s.Entity.Offset = s.BaseOffset;
@@ -125,5 +147,36 @@ namespace CocktailProject.Utilities
                 }
             }
         }
+
+        /// <summary>
+        /// Change the amplitude (shake strength) of a currently shaking entity.
+        /// </summary>
+        public static void SetShakeAmplitude(Entity entity, float newAmp)
+        {
+            foreach (var s in activeShakes)
+            {
+                if (s.Entity == entity)
+                {
+                    s.Amplitude = newAmp;
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Change the shake speed (frequency) of a currently shaking entity.
+        /// </summary>
+        public static void SetShakeSpeed(Entity entity, float newSpeed)
+        {
+            foreach (var s in activeShakes)
+            {
+                if (s.Entity == entity)
+                {
+                    s.Speed = newSpeed;
+                    return;
+                }
+            }
+        }
+
     }
 }

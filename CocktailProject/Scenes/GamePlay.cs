@@ -51,8 +51,8 @@ namespace CocktailProject.Scenes
         protected string _NPC_Name;
         protected string _tmp_NPC_Name;
         protected List<BaseCharacter> Customers = new List<BaseCharacter>();
-        
-        #endregion  
+
+        #endregion
 
         #region Image Sprite Atlas
         TextureAtlas Atlas_CustomerNPC;
@@ -98,7 +98,9 @@ namespace CocktailProject.Scenes
         protected Enum_PanelState stateBeforeServePanel = Enum_PanelState.InitPosWarp;
         protected Enum_PanelState stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
         protected Enum_PanelState stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
-        protected float timeToCloseBeforeAndAfteServePanel = 3f;
+        protected Enum_PanelState stateImgCustomer = Enum_PanelState.InitPosWarp;
+        protected Enum_CutomerState currentCustomerState = Enum_CutomerState.None;
+        protected float timeToCloseBeforeAndAfteServePanel = 2f;
 
         protected bool openArt1Panel = false;
         protected bool openArt2Panel = false;
@@ -146,7 +148,7 @@ namespace CocktailProject.Scenes
 
         #region Panel UI
         public Panel P_MainGame;
-        
+
 
         // Panel ingredient
         public Panel P_Ingredient;
@@ -212,7 +214,7 @@ namespace CocktailProject.Scenes
         public Panel P_Minigame;
         // Minigame Shaking
         public Panel P_Minigame_Shaking;
-        public Image Img_Minigame_Shaking;      TextureAtlas MiniGame_Shaking_Atlas; AnimatedSprite Shaking_Anim;
+        public Image Img_Minigame_Shaking; TextureAtlas MiniGame_Shaking_Atlas; AnimatedSprite Shaking_Anim;
         public Panel BG_ProgressBar;
         public Panel ProgressBar;
         public Panel BG_TargetZone;
@@ -220,14 +222,14 @@ namespace CocktailProject.Scenes
         public Panel Pointing;
         // Minigame Stiring
         public Panel P_Minigame_Stirring;
-        public Image Img_MiniGame_Stirring;     TextureAtlas MinGame_Stirring_Atlas; AnimatedSprite Stirring_Anim;
+        public Image Img_MiniGame_Stirring; TextureAtlas MinGame_Stirring_Atlas; AnimatedSprite Stirring_Anim;
         public CustomProgressBar PB_Stirring;
         public Panel BG_Stirring_TargetZone;
         public Panel Stirring_TargetZone;
         public Panel Arrow_Stirring;
         // Book Recipe
         public Panel P_BGBookRecipes;
-        public Image Img_BookRecipes;           public Texture2D T_BookRecipes;
+        public Image Img_BookRecipes; public Texture2D T_BookRecipes;
         public Image Img_LeftPage;
         public Image Img_RightPage;
         public Button BTN_PreviousPage;
@@ -822,7 +824,7 @@ namespace CocktailProject.Scenes
             #region Before Serve Panel
             P_BeforeServe = new Panel(new Vector2(800, 480), PanelSkin.Default, anchor: Anchor.TopRight);
             P_BeforeServe.Padding = Vector2.Zero;
-            P_BeforeServe.Offset = new Vector2(-600, 600);
+            P_BeforeServe.Offset = new Vector2(-800, 600);
 
             BTN_AddIce = new Button("Add Ice", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(150, 60));
             BTN_AddIce.Padding = Vector2.Zero;
@@ -990,7 +992,7 @@ namespace CocktailProject.Scenes
 
             Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.TopLeft);
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-            Img_Customer.Offset = new Vector2(450, 27);
+            Img_Customer.Offset = new Vector2(1920, 27);
 
             #endregion
 
@@ -1008,7 +1010,7 @@ namespace CocktailProject.Scenes
             P_ArtAfterServe.Offset = new Vector2(0, 1080);
 
             Img_Art1 = new Image(ArtAfterServe_Atlas.Texture);
-            Img_Art1.Size = new Vector2(400,600);
+            Img_Art1.Size = new Vector2(400, 600);
             Img_Art1.Anchor = Anchor.TopLeft;
             Img_Art1.SourceRectangle = ArtAfterServe_Atlas.GetRegion("ArtAfterServe_Art01").SourceRectangle;
 
@@ -1071,7 +1073,7 @@ namespace CocktailProject.Scenes
 #endif
 
             P_MainGame.AddChild(P_Ingredient);
-            
+
 
             P_MainGame.AddChild(P_MakeingZone);
             P_MainGame.AddChild(P_Minigame);
@@ -1090,118 +1092,13 @@ namespace CocktailProject.Scenes
             InitFadePanel();
             #endregion
 
-            Utilities.ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false,speed:2.5f);
 
-        }
+            //disaple stir and shaking at start
+            BTNMethodActive(false);
+            BTNMethodVisible(false);
 
-        public override void Update(GameTime gameTime)
-        {
+            Utilities.ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false, speed: 2.5f);
 
-            if (shouldFadeIn) {
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
-                {
-                    EnableFadePanel(false);
-                    shouldFadeIn = false;
-                }
-                UpdateUILogic(gameTime);
-                
-                return; 
-            }
-
-            Utilities.ShakeHelper.Update(gameTime);
-
-            if (shouldFadeOut)
-            {
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
-                {
-                    shouldFadeOut = false;
-                    Core.ChangeScene(new Thanks());
-                }
-                return;
-            }
-
-            Shaking_Anim.Update(gameTime);
-            Stirring_Anim.Update(gameTime);
-            //Add Code Here
-            UpdateUILogic(gameTime);
-
-            //update minigame Shaking
-            if (currentMinigame == Enum_MiniGameType.Shaking)
-            {
-                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Shaking)
-                {
-                    Core.Audio.PlaySoundEffect(SFX_Shaking);
-                    canPlaySFX_Shaking = false;
-                }
-                if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
-                {
-                    canPlaySFX_Shaking = true;
-                    cooldownTime_SFX_Shaking = 2.5f; // half a second cooldown
-                }
-                else
-                {
-                    cooldownTime_SFX_Shaking -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-
-                ShakingMinigame.Update(gameTime);
-                UpdateMiniGameShakingUI();
-                Shaking_Anim.Play();
-                Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
-                if (ShakingMinigame.IsComplete())
-                {
-                    ShakingMinigame.Stop();
-                    Shaking_Anim.Stop();
-                    currentMinigame = Enum_MiniGameType.None;
-                    stateBeforeServePanel = Enum_PanelState.Open;
-                }
-            }
-            if (currentMinigame == Enum_MiniGameType.Stiring)
-            {
-                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Stiring)
-                {
-                    Core.Audio.PlaySoundEffect(SFX_Stiring);
-                    canPlaySFX_Stiring = false;
-                }
-                if (cooldownTime_SFX_Stiring < 0 && !canPlaySFX_Stiring)
-                {
-                    canPlaySFX_Stiring = true;
-                    cooldownTime_SFX_Stiring = 4f;
-                }
-                else 
-                {
-                    cooldownTime_SFX_Stiring -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-
-                StiringMinigame.Update(gameTime);
-                UpdateMiniGameStiringUI();
-                Stirring_Anim.Play();
-                Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();   
-                if (StiringMinigame.IsComplated())
-                {
-                    StiringMinigame.Stop();
-                    Stirring_Anim.Stop();
-                    currentMinigame = Enum_MiniGameType.None;
-                    stateBeforeServePanel = Enum_PanelState.Open;
-                }
-
-            }
-
-            //Update movingNPC
-            foreach (var movnpc in movingnpcs)
-                movnpc.Update(gameTime);
-
-            UpdateConversation();
-            AnimationText.Update(gameTime);
-            //Add Code Above
-
-#if DEBUG
-            P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
-            P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
-#endif
-
-            //base DO NOT DELETE
-            base.Update(gameTime);
-            UserInterface.Active.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
@@ -1220,12 +1117,135 @@ namespace CocktailProject.Scenes
 
         }
 
-        // _____________________main funciton__________________
+        public override void Update(GameTime gameTime)
+        {
+            // Handle fade-in
+            if (shouldFadeIn)
+            {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    EnableFadePanel(false);
+                    stateImgCustomer = Enum_PanelState.Pos1;
+                    shouldFadeIn = false;
+
+                    ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
+                    ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
+                }
+                return;
+            }
+
+            // UI updates first
+            UpdateUILogic(gameTime);
+            Utilities.ShakeHelper.Update(gameTime);
+
+            // Handle fade-out
+            if (shouldFadeOut)
+            {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                {
+                    shouldFadeOut = false;
+                    Core.ChangeScene(new Thanks());
+                }
+                return;
+            }
+
+            // Skip all updates if no customer interaction
+            if (currentCustomerState != Enum_CutomerState.WaitingForServe)
+            {
+                base.Update(gameTime);
+                UserInterface.Active.Update(gameTime);
+                return;
+            }
+
+            // Update animations and UI
+            Shaking_Anim.Update(gameTime);
+            Stirring_Anim.Update(gameTime);
+            UpdateUILogic(gameTime);
+
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Handle Shaking minigame
+            if (currentMinigame == Enum_MiniGameType.Shaking)
+            {
+                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Shaking)
+                {
+                    Core.Audio.PlaySoundEffect(SFX_Shaking);
+                    canPlaySFX_Shaking = false;
+                }
+
+                cooldownTime_SFX_Shaking -= elapsed;
+                if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
+                {
+                    canPlaySFX_Shaking = true;
+                    cooldownTime_SFX_Shaking = 2.5f;
+                }
+
+                ShakingMinigame.Update(gameTime);
+                UpdateMiniGameShakingUI();
+                Shaking_Anim.Play();
+                Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
+
+                if (ShakingMinigame.IsComplete())
+                {
+                    ShakingMinigame.Stop();
+                    Shaking_Anim.Stop();
+                    currentMinigame = Enum_MiniGameType.None;
+                    stateBeforeServePanel = Enum_PanelState.Open;
+                }
+            }
+
+            // Handle Stirring minigame
+            else if (currentMinigame == Enum_MiniGameType.Stiring)
+            {
+                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Stiring)
+                {
+                    Core.Audio.PlaySoundEffect(SFX_Stiring);
+                    canPlaySFX_Stiring = false;
+                }
+
+                cooldownTime_SFX_Stiring -= elapsed;
+                if (cooldownTime_SFX_Stiring < 0 && !canPlaySFX_Stiring)
+                {
+                    canPlaySFX_Stiring = true;
+                    cooldownTime_SFX_Stiring = 4f;
+                }
+
+                StiringMinigame.Update(gameTime);
+                UpdateMiniGameStiringUI();
+                Stirring_Anim.Play();
+                Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
+
+                if (StiringMinigame.IsComplated())
+                {
+                    StiringMinigame.Stop();
+                    Stirring_Anim.Stop();
+                    currentMinigame = Enum_MiniGameType.None;
+                    stateBeforeServePanel = Enum_PanelState.Open;
+                }
+            }
+
+            // Moving NPC updates
+            foreach (var movnpc in movingnpcs)
+                movnpc.Update(gameTime);
+
+            // Conversation and text
+            UpdateConversation();
+            AnimationText.Update(gameTime);
+
+#if DEBUG
+            P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
+            P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
+#endif
+
+            base.Update(gameTime);
+            UserInterface.Active.Update(gameTime);
+        }
         protected void UpdateUILogic(GameTime gameTime)
         {
             CheckCurrentCountPart();
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //alcohol panel
+            // --- Alcohol panel ---
             if (openAlcoholPanel)
             {
                 SlidePanel(FP_Alcohol, 0, 20, Enum_SlideDirection.Right);
@@ -1237,7 +1257,7 @@ namespace CocktailProject.Scenes
                 SlidePanel(BTN_Alcohol, -25, 20, Enum_SlideDirection.Right);
             }
 
-            //mixer panel
+            // --- Mixer panel ---
             if (openMixerPanel)
             {
                 SlidePanel(FP_Mixer, 0, 20, Enum_SlideDirection.Right);
@@ -1249,64 +1269,77 @@ namespace CocktailProject.Scenes
                 SlidePanel(BTN_Mixer, -25, 20, Enum_SlideDirection.Right);
             }
 
-            //minigame panel
-            if (openMinigamePanel == Enum_PanelState.Open)
-                SlidePanel(P_Minigame, 0, 20, Enum_SlideDirection.Right);
-            else if (openMinigamePanel == Enum_PanelState.Close)
+            // --- Minigame panel ---
+            switch (openMinigamePanel)
             {
-                if (SlidePanel(P_Minigame, -600, 20, Enum_SlideDirection.Up))
-                    openMinigamePanel = Enum_PanelState.InitPosWarp;
+                case Enum_PanelState.Open:
+                    SlidePanel(P_Minigame, 0, 20, Enum_SlideDirection.Right);
+                    break;
+                case Enum_PanelState.Close:
+                    if (SlidePanel(P_Minigame, -600, 20, Enum_SlideDirection.Up))
+                        openMinigamePanel = Enum_PanelState.InitPosWarp;
+                    break;
+                case Enum_PanelState.InitPosWarp:
+                    P_Minigame.Offset = new Vector2(-800, 0);
+                    break;
             }
-            else if (openMinigamePanel == Enum_PanelState.InitPosWarp)
-                P_Minigame.Offset = new Vector2(-800, 0);
 
-            //open before serve panel
-            if (stateBeforeServePanel == Enum_PanelState.InitPosWarp)
-                P_BeforeServe.Offset = new Vector2(-800, 600);
-            else if (stateBeforeServePanel == Enum_PanelState.InitPosSlide)
-                SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
-            else if (stateBeforeServePanel == Enum_PanelState.Open)
-                SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right);
-            else if (stateBeforeServePanel == Enum_PanelState.Close)
-                SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left);
-            else if (stateBeforeServePanel == Enum_PanelState.Pos1)
-                SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Up);
-            if(stateBeforeServePanel == Enum_PanelState.Pos2)
-                if(SlidePanel(P_BeforeServe,-800,20,Enum_SlideDirection.Left))
-                    stateBeforeServePanel = Enum_PanelState.InitPosWarp;
+            // --- Before Serve panel ---
+            switch (stateBeforeServePanel)
+            {
+                case Enum_PanelState.InitPosWarp:
+                    P_BeforeServe.Offset = new Vector2(-800, 600);
+                    break;
+                case Enum_PanelState.InitPosSlide:
+                    SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
+                    break;
+                case Enum_PanelState.Open:
+                    SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right);
+                    break;
+                case Enum_PanelState.Close:
+                    SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left);
+                    break;
+                case Enum_PanelState.Pos1:
+                    SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Up);
+                    break;
+                case Enum_PanelState.Pos2:
+                    if (SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left))
+                        stateBeforeServePanel = Enum_PanelState.InitPosWarp;
+                    break;
+            }
 
-            //Animation After Serve Panel
-            if (stateArtAfterServePanel == Enum_PanelState.InitPosWarp)
-                P_ArtAfterServe.Offset = new Vector2(0, 1080);
-            else if (stateArtAfterServePanel == Enum_PanelState.Pos1)
-                SlidePanel(P_ArtAfterServe, 480, 20, Enum_SlideDirection.Up);
-            else if(stateArtAfterServePanel == Enum_PanelState.Pos2)
-                if (SlidePanel(P_ArtAfterServe, -800, 20, Enum_SlideDirection.Left))
-                    stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
+            // --- After Serve panel ---
+            switch (stateArtAfterServePanel)
+            {
+                case Enum_PanelState.InitPosWarp:
+                    P_ArtAfterServe.Offset = new Vector2(0, 1080);
+                    break;
+                case Enum_PanelState.Pos1:
+                    SlidePanel(P_ArtAfterServe, 480, 20, Enum_SlideDirection.Up);
+                    break;
+                case Enum_PanelState.Pos2:
+                    if (SlidePanel(P_ArtAfterServe, -800, 20, Enum_SlideDirection.Left))
+                        stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
+                    break;
+            }
 
+            // --- Auto-close panels ---
             if (stateArtAfterServePanel == Enum_PanelState.Pos1 && stateBeforeServePanel == Enum_PanelState.Pos1)
             {
-                timeToCloseBeforeAndAfteServePanel -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                timeToCloseBeforeAndAfteServePanel -= elapsed;
                 if (timeToCloseBeforeAndAfteServePanel < 0)
-                {
-                    //stateArtAfterServePanel = Enum_PanelState.Pos2;
-                    //stateBeforeServePanel = Enum_PanelState.Pos2;
-                    //timeToCloseBeforeAndAfteServePanel = 3.0f;
-                    //canGoNextConversation = true;
-                    //haveDoneOrder = true;
                     stateCocktailResultPanel = Enum_PanelState.Pos1;
-
-                }
-                Debug.WriteLine("Time to close: " + timeToCloseBeforeAndAfteServePanel);
             }
 
+            // --- Cocktail result panel ---
             switch (stateCocktailResultPanel)
-            { 
+            {
                 case Enum_PanelState.InitPosWarp:
                     Img_CocktailResult.Offset = new Vector2(1920, 75);
                     break;
                 case Enum_PanelState.Pos1:
-                    if(SlidePanel(Img_CocktailResult, 800, 10, Enum_SlideDirection.Left)){
+                    if (SlidePanel(Img_CocktailResult, 800, 5, Enum_SlideDirection.Left))
+                    {
                         stateArtAfterServePanel = Enum_PanelState.Pos2;
                         stateBeforeServePanel = Enum_PanelState.Pos2;
                         timeToCloseBeforeAndAfteServePanel = 3.0f;
@@ -1317,37 +1350,59 @@ namespace CocktailProject.Scenes
                     }
                     break;
                 case Enum_PanelState.Pos2:
-                    if (SlidePanel(Img_CocktailResult, -200, 20, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_CocktailResult, -300, 10, Enum_SlideDirection.Left))
                         stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
                     break;
             }
 
+            // --- Customer Image Panel ---
+            switch (stateImgCustomer)
+            {
+                case Enum_PanelState.InitPosWarp:
+                    currentCustomerState = Enum_CutomerState.Entering;
+                    Img_Customer.Offset = new Vector2(1920, 27);
+                    stateImgCustomer = Enum_PanelState.Pos1;
+                    ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
+                    ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
+                    break;
+
+                case Enum_PanelState.Pos1:
+                    if (SlidePanel(Img_Customer, 450, 5, Enum_SlideDirection.Left))
+                    {
+                        ShakeHelper.SetShakeSpeed(Img_Customer, 2.5f);
+                        ShakeHelper.SetShakeAmplitude(Img_Customer, 0.25f);
+                        stateImgCustomer = Enum_PanelState.None;
+                        inStartConversation = true;
+                        currentCustomerState = Enum_CutomerState.WaitingForServe;
+                    }
+                    break;
+
+                case Enum_PanelState.Pos2:
+                    EnableOrderPanel(false);
+                    if (SlidePanel(Img_Customer, -300, 10, Enum_SlideDirection.Left))
+                    {
+                        RP_CustomerName.Text = Customers[numbercustomer]._Name;
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                        stateImgCustomer = Enum_PanelState.InitPosWarp;
+                        currentCustomerState = Enum_CutomerState.Leaving;
+                    }
+                    break;
+            }
+
 #if DEBUG
-            if(Core.Input.Keyboard.WasKeyJustPressed(Keys.T))
-            {
-                stateCocktailResultPanel = Enum_PanelState.Pos1;
-            }
-            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Y))
-            {
-                stateCocktailResultPanel = Enum_PanelState.Pos2;
-            }
-            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.U))
-            {
-                stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
-            }
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.T)) stateCocktailResultPanel = Enum_PanelState.Pos1;
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Y)) stateCocktailResultPanel = Enum_PanelState.Pos2;
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.U)) stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
 #endif
-
         }
-
         protected void UpdateConversation()
         {
             RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
-            RP_ConversationCustomer.AlignToCenter = true;
 
-            // --- Skip text animation if left-click while animating ---
-            if (!AnimationText.IsFinished() &&
-                Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) &&
-                canSkipConversation)
+            bool mouseClick = Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left);
+
+            // Skip animation
+            if (!AnimationText.IsFinished() && mouseClick && canSkipConversation)
             {
                 AnimationText.Skip();
                 canSkipConversation = false;
@@ -1355,179 +1410,150 @@ namespace CocktailProject.Scenes
                 return;
             }
 
-            // --- When text animation finishes by itself ---
+            // Animation finished automatically
             if (AnimationText.IsFinished())
             {
                 canSkipConversation = false;
                 canGoNextConversation = true;
             }
 
-            // --- Handle advancing conversation ---
-            if ((canGoNextConversation && Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) || haveDoneOrder || inStartConversation))
+            // Advance conversation if conditions met
+            if (!(canGoNextConversation && mouseClick || haveDoneOrder || inStartConversation)) return;
+
+            switch (currentPhase)
             {
-                switch (currentPhase)
-                {
-                    case ConversationPhase.SmallTalkBeforeOrder:
-                        EnableOrderPanel(true);
-                        inStartConversation = false;
-                        // Get line from NPC (Day = 1 here, but you can make it dynamic)
-                        string beforeOrderLine = Customers[numbercustomer].GetConversationBeforeOrder(1);
+                case ConversationPhase.SmallTalkBeforeOrder:
+                    inStartConversation = false;
+                    EnableOrderPanel(true);
 
-                        if (beforeOrderLine != null)
-                        {
-                            AnimationText = new TaggedTextRevealer(beforeOrderLine, 0.05);
-                            AnimationText.Start();
-                            canSkipConversation = true;
-                            canGoNextConversation = false;
-                        }
-                        else
-                        {
-                            // No more before-order text, move into ordering
-                            Debug.WriteLine("Go Next Conversation (Now Ordering Cocktail)");
+                    string beforeOrderLine = Customers[numbercustomer].GetConversationBeforeOrder(1);
+                    if (beforeOrderLine != null)
+                    {
+                        AnimationText = new TaggedTextRevealer(beforeOrderLine, 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                    }
+                    else
+                    {
+                        AnimationText = new TaggedTextRevealer($"Please make me a {{MENU_TEXT}}{str_targetCocktail_Name}{{DEFAULT}}.", 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                        currentPhase = ConversationPhase.Ordering;
+                        ActiveMixerAndAlcholButton(false);
+                    }
+                    break;
 
-                            AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
-                            AnimationText.Start();
+                case ConversationPhase.Ordering:
+                    if (AnimationText.IsFinished())
+                        ActiveMixerAndAlcholButton(true);
 
-                            canSkipConversation = true;
-                            canGoNextConversation = false;
-                            currentPhase = ConversationPhase.Ordering;
-
-                            ActiveMixerAndAlcholButton(false);
-                        }
-                        break;
-
-                    case ConversationPhase.Ordering:
-                        if (AnimationText.IsFinished())
-                            ActiveMixerAndAlcholButton(true);
-
-                        // Wait for player click before moving to after-serve
-                        if (haveDoneOrder && canGoNextConversation)
-                        {
-                            ActiveMixerAndAlcholButton(false);
-                            if (cocktaillResualt == Enum_CocktaillResualt.None)
-                                cocktaillResualt = CalculateAccurateCocktail();
-
-                            // Get the after-serve line
-                            string afterServe1 = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
-
-                            if (afterServe1 != null)
-                            {
-                                // Show NPC reaction text, but do NOT auto-skip
-                                switch (cocktaillResualt)
-                                {
-                                    case Enum_CocktaillResualt.Success:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
-                                        break;
-                                    case Enum_CocktaillResualt.Aceptable:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-                                        break;
-                                    case Enum_CocktaillResualt.Fail:
-                                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
-                                        break;
-                                }
-
-                                AnimationText = new TaggedTextRevealer(afterServe1, 0.05);
-                                AnimationText.Start();
-                                canSkipConversation = true;
-                                canGoNextConversation = true;
-                            }
-                            else
-                            {
-                                haveDoneOrder = false;
-                                canSkipConversation = true;
-                                canGoNextConversation = false;
-                                currentPhase = ConversationPhase.AfterServe;
-                                _currentCocktail.ClearAllIngredients();
-                                UpdateCocktailBars();
-                            }
-                        }
-                        break;
-
-
-                    case ConversationPhase.AfterServe:
-
-                        // If we haven’t calculated result yet, do it
+                    if (haveDoneOrder && canGoNextConversation)
+                    {
+                        ActiveMixerAndAlcholButton(false);
                         if (cocktaillResualt == Enum_CocktaillResualt.None)
                             cocktaillResualt = CalculateAccurateCocktail();
 
+                        string afterServe1 = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
 
-                        // Get the after-serve line
-                        string afterServe = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
-
-                        if (afterServe != null)
+                        if (afterServe1 != null)
                         {
-                            AnimationText = new TaggedTextRevealer(afterServe, 0.05);
-                            AnimationText.Start();
+                            switch (cocktaillResualt)
+                            {
+                                case Enum_CocktaillResualt.Success:
+                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
+                                    break;
+                                case Enum_CocktaillResualt.Aceptable:
+                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                                    break;
+                                case Enum_CocktaillResualt.Fail:
+                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
+                                    break;
+                            }
 
+                            AnimationText = new TaggedTextRevealer(afterServe1, 0.05);
+                            AnimationText.Start();
                             canSkipConversation = true;
                             canGoNextConversation = true;
                         }
                         else
                         {
-                            // No after-serve, go directly to chit-chat
-                            currentPhase = ConversationPhase.SmallTalkAfterOrder;
-                            cocktaillResualt = Enum_CocktaillResualt.None;
-                            
                             haveDoneOrder = false;
                             canSkipConversation = true;
                             canGoNextConversation = false;
-
+                            currentPhase = ConversationPhase.AfterServe;
+                            _currentCocktail.ClearAllIngredients();
+                            UpdateCocktailBars();
                         }
+                    }
+                    break;
 
-                        break;
+                case ConversationPhase.AfterServe:
+                    if (cocktaillResualt == Enum_CocktaillResualt.None)
+                        cocktaillResualt = CalculateAccurateCocktail();
 
-                    case ConversationPhase.SmallTalkAfterOrder:
-                        // Pull chit chat
-                        string chitChatLine = Customers[numbercustomer].GetConversationChitChat(1);
+                    string afterServe = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
+                    if (afterServe != null)
+                    {
+                        AnimationText = new TaggedTextRevealer(afterServe, 0.05);
+                        AnimationText.Start();
+                        canSkipConversation = true;
+                        canGoNextConversation = true;
+                    }
+                    else
+                    {
+                        currentPhase = ConversationPhase.SmallTalkAfterOrder;
+                        cocktaillResualt = Enum_CocktaillResualt.None;
+                        haveDoneOrder = false;
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                    }
+                    break;
 
-                        if (chitChatLine != null)
+                case ConversationPhase.SmallTalkAfterOrder:
+                    string chitChatLine = Customers[numbercustomer].GetConversationChitChat(1);
+
+                    if (chitChatLine != null)
+                    {
+                        AnimationText = new TaggedTextRevealer(chitChatLine, 0.05);
+                        AnimationText.Start();
+                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                        canSkipConversation = true;
+                        canGoNextConversation = false;
+                    }
+                    else
+                    {
+                        stateCocktailResultPanel = Enum_PanelState.Pos2;
+                        Customers[numbercustomer].InceaseNumberOfVisitTodya();
+
+                        if (AnimationText.IsFinished())
                         {
-                            AnimationText = new TaggedTextRevealer(chitChatLine, 0.05);
-                            AnimationText.Start();
-                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-                            canSkipConversation = true;
-                            canGoNextConversation = false;
-                        }
-                        else
-                        {
-                            stateCocktailResultPanel = Enum_PanelState.Pos2;
-                            Customers[numbercustomer].InceaseNumberOfVisitTodya();
-                            if (AnimationText.IsFinished())
+                            currentPhase = ConversationPhase.SmallTalkBeforeOrder;
+                            RandomTargetCocktail();
+                            ActiveMixerAndAlcholButton(false);
+                            numbercustomer++;
+
+                            if (numbercustomer > 4)
                             {
-                                // If no chit-chat left, cycle back
-                                Debug.WriteLine("Looping back to Small Talk Before Order.");
-
-                                currentPhase = ConversationPhase.SmallTalkBeforeOrder;
-
-                                RandomTargetCocktail();
-                                ActiveMixerAndAlcholButton(false);
-
-                                numbercustomer++;
-
-                                if (numbercustomer > 4)
+                                Day++;
+                                if (Day > 2)
                                 {
-                                    //Core.ChangeScene(new Scenes.Thanks());
-                                    Day++;
-                                    if (Day > 2)
-                                    {
-                                        EnableFadePanel(true);
-                                        shouldFadeOut = true;
-                                        break;
-                                    }
-                                    numbercustomer = 0;
+                                    EnableFadePanel(true);
+                                    shouldFadeOut = true;
                                     break;
                                 }
-
-                                RP_CustomerName.Text = Customers[numbercustomer]._Name;
-                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-                                AnimationText = new TaggedTextRevealer("", 0.05);
-                                RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+                                numbercustomer = 0;
+                                break;
                             }
-                        }
-                        break;
-                }
-            }
 
+                            stateImgCustomer = Enum_PanelState.Pos2;
+                            AnimationText = new TaggedTextRevealer("", 0.05);
+                            RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
+                        }
+                    }
+                    break;
+            }
         }
 
         // ----------------------Fucntion-----------------------
@@ -1618,7 +1644,7 @@ namespace CocktailProject.Scenes
         {
             BTN_Alcohol.Enabled = Enable;
             BTN_Mixer.Enabled = Enable;
-        }                                                                                                            
+        }
         protected void BTNIngredeientActive(bool Enable)
         {
             BTN_Mixer_CanberryJuice.Enabled = Enable;
@@ -1695,7 +1721,8 @@ namespace CocktailProject.Scenes
             BTNMethodVisible(false);
             VisibleMakingCocktailVisual(false);
         }
-        protected void EnableBTNBeforeServe(bool eneble) { 
+        protected void EnableBTNBeforeServe(bool eneble)
+        {
             BTN_AddIce.Enabled = eneble;
             BTN_Serve.Enabled = eneble;
             BTN_Rest_BeforeServe.Enabled = eneble;
@@ -1915,7 +1942,8 @@ namespace CocktailProject.Scenes
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
-        public void InitMakingVisualCocktail() {
+        public void InitMakingVisualCocktail()
+        {
             P_MakingCocktailVisual = new Panel(new Vector2(300, 200), PanelSkin.None, Anchor.TopCenter);
             P_MakingCocktailVisual.Padding = new Vector2(0, 0);
             P_MakingCocktailVisual.Offset = new Vector2(-100, -25);
@@ -2042,7 +2070,8 @@ namespace CocktailProject.Scenes
                 }
             }
         }
-        public void VisibleMakingCocktailVisual(bool visible) {
+        public void VisibleMakingCocktailVisual(bool visible)
+        {
             P_MakingCocktailVisual.Visible = visible;
         }
 
@@ -2138,7 +2167,7 @@ namespace CocktailProject.Scenes
         }
 
         //---------------Sound and BGM----------------
-        public void InitSFX() 
+        public void InitSFX()
         {
             SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
             SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/Interface_Selection");
@@ -2150,9 +2179,10 @@ namespace CocktailProject.Scenes
             SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
             SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
         }
-        public void InitBGM() { 
+        public void InitBGM()
+        {
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
-            Core.Audio.PlaySong(BGM_themeSong01,true);
+            Core.Audio.PlaySong(BGM_themeSong01, true);
             Core.Audio.SongVolume = 0.25f;
         }
 
@@ -2284,5 +2314,13 @@ namespace CocktailProject.Scenes
         Pos2,
         Pos3
 
+    }
+
+    public enum Enum_CutomerState
+    {
+        None,
+        Entering,
+        WaitingForServe,
+        Leaving
     }
 }
