@@ -27,12 +27,13 @@ namespace CocktailProject.Scenes
         private BG_Parallax fg;
         private Point screenCenter;
 
+        public Image Logo; public Texture2D T_Logo;
         public Panel P_Start;
         public Panel P_Credit;
         public Panel P_Exit;
-        public Button BTN_Start;
-        public Button BTN_Credit;
-        public Button BTN_Exit;
+        public Button BTN_Start; public Texture2D T_BTN_Start_Default; public Texture2D T_BTN_Start_Hover;
+        public Button BTN_Credit; public Texture2D T_BTN_Credit_Default; public Texture2D T_BTN_Credit_Hover;
+        public Button BTN_Exit; public Texture2D T_BTN_Exit_Default; public Texture2D T_BTN_Exit_Hover;
 
         public override void Initialize()
         {
@@ -43,7 +44,7 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            
+
             if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape)) Core.Instance.Exit();
             else if (Core.Input.Keyboard.WasKeyJustPressed(Keys.E)) Core.ChangeScene(new GamePlay());
 
@@ -60,27 +61,47 @@ namespace CocktailProject.Scenes
             Texture2D BG_Texture = Content.Load<Texture2D>("images/Background/BGP_Background");
             Texture2D FG_Texture = Content.Load<Texture2D>("images/Background/BGP_Foreground");
 
+            T_BTN_Start_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Default");
+            T_BTN_Start_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Hover");
+            T_BTN_Credit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Default");
+            T_BTN_Credit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Hover");
+            T_BTN_Exit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Default");
+            T_BTN_Exit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Hover");
+            T_Logo = Content.Load<Texture2D>("images/UI/MainMenu_UI/Bar410_Logo");
+
             // Parallax || xSensitivity, ySensitivity, extraImageScale
             bg = new BG_Parallax(BG_Texture, screenCenter, 0.09f, 0.03f, 1.1f);
             fg = new BG_Parallax(FG_Texture, screenCenter, 0.02f, 0.005f, 1.02f);
 
-            P_Start = new Panel(new Vector2(300, 100), PanelSkin.Default, Anchor.Center);
-            P_Start.Offset = new Vector2(-400, -50);
-            P_Credit = new Panel(new Vector2(300, 100), PanelSkin.Default, Anchor.Center);
-            P_Credit.Offset = new Vector2(-400, 100);
-            P_Exit = new Panel(new Vector2(300, 100), PanelSkin.Default, Anchor.Center);
-            P_Exit.Offset = new Vector2(-400, 250);
+            // Panels
+            P_Start = new Panel(new Vector2(240, 80), PanelSkin.None, Anchor.TopLeft);
+            P_Start.Offset = new Vector2(200, 536);
+            P_Credit = new Panel(new Vector2(240, 80), PanelSkin.None, Anchor.TopLeft);
+            P_Credit.Offset = new Vector2(200, 660);
+            P_Exit = new Panel(new Vector2(240, 80), PanelSkin.None, Anchor.TopLeft);
+            P_Exit.Offset = new Vector2(200, 794);
 
-            BTN_Start = new Button("Start", ButtonSkin.Default, Anchor.Center);
-            BTN_Start.Size = new Vector2(300, 100);
-            BTN_Start.OnMouseDown  = (Entity e) => {
-                Core.ChangeScene(new GamePlay()); 
+            Logo = new Image(T_Logo, anchor: Anchor.TopLeft);
+            Logo.Size = new Vector2(470, 320);
+            Logo.Offset = new Vector2(100, 120);
+
+            // Buttons
+            BTN_Start = new Button("", ButtonSkin.Default, Anchor.Center);
+            BTN_Start.Size = new Vector2(240, 80);
+            BTN_Start.SetCustomSkin(T_BTN_Start_Default, T_BTN_Start_Hover, T_BTN_Start_Hover);
+            BTN_Start.OnMouseDown = (Entity e) => {
+                Core.ChangeScene(new GamePlay());
             };
-            BTN_Credit = new Button("Credit", ButtonSkin.Default, Anchor.Center);
-            BTN_Credit.Size = new Vector2(300, 100);
+            BTN_Credit = new Button("", ButtonSkin.Default, Anchor.Center);
+            BTN_Credit.Size = new Vector2(240, 80);
+            BTN_Credit.SetCustomSkin(T_BTN_Credit_Default, T_BTN_Credit_Hover, T_BTN_Credit_Hover);
+            //BTN_Credit.OnMouseDown = (Entity e) => {
+            //    Core.ChangeScene(new GamePlay());
+            //};
 
-            BTN_Exit = new Button("Exit", ButtonSkin.Default, Anchor.Center);
-            BTN_Exit.Size = new Vector2(300, 100);
+            BTN_Exit = new Button("", ButtonSkin.Default, Anchor.Center);
+            BTN_Exit.Size = new Vector2(240, 80);
+            BTN_Exit.SetCustomSkin(T_BTN_Exit_Default, T_BTN_Exit_Hover, T_BTN_Exit_Hover);
             BTN_Exit.OnMouseDown = (Entity e) => {
                 Core.Instance.Exit();
             };
@@ -93,6 +114,7 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_Start);
             UserInterface.Active.AddEntity(P_Credit);
             UserInterface.Active.AddEntity(P_Exit);
+            UserInterface.Active.AddEntity(Logo);
 
             base.LoadContent();
         }
@@ -104,7 +126,6 @@ namespace CocktailProject.Scenes
             Core.SpriteBatch.Begin();
             bg.Draw(Core.SpriteBatch, Core.Graphics, new Vector2(0, -50));
             fg.Draw(Core.SpriteBatch, Core.Graphics, new Vector2(0, 0));
-            
             Core.SpriteBatch.End();
 
             UserInterface.Active.Draw(Core.SpriteBatch);
