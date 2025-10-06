@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CocktailProject
 {
-    public static class  GlobalVariable
+    public static class GlobalVariable
     {
         public static int Income = 0;
         public static int Tip = 0;

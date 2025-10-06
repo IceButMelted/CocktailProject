@@ -39,6 +39,7 @@
     <ProjectReference Include="..\MonoGameLibrary\MonoGameLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\images\UI\Summary\" />
     <Folder Include="Enum\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="CollectPackageReferences">
