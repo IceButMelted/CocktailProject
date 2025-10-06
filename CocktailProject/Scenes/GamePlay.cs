@@ -68,7 +68,11 @@ namespace CocktailProject.Scenes
         SoundEffect SFX_PressedBTN;
         SoundEffect SFX_Serve;
         SoundEffect SFX_Shaking;
+        float cooldownTime_SFX_Shaking = 2.5f;
+        bool canPlaySFX_Shaking = true;
         SoundEffect SFX_Stiring;
+        float cooldownTime_SFX_Stiring = 4f;
+        bool canPlaySFX_Stiring = true;
         SoundEffect SFX_Pouring;
         SoundEffect SFX_Peppermint;
         SoundEffect SFX_AddIce;
@@ -1123,6 +1127,21 @@ namespace CocktailProject.Scenes
             //update minigame Shaking
             if (currentMinigame == Enum_MiniGameType.Shaking)
             {
+                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Shaking)
+                {
+                    Core.Audio.PlaySoundEffect(SFX_Shaking);
+                    canPlaySFX_Shaking = false;
+                }
+                if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
+                {
+                    canPlaySFX_Shaking = true;
+                    cooldownTime_SFX_Shaking = 2.5f; // half a second cooldown
+                }
+                else
+                {
+                    cooldownTime_SFX_Shaking -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+
                 ShakingMinigame.Update(gameTime);
                 UpdateMiniGameShakingUI();
                 Shaking_Anim.Play();
@@ -1137,6 +1156,21 @@ namespace CocktailProject.Scenes
             }
             if (currentMinigame == Enum_MiniGameType.Stiring)
             {
+                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Stiring)
+                {
+                    Core.Audio.PlaySoundEffect(SFX_Stiring);
+                    canPlaySFX_Stiring = false;
+                }
+                if (cooldownTime_SFX_Stiring < 0 && !canPlaySFX_Stiring)
+                {
+                    canPlaySFX_Stiring = true;
+                    cooldownTime_SFX_Stiring = 4f;
+                }
+                else 
+                {
+                    cooldownTime_SFX_Stiring -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+
                 StiringMinigame.Update(gameTime);
                 UpdateMiniGameStiringUI();
                 Stirring_Anim.Play();

@@ -2,15 +2,17 @@
 <TextureAtlas>
 	<Texture>images/MiniGame/QTE_shake</Texture>
 	<Regions>
-		<Region name="QTE_shake01" x="0" y="0" width="800" height="480" />
-		<Region name="QTE_shake02" x="0" y="480" width="800" height="480" />
-		<Region name="QTE_shake03" x="0" y="960" width="800" height="480" />
+		<Region name="QTE_shake01" x="0" y="0" width="800" height="600" />
+		<Region name="QTE_shake02" x="0" y="600" width="800" height="600" />
+		<Region name="QTE_shake03" x="0" y="1200" width="800" height="600" />
+		<Region name="QTE_shake04" x="0" y="1800" width="800" height="600" />
 	</Regions>
 	<Animations>
-		<Animation name="Shaking_Animation" delay="120">
+		<Animation name="Shaking_Animation" delay="180">
 			<Frame region="QTE_shake01" />
 			<Frame region="QTE_shake02" />
 			<Frame region="QTE_shake03" />
+			<Frame region="QTE_shake04" />
 		</Animation>
 	</Animations>
 </TextureAtlas>
