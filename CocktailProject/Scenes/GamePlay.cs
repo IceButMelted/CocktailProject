@@ -40,14 +40,16 @@ namespace CocktailProject.Scenes
     {
         #region Cocktail
         private static string str_targetCocktail_Name;
+        private static string str_currentCocktail_Name;
         private Cocktail _targetCoctail = new Cocktail();
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
         private Enum_CocktaillResualt cocktaillResualt = Enum_CocktaillResualt.None;
         #endregion
 
         #region NPC
-        protected byte Day = 1;
-        protected int numbercustomer = 0;
+        protected byte Day = GlobalVariable.Day;
+        protected bool shouldEndDay = false;
+        protected int numbercustomer = GlobalVariable.customerNumber;
         protected string _NPC_Name;
         protected string _tmp_NPC_Name;
         protected List<BaseCharacter> Customers = new List<BaseCharacter>();
@@ -67,11 +69,12 @@ namespace CocktailProject.Scenes
 
         SoundEffect SFX_PressedBTN;
         SoundEffect SFX_Serve;
+        bool canPlaySFX_Serve = true;
         SoundEffect SFX_Shaking;
         float cooldownTime_SFX_Shaking = 2.5f;
         bool canPlaySFX_Shaking = true;
         SoundEffect SFX_Stiring;
-        float cooldownTime_SFX_Stiring = 4f;
+        float cooldownTime_SFX_Stiring = 1.2f;
         bool canPlaySFX_Stiring = true;
         SoundEffect SFX_Pouring;
         SoundEffect SFX_Peppermint;
@@ -109,7 +112,7 @@ namespace CocktailProject.Scenes
 
         protected int TextUIOffeset_BTN = -30;
 
-        public int CurrentPage = 0;
+        public int CurrentPage = 1;
         public int TotalPages = 0;
 
         protected SpriteFont RegularFont;
@@ -271,7 +274,7 @@ namespace CocktailProject.Scenes
 #if DEBUG
         public Paragraph P_Debug_targetCocktail;
         public Paragraph P_Debug_CurrentCocktail;
-
+        public Paragraph P_Debug_GlobalVariable;
 #endif
 
         //BG
@@ -832,7 +835,7 @@ namespace CocktailProject.Scenes
             BTN_AddIce.ButtonParagraph.OutlineWidth = 0;
             BTN_AddIce.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_AddIce);
                 _currentCocktail.AddIce(true);
                 Debug.WriteLine("Added Ice");
                 Debug.WriteLine(_currentCocktail.Info());
@@ -849,6 +852,8 @@ namespace CocktailProject.Scenes
                 ActiveMixerAndAlcholButton(false);
 
                 _currentCocktail.SetTypeOfCocktailBySearch();
+                _currentCocktail.SetNameOfCocktailBySearch();
+                Debug.WriteLine("--------***************** \n Target Cocktail is: " + _currentCocktail.GetName());
                 Debug.WriteLine("Served Cocktail");
                 Debug.WriteLine(_currentCocktail.Info());
                 float price = CalcualatePrice(_targetCoctail);
@@ -977,6 +982,9 @@ namespace CocktailProject.Scenes
 
             P_Debug_CurrentCocktail = new Paragraph("Current Cocktail: " + _currentCocktail.Info(), anchor: Anchor.TopLeft, size: new Vector2(300, 500));
             P_Debug_CurrentCocktail.Offset = new Vector2(300, 0);
+
+            P_Debug_GlobalVariable = new Paragraph(GlobalVariable.DebugPrintString() + 0 , anchor: Anchor.TopLeft, size: new Vector2(300, 500));
+            P_Debug_GlobalVariable.Offset = new Vector2(600, 0);
 #endif
             #endregion
 
@@ -1070,6 +1078,7 @@ namespace CocktailProject.Scenes
             //UserInterface.Active.AddEntity(P_Debug_targetCocktail);
             P_MainGame.AddChild(P_Debug_CurrentCocktail);
             P_MainGame.AddChild(P_Debug_targetCocktail);
+            P_MainGame.AddChild(P_Debug_GlobalVariable);
 #endif
 
             P_MainGame.AddChild(P_Ingredient);
@@ -1134,7 +1143,18 @@ namespace CocktailProject.Scenes
                 return;
             }
 
-            // UI updates first
+            if (shouldFadeOut) {
+
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 0, 255, 2.0f, ref fadeTimer))
+                {
+                    // go to thank scene
+                    shouldFadeOut = false;
+                    Core.ChangeScene(new Thanks());
+                }
+                return;
+            }
+
+                        
             UpdateUILogic(gameTime);
             Utilities.ShakeHelper.Update(gameTime);
 
@@ -1177,7 +1197,7 @@ namespace CocktailProject.Scenes
                 if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
                 {
                     canPlaySFX_Shaking = true;
-                    cooldownTime_SFX_Shaking = 2.5f;
+                    cooldownTime_SFX_Shaking = 3f;
                 }
 
                 ShakingMinigame.Update(gameTime);
@@ -1191,6 +1211,7 @@ namespace CocktailProject.Scenes
                     Shaking_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
+                    cooldownTime_SFX_Shaking = 2.5f;
                 }
             }
 
@@ -1199,7 +1220,8 @@ namespace CocktailProject.Scenes
             {
                 if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Stiring)
                 {
-                    Core.Audio.PlaySoundEffect(SFX_Stiring);
+                    PlaySoundEffectWithRandomPitch(SFX_Stiring, 0.5f);
+                    //Core.Audio.PlaySoundEffect(SFX_Stiring);
                     canPlaySFX_Stiring = false;
                 }
 
@@ -1207,7 +1229,7 @@ namespace CocktailProject.Scenes
                 if (cooldownTime_SFX_Stiring < 0 && !canPlaySFX_Stiring)
                 {
                     canPlaySFX_Stiring = true;
-                    cooldownTime_SFX_Stiring = 4f;
+                    cooldownTime_SFX_Stiring = 1.2f;
                 }
 
                 StiringMinigame.Update(gameTime);
@@ -1221,6 +1243,7 @@ namespace CocktailProject.Scenes
                     Stirring_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
+                    cooldownTime_SFX_Stiring = 4f;
                 }
             }
 
@@ -1235,6 +1258,7 @@ namespace CocktailProject.Scenes
 #if DEBUG
             P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
+            P_Debug_GlobalVariable.Text = GlobalVariable.DebugPrintString();
 #endif
 
             base.Update(gameTime);
@@ -1350,7 +1374,7 @@ namespace CocktailProject.Scenes
                     }
                     break;
                 case Enum_PanelState.Pos2:
-                    if (SlidePanel(Img_CocktailResult, -300, 10, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_CocktailResult, -400, 7, Enum_SlideDirection.Left))
                         stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
                     break;
             }
@@ -1367,7 +1391,7 @@ namespace CocktailProject.Scenes
                     break;
 
                 case Enum_PanelState.Pos1:
-                    if (SlidePanel(Img_Customer, 450, 5, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_Customer, 450, 7, Enum_SlideDirection.Left))
                     {
                         ShakeHelper.SetShakeSpeed(Img_Customer, 2.5f);
                         ShakeHelper.SetShakeAmplitude(Img_Customer, 0.25f);
@@ -1379,12 +1403,22 @@ namespace CocktailProject.Scenes
 
                 case Enum_PanelState.Pos2:
                     EnableOrderPanel(false);
-                    if (SlidePanel(Img_Customer, -300, 10, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_Customer, -400, 5, Enum_SlideDirection.Left))
                     {
-                        RP_CustomerName.Text = Customers[numbercustomer]._Name;
-                        Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-                        stateImgCustomer = Enum_PanelState.InitPosWarp;
-                        currentCustomerState = Enum_CutomerState.Leaving;
+                        if (numbercustomer > 1)
+                        {
+                            GlobalVariable.Day++;
+                            EnableFadePanel(true);
+                            shouldFadeOut = true;
+                            return;
+                        }
+                        else
+                        {
+                            RP_CustomerName.Text = Customers[numbercustomer]._Name;
+                            Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                            stateImgCustomer = Enum_PanelState.InitPosWarp;
+                            currentCustomerState = Enum_CutomerState.Leaving;
+                        }
                     }
                     break;
             }
@@ -1426,7 +1460,7 @@ namespace CocktailProject.Scenes
                     inStartConversation = false;
                     EnableOrderPanel(true);
 
-                    string beforeOrderLine = Customers[numbercustomer].GetConversationBeforeOrder(1);
+                    string beforeOrderLine = Customers[numbercustomer].GetConversationBeforeOrder(Day);
                     if (beforeOrderLine != null)
                     {
                         AnimationText = new TaggedTextRevealer(beforeOrderLine, 0.05);
@@ -1454,24 +1488,32 @@ namespace CocktailProject.Scenes
                         ActiveMixerAndAlcholButton(false);
                         if (cocktaillResualt == Enum_CocktaillResualt.None)
                             cocktaillResualt = CalculateAccurateCocktail();
+                        str_currentCocktail_Name = _currentCocktail.GetName();
+
+                        switch (cocktaillResualt)
+                        {
+                            case Enum_CocktaillResualt.Success:
+                                GlobalVariable.AddIncome((int)(_targetCoctail.GetPrice()));
+                                GlobalVariable.AddTip((int)(_targetCoctail.GetPrice() * 0.2f));
+                                GlobalVariable.AddCocktailDone(str_currentCocktail_Name, (int)(_targetCoctail.GetPrice()));
+
+                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
+                                break;
+                            case Enum_CocktaillResualt.Aceptable:
+                                GlobalVariable.AddIncome((int)_targetCoctail.GetPrice());
+                                GlobalVariable.AddCocktailDone(str_currentCocktail_Name, (int)_targetCoctail.GetPrice());
+
+                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
+                                break;
+                            case Enum_CocktaillResualt.Fail:
+                                Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
+                                break;
+                        }
 
                         string afterServe1 = Customers[numbercustomer].GetConversationAfterServe(cocktaillResualt);
 
                         if (afterServe1 != null)
                         {
-                            switch (cocktaillResualt)
-                            {
-                                case Enum_CocktaillResualt.Success:
-                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
-                                    break;
-                                case Enum_CocktaillResualt.Aceptable:
-                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-                                    break;
-                                case Enum_CocktaillResualt.Fail:
-                                    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
-                                    break;
-                            }
-
                             AnimationText = new TaggedTextRevealer(afterServe1, 0.05);
                             AnimationText.Start();
                             canSkipConversation = true;
@@ -1512,7 +1554,7 @@ namespace CocktailProject.Scenes
                     break;
 
                 case ConversationPhase.SmallTalkAfterOrder:
-                    string chitChatLine = Customers[numbercustomer].GetConversationChitChat(1);
+                    string chitChatLine = Customers[numbercustomer].GetConversationChitChat(Day);
 
                     if (chitChatLine != null)
                     {
@@ -1533,19 +1575,7 @@ namespace CocktailProject.Scenes
                             RandomTargetCocktail();
                             ActiveMixerAndAlcholButton(false);
                             numbercustomer++;
-
-                            if (numbercustomer > 4)
-                            {
-                                Day++;
-                                if (Day > 2)
-                                {
-                                    EnableFadePanel(true);
-                                    shouldFadeOut = true;
-                                    break;
-                                }
-                                numbercustomer = 0;
-                                break;
-                            }
+                            GlobalVariable.AddCustomer();
 
                             stateImgCustomer = Enum_PanelState.Pos2;
                             AnimationText = new TaggedTextRevealer("", 0.05);
@@ -1616,8 +1646,8 @@ namespace CocktailProject.Scenes
                 return Enum_CocktaillResualt.Aceptable;
             }
             return Enum_CocktaillResualt.Fail;
-
         }
+
         protected void CheckCurrentCountPart()
         {
             bool method = _currentCocktail.Getmethod() == Enum_Method.None;
@@ -1915,11 +1945,15 @@ namespace CocktailProject.Scenes
             if (_Page == Enum_Page.NextPage && CurrentPage < TotalPages)
             {
                 CurrentPage++;
+                if(CurrentPage > TotalPages)
+                    CurrentPage = TotalPages;
                 UpdatePageView();
             }
             if (_Page == Enum_Page.PreviousPage && CurrentPage > 1)
             {
                 CurrentPage--;
+                if (CurrentPage < 1)
+                    CurrentPage = 1;
                 UpdatePageView();
             }
         }
@@ -2209,29 +2243,6 @@ namespace CocktailProject.Scenes
             Cole.AddDayConversationFromJson("Content/Conversation/Cole_Conversation.json");
             Cole.SetID("NPC_05");
 
-            //Debug.WriteLine("-------- info ------");
-            //Debug.WriteLine("Character Name: " + Walter._Name);
-            //Debug.WriteLine("Character ID: " + Walter.GetID());
-            //Debug.WriteLine("Favorite Cocktails: " + string.Join(", ", Walter._FavoriteTypeOfCocktail));
-            //Debug.WriteLine("-------- Conversation ------");
-            //Debug.WriteLine("AfterServe : ");
-            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Success));
-            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Aceptable));
-            //Debug.WriteLine(Walter.GetConversationAfterServe(Enum_CocktaillResualt.Fail));
-            //Debug.WriteLine("Bfore Serve 1 : ");
-            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
-            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
-            //Debug.WriteLine("ChitChat 1");
-            //Debug.WriteLine(Walter.GetConversationChitChat(1));
-            //Debug.WriteLine(Walter.GetConversationChitChat(1));
-            //Debug.WriteLine(Walter.GetConversationChitChat(1));
-            //Debug.WriteLine("DeforeServe 2 :");
-            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
-            //Debug.WriteLine(Walter.GetConversationBeforeOrder(1));
-            //Debug.WriteLine("ChitChat 2");
-            //Debug.WriteLine(Walter.GetConversationChitChat(1));
-            //Debug.WriteLine(Walter.GetConversationChitChat(1));
-
             Customers.Add(Walter);
             Customers.Add(Owen);
             Customers.Add(Freya);
@@ -2273,7 +2284,6 @@ namespace CocktailProject.Scenes
             instance.Volume = Volume;
             instance.Play();
         }
-
 
         //--------------- Fade ----------------------
         public void InitFadePanel()

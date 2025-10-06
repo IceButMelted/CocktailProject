@@ -12,6 +12,8 @@ namespace CocktailProject.ClassCocktail
     /// </summary>
     public class CocktailBuilder : Cocktail
     {
+        protected string _Name = "Unknown Cocktail";
+
         /// <summary>
         /// Adds or updates the amount of alcohol in the cocktail.
         /// </summary>
@@ -115,11 +117,37 @@ namespace CocktailProject.ClassCocktail
             }
         }
 
-
-        public void IsSameIngredient()
+        public void SetNameOfCocktailBySearch()
         {
-            
+            _Name = GetNameOfCocktailBySearch();
         }
+
+        public string GetName()
+        {
+            return _Name;
+        }
+
+        public string GetNameOfCocktailBySearch()
+        {
+            foreach (var kvp in CocktailDicMaker.CocktailDictionary)
+            {
+                var cocktailName = kvp.Key;
+                var cocktail = kvp.Value;
+
+                if (cocktail.GetDicAlcohol().Count != _alcoholWithQuantity.Count ||
+                    cocktail.GetDicMixer().Count != _mixerWithQuantity.Count)
+                    continue;
+
+                if (cocktail.GetDicAlcohol().All(a => _alcoholWithQuantity.TryGetValue(a.Key, out var qtyA) && qtyA == a.Value) &&
+                    cocktail.GetDicMixer().All(m => _mixerWithQuantity.TryGetValue(m.Key, out var qtyM) && qtyM == m.Value))
+                {
+                    return cocktailName; 
+                }
+            }
+
+            return "Unknown Cocktail";
+        }
+
 
         /// <summary>
         /// Converts the builder to a regular Cocktail object.
