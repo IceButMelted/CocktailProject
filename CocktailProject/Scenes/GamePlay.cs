@@ -318,6 +318,8 @@ namespace CocktailProject.Scenes
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = true;
+
+            // #EBE4C6 light cream
             RichParagraphStyleInstruction.AddInstruction("MENU_TEXT", new RichParagraphStyleInstruction(fillColor: new Color(192, 130, 30)));
 
 
@@ -1149,7 +1151,7 @@ namespace CocktailProject.Scenes
                 {
                     // go to thank scene
                     shouldFadeOut = false;
-                    Core.ChangeScene(new Thanks());
+                    Core.ChangeScene(new Summary());
                 }
                 return;
             }
