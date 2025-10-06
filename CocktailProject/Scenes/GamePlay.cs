@@ -1090,10 +1090,13 @@ namespace CocktailProject.Scenes
             InitFadePanel();
             #endregion
 
+            Utilities.ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false,speed:2.5f);
+
         }
 
         public override void Update(GameTime gameTime)
         {
+
             if (shouldFadeIn) {
                 if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
                 {
@@ -1105,6 +1108,8 @@ namespace CocktailProject.Scenes
                 return; 
             }
 
+            Utilities.ShakeHelper.Update(gameTime);
+
             if (shouldFadeOut)
             {
                 if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
@@ -1112,6 +1117,7 @@ namespace CocktailProject.Scenes
                     shouldFadeOut = false;
                     Core.ChangeScene(new Thanks());
                 }
+                return;
             }
 
             Shaking_Anim.Update(gameTime);
