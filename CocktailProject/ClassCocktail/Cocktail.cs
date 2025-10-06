@@ -225,7 +225,6 @@ namespace CocktailProject.ClassCocktail
             return true;
         }
 
-
         /// <summary>
         /// Reset the cocktail to empty state.
         /// </summary>
