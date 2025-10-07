@@ -78,9 +78,9 @@ namespace CocktailProject.Scenes
 
         public override void LoadContent()
         {
-            Theme01 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
-            Core.Audio.PlaySong(Theme01, true);
-            Core.Audio.SongVolume = (0.25f);
+            Theme01 = Content.Load<Song>("Sound/Background_Music/PreviseScene");
+            Core.Audio.PlaySong(Theme01, false);
+            Core.Audio.SongVolume = (0.1f);
             PrevisAtlas = Content.Load<Texture2D>("images/Previs/Atlas_Previs");
 
             // Frames Configs
@@ -91,9 +91,9 @@ namespace CocktailProject.Scenes
             frames.Add(new Rectangle(0, 1400, 1920, 700));
             frameDurations.Add(2.0);
             frames.Add(new Rectangle(0, 2100, 1920, 700));
-            frameDurations.Add(1.0);
+            frameDurations.Add(0.6);
             frames.Add(new Rectangle(0, 2800, 1920, 700));
-            frameDurations.Add(4.0);
+            frameDurations.Add(3.0);
 
             T_BTN_Skip_Default = Content.Load<Texture2D>("images/Previs/Skip_Default");
             T_BTN_Skip_Hover = Content.Load<Texture2D>("images/Previs/Skip_Hover");

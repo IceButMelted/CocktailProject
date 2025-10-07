@@ -1412,6 +1412,12 @@
 /processorParam:Quality=Best
 /build:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
 
+#begin Sound/Background_Music/PreviseScene.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Background_Music/PreviseScene.mp3;Sound/Background_Music/PreviseScene
+
 #begin Sound/Background_Music/ThemeSong01.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
