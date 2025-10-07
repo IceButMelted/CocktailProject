@@ -207,7 +207,7 @@ namespace CocktailProject.Scenes
         public Button BTN_Shaking;
         public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
         public Button BTN_Reset_OnTable;
-        public Button BTN_BookRecipes;
+        public Button BTN_BookRecipes; 
         // Before Serve
         public Panel P_BeforeServe;
         public Button BTN_AddIce;
@@ -764,7 +764,12 @@ namespace CocktailProject.Scenes
             InitMakingVisualCocktail();
 
             //Book Recipe Button
+
+            Texture2D T_BookRecipes_Default = Content.Load<Texture2D>("images/UI/BookButton/Book_Default");
+            Texture2D T_BookRecipes_Hover = Content.Load<Texture2D>("images/UI/BookButton/Book_Hover");
+
             BTN_BookRecipes = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomLeft, size: new Vector2(128, 128));
+            BTN_BookRecipes.SetCustomSkin(T_BookRecipes_Default, T_BookRecipes_Hover, T_BookRecipes_Hover);
             BTN_BookRecipes.Offset = new Vector2(-50, 75);
             BTN_BookRecipes.OnMouseDown = (Entity e) =>
             {
