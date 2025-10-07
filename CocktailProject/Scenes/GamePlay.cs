@@ -731,7 +731,7 @@ namespace CocktailProject.Scenes
                 EnableBookRecipes(false);
             };
 
-            BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100, 80));
+            BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100,100));
             BTN_Reset_OnTable.Padding = Vector2.Zero;
             BTN_Reset_OnTable.Offset = new Vector2(-100, 150);
             BTN_Reset_OnTable.ButtonParagraph.OutlineWidth = 0;
@@ -802,7 +802,7 @@ namespace CocktailProject.Scenes
 
             MiniGame_Shaking_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Shake_Define.xml");
             Shaking_Anim = MiniGame_Shaking_Atlas.CreateAnimatedSprite("Shaking_Animation");
-            Img_Minigame_Shaking = new Image(MiniGame_Shaking_Atlas.Texture, new Vector2(800, 480), anchor: Anchor.TopCenter);
+            Img_Minigame_Shaking = new Image(MiniGame_Shaking_Atlas.Texture, new Vector2(800, 600), anchor: Anchor.TopCenter);
             Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
             P_Minigame_Shaking.AddChild(Img_Minigame_Shaking);
 
@@ -836,7 +836,7 @@ namespace CocktailProject.Scenes
             P_BeforeServe.Padding = Vector2.Zero;
             P_BeforeServe.Offset = new Vector2(-800, 600);
 
-            BTN_AddIce = new Button("Add Ice", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(150, 60));
+            BTN_AddIce = new Button("Add Ice", skin: ButtonSkin.Default, anchor: Anchor.CenterLeft, size: new Vector2(150, 60));
             BTN_AddIce.Padding = Vector2.Zero;
             BTN_AddIce.Offset = Vector2.Zero;
             BTN_AddIce.ButtonParagraph.OutlineWidth = 0;
@@ -849,7 +849,7 @@ namespace CocktailProject.Scenes
                 BTN_AddIce.Enabled = false;
             };
 
-            BTN_Serve = new Button("Serve", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(150, 60));
+            BTN_Serve = new Button("Serve", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(150, 60));
             BTN_Serve.Padding = Vector2.Zero;
             BTN_Serve.Offset = Vector2.Zero;
             BTN_Serve.ButtonParagraph.OutlineWidth = 0;
@@ -913,7 +913,7 @@ namespace CocktailProject.Scenes
                 EnableOrderPanel(false);
             };
 
-            BTN_Rest_BeforeServe = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.AutoCenter, size: new Vector2(100, 80));
+            BTN_Rest_BeforeServe = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.BottomCenter, size: new Vector2(100, 80));
             BTN_Rest_BeforeServe.Padding = Vector2.Zero;
             BTN_Rest_BeforeServe.Offset = Vector2.Zero;
             BTN_Rest_BeforeServe.ButtonParagraph.OutlineWidth = 0;
@@ -2153,6 +2153,7 @@ namespace CocktailProject.Scenes
         public void VisibleMakingCocktailVisual(bool visible)
         {
             P_MakingCocktailVisual.Visible = visible;
+            Img_CocktailBottle.Visible = visible;
         }
 
         // ----------------------Slide Panel-----------------------
