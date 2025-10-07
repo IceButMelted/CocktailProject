@@ -293,7 +293,7 @@ namespace CocktailProject.Scenes
         {
             //Add Code Here
 
-            RandomTargetCocktail();
+            //RandomTargetCocktail();
             //_NPC_Name = RandomNPC();
             InitNpc();
             ShuffleCustomers();
@@ -1399,6 +1399,7 @@ namespace CocktailProject.Scenes
                         ShakeHelper.SetShakeSpeed(Img_Customer, 2.5f);
                         ShakeHelper.SetShakeAmplitude(Img_Customer, 0.25f);
                         stateImgCustomer = Enum_PanelState.None;
+                        RandomTargetCocktail();
                         inStartConversation = true;
                         currentCustomerState = Enum_CutomerState.WaitingForServe;
                     }
@@ -1599,11 +1600,37 @@ namespace CocktailProject.Scenes
             int randomIndex = random.Next(CocktailDicMaker.CocktailDictionary.Count);
             return CocktailDicMaker.CocktailDictionary.Keys.ElementAt(randomIndex);
         }
+
+        protected string GetRandomCocktailNameFromFavType(HashSet<Enum_TypeOfCocktail> favTypes)
+        {
+            var matchingCocktails = CocktailDicMaker.CocktailDictionary
+                .Where(kv => favTypes.Contains(kv.Value.GetTypeOfCocktail()))
+                .Select(kv => kv.Key)
+                .ToList();
+            if (matchingCocktails.Count == 0)
+                return GetRandomCocktailName();
+            var random = new Random();
+            int randomIndex = random.Next(matchingCocktails.Count);
+            return matchingCocktails[randomIndex];
+        }
+
         protected void RandomTargetCocktail()
         {
-            str_targetCocktail_Name = GetRandomCocktailName();
-            CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+            // Get the customer's favorite cocktail types
+            HashSet<Enum_TypeOfCocktail> favCocktailTypes = Customers[numbercustomer]._FavoriteTypeOfCocktail;
+
+            // Get a random cocktail name that matches the favorite types (fallback handled inside)
+            str_targetCocktail_Name = GetRandomCocktailNameFromFavType(favCocktailTypes);
+
+            // Retrieve the cocktail object from the dictionary
+            if (!CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail))
+            {
+                //fallback if not found for safety
+                str_targetCocktail_Name = GetRandomCocktailName();
+                CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
+            }
         }
+
         protected string RandomNPC()
         {
             Random random = new Random();
@@ -2229,22 +2256,28 @@ namespace CocktailProject.Scenes
             BaseCharacter Walter = new BaseCharacter("Walter");
             Walter.AddDayConversationFromJson("Content/Conversation/Walter_Conversation.json");
             Walter.SetID("NPC_01");
+            Walter.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.LowAlcohol);
+            Walter.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.NonAlcoholic);
 
             BaseCharacter Owen = new BaseCharacter("Owen");
             Owen.AddDayConversationFromJson("Content/Conversation/Owen_Conversation.json");
             Owen.SetID("NPC_02");
+            Owen.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.LowAlcohol);
 
             BaseCharacter Freya = new BaseCharacter("Freya");
             Freya.AddDayConversationFromJson("Content/Conversation/Freya_Conversation.json");
             Freya.SetID("NPC_03");
+            Freya.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.HighAlcohol);
 
             BaseCharacter Isla = new BaseCharacter("Isla");
             Isla.AddDayConversationFromJson("Content/Conversation/Isla_Conversation.json");
             Isla.SetID("NPC_04");
+            Isla.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.NonAlcoholic);
 
             BaseCharacter Cole = new BaseCharacter("Cole");
             Cole.AddDayConversationFromJson("Content/Conversation/Cole_Conversation.json");
             Cole.SetID("NPC_05");
+            Cole.AddFavoriteTypeOfCocktail(Enum_TypeOfCocktail.HighAlcohol);
 
             Customers.Add(Walter);
             Customers.Add(Owen);
