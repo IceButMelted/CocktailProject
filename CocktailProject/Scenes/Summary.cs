@@ -154,7 +154,7 @@ namespace CocktailProject.Scenes
             }
             else
             {
-                panel.AddChild(CreateLabel("   No cocktails made yet."));
+                panel.AddChild(CreateLabel("   No cocktails you made is good enough."));
             }
 
             // Add tip line last

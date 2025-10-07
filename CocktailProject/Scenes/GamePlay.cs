@@ -88,6 +88,8 @@ namespace CocktailProject.Scenes
         public TaggedTextRevealer AnimationText;
         ConversationPhase currentPhase = ConversationPhase.SmallTalkBeforeOrder;
 
+        protected bool canDoconversation = false;
+
         protected bool canSkipConversation = false;
         protected bool canGoNextConversation = false;
         protected bool haveDoneOrder = false;
@@ -860,6 +862,7 @@ namespace CocktailProject.Scenes
 
                 _currentCocktail.SetTypeOfCocktailBySearch();
                 _currentCocktail.SetNameOfCocktailBySearch();
+                str_currentCocktail_Name = _currentCocktail.GetName();
                 Img_CocktailResult.SourceRectangle = CocktailResult_Atlas.GetRegion(_currentCocktail.GetName()).SourceRectangle;
                 Debug.WriteLine("--------***************** \n Target Cocktail is: " + _currentCocktail.GetName());
                 Debug.WriteLine("Served Cocktail");
@@ -1136,6 +1139,10 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            // Moving NPC updates
+            foreach (var movnpc in movingnpcs)
+                movnpc.Update(gameTime);
+
             // Handle fade-in
             if (shouldFadeIn)
             {
@@ -1255,16 +1262,12 @@ namespace CocktailProject.Scenes
                 }
             }
 
-            // Moving NPC updates
-            foreach (var movnpc in movingnpcs)
-                movnpc.Update(gameTime);
-
             // Conversation and text
             UpdateConversation();
             AnimationText.Update(gameTime);
 
 #if DEBUG
-            P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
+            P_Debug_CurrentCocktail.Text = "Current Cocktail:" + str_currentCocktail_Name + "\n" + _currentCocktail.Info();
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
             P_Debug_GlobalVariable.Text = GlobalVariable.DebugPrintString();
 #endif
@@ -1370,6 +1373,7 @@ namespace CocktailProject.Scenes
             switch (stateCocktailResultPanel)
             {
                 case Enum_PanelState.InitPosWarp:
+                    
                     Img_CocktailResult.Offset = new Vector2(1920, 75);
                     break;
                 case Enum_PanelState.Pos1:
@@ -1385,6 +1389,7 @@ namespace CocktailProject.Scenes
                     }
                     break;
                 case Enum_PanelState.Pos2:
+                    
                     if (SlidePanel(Img_CocktailResult, -400, 7, Enum_SlideDirection.Left))
                         stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
                     break;
@@ -1394,6 +1399,7 @@ namespace CocktailProject.Scenes
             switch (stateImgCustomer)
             {
                 case Enum_PanelState.InitPosWarp:
+                    canDoconversation = false;
                     currentCustomerState = Enum_CutomerState.Entering;
                     Img_Customer.Offset = new Vector2(1920, 27);
                     stateImgCustomer = Enum_PanelState.Pos1;
@@ -1404,6 +1410,7 @@ namespace CocktailProject.Scenes
                 case Enum_PanelState.Pos1:
                     if (SlidePanel(Img_Customer, 450, 7, Enum_SlideDirection.Left))
                     {
+                        canDoconversation = true;
                         ShakeHelper.SetShakeSpeed(Img_Customer, 2.5f);
                         ShakeHelper.SetShakeAmplitude(Img_Customer, 0.25f);
                         stateImgCustomer = Enum_PanelState.None;
@@ -1414,10 +1421,11 @@ namespace CocktailProject.Scenes
                     break;
 
                 case Enum_PanelState.Pos2:
+                    canDoconversation = false;
                     EnableOrderPanel(false);
                     if (SlidePanel(Img_Customer, -400, 7, Enum_SlideDirection.Left))
                     {
-                        if (numbercustomer > 1)
+                        if (numbercustomer >= Customers.Count)
                         {
                             EnableFadePanel(true);
                             shouldFadeOut = true;
@@ -1442,6 +1450,8 @@ namespace CocktailProject.Scenes
         }
         protected void UpdateConversation()
         {
+
+            if (!canDoconversation) return;
             RP_ConversationCustomer.Text = AnimationText.GetVisibleText();
 
             bool mouseClick = Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left);
@@ -1499,7 +1509,7 @@ namespace CocktailProject.Scenes
                         ActiveMixerAndAlcholButton(false);
                         if (cocktaillResualt == Enum_CocktaillResualt.None)
                             cocktaillResualt = CalculateAccurateCocktail();
-                        str_currentCocktail_Name = _currentCocktail.GetName();
+                        
 
                         switch (cocktaillResualt)
                         {
@@ -1587,7 +1597,7 @@ namespace CocktailProject.Scenes
                             ActiveMixerAndAlcholButton(false);
                             numbercustomer++;
                             GlobalVariable.AddCustomer();
-
+                            str_currentCocktail_Name = "";
                             stateImgCustomer = Enum_PanelState.Pos2;
                             AnimationText = new TaggedTextRevealer("", 0.05);
                             RP_ConversationCustomer.Text = AnimationText.GetVisibleText();

@@ -10,7 +10,7 @@ namespace CocktailProject
     {
         public static int Income = 0;
         public static int Tip = 0;
-        public static int customerNumber = 0;
+        public static int customerNumber = 4;
         public static byte Day = 1;
         public static Dictionary<string, int> CocktailHaveDone = new Dictionary<string, int>();
 
