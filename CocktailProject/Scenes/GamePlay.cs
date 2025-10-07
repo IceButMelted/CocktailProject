@@ -30,6 +30,7 @@ using MonoGameLibrary.Audio;
 using MonoGameLibrary.Input;
 using MonoGameLibrary.Scenes;
 using System.Text.Json;
+using System.Collections;
 
 
 
@@ -43,7 +44,19 @@ namespace CocktailProject.Scenes
         private static string str_currentCocktail_Name;
         private Cocktail _targetCoctail = new Cocktail();
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
+        private Queue<Enum_TextType> ListTextTypes = new Queue<Enum_TextType>();
         private Enum_CocktaillResualt cocktaillResualt = Enum_CocktaillResualt.None;
+        private Dictionary<string, string> ComplexTextCocktail = new Dictionary<string, string> {
+            { "Cosmopolitan"    ,"'Tart and lightly sweet'" },
+            { "Martini"         ,"'Dry crisp and aromatic'" },
+            { "White Lady"      ,"'Smooth but Sharp'" },
+            { "Gin Fizz"        ,"'Bright and refreshing'" },
+            { "Greyhound"       ,"'Clean and slightly bitter'" },
+            { "Sea Breeze"      ,"'Cool and breezy refreshing'" },
+            { "Nojito"          ,"'Sweet and sparklingly refreshing'" },
+            { "Cranberry Fizz"  ,"'Tangy-sweet and Light'" },
+            { "Grapefruit Spritz","'Gentle bittersweetness and Brightened'"}
+        };
         #endregion
 
         #region NPC
@@ -204,10 +217,10 @@ namespace CocktailProject.Scenes
         public Texture2D T_BTN_Alcohol_Vermouth_Hover;
         public Texture2D T_BTN_Alcohol_Vermouth_Pressed;
         // Making Zone
-        public Panel P_MakeingZone; public Texture2D T_MakingZone_Panel;
+        public Panel P_MakeingZone;
         public Button BTN_Stiring;
         public Button BTN_Shaking;
-        public Image Img_CocktailBottle; public TextureAtlas Atlas_Cocktail; public Texture2D T_CocktailBase;
+        public Image Img_CocktailBottle; public Texture2D T_CocktailBase;
         public Button BTN_Reset_OnTable;
         public Button BTN_BookRecipes; 
         // Before Serve
@@ -241,10 +254,9 @@ namespace CocktailProject.Scenes
         public Button BTN_NextPage;
         // Art After Serve Panel
         public Panel P_ArtAfterServe;
-        public Image Img_Art1; public Texture2D T_Art1;
-        public Image Img_Art2; public Texture2D T_Art2;
+        public Image Img_Art1; 
+        public Image Img_Art2; 
         //visual Cocktail on table
-        protected Panel P_CocktailVisual;
         protected Panel P_MakingCocktailVisual;
         protected Image Img_MainDisplay;
         protected Image Img_Visual01;
@@ -264,7 +276,6 @@ namespace CocktailProject.Scenes
 
         // Fading Close Visual
         protected Panel P_Fade;
-        protected Paragraph Pr_TextFade;
         protected RichParagraph RP_Fade;
 
         // customer and order panel
@@ -299,6 +310,8 @@ namespace CocktailProject.Scenes
             //_NPC_Name = RandomNPC();
             InitNpc();
             ShuffleCustomers();
+
+            ListTextTypes = GlobalVariable.ListOfTextTpyeEachDay[GlobalVariable.Day-1];
 
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
@@ -870,39 +883,6 @@ namespace CocktailProject.Scenes
                 float price = CalcualatePrice(_targetCoctail);
                 Debug.WriteLine("Earned Price: " + price);
 
-                #region not used code
-                //_currentCocktail.ClearAllIngredients();
-                //RandomTargetCocktail();\
-
-                //--------- from conversation phase Order to Small Talk After Order --------------
-                //apply text and change conversation phase
-
-                //Debug.WriteLine("Cocktail Served! Small Talk About Cocktail.");
-
-                //if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Success)
-                //{
-                //    AnimationText = new TaggedTextRevealer("Thanks for the {{RED}}" + str_targetCocktail_Name + "{{WHITE}}, it was great!", 0.05);
-                //    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_happy").SourceRectangle;
-                //}
-                //else if (CalculateAccurateCocktail() == Enum_CocktaillResualt.Aceptable)
-                //{
-                //    AnimationText = new TaggedTextRevealer("This is not {{ORANGE}}" + str_targetCocktail_Name + "{{WHITE}} i knew but it was okay I guess.", 0.05);
-                //    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_default").SourceRectangle;
-                //}
-                //else
-                //{
-                //    AnimationText = new TaggedTextRevealer("Ugh, this is not  {{BLUE}}" + str_targetCocktail_Name + "{{WHITE}}, i have ordered ", 0.05);
-                //    Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(_NPC_Name + "_upset").SourceRectangle;
-                //}
-                //canSkipConversation = false;
-                //canGoNextConversation = false;
-                //currentPhase = ConversationPhase.SmallTalkAfterOrder;
-                //AnimationText.Start();
-                //haveDoneOrder = true;
-
-                //-------------------------------------------------------------------------------
-                #endregion
-
                 Debug.WriteLine("New Target Cocktail is: " + str_targetCocktail_Name);
 
                 BTNIngredeientActive(true);
@@ -1146,7 +1126,7 @@ namespace CocktailProject.Scenes
             // Handle fade-in
             if (shouldFadeIn)
             {
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 3.0f, ref fadeTimer))
                 {
                     EnableFadePanel(false);
                     stateImgCustomer = Enum_PanelState.Pos1;
@@ -1160,7 +1140,7 @@ namespace CocktailProject.Scenes
 
             if (shouldFadeOut) {
 
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 0, 255, 2.0f, ref fadeTimer))
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 0, 255, 5f, ref fadeTimer))
                 {
                     // go to thank scene
                     shouldFadeOut = false;
@@ -1172,17 +1152,6 @@ namespace CocktailProject.Scenes
                         
             UpdateUILogic(gameTime);
             Utilities.ShakeHelper.Update(gameTime);
-
-            // Handle fade-out
-            if (shouldFadeOut)
-            {
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 2.0f, ref fadeTimer))
-                {
-                    shouldFadeOut = false;
-                    Core.ChangeScene(new Thanks());
-                }
-                return;
-            }
 
             // Skip all updates if no customer interaction
             if (currentCustomerState != Enum_CutomerState.WaitingForServe)
@@ -1415,6 +1384,7 @@ namespace CocktailProject.Scenes
                         ShakeHelper.SetShakeAmplitude(Img_Customer, 0.25f);
                         stateImgCustomer = Enum_PanelState.None;
                         RandomTargetCocktail();
+                        Debug.WriteLine("New Target Cocktail is: " + str_targetCocktail_Name);
                         inStartConversation = true;
                         currentCustomerState = Enum_CutomerState.WaitingForServe;
                     }
@@ -1491,7 +1461,7 @@ namespace CocktailProject.Scenes
                     }
                     else
                     {
-                        AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}"  + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
+                        AnimationText = new TaggedTextRevealer(DecideToUseTypeOfText(), 0.05);
                         AnimationText.Start();
                         canSkipConversation = true;
                         canGoNextConversation = false;
@@ -1636,6 +1606,8 @@ namespace CocktailProject.Scenes
             // Get the customer's favorite cocktail types
             HashSet<Enum_TypeOfCocktail> favCocktailTypes = Customers[numbercustomer]._FavoriteTypeOfCocktail;
 
+
+
             // Get a random cocktail name that matches the favorite types (fallback handled inside)
             str_targetCocktail_Name = GetRandomCocktailNameFromFavType(favCocktailTypes);
 
@@ -1646,6 +1618,42 @@ namespace CocktailProject.Scenes
                 str_targetCocktail_Name = GetRandomCocktailName();
                 CocktailDicMaker.CocktailDictionary.TryGetValue(str_targetCocktail_Name, out _targetCoctail);
             }
+            
+        }
+
+        public string DecideToUseTypeOfText() {
+            if (ListTextTypes.Count > 0)
+            {
+                Enum_TextType textType = ListTextTypes.Dequeue();
+
+                switch (textType)
+                {
+                    case Enum_TextType.Normal:
+                        // Use the name as-is
+                        break;
+
+                    case Enum_TextType.Complex:
+                        Debug.WriteLine($"Looking for complex version of {str_targetCocktail_Name}");
+                        if (ComplexTextCocktail.TryGetValue(str_targetCocktail_Name, out var complexName))
+                        {
+                            str_targetCocktail_Name = complexName;
+                            Debug.WriteLine($"Found complex version: {str_targetCocktail_Name}");
+                            return "Please make me something {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.";
+                        }
+                        else
+                        {
+                            // Fallback if not found
+                            Debug.WriteLine($"No complex version found for {str_targetCocktail_Name}");
+                            return "Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.";
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("No text types left in queue!");
+            }
+            return "Please make me a {{MENU_TEXT}}" + str_targetCocktail_Name + "{{DEFAULT}}.";
         }
 
         protected string RandomNPC()
@@ -2354,12 +2362,24 @@ namespace CocktailProject.Scenes
             P_Fade = new Panel(new Vector2(2300, 1200), PanelSkin.Simple, Anchor.Center);
             P_Fade.FillColor = Color.Black;
             P_Fade.Opacity = 255;
+            RP_Fade = new RichParagraph("Day" + GlobalVariable.Day);
+            RP_Fade.FontOverride = BoldFont;
+            RP_Fade.FillColor = Color.Red;
+            RP_Fade.Scale = 2f;
+            P_Fade.AddChild(RP_Fade);
             UserInterface.Active.AddEntity(P_Fade);
         }
         public void EnableFadePanel(bool enable)
         {
             P_Fade.Enabled = enable;
             P_Fade.Visible = enable;
+            if (enable) { 
+                RP_Fade.Text = "DAY" + GlobalVariable.Day;
+            }
+            if (!enable)
+            {
+                RP_Fade.Text = "END DAY";
+            }
         }
 
         public void EnableAllBTN(bool enable) { 

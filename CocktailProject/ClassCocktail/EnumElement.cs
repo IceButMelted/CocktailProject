@@ -80,5 +80,10 @@ namespace CocktailProject.ClassCocktail
         Right
     }
 
+    public enum Enum_TextType
+    {
+        Normal,
+        Complex
+    }
 
 }
