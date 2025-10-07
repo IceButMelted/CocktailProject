@@ -79,12 +79,14 @@ namespace CocktailProject.Scenes
 
         #region SoundVariable
         Song BGM_themeSong01;
+        Song BGM_themeSong02;
 
         SoundEffect SFX_PressedBTN;
+        SoundEffect SFX_Welcome;
         SoundEffect SFX_Serve;
         bool canPlaySFX_Serve = true;
         SoundEffect SFX_Shaking;
-        float cooldownTime_SFX_Shaking = 2.5f;
+        float cooldownTime_SFX_Shaking = 2f;
         bool canPlaySFX_Shaking = true;
         SoundEffect SFX_Stiring;
         float cooldownTime_SFX_Stiring = 1.2f;
@@ -95,6 +97,7 @@ namespace CocktailProject.Scenes
         SoundEffect SFX_Lemon;
         SoundEffect SFX_Book_Turnpage;
         SoundEffect SFX_Book_Open_Close;
+        SoundEffect SFX_Open_Interface;
         #endregion
 
         #region Conversation Logic Variable
@@ -118,7 +121,7 @@ namespace CocktailProject.Scenes
         protected Enum_PanelState stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
         protected Enum_PanelState stateImgCustomer = Enum_PanelState.InitPosWarp;
         protected Enum_CutomerState currentCustomerState = Enum_CutomerState.None;
-        protected float timeToCloseBeforeAndAfteServePanel = 2f;
+        protected float timeToCloseBeforeAndAfteServePanel = 3f;
 
         protected bool openArt1Panel = false;
         protected bool openArt2Panel = false;
@@ -445,7 +448,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol.SetCustomSkin(T_BTN_Alchol, T_BTN_Alchol, T_BTN_Alchol);
             BTN_Alcohol.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_Open_Interface);
                 if (openAlcoholPanel)
                     openAlcoholPanel = false;
                 else
@@ -544,7 +547,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer.SetCustomSkin(T_BTN_Mixer, T_BTN_Mixer, T_BTN_Mixer);
             BTN_Mixer.OnMouseDown = (Entity e) =>
             {
-                Core.Audio.PlaySoundEffect(SFX_PressedBTN);
+                Core.Audio.PlaySoundEffect(SFX_Open_Interface);
                 if (openMixerPanel)
                 {
                     openMixerPanel = false;
@@ -1130,6 +1133,7 @@ namespace CocktailProject.Scenes
                 {
                     EnableFadePanel(false);
                     stateImgCustomer = Enum_PanelState.Pos1;
+                    Core.Audio.PlaySoundEffect(SFX_Welcome);
                     shouldFadeIn = false;
 
                     ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
@@ -1181,7 +1185,7 @@ namespace CocktailProject.Scenes
                 if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
                 {
                     canPlaySFX_Shaking = true;
-                    cooldownTime_SFX_Shaking = 3f;
+                    cooldownTime_SFX_Shaking = 2f;
                 }
 
                 ShakingMinigame.Update(gameTime);
@@ -1252,25 +1256,25 @@ namespace CocktailProject.Scenes
             // --- Alcohol panel ---
             if (openAlcoholPanel)
             {
-                SlidePanel(FP_Alcohol, 0, 20, Enum_SlideDirection.Right);
-                SlidePanel(BTN_Alcohol, -125, 20, Enum_SlideDirection.Left);
+                SlidePanel(FP_Alcohol, 0, 25, Enum_SlideDirection.Right);
+                SlidePanel(BTN_Alcohol, -125, 25, Enum_SlideDirection.Left);
             }
             else
             {
-                SlidePanel(FP_Alcohol, -800, 20, Enum_SlideDirection.Left);
-                SlidePanel(BTN_Alcohol, -25, 20, Enum_SlideDirection.Right);
+                SlidePanel(FP_Alcohol, -800, 25, Enum_SlideDirection.Left);
+                SlidePanel(BTN_Alcohol, -25, 25, Enum_SlideDirection.Right);
             }
 
             // --- Mixer panel ---
             if (openMixerPanel)
             {
-                SlidePanel(FP_Mixer, 0, 20, Enum_SlideDirection.Right);
-                SlidePanel(BTN_Mixer, -125, 20, Enum_SlideDirection.Left);
+                SlidePanel(FP_Mixer, 0, 25, Enum_SlideDirection.Right);
+                SlidePanel(BTN_Mixer, -125, 25, Enum_SlideDirection.Left);
             }
             else
             {
-                SlidePanel(FP_Mixer, -800, 20, Enum_SlideDirection.Left);
-                SlidePanel(BTN_Mixer, -25, 20, Enum_SlideDirection.Right);
+                SlidePanel(FP_Mixer, -800, 25, Enum_SlideDirection.Left);
+                SlidePanel(BTN_Mixer, -25, 25, Enum_SlideDirection.Right);
             }
 
             // --- Minigame panel ---
@@ -1335,7 +1339,11 @@ namespace CocktailProject.Scenes
             {
                 timeToCloseBeforeAndAfteServePanel -= elapsed;
                 if (timeToCloseBeforeAndAfteServePanel < 0)
+                {
                     stateCocktailResultPanel = Enum_PanelState.Pos1;
+                    Core.Audio.PlaySoundEffect(SFX_Serve);
+                    timeToCloseBeforeAndAfteServePanel = 3;
+                }
             }
 
             // --- Cocktail result panel ---
@@ -1370,6 +1378,7 @@ namespace CocktailProject.Scenes
                 case Enum_PanelState.InitPosWarp:
                     canDoconversation = false;
                     currentCustomerState = Enum_CutomerState.Entering;
+                    Core.Audio.PlaySoundEffect(SFX_Welcome);
                     Img_Customer.Offset = new Vector2(1920, 27);
                     stateImgCustomer = Enum_PanelState.Pos1;
                     ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
@@ -1805,6 +1814,10 @@ namespace CocktailProject.Scenes
             BTNMethodActive(false);
             BTNMethodVisible(false);
             VisibleMakingCocktailVisual(false);
+            cooldownTime_SFX_Shaking = 2f;
+            cooldownTime_SFX_Stiring = 1.2f;
+            canPlaySFX_Shaking = true;
+            canPlaySFX_Stiring = true;
         }
         protected void EnableBTNBeforeServe(bool eneble)
         {
@@ -2268,6 +2281,8 @@ namespace CocktailProject.Scenes
         //---------------Sound and BGM----------------
         public void InitSFX()
         {
+            SFX_Serve = Content.Load<SoundEffect>("Sound/Sound_Effect/Serve");
+            SFX_Welcome = Content.Load<SoundEffect>("Sound/Sound_Effect/Welcome");
             SFX_AddIce = Content.Load<SoundEffect>("Sound/Sound_Effect/Ice");
             SFX_PressedBTN = Content.Load<SoundEffect>("Sound/Sound_Effect/Interface_Selection");
             SFX_Book_Turnpage = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Turnpage.");
@@ -2277,10 +2292,12 @@ namespace CocktailProject.Scenes
             SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
             SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
             SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
+            SFX_Open_Interface = Content.Load<SoundEffect>("Sound/Sound_Effect/Open_Interface");
         }
         public void InitBGM()
         {
-            BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/BGM_MockUp");
+            BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/ThemeSong01");
+            BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, true);
             Core.Audio.SongVolume = 0.25f;
         }
@@ -2397,6 +2414,7 @@ namespace CocktailProject.Scenes
             BTN_BookRecipes.Enabled = enable;
 
         }
+
     }
 
     public enum Enum_MiniGameType
