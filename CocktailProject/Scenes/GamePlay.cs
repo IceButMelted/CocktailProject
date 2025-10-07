@@ -810,7 +810,7 @@ namespace CocktailProject.Scenes
 
             MinGame_Stirring_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Stir_Define.xml");
             Stirring_Anim = MinGame_Stirring_Atlas.CreateAnimatedSprite("Stirring_Animation");
-            Img_MiniGame_Stirring = new Image(MinGame_Stirring_Atlas.Texture, new Vector2(800, 480), anchor: Anchor.TopCenter);
+            Img_MiniGame_Stirring = new Image(MinGame_Stirring_Atlas.Texture, new Vector2(800, 600), anchor: Anchor.TopCenter);
             Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
             P_Minigame_Stirring.AddChild(Img_MiniGame_Stirring);
 
@@ -1346,7 +1346,7 @@ namespace CocktailProject.Scenes
                     break;
                 case Enum_PanelState.Pos1:
                     SlidePanel(P_ArtAfterServe, 480, 20, Enum_SlideDirection.Up);
-                    break;
+                    break; 
                 case Enum_PanelState.Pos2:
                     if (SlidePanel(P_ArtAfterServe, -800, 20, Enum_SlideDirection.Left))
                         stateArtAfterServePanel = Enum_PanelState.InitPosWarp;
@@ -1919,47 +1919,56 @@ namespace CocktailProject.Scenes
             P_BGBookRecipes = new Panel(new Vector2(1920, 1080), PanelSkin.Default, Anchor.Center);
             P_BGBookRecipes.FillColor = Color.Black * 0.75f;
 
-            Img_BookRecipes = new Image(T_BookRecipes, new Vector2(1033, 755), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_BookRecipes = new Image(T_BookRecipes, new Vector2(1100, 750), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_BookRecipes.Offset = new Vector2(66, 63);
 
             Img_LeftPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_LeftPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_L").SourceRectangle;
-            Img_LeftPage.Offset = new Vector2(11, 24);
+            Img_LeftPage.Offset = new Vector2(25, 0);
 
             Img_RightPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_RightPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_R").SourceRectangle;
-            Img_RightPage.Offset = new Vector2(491, 24);
+            Img_RightPage.Offset = new Vector2(505, 0);
 
-            BTN_PreviousPage = new Button("<", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(50, 50));
+            BTN_PreviousPage = new Button("", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(160/2, 80/2));
             BTN_PreviousPage.OnClick += (Entity e) =>
             {
                 ChangePage(Enum_Page.PreviousPage);
                 UpdatePageView();
                 Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
+            BTN_PreviousPage.Offset = new Vector2(-20, 0);
+            Texture2D T_BTN_PreviousPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Left");
+            BTN_PreviousPage.SetCustomSkin(T_BTN_PreviousPage, T_BTN_PreviousPage, T_BTN_PreviousPage);
 
-            BTN_NextPage = new Button(">", ButtonSkin.Default, Anchor.BottomRight, new Vector2(50, 50));
+            BTN_NextPage = new Button("", ButtonSkin.Default, Anchor.BottomRight, new Vector2(160/2, 80/2));
             BTN_NextPage.OnClick += (Entity e) =>
             {
                 ChangePage(Enum_Page.NextPage);
                 UpdatePageView();
                 Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
+            BTN_NextPage.Offset = new Vector2(20, 0);
+            Texture2D T_BTN_NextPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Right");
+            BTN_NextPage.SetCustomSkin(T_BTN_NextPage, T_BTN_NextPage, T_BTN_NextPage);
 
-            Button BTN_CloseBookRecipes = new Button("X", ButtonSkin.Default, Anchor.TopRight, new Vector2(50, 50));
+
+            Button BTN_CloseBookRecipes = new Button("", ButtonSkin.Default, Anchor.TopRight, new Vector2(80/2, 120/2));
             BTN_CloseBookRecipes.OnClick += (Entity e) =>
             {
                 ToggleBookRecipes();
                 Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
             };
+            BTN_CloseBookRecipes.Offset = new Vector2(80, -40);
+            Texture2D T_BTN_CloseBookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close");
+            BTN_CloseBookRecipes.SetCustomSkin(T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes);
 
             Img_BookRecipes.AddChild(Img_LeftPage);
             Img_BookRecipes.AddChild(Img_RightPage);
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
             Img_BookRecipes.AddChild(BTN_CloseBookRecipes);
-            //UserInterface.Active.AddEntity(Img_BookRecipes);
-            //P_BGBookRecipes.AddChild(Img_BookRecipes);
+
 
             EnableBookRecipes(false);
 

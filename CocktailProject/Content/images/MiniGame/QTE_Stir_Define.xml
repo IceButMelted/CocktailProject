@@ -2,15 +2,19 @@
 <TextureAtlas>
 	<Texture>images/MiniGame/QTE_stir</Texture>
 	<Regions>
-		<Region name="QTE_stir01" x="0" y="0" width="800" height="480" />
-		<Region name="QTE_stir02" x="0" y="480" width="800" height="480" />
-		<Region name="QTE_stir03" x="0" y="960" width="800" height="480" />
+		<Region name="QTE_stir01" x="0" y="0" width="800" height="600" />
+		<Region name="QTE_stir02" x="0" y="600" width="800" height="600" />
+		<Region name="QTE_stir03" x="0" y="1200" width="800" height="600" />
+		<Region name="QTE_stir04" x="0" y="1800" width="800" height="600" />
+		<Region name="QTE_stir05" x="0" y="2400" width="800" height="600" />
 	</Regions>
 	<Animations>
 		<Animation name="Stirring_Animation" delay="100">
 			<Frame region="QTE_stir01" />
 			<Frame region="QTE_stir02" />
 			<Frame region="QTE_stir03" />
+			<Frame region="QTE_stir04" />
+			<Frame region="QTE_stir05" />
 		</Animation>
 	</Animations>
 </TextureAtlas>
