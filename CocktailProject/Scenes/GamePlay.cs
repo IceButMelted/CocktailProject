@@ -855,6 +855,7 @@ namespace CocktailProject.Scenes
 
                 _currentCocktail.SetTypeOfCocktailBySearch();
                 _currentCocktail.SetNameOfCocktailBySearch();
+                Img_CocktailResult.SourceRectangle = CocktailResult_Atlas.GetRegion(_currentCocktail.GetName()).SourceRectangle;
                 Debug.WriteLine("--------***************** \n Target Cocktail is: " + _currentCocktail.GetName());
                 Debug.WriteLine("Served Cocktail");
                 Debug.WriteLine(_currentCocktail.Info());
@@ -1405,7 +1406,7 @@ namespace CocktailProject.Scenes
 
                 case Enum_PanelState.Pos2:
                     EnableOrderPanel(false);
-                    if (SlidePanel(Img_Customer, -400, 5, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_Customer, -400, 7, Enum_SlideDirection.Left))
                     {
                         if (numbercustomer > 1)
                         {

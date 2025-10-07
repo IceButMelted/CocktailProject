@@ -12,6 +12,7 @@
 		<Region name="Nojito"				x="0" y="320" width="160" height="160" />
 		<Region name="Sea Breeze"			x="160" y="320" width="160" height="160" />
 		<Region name="White Lady"			x="320" y="320" width="160" height="160" />
+		<Region name="Unknown Cocktail"		x="0" y="180" width="160" height="160" />
 		
 	</Regions>
 	<Animations>
