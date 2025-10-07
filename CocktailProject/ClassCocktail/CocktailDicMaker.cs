@@ -34,7 +34,7 @@ namespace CocktailProject.ClassCocktail
 
             _cocktails.Add("Martini", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Gin, 7 },
-                                                    { Enum_Alcohol.Vermouth, 1} },
+                                                    { Enum_Alcohol.Vermouth, 2} },
                 new Dictionary<Enum_Mixer, int> { },
                 Enum_Method.Mixing,
                 Enum_Glass.NotFix,

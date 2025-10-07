@@ -1267,7 +1267,7 @@ namespace CocktailProject.Scenes
             AnimationText.Update(gameTime);
 
 #if DEBUG
-            P_Debug_CurrentCocktail.Text = "Current Cocktail: \n" + _currentCocktail.Info();
+            P_Debug_CurrentCocktail.Text = "Current Cocktail:" + str_currentCocktail_Name + "\n" + _currentCocktail.Info();
             P_Debug_targetCocktail.Text = "Target Cocktail: " + str_targetCocktail_Name + "\n" + _targetCoctail.Info();
             P_Debug_GlobalVariable.Text = GlobalVariable.DebugPrintString();
 #endif
@@ -1425,7 +1425,7 @@ namespace CocktailProject.Scenes
                     EnableOrderPanel(false);
                     if (SlidePanel(Img_Customer, -400, 7, Enum_SlideDirection.Left))
                     {
-                        if (numbercustomer > 1)
+                        if (numbercustomer >= Customers.Count)
                         {
                             EnableFadePanel(true);
                             shouldFadeOut = true;
