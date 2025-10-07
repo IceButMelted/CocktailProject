@@ -164,7 +164,7 @@ namespace CocktailProject.Scenes
             // Total line
             int grandTotal = GlobalVariable.Income + GlobalVariable.Tip;
             Paragraph txt_Total = new Paragraph(
-                $"Total".PadRight(maxNameLength + 12) + $"{grandTotal,5}",
+                $"Total".PadRight(maxNameLength + 9) + $"{grandTotal,5}",
                 Anchor.BottomCenter
             );
             txt_Total.FontOverride = BoldFont;

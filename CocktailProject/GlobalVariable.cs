@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CocktailProject.ClassCocktail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,30 @@ namespace CocktailProject
     {
         public static int Income = 0;
         public static int Tip = 0;
-        public static int customerNumber = 4;
+        public static int customerNumber = 0;
         public static byte Day = 1;
         public static Dictionary<string, int> CocktailHaveDone = new Dictionary<string, int>();
+
+        public static List<Queue<Enum_TextType>> ListOfTextTpyeEachDay = new List<Queue<Enum_TextType>>
+        {
+            new Queue<Enum_TextType>(new[]
+            {
+                Enum_TextType.Normal,
+                Enum_TextType.Normal,
+                Enum_TextType.Complex,
+                Enum_TextType.Normal,
+                Enum_TextType.Normal
+            }),
+
+            new Queue<Enum_TextType>(new[]
+            {
+                Enum_TextType.Complex,
+                Enum_TextType.Normal,
+                Enum_TextType.Complex,
+                Enum_TextType.Normal,
+                Enum_TextType.Complex
+            }),
+        };
 
         public static void Reset()
         {
