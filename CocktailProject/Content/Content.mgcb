@@ -1067,6 +1067,66 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/RecipeBook/Book_Base.png
 
+#begin images/UI/RecipeBook/Recipe_Button_All.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_All.png;images/UI/RecipeBook/Recipe_Button_All
+
+#begin images/UI/RecipeBook/Recipe_Button_Close.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Close.png;images/UI/RecipeBook/Recipe_Button_Close
+
+#begin images/UI/RecipeBook/Recipe_Button_Left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Left.png;images/UI/RecipeBook/Recipe_Button_Left
+
+#begin images/UI/RecipeBook/Recipe_Button_Right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Right.png;images/UI/RecipeBook/Recipe_Button_Right
+
+#begin images/UI/RecipeBook/Recipes_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipes_Atlas.png;images/UI/RecipeBook/Recipes_Atlas
+
 #begin images/UI/RecipeBook/Recipes_Atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor

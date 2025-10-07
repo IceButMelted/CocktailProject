@@ -42,7 +42,7 @@ namespace CocktailProject.ClassCocktail
                 Enum_TypeOfCocktail.HighAlcohol,
                 140));
 
-            _cocktails.Add("White lady", CreateCocktail(
+            _cocktails.Add("White Lady", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Gin, 5 },
                                                     { Enum_Alcohol.Triplesec, 3 } },
                 new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 2 } },
@@ -53,7 +53,7 @@ namespace CocktailProject.ClassCocktail
                 130));
 
             // Low Alcohol
-            _cocktails.Add("Gin fizz", CreateCocktail(
+            _cocktails.Add("Gin Fizz", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Gin, 4 } },
                 new Dictionary<Enum_Mixer, int> { { Enum_Mixer.LemonJuice, 3 },
                                                   { Enum_Mixer.Syrup, 2 },
@@ -73,7 +73,7 @@ namespace CocktailProject.ClassCocktail
                 Enum_TypeOfCocktail.LowAlcohol,
                 100));
 
-            _cocktails.Add("Sea breeze", CreateCocktail(
+            _cocktails.Add("Sea Breeze", CreateCocktail(
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Vodka, 4 } },
                 new Dictionary<Enum_Mixer, int> { { Enum_Mixer.CanberryJuice, 4 },
                                                   { Enum_Mixer.GrapefruitJuice, 2 } },

@@ -62,6 +62,15 @@ namespace CocktailProject.Scenes
             bg.Update(Mouse.GetState());
             UserInterface.Active.Update(gameTime);
 
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Q))
+            {
+                if(GlobalVariable.Day == 2)
+                    Core.ChangeScene(new Thanks());
+                UserInterface.Active.Clear();
+                GlobalVariable.NextDay();
+                Core.ChangeScene(new GamePlay());
+            }
+
             base.Update(gameTime);
         }
 
