@@ -311,6 +311,30 @@
 /processorParam:TextureFormat=Color
 /build:images/Previs/Atlas_Previs.png
 
+#begin images/Previs/Skip_Default.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Previs/Skip_Default.png
+
+#begin images/Previs/Skip_Hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Previs/Skip_Hover.png
+
 #begin images/UI/Alcohol/Alcohol_Atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor
