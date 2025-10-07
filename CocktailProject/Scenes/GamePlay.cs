@@ -227,7 +227,7 @@ namespace CocktailProject.Scenes
         public Button BTN_Reset_OnTable;
         public Button BTN_BookRecipes; 
         // Before Serve
-        public Panel P_BeforeServe;
+        public FullImagePanel P_BeforeServe;
         public Button BTN_AddIce;
         public Button BTN_Serve;
         public Button BTN_Rest_BeforeServe;
@@ -699,10 +699,14 @@ namespace CocktailProject.Scenes
             P_MakeingZone.Padding = Vector2.Zero;
             P_MakeingZone.Offset = new Vector2(0, 600);
 
-            BTN_Stiring = new Button("Stiring", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(150, 60));
+            Texture2D T_BTN_Stiring = Content.Load<Texture2D>("images/UI/MakingZone/Button_Stir_Default");
+            Texture2D T_BTN_Stiring_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Stir_Hover");
+            Texture2D T_BTN_Stiring_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Stir_Off");
+            BTN_Stiring = new Button("", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(220, 80));
             BTN_Stiring.Padding = Vector2.Zero;
             BTN_Stiring.Offset = new Vector2(75, 0);
             BTN_Stiring.ButtonParagraph.OutlineWidth = 0;
+            BTN_Stiring.SetCustomSkin(T_BTN_Stiring, T_BTN_Stiring_Hover, T_BTN_Stiring_Pressed);
             BTN_Stiring.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
@@ -724,10 +728,14 @@ namespace CocktailProject.Scenes
                 EnableBookRecipes(false);
             };
 
-            BTN_Shaking = new Button("Shaking", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(150, 60));
+            Texture2D T_BTN_Shaking = Content.Load<Texture2D>("images/UI/MakingZone/Button_Shake_Default");
+            Texture2D T_BTN_Shaking_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Shake_Hover");
+            Texture2D T_BTN_Shaking_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Shake_Off");
+            BTN_Shaking = new Button("", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(220, 80));
             BTN_Shaking.Padding = Vector2.Zero;
             BTN_Shaking.Offset = new Vector2(75, 60 + 20);
             BTN_Shaking.ButtonParagraph.OutlineWidth = 0;
+            BTN_Shaking.SetCustomSkin(T_BTN_Shaking, T_BTN_Shaking_Hover, T_BTN_Shaking_Pressed);
             BTN_Shaking.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
@@ -749,10 +757,14 @@ namespace CocktailProject.Scenes
                 EnableBookRecipes(false);
             };
 
-            BTN_Reset_OnTable = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(100,100));
+            Texture2D T_BTN_Reset = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Default");
+            Texture2D T_BTN_Reset_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Hover");
+            Texture2D T_BTN_Reset_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Off");
+            BTN_Reset_OnTable = new Button("", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(135,135));
             BTN_Reset_OnTable.Padding = Vector2.Zero;
             BTN_Reset_OnTable.Offset = new Vector2(-100, 150);
             BTN_Reset_OnTable.ButtonParagraph.OutlineWidth = 0;
+            BTN_Reset_OnTable.SetCustomSkin(T_BTN_Reset, T_BTN_Reset_Hover, T_BTN_Reset_Pressed);
             BTN_Reset_OnTable.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
@@ -850,14 +862,21 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Before Serve Panel
-            P_BeforeServe = new Panel(new Vector2(800, 480), PanelSkin.Default, anchor: Anchor.TopRight);
+            Texture2D T_P_BeforeServe = Content.Load<Texture2D>("images/UI/MakingZone/Panel_BeforeServe");
+            P_BeforeServe = new FullImagePanel(T_P_BeforeServe,new Vector2(800, 480),  anchor: Anchor.TopRight);
             P_BeforeServe.Padding = Vector2.Zero;
             P_BeforeServe.Offset = new Vector2(-800, 600);
 
-            BTN_AddIce = new Button("Add Ice", skin: ButtonSkin.Default, anchor: Anchor.CenterLeft, size: new Vector2(150, 60));
+
+
+            Texture2D T_BTN_AddIce_Default = Content.Load<Texture2D>("images/UI/MakingZone/Button_AddIce_Defalut");
+            Texture2D T_BTN_AddIce_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_AddIce_Hover");
+            Texture2D T_BTN_AddIce_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_AddIce_Off");
+            BTN_AddIce = new Button("", skin: ButtonSkin.Default, anchor: Anchor.CenterLeft, size: new Vector2(220, 80));
             BTN_AddIce.Padding = Vector2.Zero;
-            BTN_AddIce.Offset = Vector2.Zero;
+            BTN_AddIce.Offset = new Vector2(50,0);
             BTN_AddIce.ButtonParagraph.OutlineWidth = 0;
+            BTN_AddIce.SetCustomSkin(T_BTN_AddIce_Default, T_BTN_AddIce_Hover, T_BTN_AddIce_Pressed);
             BTN_AddIce.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_AddIce);
@@ -866,16 +885,20 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine(_currentCocktail.Info());
                 BTN_AddIce.Enabled = false;
             };
+            
 
-            BTN_Serve = new Button("Serve", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(150, 60));
+            Texture2D T_BTN_Serve_Default = Content.Load<Texture2D>("images/UI/MakingZone/Button_Serve_Default");
+            Texture2D T_BTN_Serve_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Serve_Hover");
+            Texture2D T_BTN_Serve_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Serve_Off");
+            BTN_Serve = new Button("", skin: ButtonSkin.Default, anchor: Anchor.CenterRight, size: new Vector2(220, 80));
             BTN_Serve.Padding = Vector2.Zero;
-            BTN_Serve.Offset = Vector2.Zero;
+            BTN_Serve.Offset = new Vector2(50,0);
             BTN_Serve.ButtonParagraph.OutlineWidth = 0;
+            BTN_Serve.SetCustomSkin(T_BTN_Serve_Default, T_BTN_Serve_Hover, T_BTN_Serve_Pressed);
             BTN_Serve.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
                 ActiveMixerAndAlcholButton(false);
-
                 _currentCocktail.SetTypeOfCocktailBySearch();
                 _currentCocktail.SetNameOfCocktailBySearch();
                 str_currentCocktail_Name = _currentCocktail.GetName();
@@ -899,10 +922,15 @@ namespace CocktailProject.Scenes
                 EnableOrderPanel(false);
             };
 
-            BTN_Rest_BeforeServe = new Button("Reset", skin: ButtonSkin.Default, anchor: Anchor.BottomCenter, size: new Vector2(100, 80));
+
+            Texture2D T_BTN_Rest_BeforeServe = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Default");
+            Texture2D T_BTN_Rest_BeforeServe_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Hover");
+            Texture2D T_BTN_Rest_BeforeServe_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Off");
+            BTN_Rest_BeforeServe = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomCenter, size: new Vector2(135, 135));
             BTN_Rest_BeforeServe.Padding = Vector2.Zero;
             BTN_Rest_BeforeServe.Offset = Vector2.Zero;
             BTN_Rest_BeforeServe.ButtonParagraph.OutlineWidth = 0;
+            BTN_Rest_BeforeServe.SetCustomSkin(T_BTN_Rest_BeforeServe, T_BTN_Rest_BeforeServe_Hover, T_BTN_Rest_BeforeServe_Pressed);
             BTN_Rest_BeforeServe.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_PressedBTN);
