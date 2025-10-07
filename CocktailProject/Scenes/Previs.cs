@@ -14,6 +14,7 @@ using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace CocktailProject.Scenes
 {
@@ -29,6 +30,8 @@ namespace CocktailProject.Scenes
 
         private double elapsedTime = 0;
 
+        Song Theme01;
+
         public Panel P_Skip;
         public Button BTN_Skip;
         public Texture2D T_BTN_Skip_Default;
@@ -39,6 +42,7 @@ namespace CocktailProject.Scenes
         public override void Initialize()
         {
             UserInterface.Initialize(Content, BuiltinThemes.hd);
+            
             base.Initialize();
         }
 
@@ -74,6 +78,9 @@ namespace CocktailProject.Scenes
 
         public override void LoadContent()
         {
+            Theme01 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
+            Core.Audio.PlaySong(Theme01, true);
+            Core.Audio.SongVolume = (0.25f);
             PrevisAtlas = Content.Load<Texture2D>("images/Previs/Atlas_Previs");
 
             // Frames Configs

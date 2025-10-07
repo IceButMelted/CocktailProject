@@ -98,22 +98,29 @@ public class AudioController : IDisposable
     /// <summary>
     /// Updates this audio controller.
     /// </summary>
+    public bool IsSongFinished { get; private set; }
+
     public void Update()
     {
+        // Clean up stopped sound effects
         for (int i = _activeSoundEffectInstances.Count - 1; i >= 0; i--)
         {
-            SoundEffectInstance instance = _activeSoundEffectInstances[i];
-
+            var instance = _activeSoundEffectInstances[i];
             if (instance.State == SoundState.Stopped)
             {
-                if (!instance.IsDisposed)
-                {
-                    instance.Dispose();
-                }
+                instance.Dispose();
                 _activeSoundEffectInstances.RemoveAt(i);
             }
         }
+
+        // Check if current song stopped
+        if (MediaPlayer.State == MediaState.Stopped && !IsSongFinished)
+        {
+            IsSongFinished = true;
+            Console.WriteLine("Song ended.");
+        }
     }
+
 
     /// <summary>
     /// Plays the given sound effect.
@@ -162,15 +169,12 @@ public class AudioController : IDisposable
     /// <param name="isRepeating">Optionally specify if the song should repeat.  Default is true.</param>
     public void PlaySong(Song song, bool isRepeating = true)
     {
-        // Check if the media player is already playing, if so, stop it.
-        // If we do not stop it, this could cause issues on some platforms
         if (MediaPlayer.State == MediaState.Playing)
-        {
             MediaPlayer.Stop();
-        }
 
         MediaPlayer.Play(song);
         MediaPlayer.IsRepeating = isRepeating;
+        IsSongFinished = false;
     }
 
     /// <summary>

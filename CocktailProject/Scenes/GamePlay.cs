@@ -80,6 +80,9 @@ namespace CocktailProject.Scenes
         #region SoundVariable
         Song BGM_themeSong01;
         Song BGM_themeSong02;
+        bool shouldPlayBGM_themeSong01 = true;
+        bool shouldPlayBGM_themeSong02 = false;
+
 
         SoundEffect SFX_PressedBTN;
         SoundEffect SFX_Welcome;
@@ -98,6 +101,8 @@ namespace CocktailProject.Scenes
         SoundEffect SFX_Book_Turnpage;
         SoundEffect SFX_Book_Open_Close;
         SoundEffect SFX_Open_Interface;
+
+        
         #endregion
 
         #region Conversation Logic Variable
@@ -1153,6 +1158,8 @@ namespace CocktailProject.Scenes
             // Moving NPC updates
             foreach (var movnpc in movingnpcs)
                 movnpc.Update(gameTime);
+
+            UpdateSong();
 
             // Handle fade-in
             if (shouldFadeIn)
@@ -2328,6 +2335,23 @@ namespace CocktailProject.Scenes
             BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, true);
             Core.Audio.SongVolume = 0.25f;
+        }
+
+        public void UpdateSong() {
+            if (Core.Audio.IsSongFinished && shouldPlayBGM_themeSong01)
+            {
+                Core.Audio.PlaySong(BGM_themeSong02, false);
+                Core.Audio.SongVolume = 0.25f;
+                shouldPlayBGM_themeSong01 = false;
+                shouldPlayBGM_themeSong02 = true;
+            }
+            else if (Core.Audio.IsSongFinished && shouldPlayBGM_themeSong02)
+            {
+                Core.Audio.PlaySong(BGM_themeSong01, false);
+                Core.Audio.SongVolume = 0.25f;
+                shouldPlayBGM_themeSong02 = false;
+                shouldPlayBGM_themeSong01 = true;
+            }
         }
 
         //----------------NPC Init-------------------

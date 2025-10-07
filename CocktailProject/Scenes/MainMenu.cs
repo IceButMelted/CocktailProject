@@ -14,6 +14,7 @@ using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 
 
@@ -21,6 +22,11 @@ namespace CocktailProject.Scenes
 {
     class MainMenu : Scene
     {
+        Song BGM_themeSong01;
+        Song BGM_themeSong02;
+        bool shouldPlayBGM_themeSong01 = true;
+        bool shouldPlayBGM_themeSong02 = false;
+
         private const String COCKTAIL_TEXT = "Cocktail : 410";
 
         private BG_Parallax bg;
@@ -52,12 +58,29 @@ namespace CocktailProject.Scenes
             bg.Update(mouse);
             fg.Update(mouse);
 
+            if(Core.Audio.IsSongFinished && shouldPlayBGM_themeSong01)
+            {
+                Core.Audio.PlaySong(BGM_themeSong02, false);
+                Core.Audio.SongVolume = 0.25f;
+                shouldPlayBGM_themeSong01 = false;
+                shouldPlayBGM_themeSong02 = true;
+            }
+            else if (Core.Audio.IsSongFinished && shouldPlayBGM_themeSong02)
+            {
+                Core.Audio.PlaySong(BGM_themeSong01, false);
+                Core.Audio.SongVolume = 0.25f;
+                shouldPlayBGM_themeSong02 = false;
+                shouldPlayBGM_themeSong01 = true;
+            }
+
             UserInterface.Active.Update(gameTime);
             base.Update(gameTime);
         }
 
         public override void LoadContent()
         {
+            InitBGM();
+
             Texture2D BG_Texture = Content.Load<Texture2D>("images/Background/BGP_Background");
             Texture2D FG_Texture = Content.Load<Texture2D>("images/Background/BGP_Foreground");
 
@@ -130,6 +153,14 @@ namespace CocktailProject.Scenes
 
             UserInterface.Active.Draw(Core.SpriteBatch);
             base.Draw(gameTime);
+        }
+
+        public void InitBGM()
+        {
+            BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/ThemeSong01");
+            BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
+            Core.Audio.PlaySong(BGM_themeSong01, false);
+            Core.Audio.SongVolume = 0.25f;
         }
     }
 }
