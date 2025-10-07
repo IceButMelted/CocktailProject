@@ -1196,6 +1196,18 @@
 /processorParam:Quality=Best
 /build:Sound/Background_Music/BGM_MockUp.mp3;Sound/Background_Music/BGM_MockUp
 
+#begin Sound/Background_Music/ThemeSong01.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Background_Music/ThemeSong01.mp3;Sound/Background_Music/ThemeSong01
+
+#begin Sound/Background_Music/ThemeSong02.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Background_Music/ThemeSong02.mp3;Sound/Background_Music/ThemeSong02
+
 #begin Sound/Sound_Effect/Book_Open_Close.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1226,6 +1238,12 @@
 /processorParam:Quality=Best
 /build:Sound/Sound_Effect/Lemon.wav;Sound/Sound_Effect/Lemon
 
+#begin Sound/Sound_Effect/Open_Interface.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Open_Interface.wav;Sound/Sound_Effect/Open_Interface
+
 #begin Sound/Sound_Effect/Peppermint.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1238,6 +1256,12 @@
 /processorParam:Quality=Best
 /build:Sound/Sound_Effect/Pouring.wav;Sound/Sound_Effect/Pouring
 
+#begin Sound/Sound_Effect/Serve.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Serve.wav;Sound/Sound_Effect/Serve
+
 #begin Sound/Sound_Effect/Shaking.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1249,4 +1273,10 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/Sound_Effect/Stiring.wav;Sound/Sound_Effect/Stiring
+
+#begin Sound/Sound_Effect/Welcome.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Welcome.wav;Sound/Sound_Effect/Welcome
 
