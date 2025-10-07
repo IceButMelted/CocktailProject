@@ -1417,7 +1417,7 @@ namespace CocktailProject.Scenes
                     EnableOrderPanel(false);
                     if (SlidePanel(Img_Customer, -400, 7, Enum_SlideDirection.Left))
                     {
-                        if (numbercustomer > 0)
+                        if (numbercustomer > 1)
                         {
                             EnableFadePanel(true);
                             shouldFadeOut = true;

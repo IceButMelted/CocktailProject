@@ -64,11 +64,15 @@ namespace CocktailProject.Scenes
 
             if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Q))
             {
-                if(GlobalVariable.Day == 2)
+                if (GlobalVariable.Day >= 2)
                     Core.ChangeScene(new Thanks());
-                UserInterface.Active.Clear();
-                GlobalVariable.NextDay();
-                Core.ChangeScene(new GamePlay());
+                else
+                {
+                    UserInterface.Active.Clear();
+                    GlobalVariable.NextDay();
+                    Core.ChangeScene(new GamePlay());
+
+                }
             }
 
             base.Update(gameTime);
@@ -113,7 +117,7 @@ namespace CocktailProject.Scenes
                 FillColor = new Color(235, 228, 202),
                 OutlineOpacity = 0
             };
-           
+
 
             // -----------------------------------------------------------------
             // Info Panel
@@ -124,7 +128,6 @@ namespace CocktailProject.Scenes
             string formattedCustomer = $"{"Customer".PadRight(LabelWidth)}{GlobalVariable.customerNumber,ValueWidth}";
             string formattedIncome = $"{"Income".PadRight(LabelWidth)}{GlobalVariable.Income,ValueWidth}";
             string formattedTip = $"{"Tip".PadRight(LabelWidth)}{GlobalVariable.Tip,ValueWidth}";
-
             Paragraph txtCustomer = CreateLabel(formattedCustomer);
             Paragraph txtIncome = CreateLabel(formattedIncome);
 
@@ -135,12 +138,23 @@ namespace CocktailProject.Scenes
             // -----------------------------------------------------------------
             // Cocktail List
             // -----------------------------------------------------------------
-            int maxNameLength = GlobalVariable.CocktailHaveDone.Keys.Max(k => k.Length);
 
-            foreach (var kvp in GlobalVariable.CocktailHaveDone)
+            // Fallback safe if no cocktail made
+            int maxNameLength = 10; // default value
+
+            if (GlobalVariable.CocktailHaveDone.Count != 0)
             {
-                string formattedLine = $"   {kvp.Key.PadRight(maxNameLength + 5)}{kvp.Value,5}";
-                panel.AddChild(CreateLabel(formattedLine));
+                maxNameLength = GlobalVariable.CocktailHaveDone.Keys.Max(k => k.Length);
+
+                foreach (var kvp in GlobalVariable.CocktailHaveDone)
+                {
+                    string formattedLine = $"   {kvp.Key.PadRight(maxNameLength + 5)}{kvp.Value,5}";
+                    panel.AddChild(CreateLabel(formattedLine));
+                }
+            }
+            else
+            {
+                panel.AddChild(CreateLabel("   No cocktails made yet."));
             }
 
             // Add tip line last
@@ -149,11 +163,15 @@ namespace CocktailProject.Scenes
 
             // Total line
             int grandTotal = GlobalVariable.Income + GlobalVariable.Tip;
-            Paragraph txt_Total = new Paragraph($"Total".PadRight(maxNameLength + 12) + $"{grandTotal,5}", Anchor.BottomCenter);
+            Paragraph txt_Total = new Paragraph(
+                $"Total".PadRight(maxNameLength + 12) + $"{grandTotal,5}",
+                Anchor.BottomCenter
+            );
             txt_Total.FontOverride = BoldFont;
             txt_Total.FillColor = new Color(235, 228, 202);
             txt_Total.OutlineOpacity = 0;
             panel.AddChild(txt_Total);
+
 
             // -----------------------------------------------------------------
             // Combine UI Elements
