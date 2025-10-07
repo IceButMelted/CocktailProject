@@ -78,18 +78,18 @@ namespace CocktailProject.Scenes
 
             // Frames Configs
             frames.Add(new Rectangle(0, 0, 1920, 700));
-            frameDurations.Add(5.0);
+            frameDurations.Add(4.0);
             frames.Add(new Rectangle(0, 700, 1920, 700));
-            frameDurations.Add(5.0);
+            frameDurations.Add(4.0);
             frames.Add(new Rectangle(0, 1400, 1920, 700));
-            frameDurations.Add(5.0);
+            frameDurations.Add(2.0);
             frames.Add(new Rectangle(0, 2100, 1920, 700));
-            frameDurations.Add(5.0);
+            frameDurations.Add(1.0);
             frames.Add(new Rectangle(0, 2800, 1920, 700));
-            frameDurations.Add(5.0);
+            frameDurations.Add(4.0);
 
-            T_BTN_Skip_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Default");
-            T_BTN_Skip_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Hover");
+            T_BTN_Skip_Default = Content.Load<Texture2D>("images/Previs/Skip_Default");
+            T_BTN_Skip_Hover = Content.Load<Texture2D>("images/Previs/Skip_Hover");
 
             // Panels
             P_Skip = new Panel(new Vector2(240, 80), PanelSkin.None, Anchor.BottomRight);
