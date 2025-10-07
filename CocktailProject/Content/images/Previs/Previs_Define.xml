@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/Previs/Atlas_Previs</Texture>
+	<Regions>
+		<!-- Atlas_Previs -->
+		<Region name="Scene1" x="0" y="0" width="1920" height="700" />
+		<Region name="Scene2" x="0" y="700" width="1920" height="700" />
+		<Region name="Scene3" x="0" y="1400" width="1920" height="700" />
+		<Region name="Scene4" x="0" y="2100" width="1920" height="700" />
+		<Region name="Scene1" x="0" y="2800" width="1920" height="700" />
+	</Regions>
+	<Animations>
+	</Animations>
+</TextureAtlas>
