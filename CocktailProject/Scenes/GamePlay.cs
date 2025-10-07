@@ -1412,9 +1412,8 @@ namespace CocktailProject.Scenes
                     EnableOrderPanel(false);
                     if (SlidePanel(Img_Customer, -400, 7, Enum_SlideDirection.Left))
                     {
-                        if (numbercustomer > 1)
+                        if (numbercustomer > 0)
                         {
-                            GlobalVariable.Day++;
                             EnableFadePanel(true);
                             shouldFadeOut = true;
                             return;
@@ -1477,7 +1476,7 @@ namespace CocktailProject.Scenes
                     }
                     else
                     {
-                        AnimationText = new TaggedTextRevealer($"Please make me a {{MENU_TEXT}}{str_targetCocktail_Name}{{DEFAULT}}.", 0.05);
+                        AnimationText = new TaggedTextRevealer("Please make me a {{MENU_TEXT}}"  + str_targetCocktail_Name + "{{DEFAULT}}.", 0.05);
                         AnimationText.Start();
                         canSkipConversation = true;
                         canGoNextConversation = false;
@@ -2350,7 +2349,7 @@ namespace CocktailProject.Scenes
         public void EnableAllBTN(bool enable) { 
             BTNIngredeientActive(enable);
             BTNMethodActive(enable);
-            BTN_AddIce.Enabled = enable;
+            //BTN_AddIce.Enabled = enable;
             BTN_Serve.Enabled = enable;
             BTN_Rest_BeforeServe.Enabled = enable;
             //BTN_Alcohol.Enabled = enable;

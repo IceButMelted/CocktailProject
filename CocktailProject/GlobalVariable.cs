@@ -60,7 +60,8 @@ namespace CocktailProject
             Day++;
             Tip = 0;
             customerNumber = 0;
-            CocktailHaveDone.Clear();
+            Income = 0;
+            CocktailHaveDone = new Dictionary<string, int>();
         }
 
         public static void DebugPrint()
@@ -82,5 +83,6 @@ namespace CocktailProject
             }
             return sb.ToString();
         }
+
     }
 }
