@@ -1321,7 +1321,10 @@ namespace CocktailProject.Scenes
                     SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
                     break;
                 case Enum_PanelState.Open:
-                    SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right);
+                    EnableAllBTN(false);
+                    if (SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Right)) {
+                        EnableAllBTN(true);
+                    }
                     break;
                 case Enum_PanelState.Close:
                     SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left);
@@ -2333,6 +2336,22 @@ namespace CocktailProject.Scenes
         {
             P_Fade.Enabled = enable;
             P_Fade.Visible = enable;
+        }
+
+        public void EnableAllBTN(bool enable) { 
+            BTNIngredeientActive(enable);
+            BTNMethodActive(enable);
+            BTN_AddIce.Enabled = enable;
+            BTN_Serve.Enabled = enable;
+            BTN_Rest_BeforeServe.Enabled = enable;
+            //BTN_Alcohol.Enabled = enable;
+            //BTN_Mixer.Enabled = enable;
+            BTN_Reset_OnTable.Enabled = enable;
+            BTN_Stiring.Enabled = enable;
+            BTN_Shaking.Enabled = enable;
+            BTN_BookRecipes.Enabled = enable;
+            BTN_BookRecipes.Enabled = enable;
+
         }
     }
 
