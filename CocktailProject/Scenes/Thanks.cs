@@ -34,8 +34,11 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            if(Core.Input.Keyboard.WasKeyJustPressed(Keys.E))
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.E))
+            {
                 Core.ChangeScene(new GamePlay());
+                UserInterface.Active.Clear();
+            }
 
             base.Update(gameTime);
         }
