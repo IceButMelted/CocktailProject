@@ -7,7 +7,9 @@
           {
             "Conversation": [
               "Good evening so you're the brave soul who opened a new bar?",
-              "Well welcome to the town. I rarely see people moving into this city."
+              "Well welcome to the town. I rarely see people moving into this city.",
+              "Plus, the shop is located on Route 410, the main road of the city.",
+              "It won't be long before the shop is very crowded."
             ],
             "CurrentIndex": 0
           }
@@ -29,7 +31,7 @@
             "Conversation": [
               "Good evening again! I hope you're having a pleasant night so far.",
               "I must apologize if I seem a bit stiff tonight -",
-              "pent the better part of the day at the hospital having my back examined.",
+              "Spent the better part of the day at the hospital having my back examined.",
               "The joys of growing older, as they say!"
             ],
             "CurrentIndex": 0
