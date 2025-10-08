@@ -14,6 +14,7 @@ using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 namespace CocktailProject.Scenes
 {
@@ -29,9 +30,13 @@ namespace CocktailProject.Scenes
         protected Image Img_Summary;
         protected Texture2D T_Img_Summary;
 
+        protected float TimeWitingBeforeClick = 5f;
+
         protected SpriteFont RegularFont;
         protected SpriteFont BoldFont;
         protected SpriteFont ItalicFont;
+
+        protected Paragraph contipragrop;
 
         // ---------------------------------------------------------------------
         // Background
@@ -74,6 +79,23 @@ namespace CocktailProject.Scenes
 
                 }
             }
+
+            TimeWitingBeforeClick -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (TimeWitingBeforeClick < 0)
+                if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left)) {
+                    if (GlobalVariable.Day >= 2)
+                        Core.ChangeScene(new Thanks());
+                    else
+                    {
+                        UserInterface.Active.Clear();
+                        GlobalVariable.NextDay();
+                        Core.ChangeScene(new GamePlay());
+
+                    }
+                }
+
+
+
 
             base.Update(gameTime);
         }
@@ -118,6 +140,16 @@ namespace CocktailProject.Scenes
                 OutlineOpacity = 0
             };
 
+            contipragrop = new Paragraph("Click any where to continue", Anchor.BottomCenter)
+            {
+                Size = new Vector2(500, 40),
+                Offset = new Vector2(0, -20),
+                FontOverride = ItalicFont,
+                FillColor = new Color(200, 200, 200),
+                OutlineOpacity = 0
+            };
+
+            Img_Summary.AddChild(contipragrop);
 
             // -----------------------------------------------------------------
             // Info Panel
