@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using GeonBit.UI.Source.Entities;
 
 
 
@@ -32,6 +33,8 @@ namespace CocktailProject.Scenes
         private BG_Parallax bg;
         private BG_Parallax fg;
         private Point screenCenter;
+
+        private FullImagePanel P_credit;
 
         public Image Logo; public Texture2D T_Logo;
         public Panel P_Start;
@@ -77,9 +80,12 @@ namespace CocktailProject.Scenes
             base.Update(gameTime);
         }
 
-        public override void LoadContent()
+        public override void LoadContent() 
         {
             InitBGM();
+
+            Texture2D T_credit = Content.Load<Texture2D>("images/UI/Book_Credit");
+            P_credit = new FullImagePanel(T_credit, new Vector2(1100,800), Anchor.CenterRight);
 
             Texture2D BG_Texture = Content.Load<Texture2D>("images/Background/BGP_Background");
             Texture2D FG_Texture = Content.Load<Texture2D>("images/Background/BGP_Foreground");
@@ -118,9 +124,9 @@ namespace CocktailProject.Scenes
             BTN_Credit = new Button("", ButtonSkin.Default, Anchor.Center);
             BTN_Credit.Size = new Vector2(240, 80);
             BTN_Credit.SetCustomSkin(T_BTN_Credit_Default, T_BTN_Credit_Hover, T_BTN_Credit_Hover);
-            //BTN_Credit.OnMouseDown = (Entity e) => {
-            //    Core.ChangeScene(new GamePlay());
-            //};
+            BTN_Credit.OnMouseDown = (Entity e) => {
+                //ToggleCreditPanel();
+            };
 
             BTN_Exit = new Button("", ButtonSkin.Default, Anchor.Center);
             BTN_Exit.Size = new Vector2(240, 80);
@@ -138,6 +144,8 @@ namespace CocktailProject.Scenes
             UserInterface.Active.AddEntity(P_Credit);
             UserInterface.Active.AddEntity(P_Exit);
             UserInterface.Active.AddEntity(Logo);
+            UserInterface.Active.AddEntity(P_credit);
+            P_credit.Visible = false;
 
             base.LoadContent();
         }
@@ -161,6 +169,13 @@ namespace CocktailProject.Scenes
             BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, false);
             Core.Audio.SongVolume = 0.25f;
+        }
+
+        public void ToggleCreditPanel()
+        {
+            if (P_credit.Visible) P_credit.Visible = false;
+            else if (!P_credit.Visible) P_credit.Visible = true;
+            
         }
     }
 }
