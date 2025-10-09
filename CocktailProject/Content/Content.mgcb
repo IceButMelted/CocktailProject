@@ -1043,6 +1043,18 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/MakingZone/Button_Stir_Off.png;images/UI/MakingZone/Button_Stir_Off
 
+#begin images/UI/MakingZone/Panel_BeforeServe_AddIce.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/MakingZone/Panel_BeforeServe_AddIce.png;images/UI/MakingZone/Panel_BeforeServe_AddIce
+
 #begin images/UI/MakingZone/Panel_BeforeServe.png
 /importer:TextureImporter
 /processor:TextureProcessor

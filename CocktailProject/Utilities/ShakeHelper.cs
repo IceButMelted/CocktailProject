@@ -178,5 +178,18 @@ namespace CocktailProject.Utilities
             }
         }
 
+        //see if that enitity is finish shaking
+        public static bool IsComplete(Entity entity)
+        {
+            foreach (var s in activeShakes)
+            {
+                if (s.Entity == entity)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }

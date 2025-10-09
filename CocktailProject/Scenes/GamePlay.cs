@@ -230,9 +230,10 @@ namespace CocktailProject.Scenes
         public Button BTN_Shaking;
         public Image Img_CocktailBottle; public Texture2D T_CocktailBase;
         public Button BTN_Reset_OnTable;
-        public Button BTN_BookRecipes; 
+        public Button BTN_BookRecipes;
         // Before Serve
-        public FullImagePanel P_BeforeServe;
+        public Texture2D T_P_BeforeServe; public Texture2D T_P_BeforeServe_Addice;
+        public Image P_BeforeServe;
         public Button BTN_AddIce;
         public Button BTN_Serve;
         public Button BTN_Rest_BeforeServe;
@@ -251,8 +252,8 @@ namespace CocktailProject.Scenes
         public Image Img_MiniGame_Stirring; TextureAtlas MinGame_Stirring_Atlas; AnimatedSprite Stirring_Anim;
         public CustomProgressBar PB_Stirring;
         public Panel BG_Stirring_TargetZone;
-        public Panel Stirring_TargetZone;
-        public Panel Arrow_Stirring;
+        public Image Img_Stirring_TargetZone;
+        public Image Arrow_Stirring;
         // Book Recipe
         public Panel P_BGBookRecipes;
         public Image Img_BookRecipes; public Texture2D T_BookRecipes;
@@ -341,6 +342,7 @@ namespace CocktailProject.Scenes
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = true;
+            
 
             // #EBE4C6 light cream
             RichParagraphStyleInstruction.AddInstruction("MENU_TEXT", new RichParagraphStyleInstruction(fillColor: new Color(192, 130, 30)));
@@ -482,6 +484,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Vodka. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Alcohol_Gin = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -500,6 +504,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Gin. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Alcohol_Triplesec = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -518,6 +524,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Triplesec. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Alcohol_Vermouth = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -536,6 +544,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Vermouth. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             #endregion
@@ -582,6 +592,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Canberry Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Mixer_GrapefruitJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -600,6 +612,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Grapefruit Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Mixer_LemonJuice = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -618,6 +632,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Lemon Juice. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             //new row
@@ -637,6 +653,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Soda. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Mixer_Syrup = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -655,6 +673,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Syrup. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
             BTN_Mixer_PepperMint = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
@@ -673,6 +693,8 @@ namespace CocktailProject.Scenes
                 Debug.WriteLine("Added Pepper Mint. Current cocktail parts: " + _currentCocktail.GetCountPart());
                 Debug.WriteLine(_currentCocktail.Info());
                 VisibleMakingCocktailVisual(true);
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
 
@@ -765,7 +787,7 @@ namespace CocktailProject.Scenes
             Texture2D T_BTN_Reset = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Default");
             Texture2D T_BTN_Reset_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Hover");
             Texture2D T_BTN_Reset_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Off");
-            BTN_Reset_OnTable = new Button("", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(135,135));
+            BTN_Reset_OnTable = new Button("", skin: ButtonSkin.Default, anchor: Anchor.Center, size: new Vector2(60,60));
             BTN_Reset_OnTable.Padding = Vector2.Zero;
             BTN_Reset_OnTable.Offset = new Vector2(-100, 150);
             BTN_Reset_OnTable.ButtonParagraph.OutlineWidth = 0;
@@ -790,10 +812,17 @@ namespace CocktailProject.Scenes
 
                 ResetUI();
                 UpdateCocktailBars();
+
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
+            
 
             Img_CocktailBottle = new Image(T_CocktailBase, new Vector2(80, 140), anchor: Anchor.Center);
             Img_CocktailBottle.Offset = new Vector2(-100, 25);
+            Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
+            
+            
 
             //visual cocktail
             InitMakingVisualCocktail();
@@ -867,8 +896,9 @@ namespace CocktailProject.Scenes
             #endregion
 
             #region Before Serve Panel
-            Texture2D T_P_BeforeServe = Content.Load<Texture2D>("images/UI/MakingZone/Panel_BeforeServe");
-            P_BeforeServe = new FullImagePanel(T_P_BeforeServe,new Vector2(800, 480),  anchor: Anchor.TopRight);
+            T_P_BeforeServe = Content.Load<Texture2D>("images/UI/MakingZone/Panel_BeforeServe");
+            T_P_BeforeServe_Addice = Content.Load<Texture2D>("images/UI/MakingZone/Panel_BeforeServe_AddIce");
+            P_BeforeServe = new Image(T_P_BeforeServe, new Vector2(800, 480),  anchor: Anchor.TopRight);
             P_BeforeServe.Padding = Vector2.Zero;
             P_BeforeServe.Offset = new Vector2(-800, 600);
 
@@ -888,7 +918,9 @@ namespace CocktailProject.Scenes
                 _currentCocktail.AddIce(true);
                 Debug.WriteLine("Added Ice");
                 Debug.WriteLine(_currentCocktail.Info());
+                P_BeforeServe.Texture = T_P_BeforeServe_Addice;
                 BTN_AddIce.Enabled = false;
+                BTN_AddIce.Visible = false;
             };
             
 
@@ -931,9 +963,9 @@ namespace CocktailProject.Scenes
             Texture2D T_BTN_Rest_BeforeServe = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Default");
             Texture2D T_BTN_Rest_BeforeServe_Hover = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Hover");
             Texture2D T_BTN_Rest_BeforeServe_Pressed = Content.Load<Texture2D>("images/UI/MakingZone/Button_Reset_Off");
-            BTN_Rest_BeforeServe = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomCenter, size: new Vector2(135, 135));
+            BTN_Rest_BeforeServe = new Button("", skin: ButtonSkin.Default, anchor: Anchor.BottomCenter, size: new Vector2(60, 60));
             BTN_Rest_BeforeServe.Padding = Vector2.Zero;
-            BTN_Rest_BeforeServe.Offset = Vector2.Zero;
+            BTN_Rest_BeforeServe.Offset = new Vector2(0, 50);
             BTN_Rest_BeforeServe.ButtonParagraph.OutlineWidth = 0;
             BTN_Rest_BeforeServe.SetCustomSkin(T_BTN_Rest_BeforeServe, T_BTN_Rest_BeforeServe_Hover, T_BTN_Rest_BeforeServe_Pressed);
             BTN_Rest_BeforeServe.OnMouseDown = (Entity e) =>
@@ -946,6 +978,8 @@ namespace CocktailProject.Scenes
                 ResetUI();
                 MiniGame.ShakingMinigame.Reset();
                 MiniGame.StiringMinigame.Reset();
+
+                Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
 
             };
             #endregion
@@ -1027,7 +1061,7 @@ namespace CocktailProject.Scenes
 
             Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.TopLeft);
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-            Img_Customer.Offset = new Vector2(1920, 27);
+            Img_Customer.Offset = new Vector2(1920, 40);
 
             #endregion
 
@@ -1256,6 +1290,18 @@ namespace CocktailProject.Scenes
                 }
 
                 StiringMinigame.Update(gameTime);
+                if (!StiringMinigame.GetIsHitCorrectValue()) { 
+                    ShakeHelper.ShakingEntity(PB_Stirring, 5f, true, 0.6f, speed: 100f);
+                    PB_Stirring.FillColor = Color.Orange;
+                    PB_Stirring.ProgressFill.FillColor = Color.Orange;
+                    StiringMinigame.IsHitCorrectValue = true;
+                }
+                if (ShakeHelper.IsComplete(PB_Stirring))
+                {
+                    PB_Stirring.Offset = new Vector2(0, 70);
+                    PB_Stirring.FillColor = Color.White;
+                    PB_Stirring.ProgressFill.FillColor = Color.Yellow;
+                }
                 UpdateMiniGameStiringUI();
                 Stirring_Anim.Play();
                 Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
@@ -1350,6 +1396,7 @@ namespace CocktailProject.Scenes
                     break;
                 case Enum_PanelState.Pos2:
                     if (SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left))
+                        P_BeforeServe.Texture = T_P_BeforeServe;
                         stateBeforeServePanel = Enum_PanelState.InitPosWarp;
                     break;
             }
@@ -1414,7 +1461,7 @@ namespace CocktailProject.Scenes
                     canDoconversation = false;
                     currentCustomerState = Enum_CutomerState.Entering;
                     Core.Audio.PlaySoundEffect(SFX_Welcome);
-                    Img_Customer.Offset = new Vector2(1920, 27);
+                    Img_Customer.Offset = new Vector2(1920, 40);
                     stateImgCustomer = Enum_PanelState.Pos1;
                     ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
                     ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
@@ -1845,6 +1892,7 @@ namespace CocktailProject.Scenes
             openMinigamePanel = Enum_PanelState.Close;
             stateBeforeServePanel = Enum_PanelState.InitPosSlide;
             BTN_AddIce.Enabled = true;
+            BTN_AddIce.Visible = true;
             BTNIngredeientActive(true);
             BTNMethodActive(false);
             BTNMethodVisible(false);
@@ -1887,11 +1935,10 @@ namespace CocktailProject.Scenes
             BG_ProgressBar.Padding = Vector2.Zero;
 
             ProgressBar = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
-            ProgressBar.FillColor = Color.Green;
+            ProgressBar.FillColor = Color.Olive;
 
             TargetZone = new Panel(new Vector2(40, 50), PanelSkin.Simple, Anchor.BottomCenter);
-            TargetZone.FillColor = Color.Red;
-            TargetZone.Opacity = 100;
+            TargetZone.FillColor = Color.Green * 0.75f;
 
             Pointing = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
 
@@ -1911,22 +1958,32 @@ namespace CocktailProject.Scenes
             PB_Stirring.SliderSkin = SliderSkin.Default;
             PB_Stirring.ProgressFill.FillColor = Color.Yellow;
 
+            Utilities.ShakeHelper.ShakingEntity(PB_Stirring, 0.3f, false, 0.3f, 10);
+            ShakeHelper.StopShake(PB_Stirring);
+
 
             BG_Stirring_TargetZone = new Panel(new Vector2(XSizeBar_Stiring - PaddingLR_Bar_Stiring, 50), PanelSkin.Simple, Anchor.BottomCenter);
             BG_Stirring_TargetZone.Offset = new Vector2(0, 10);
             BG_Stirring_TargetZone.FillColor = Color.Gray;
             BG_Stirring_TargetZone.Padding = new Vector2(0, 0);
 
-            Stirring_TargetZone = new Panel(new Vector2((StiringMinigame.TargetZone_CurrentSize / (StiringMinigame.MaxSize - StiringMinigame.MinSize)) * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50), PanelSkin.Simple, Anchor.CenterLeft);
-            Stirring_TargetZone.FillColor = Color.Red;
-            Stirring_TargetZone.Padding = Vector2.Zero;
-            Stirring_TargetZone.Opacity = 128;
+            Texture2D T_Stirring_TargetZone = new Texture2D(Core.GraphicsDevice, 1, 1);
+            T_Stirring_TargetZone.SetData(new[] { Color.White });
 
-            Arrow_Stirring = new Panel(new Vector2(2, 50), PanelSkin.Simple, Anchor.CenterLeft);
+            Img_Stirring_TargetZone = new Image(T_Stirring_TargetZone,new Vector2((StiringMinigame.TargetZone_CurrentSize / (StiringMinigame.MaxSize - StiringMinigame.MinSize)) * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50), anchor: Anchor.CenterLeft);
+            Img_Stirring_TargetZone.FillColor = Color.LightGreen;
+            Img_Stirring_TargetZone.Padding = Vector2.Zero;
+            Img_Stirring_TargetZone.Opacity = 128;
+
+            Texture2D T_Arrow = new Texture2D(Core.GraphicsDevice, 1, 1);
+            T_Arrow.SetData(new[] { Color.White });
+
+            Arrow_Stirring = new Image(T_Arrow, new Vector2(5, 50), anchor: Anchor.CenterLeft);
+            //Arrow_Stirring = new Panel(new Vector2(2, 50), PanelSkin.Simple, Anchor.CenterLeft);
             Arrow_Stirring.Offset = new Vector2((StiringMinigame.PointingArrow_CurrentValue) - 5, 0);
-            Arrow_Stirring.FillColor = Color.Blue;
+            Arrow_Stirring.FillColor = Color.LightBlue;
 
-            BG_Stirring_TargetZone.AddChild(Stirring_TargetZone);
+            BG_Stirring_TargetZone.AddChild(Img_Stirring_TargetZone);
             BG_Stirring_TargetZone.AddChild(Arrow_Stirring);
 
 
@@ -1958,8 +2015,8 @@ namespace CocktailProject.Scenes
             float normalizedWidth = (StiringMinigame.TargetZone_CurrentSize)
                                     / (StiringMinigame.MaxSize - StiringMinigame.MinSize);
 
-            Stirring_TargetZone.Offset = new Vector2((XSizeBar_Stiring - PaddingLR_Bar_Stiring) * (normalizedMin / 100), 0);
-            Stirring_TargetZone.Size = new Vector2(normalizedWidth * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50);
+            Img_Stirring_TargetZone.Offset = new Vector2((XSizeBar_Stiring - PaddingLR_Bar_Stiring) * (normalizedMin / 100), 0);
+            Img_Stirring_TargetZone.Size = new Vector2(normalizedWidth * (XSizeBar_Stiring - PaddingLR_Bar_Stiring), 50);
 
             float normalizedArrow = (StiringMinigame.PointingArrow_CurrentValue - StiringMinigame.MinSize)
                                     / (StiringMinigame.MaxSize - StiringMinigame.MinSize);
@@ -2334,21 +2391,21 @@ namespace CocktailProject.Scenes
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/ThemeSong01");
             BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, true);
-            Core.Audio.SongVolume = 0.25f;
+            Core.Audio.SongVolume = 0.75f;
         }
 
         public void UpdateSong() {
             if (Core.Audio.IsSongFinished && shouldPlayBGM_themeSong01)
             {
                 Core.Audio.PlaySong(BGM_themeSong02, false);
-                Core.Audio.SongVolume = 0.25f;
+                Core.Audio.SongVolume = 0.75f;
                 shouldPlayBGM_themeSong01 = false;
                 shouldPlayBGM_themeSong02 = true;
             }
             else if (Core.Audio.IsSongFinished && shouldPlayBGM_themeSong02)
             {
                 Core.Audio.PlaySong(BGM_themeSong01, false);
-                Core.Audio.SongVolume = 0.25f;
+                Core.Audio.SongVolume = 0.75f;
                 shouldPlayBGM_themeSong02 = false;
                 shouldPlayBGM_themeSong01 = true;
             }
@@ -2429,7 +2486,7 @@ namespace CocktailProject.Scenes
         public void InitFadePanel()
         {
             P_Fade = new Panel(new Vector2(2300, 1200), PanelSkin.Simple, Anchor.Center);
-            P_Fade.FillColor = Color.Black;
+            //P_Fade.FillColor = Color.Black;
             P_Fade.Opacity = 255;
             RP_Fade = new RichParagraph("Day" + GlobalVariable.Day);
             RP_Fade.FontOverride = BoldFont;
