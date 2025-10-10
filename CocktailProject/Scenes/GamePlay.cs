@@ -343,7 +343,7 @@ namespace CocktailProject.Scenes
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
             UserInterface.Active.ShowCursor = true;
-            
+            UserInterface.TimeToShowTooltipText = 0.6f;
 
             // #EBE4C6 light cream
             RichParagraphStyleInstruction.AddInstruction("MENU_TEXT", new RichParagraphStyleInstruction(fillColor: new Color(192, 130, 30)));
@@ -355,6 +355,7 @@ namespace CocktailProject.Scenes
             RegularFont = Content.Load<SpriteFont>("Fonts/Regular");
             BoldFont = Content.Load<SpriteFont>("Fonts/Bold");
             ItalicFont = Content.Load<SpriteFont>("Fonts/Italic");
+            UserInterface._tooltipFont = RegularFont;
 
             LoadImageAndAtlas();
 
@@ -477,6 +478,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vodka.ButtonParagraph.OutlineWidth = 0;
             BTN_Alcohol_Vodka.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Alcohol_Vodka.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Alcohol_Vodka.ToolTipText = "Vodka";
             BTN_Alcohol_Vodka.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -488,6 +490,7 @@ namespace CocktailProject.Scenes
 
                 Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
+            
 
             BTN_Alcohol_Gin = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Gin.Padding = Vector2.Zero;
@@ -497,6 +500,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Gin.ButtonParagraph.OutlineWidth = 0;
             BTN_Alcohol_Gin.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Alcohol_Gin.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Alcohol_Gin.ToolTipText = "Gin";
             BTN_Alcohol_Gin.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -509,6 +513,7 @@ namespace CocktailProject.Scenes
                 Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
 
+
             BTN_Alcohol_Triplesec = new Button("", skin: ButtonSkin.Default, anchor: Anchor.TopLeft, size: new Vector2(160, 175));
             BTN_Alcohol_Triplesec.Padding = Vector2.Zero;
             BTN_Alcohol_Triplesec.Offset = new Vector2(50, 257);
@@ -517,6 +522,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Triplesec.ButtonParagraph.OutlineWidth = 0;
             BTN_Alcohol_Triplesec.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Alcohol_Triplesec.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Alcohol_Triplesec.ToolTipText = "Triplesec";
             BTN_Alcohol_Triplesec.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -537,6 +543,7 @@ namespace CocktailProject.Scenes
             BTN_Alcohol_Vermouth.ButtonParagraph.OutlineWidth = 0;
             BTN_Alcohol_Vermouth.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Alcohol_Vermouth.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Alcohol_Vermouth.ToolTipText = "Vermouth";
             BTN_Alcohol_Vermouth.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -585,6 +592,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_CanberryJuice.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_CanberryJuice.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_CanberryJuice.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_CanberryJuice.ToolTipText = "Canberry Juice";
             BTN_Mixer_CanberryJuice.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -605,6 +613,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_GrapefruitJuice.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_GrapefruitJuice.ToolTipText = "Grapefruit Juice";
             BTN_Mixer_GrapefruitJuice.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -625,6 +634,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_LemonJuice.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_LemonJuice.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_LemonJuice.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_LemonJuice.ToolTipText = "Lemon Juice";
             BTN_Mixer_LemonJuice.OnMouseDown = (Entity e) =>
             {
                 Core.Audio.PlaySoundEffect(SFX_Lemon);
@@ -646,6 +656,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Soda.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_Soda.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_Soda.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_Soda.ToolTipText = "Soda";
             BTN_Mixer_Soda.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -666,6 +677,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_Syrup.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_Syrup.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_Syrup.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_Syrup.ToolTipText = "Syrup";
             BTN_Mixer_Syrup.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Pouring);
@@ -686,6 +698,7 @@ namespace CocktailProject.Scenes
             BTN_Mixer_PepperMint.ButtonParagraph.OutlineWidth = 0;
             BTN_Mixer_PepperMint.ButtonParagraph.Offset = new Vector2(0, TextUIOffeset_BTN);
             BTN_Mixer_PepperMint.ButtonParagraph.FontOverride = BoldFont;
+            BTN_Mixer_PepperMint.ToolTipText = "Pepper Mint";
             BTN_Mixer_PepperMint.OnMouseDown = (Entity e) =>
             {
                 PlaySoundEffectWithRandomPitch(SFX_Peppermint);

@@ -305,6 +305,8 @@ namespace GeonBit.UI
         // time until we show tooltip text.
         private float _timeUntilTooltip = 0f;
 
+        public static SpriteFont _tooltipFont = null;
+
         // the current tooltip entity.
         Entity _tooltipEntity;
 
@@ -381,6 +383,8 @@ namespace GeonBit.UI
 
             // create tooltip paragraph
             var tooltip = new Paragraph(source.ToolTipText, size: new Vector2(500, -1));
+            if(!(_tooltipFont == null))
+                tooltip.FontOverride = _tooltipFont;
             tooltip.BackgroundColor = Color.Black * 0.75f;
 
             // add callback to update tooltip position
