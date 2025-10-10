@@ -105,8 +105,8 @@ namespace CocktailProject.Scenes
             P_Exit.Offset = new Vector2(200, 794);
 
             Logo = new Image(T_Logo, anchor: Anchor.TopLeft);
-            Logo.Size = new Vector2(470, 320);
-            Logo.Offset = new Vector2(100, 120);
+            Logo.Size = new Vector2(470+75, 320+75);
+            Logo.Offset = new Vector2(100, 120-25);
 
             // Buttons
             BTN_Start = new Button("", ButtonSkin.Default, Anchor.Center);

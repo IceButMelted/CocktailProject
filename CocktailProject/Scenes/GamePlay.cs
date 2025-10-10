@@ -106,6 +106,9 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region Conversation Logic Variable
+
+        public bool EndTutorial = false;
+
         public TaggedTextRevealer AnimationText;
         ConversationPhase currentPhase = ConversationPhase.SmallTalkBeforeOrder;
 
@@ -141,9 +144,7 @@ namespace CocktailProject.Scenes
         protected SpriteFont RegularFont;
         protected SpriteFont BoldFont;
         protected SpriteFont ItalicFont;
-        #endregion
 
-        #region Variable UI
         int XSizeBar_Stiring = 800;
         int PaddingLR_Bar_Stiring = 50;
 
@@ -1201,15 +1202,14 @@ namespace CocktailProject.Scenes
                 if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 3.0f, ref fadeTimer))
                 {
                     EnableFadePanel(false);
-                    stateImgCustomer = Enum_PanelState.Pos1;
-                    Core.Audio.PlaySoundEffect(SFX_Welcome);
                     shouldFadeIn = false;
-
-                    ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
-                    ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
+                    OpenBookOnTutorial();
                 }
                 return;
             }
+
+            UserInterface.Active.Update(gameTime);
+            if (!EndTutorial) return; 
 
             if (shouldFadeOut) {
 
@@ -2057,38 +2057,75 @@ namespace CocktailProject.Scenes
             Img_RightPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_R").SourceRectangle;
             Img_RightPage.Offset = new Vector2(505, 0);
 
-            BTN_PreviousPage = new Button("", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(160/2, 80/2));
+
+            BTN_PreviousPage = new Button("", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(166/2, 98/2));
             BTN_PreviousPage.OnClick += (Entity e) =>
             {
                 ChangePage(Enum_Page.PreviousPage);
                 UpdatePageView();
                 Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
+            BTN_PreviousPage.OnMouseDown += (Entity e) =>
+            {
+                BTN_PreviousPage.Offset += new Vector2(0, -5);
+                BTN_PreviousPage.FillColor = Color.DarkGray;
+            };
+            BTN_PreviousPage.OnMouseReleased += (Entity e) =>
+            {
+                BTN_PreviousPage.Offset += new Vector2(0, +5);
+                BTN_PreviousPage.FillColor = Color.White;
+            };
             BTN_PreviousPage.Offset = new Vector2(-20, 0);
             Texture2D T_BTN_PreviousPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Left");
-            BTN_PreviousPage.SetCustomSkin(T_BTN_PreviousPage, T_BTN_PreviousPage, T_BTN_PreviousPage);
+            Texture2D T_BTN_PreviousPage_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Left_Hover");
+            BTN_PreviousPage.SetCustomSkin(T_BTN_PreviousPage, T_BTN_PreviousPage_hover, T_BTN_PreviousPage);
 
-            BTN_NextPage = new Button("", ButtonSkin.Default, Anchor.BottomRight, new Vector2(160/2, 80/2));
+
+            BTN_NextPage = new Button("", ButtonSkin.Default, Anchor.BottomRight, new Vector2(166/2, 98/2));
             BTN_NextPage.OnClick += (Entity e) =>
             {
                 ChangePage(Enum_Page.NextPage);
                 UpdatePageView();
                 Core.Audio.PlaySoundEffect(SFX_Book_Turnpage);
             };
+            BTN_NextPage.OnMouseDown += (Entity e) =>
+            {
+                BTN_NextPage.Offset += new Vector2(0, -5);
+                BTN_NextPage.FillColor = Color.DarkGray;
+            };
+            BTN_NextPage.OnMouseReleased += (Entity e) =>
+            {
+                BTN_NextPage.Offset += new Vector2(0, +5);
+                BTN_NextPage.FillColor = Color.White;
+            };
             BTN_NextPage.Offset = new Vector2(20, 0);
             Texture2D T_BTN_NextPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Right");
-            BTN_NextPage.SetCustomSkin(T_BTN_NextPage, T_BTN_NextPage, T_BTN_NextPage);
+            Texture2D T_BTN_NextPage_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Right_Hover");
+            BTN_NextPage.SetCustomSkin(T_BTN_NextPage, T_BTN_NextPage_hover, T_BTN_NextPage);
 
 
-            Button BTN_CloseBookRecipes = new Button("", ButtonSkin.Default, Anchor.TopRight, new Vector2(80/2, 120/2));
+            Button BTN_CloseBookRecipes = new Button("", ButtonSkin.Default, Anchor.TopRight, new Vector2(98/2, 140/2));
             BTN_CloseBookRecipes.OnClick += (Entity e) =>
             {
                 ToggleBookRecipes();
                 Core.Audio.PlaySoundEffect(SFX_Book_Open_Close);
+                
+            };
+            BTN_CloseBookRecipes.OnMouseDown += (Entity e) =>
+            {
+                BTN_CloseBookRecipes.Offset += new Vector2(0, +5);
+                BTN_CloseBookRecipes.FillColor = Color.DarkGray;
+            };
+            BTN_CloseBookRecipes.OnMouseReleased += (Entity e) =>
+            {
+                BTN_CloseBookRecipes.Offset += new Vector2(0, -5);
+                BTN_CloseBookRecipes.FillColor = Color.White;
             };
             BTN_CloseBookRecipes.Offset = new Vector2(80, -40);
             Texture2D T_BTN_CloseBookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close");
+            Texture2D T_BTN_CloseBookRecipes_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close_Hover");
             BTN_CloseBookRecipes.SetCustomSkin(T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes);
+
 
             Img_BookRecipes.AddChild(Img_LeftPage);
             Img_BookRecipes.AddChild(Img_RightPage);
@@ -2098,6 +2135,9 @@ namespace CocktailProject.Scenes
 
 
             EnableBookRecipes(false);
+
+            BTN_PreviousPage.Enabled = false;
+            BTN_PreviousPage.Visible = false;
 
 
 
@@ -2109,22 +2149,45 @@ namespace CocktailProject.Scenes
             PreviousPage,
             NextPage
         }
-        public void ChangePage(Enum_Page _Page)
+        public void ChangePage(Enum_Page page)
         {
-            if (_Page == Enum_Page.NextPage && CurrentPage < TotalPages)
+            // Handle page change
+            if (page == Enum_Page.NextPage && CurrentPage < TotalPages)
             {
                 CurrentPage++;
-                if(CurrentPage > TotalPages)
-                    CurrentPage = TotalPages;
-                UpdatePageView();
             }
-            if (_Page == Enum_Page.PreviousPage && CurrentPage > 1)
+            else if (page == Enum_Page.PreviousPage && CurrentPage > 1)
             {
                 CurrentPage--;
-                if (CurrentPage < 1)
-                    CurrentPage = 1;
-                UpdatePageView();
             }
+
+            // Enforce valid page bounds
+            if (CurrentPage <= 1)
+            {
+                CurrentPage = 1;
+                BTN_PreviousPage.Enabled = false;
+                BTN_PreviousPage.Visible = false;
+            }
+            else
+            {
+                BTN_PreviousPage.Enabled = true;
+                BTN_PreviousPage.Visible = true;
+            }
+
+            if (CurrentPage >= TotalPages)
+            {
+                CurrentPage = TotalPages;
+                BTN_NextPage.Enabled = false;
+                BTN_NextPage.Visible = false;
+            }
+            else
+            {
+                BTN_NextPage.Enabled = true;
+                BTN_NextPage.Visible = true;
+            }
+
+            // Refresh the display
+            UpdatePageView();
         }
         private void UpdatePageView()
         {
@@ -2142,6 +2205,23 @@ namespace CocktailProject.Scenes
         {
             bool isActive = Img_BookRecipes.Visible;
             EnableBookRecipes(!isActive);
+            if (!EndTutorial) 
+            {
+                stateImgCustomer = Enum_PanelState.Pos1;
+                Core.Audio.PlaySoundEffect(SFX_Welcome);
+
+                ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
+                ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
+            }
+            EndTutorial = true;
+        }
+        public void OpenBookOnTutorial()
+        {
+            EnableBookRecipes(true);
+            CurrentPage = 1;
+            UpdatePageView();
+            BTN_PreviousPage.Enabled = false;
+            BTN_PreviousPage.Visible = false;
         }
 
         //---------------------- Making Cocktail Visual On table-----------------------
@@ -2551,7 +2631,6 @@ namespace CocktailProject.Scenes
         Pos3
 
     }
-
     public enum Enum_CutomerState
     {
         None,
