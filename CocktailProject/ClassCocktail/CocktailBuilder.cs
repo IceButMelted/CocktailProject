@@ -163,5 +163,24 @@ namespace CocktailProject.ClassCocktail
                 _AddIce
             );
         }
+
+        /// <summary>
+        /// Provides a simple string representation of the cocktail's ingredients and Qualty as text .
+        /// </summary>
+        /// <returns></returns>
+        public string GetSimpleInfo()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var kvp in _alcoholWithQuantity)
+            {
+                sb.AppendLine($" - {kvp.Key}: {kvp.Value} shot");
+            }
+            foreach (var kvp in _mixerWithQuantity)
+            {
+                sb.AppendLine($" - {kvp.Key}: {kvp.Value} shot");
+            }          
+            return sb.ToString();
+        }
+
     }
 }

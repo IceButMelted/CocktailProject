@@ -58,9 +58,13 @@ namespace CocktailProject.MiniGame
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Core.Input.Mouse.WasButtonJustPressed(MouseButton.Left))
+            {
                 IncreaseValue();
+            }
             else
+            {
                 DecreaseValue(dt);
+            }
 
             CurrentValue = MathHelper.Clamp(CurrentValue, MinSize, MaxSize);
 

@@ -36,11 +36,11 @@ namespace CocktailProject.MiniGame
         //progress bar
         public const float ProgressBar_MaxValue = 100;
         public static float ProgressBar_CurrentValue = 1;
-        public static int ProgressBar_SuccessTimeToWin = 6;
+        public static int ProgressBar_SuccessTimeToWin = 60;
         public static int ProgressBar_Success = 0;
 
         //is hit on correct value
-        public static bool IsHitCorrectValue = false;
+        public static bool IsHitCorrectValue = true;
 
         public static void InitTargetZone()
         {
@@ -92,7 +92,7 @@ namespace CocktailProject.MiniGame
                     {
                         TargetZone_CurrentSize = TargetZone_MinSize; // Clamp to minimum size
                     }
-                    ProgressBar_Success++;
+                    ProgressBar_Success += 5;
                     if(PointingArrow_Speed < PointingArrow_SpeedCap)
                         PointingArrow_Speed += PointingArrow_SpeedIncreaseRate; // Increase arrow speed
                     InitNewTargetZone(); // Reinitialize target zone position
@@ -105,6 +105,9 @@ namespace CocktailProject.MiniGame
                         TargetZone_CurrentSize += TargetZone_IncreaseOnFail; // Increase target zone size
 
                     PointingArrow_Speed = PointingArrow_InitSpeed; // Decrease arrow speed
+                    ProgressBar_Success -= 2;
+                    if(ProgressBar_Success < 0)
+                        ProgressBar_Success = 0;
                     InitTargetZone();
                     IsHitCorrectValue = false;
                 }
@@ -136,6 +139,11 @@ namespace CocktailProject.MiniGame
         public static bool IsComplated()
         {
             return ProgressBar_Success >= ProgressBar_SuccessTimeToWin;
+        }
+
+        public static bool GetIsHitCorrectValue()
+        {
+            return IsHitCorrectValue;
         }
 
         public static void Reset()

@@ -1055,6 +1055,18 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/MakingZone/Button_Stir_Off.png;images/UI/MakingZone/Button_Stir_Off
 
+#begin images/UI/MakingZone/Panel_BeforeServe_AddIce.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/MakingZone/Panel_BeforeServe_AddIce.png;images/UI/MakingZone/Panel_BeforeServe_AddIce
+
 #begin images/UI/MakingZone/Panel_BeforeServe.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1343,6 +1355,18 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/RecipeBook/Recipe_Button_All.png;images/UI/RecipeBook/Recipe_Button_All
 
+#begin images/UI/RecipeBook/Recipe_Button_Close_Hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Close_Hover.png;images/UI/RecipeBook/Recipe_Button_Close_Hover
+
 #begin images/UI/RecipeBook/Recipe_Button_Close.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1355,6 +1379,18 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/RecipeBook/Recipe_Button_Close.png;images/UI/RecipeBook/Recipe_Button_Close
 
+#begin images/UI/RecipeBook/Recipe_Button_Left_Hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Left_Hover.png;images/UI/RecipeBook/Recipe_Button_Left_Hover
+
 #begin images/UI/RecipeBook/Recipe_Button_Left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1366,6 +1402,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/UI/RecipeBook/Recipe_Button_Left.png;images/UI/RecipeBook/Recipe_Button_Left
+
+#begin images/UI/RecipeBook/Recipe_Button_Right_Hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/RecipeBook/Recipe_Button_Right_Hover.png;images/UI/RecipeBook/Recipe_Button_Right_Hover
 
 #begin images/UI/RecipeBook/Recipe_Button_Right.png
 /importer:TextureImporter

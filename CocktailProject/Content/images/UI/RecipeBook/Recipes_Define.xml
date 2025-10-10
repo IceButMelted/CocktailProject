@@ -8,6 +8,8 @@
 		<Region name="Recipe_02_R" x="480" y="750" width="480" height="750" />
 		<Region name="Recipe_03_L" x="0" y="1500" width="480" height="750" />
 		<Region name="Recipe_03_R" x="480" y="1500" width="480" height="750" />
+		<Region name="Recipe_04_L" x="0" y="2250" width="480" height="750" />
+		<Region name="Recipe_04_R" x="480" y="2250" width="480" height="750" />
 		
 	</Regions>
 	<Animations>

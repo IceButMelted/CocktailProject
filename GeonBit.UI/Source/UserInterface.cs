@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework.Content;
 using System.Xml.Serialization;
+using System;
 
 
 namespace GeonBit.UI
@@ -304,6 +305,8 @@ namespace GeonBit.UI
         // time until we show tooltip text.
         private float _timeUntilTooltip = 0f;
 
+        public static SpriteFont _tooltipFont = null;
+
         // the current tooltip entity.
         Entity _tooltipEntity;
 
@@ -313,7 +316,7 @@ namespace GeonBit.UI
         /// <summary>
         /// How long to wait before showing tooltip texts.
         /// </summary>
-        public static float TimeToShowTooltipText = 2f;
+        public static float TimeToShowTooltipText = 1.5f;
 
         /// <summary>Whether or not to draw the cursor.</summary>
         public bool ShowCursor = true;
@@ -380,7 +383,9 @@ namespace GeonBit.UI
 
             // create tooltip paragraph
             var tooltip = new Paragraph(source.ToolTipText, size: new Vector2(500, -1));
-            tooltip.BackgroundColor = Color.Black;
+            if(!(_tooltipFont == null))
+                tooltip.FontOverride = _tooltipFont;
+            tooltip.BackgroundColor = Color.Black * 0.75f;
 
             // add callback to update tooltip position
             tooltip.BeforeDraw += (Entity ent) =>
