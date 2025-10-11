@@ -35,14 +35,13 @@ namespace CocktailProject.Scenes
         private BG_Parallax bg;
         private BG_Parallax fg;
         private Point screenCenter;
-
-        public Image Logo; public Texture2D T_Logo;
+        public Image Logo; 
         public Panel P_Start;
         public Panel P_Credit;
         public Panel P_Exit;
-        public Button BTN_Start; public Texture2D T_BTN_Start_Default; public Texture2D T_BTN_Start_Hover;
-        public Button BTN_Credit; public Texture2D T_BTN_Credit_Default; public Texture2D T_BTN_Credit_Hover;
-        public Button BTN_Exit; public Texture2D T_BTN_Exit_Default; public Texture2D T_BTN_Exit_Hover;
+        public Button BTN_Start; 
+        public Button BTN_Credit; 
+        public Button BTN_Exit; 
         public Image Img_Credit_Book;
 
         public override void Initialize()
@@ -89,13 +88,13 @@ namespace CocktailProject.Scenes
             Texture2D BG_Texture = Content.Load<Texture2D>("images/Background/BGP_Background");
             Texture2D FG_Texture = Content.Load<Texture2D>("images/Background/BGP_Foreground");
 
-            T_BTN_Start_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Default");
-            T_BTN_Start_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Hover");
-            T_BTN_Credit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Default");
-            T_BTN_Credit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Hover");
-            T_BTN_Exit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Default");
-            T_BTN_Exit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Hover");
-            T_Logo = Content.Load<Texture2D>("images/UI/MainMenu_UI/Bar410_Logo");
+            Texture2D T_BTN_Start_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Default");
+            Texture2D T_BTN_Start_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Start_Hover");
+            Texture2D T_BTN_Credit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Default");
+            Texture2D T_BTN_Credit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Credit_Hover");
+            Texture2D T_BTN_Exit_Default = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Default");
+            Texture2D T_BTN_Exit_Hover = Content.Load<Texture2D>("images/UI/MainMenu_UI/Exit_Hover");
+            Texture2D T_Logo = Content.Load<Texture2D>("images/UI/MainMenu_UI/Bar410_Logo");
 
             // Parallax || xSensitivity, ySensitivity, extraImageScale
             bg = new BG_Parallax(BG_Texture, screenCenter, 0.09f, 0.03f, 1.1f);

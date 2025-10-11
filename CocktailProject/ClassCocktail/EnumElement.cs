@@ -86,4 +86,46 @@ namespace CocktailProject.ClassCocktail
         Complex
     }
 
+    public enum ConversationPhase
+    {
+        SmallTalkBeforeOrder,
+        Ordering,
+        AfterServe,
+        SmallTalkAfterOrder
+
+    }
+
+    public enum Enum_MiniGameType
+    {
+        None,
+        Shaking,
+        Stiring
+    }
+    public enum Enum_SlideDirection
+    {
+        Left,
+        Right,
+        Up,
+        Down
+    }
+    public enum Enum_PanelState
+    {
+        None,
+        InitPosWarp,
+        InitPosSlide,
+        Open,
+        Close,
+        Pos1,
+        Pos2,
+        Pos3
+
+    }
+
+    public enum Enum_CutomerState
+    {
+        None,
+        Entering,
+        WaitingForServe,
+        Leaving
+    }
 }

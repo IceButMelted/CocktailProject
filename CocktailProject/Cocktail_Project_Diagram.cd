@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="BaseCharacter Class">
+    <Position X="18.928" Y="1.065" Height="0.291" Width="1.7" />
+  </Comment>
+  <Class Name="TaggedTextRevealer">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TaggedTextRevealer.Segment">
+        <TypeIdentifier>
+          <NewMemberFileName>Class DialogLogic\TaggedTextRevealer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAACAABABAAAAAIIAAAAAAAIAAJAAAAAhAEQA=</HashCode>
+      <FileName>Class DialogLogic\TaggedTextRevealer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.ClassCocktail.Cocktail">
+    <Position X="3.25" Y="0.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="CocktailProject.ClassCocktail.Cocktail.IngredientPart">
+        <Compartments>
+          <Compartment Name="Methods" Collapsed="true" />
+        </Compartments>
+        <TypeIdentifier>
+          <NewMemberFileName>ClassCocktail\Cocktail.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IgAAQKAEgBABDCAAkAAAACABAAAAAQAgACAAEUAiAIg=</HashCode>
+      <FileName>ClassCocktail\Cocktail.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CocktailProject.ClassCocktail.CocktailBuilder">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAAAAAAQAAAAAAIAACAAAAgAIAAAABkEIABAA=</HashCode>
+      <FileName>ClassCocktail\CocktailBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.ClassCocktail.CocktailDicMaker">
+    <Position X="1.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAACBAAAAAAIA=</HashCode>
+      <FileName>ClassCocktail\CocktailDicMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.ClassMotion.BG_NPC">
+    <Position X="1.25" Y="9.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CocktailProject.ClassMotion.BG_NPC.MovementMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ClassMotion\BG_NPC.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABREAASAAAAAACCAABAAIAAAAgAAAQAAAQEAAgBAAEA=</HashCode>
+      <FileName>ClassMotion\BG_NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BG_Parallax">
+    <Position X="3" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAAgAIAAAAAgAAAAQAAgAAAAAAAAAgAAA=</HashCode>
+      <FileName>ClassMotion\BG_Parallax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.ClassNPC.BaseCharacter">
+    <Position X="20.75" Y="1.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AwAIEACAAxAAAgAABEgAoBAATAgAAAAAAAAAAgAABEA=</HashCode>
+      <FileName>ClassNPC\BaseCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.MiniGame.ShakingMinigame">
+    <Position X="16" Y="8" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QQSAAAACATACJAAAAAAAAAEgAIAIEAAAIwQCAAEAAEA=</HashCode>
+      <FileName>MiniGame\ShakingMinigame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.MiniGame.StiringMinigame">
+    <Position X="19.75" Y="8" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BASQAAACgLAAJACCAQAAAgAgAIAIAAQIIwAAAAIIAEA=</HashCode>
+      <FileName>MiniGame\StiringMinigame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.GameIntro">
+    <Position X="7.5" Y="19.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAggAAAAwAACAAAAQAAAAAAAAAAAAAAAQAAAIQ=</HashCode>
+      <FileName>Scenes\GameIntro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.MainMenu">
+    <Position X="14.5" Y="19.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAYCAQAAAAAgI4IQAAAAACggAAAAEBAABAAAAGAhAAQ=</HashCode>
+      <FileName>Scenes\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.Previs">
+    <Position X="11" Y="19.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACwAAAAAgQABAwAACAgAAAAAAAAAAgAhAAAAAQAAAAQ=</HashCode>
+      <FileName>Scenes\Previs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.GamePlay">
+    <Position X="18.75" Y="19.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CocktailProject.Scenes.GamePlay.Enum_Page">
+        <TypeIdentifier>
+          <NewMemberFileName>Scenes\GamePlay.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>rNV2SphbfjO3dwZHPrOsMpozfGq1u10jlVAbsnhVaw4=</HashCode>
+      <FileName>Scenes\GamePlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.Summary">
+    <Position X="22.25" Y="19.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAEAA4IAAAAAAAAAEAABAIAAAAAAACAwAAQ=</HashCode>
+      <FileName>Scenes\Summary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CocktailProject.ClassNPC.DayConversation">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ClassNPC\BaseCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CocktailProject.ClassNPC.TextConversation">
+    <Position X="16.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassNPC\BaseCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_Alcohol">
+    <Position X="26.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAgAAIAAAAAAAAAAAAAE=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_Mixer">
+    <Position X="26.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAACAAAAAAgAAAACACAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_Glass">
+    <Position X="28.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAIAAAAAEAAAAAAQAAhEAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_Method">
+    <Position X="28.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEIAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_TypeOfCocktail">
+    <Position X="32.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAABAAAIAAAAEAEAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_CocktaillResualt">
+    <Position X="26.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_Direction">
+    <Position X="30.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_TextType">
+    <Position X="30.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.ConversationPhase">
+    <Position X="28.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAQAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_MiniGameType">
+    <Position X="30.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_SlideDirection">
+    <Position X="32.5" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_PanelState">
+    <Position X="34.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIEALAAAAAAAAAAAAAABAAAAAAAGAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassCocktail.Enum_CutomerState">
+    <Position X="32.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAEAAAA=</HashCode>
+      <FileName>ClassCocktail\EnumElement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CocktailProject.ClassNPC.Enum_Mood">
+    <Position X="18.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ClassNPC\BaseCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-using CocktailProject.Class_DialogLogic;
 using CocktailProject.ClassCocktail;
 using CocktailProject.ClassMotion;
 using CocktailProject.ClassTime;
@@ -41,8 +40,8 @@ namespace CocktailProject.Scenes
     {
         #region Cocktail
         private static string str_targetCocktail_Name;
-        private static string str_currentCocktail_Name;
         private Cocktail _targetCoctail = new Cocktail();
+        private static string str_currentCocktail_Name;
         private CocktailBuilder _currentCocktail = new CocktailBuilder();
         private Queue<Enum_TextType> ListTextTypes = new Queue<Enum_TextType>();
         private Enum_CocktaillResualt cocktaillResualt = Enum_CocktaillResualt.None;
@@ -63,8 +62,6 @@ namespace CocktailProject.Scenes
         protected byte Day = GlobalVariable.Day;
         protected bool shouldEndDay = false;
         protected int numbercustomer = GlobalVariable.customerNumber;
-        protected string _NPC_Name;
-        protected string _tmp_NPC_Name;
         protected List<BaseCharacter> Customers = new List<BaseCharacter>();
 
         #endregion
@@ -83,11 +80,9 @@ namespace CocktailProject.Scenes
         bool shouldPlayBGM_themeSong01 = true;
         bool shouldPlayBGM_themeSong02 = false;
 
-
         SoundEffect SFX_PressedBTN;
         SoundEffect SFX_Welcome;
         SoundEffect SFX_Serve;
-        bool canPlaySFX_Serve = true;
         SoundEffect SFX_Shaking;
         float cooldownTime_SFX_Shaking = 2f;
         bool canPlaySFX_Shaking = true;
@@ -117,7 +112,6 @@ namespace CocktailProject.Scenes
         protected bool canSkipConversation = false;
         protected bool canGoNextConversation = false;
         protected bool haveDoneOrder = false;
-
         protected bool inStartConversation = false;
 
         protected bool openAlcoholPanel = false;
@@ -131,20 +125,20 @@ namespace CocktailProject.Scenes
         protected Enum_CutomerState currentCustomerState = Enum_CutomerState.None;
         protected float timeToCloseBeforeAndAfteServePanel = 3f;
 
-        protected bool openArt1Panel = false;
-        protected bool openArt2Panel = false;
-
         protected Enum_MiniGameType currentMinigame = Enum_MiniGameType.None;
 
         protected int TextUIOffeset_BTN = -30;
 
+        //Book recipe
         public int CurrentPage = 1;
         public int TotalPages = 0;
 
+        //Sprite Font
         protected SpriteFont RegularFont;
         protected SpriteFont BoldFont;
         protected SpriteFont ItalicFont;
 
+        //cocktail bar
         int XSizeBar_Stiring = 800;
         int PaddingLR_Bar_Stiring = 50;
 
@@ -174,67 +168,40 @@ namespace CocktailProject.Scenes
         #endregion
 
         #region Panel UI
+        //Panel Main Game
         public Panel P_MainGame;
-
-
         // Panel ingredient
         public Panel P_Ingredient;
         // Mixer
-        public Button BTN_Mixer; public Texture2D T_BTN_Mixer;
-        public FullImagePanel FP_Mixer; public Texture2D T_Mixer_Panel;
+        public Button BTN_Mixer; 
+        public FullImagePanel FP_Mixer; 
         public Button BTN_Mixer_CanberryJuice;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Default;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Hover;
-        public Texture2D T_BTN_Mixer_CanberryJuice_Pressed;
         public Button BTN_Mixer_GrapefruitJuice;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Default;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Hover;
-        public Texture2D T_BTN_Mixer_GrapefruitJuice_Pressed;
         public Button BTN_Mixer_LemonJuice;
-        public Texture2D T_BTN_Mixer_LemonJuice_Default;
-        public Texture2D T_BTN_Mixer_LemonJuice_Hover;
-        public Texture2D T_BTN_Mixer_LemonJuice_Pressed;
         public Button BTN_Mixer_Soda;
-        public Texture2D T_BTN_Mixer_Soda_Default;
-        public Texture2D T_BTN_Mixer_Soda_Hover;
-        public Texture2D T_BTN_Mixer_Soda_Pressed;
         public Button BTN_Mixer_Syrup;
-        public Texture2D T_BTN_Mixer_Syrup_Default;
-        public Texture2D T_BTN_Mixer_Syrup_Hover;
-        public Texture2D T_BTN_Mixer_Syrup_Pressed;
         public Button BTN_Mixer_PepperMint;
-        public Texture2D T_BTN_Mixer_PepperMint_Default;
-        public Texture2D T_BTN_Mixer_PepperMint_Hover;
-        public Texture2D T_BTN_Mixer_PepperMint_Pressed;
+
         // Alcohol
-        public Button BTN_Alcohol; public Texture2D T_BTN_Alchol;
-        public FullImagePanel FP_Alcohol; public Texture2D T_Alchohol_Panel;
+        public Button BTN_Alcohol; 
+        public FullImagePanel FP_Alcohol; 
         public Button BTN_Alcohol_Vodka;
-        public Texture2D T_BTN_Alcohol_Vodka_Default;
-        public Texture2D T_BTN_Alcohol_Vodka_Hover;
-        public Texture2D T_BTN_Alcohol_Vodka_Pressed;
         public Button BTN_Alcohol_Gin;
-        public Texture2D T_BTN_Alcohol_Gin_Default;
-        public Texture2D T_BTN_Alcohol_Gin_Hover;
-        public Texture2D T_BTN_Alcohol_Gin_Pressed;
-        public Button BTN_Alcohol_Triplesec;
-        public Texture2D T_BTN_Alcohol_Triplesec_Default;
-        public Texture2D T_BTN_Alcohol_Triplesec_Hover;
-        public Texture2D T_BTN_Alcohol_Triplesec_Pressed;
+        public Button BTN_Alcohol_Triplesec; 
         public Button BTN_Alcohol_Vermouth;
-        public Texture2D T_BTN_Alcohol_Vermouth_Default;
-        public Texture2D T_BTN_Alcohol_Vermouth_Hover;
-        public Texture2D T_BTN_Alcohol_Vermouth_Pressed;
+       
         // Making Zone
         public Panel P_MakeingZone;
         public Button BTN_Stiring;
         public Button BTN_Shaking;
-        public Image Img_CocktailBottle; public Texture2D T_CocktailBase;
+        public Image Img_CocktailBottle;
         public Button BTN_Reset_OnTable;
         public Button BTN_BookRecipes;
         // Before Serve
-        public Texture2D T_P_BeforeServe; public Texture2D T_P_BeforeServe_Addice;
-        public Image P_BeforeServe;
+        
+        public Image P_BeforeServe; 
+            Texture2D T_P_BeforeServe;  
+            Texture2D T_P_BeforeServe_Addice;
         public Button BTN_AddIce;
         public Button BTN_Serve;
         public Button BTN_Rest_BeforeServe;
@@ -242,7 +209,9 @@ namespace CocktailProject.Scenes
         public Panel P_Minigame;
         // Minigame Shaking
         public Panel P_Minigame_Shaking;
-        public Image Img_Minigame_Shaking; TextureAtlas MiniGame_Shaking_Atlas; AnimatedSprite Shaking_Anim;
+        public Image Img_Minigame_Shaking; 
+            TextureAtlas MiniGame_Shaking_Atlas; 
+            AnimatedSprite Shaking_Anim;
         public Panel BG_ProgressBar;
         public Panel ProgressBar;
         public Panel BG_TargetZone;
@@ -250,14 +219,16 @@ namespace CocktailProject.Scenes
         public Panel Pointing;
         // Minigame Stiring
         public Panel P_Minigame_Stirring;
-        public Image Img_MiniGame_Stirring; TextureAtlas MinGame_Stirring_Atlas; AnimatedSprite Stirring_Anim;
+        public Image Img_MiniGame_Stirring; 
+            TextureAtlas MinGame_Stirring_Atlas; 
+            AnimatedSprite Stirring_Anim;
         public CustomProgressBar PB_Stirring;
         public Panel BG_Stirring_TargetZone;
         public Image Img_Stirring_TargetZone;
         public Image Arrow_Stirring;
         // Book Recipe
         public Panel P_BGBookRecipes;
-        public Image Img_BookRecipes; public Texture2D T_BookRecipes;
+        public Image Img_BookRecipes;
         public Image Img_LeftPage;
         public Image Img_RightPage;
         public Button BTN_PreviousPage;
@@ -280,9 +251,12 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual09;
         protected Image Img_Visual10;
         // Image Cocktil Resuilt
-        protected Image Img_CocktailResult; protected TextureAtlas CocktailResult_Atlas;
+        protected Image Img_CocktailResult;  
+            TextureAtlas CocktailResult_Atlas;
         // Image Mouse 
-        protected Image Img_Mouse; protected TextureAtlas Mouse_Atlas; AnimatedSprite Mouse_Anim;
+        protected Image Img_Mouse;      
+            TextureAtlas Mouse_Atlas; 
+            AnimatedSprite Mouse_Anim;
         // Fading Close Visual
         protected Panel P_Fade;
         protected RichParagraph RP_Fade;
@@ -290,7 +264,7 @@ namespace CocktailProject.Scenes
         // customer and order panel
         public Image Img_Customer;
         public RichParagraph RP_CustomerName;
-        public Image ImgP_OrderPanel; public Texture2D T_DialogBG_Panel;
+        public Image ImgP_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
 
 #if DEBUG
@@ -300,13 +274,13 @@ namespace CocktailProject.Scenes
 #endif
 
         //BG
-        public Image Img_BG_Foreground; public Texture2D T_BG_Foreground;
-        public Image Img_BG_Midground; public Texture2D T_BG_Midgroud;
-        public Image Img_BG_Background; public Texture2D T_BG_Background;
+        public Image Img_BG_Foreground;
+        public Image Img_BG_Midground;
+        public Image Img_BG_Background;
         #endregion
 
         #region BG NPC
-        public Image Img_BG_NPC; public Texture2D moving_BG_NPC;
+        public Image Img_BG_NPC; 
         private List<BG_NPC> movingnpcs = new List<BG_NPC>();
         private int npcCount = 8; //NPC Counts
         #endregion
@@ -356,8 +330,6 @@ namespace CocktailProject.Scenes
             ItalicFont = Content.Load<SpriteFont>("Fonts/Italic");
             UserInterface._tooltipFont = RegularFont;
 
-            LoadImageAndAtlas();
-
             //Add Code Above
             InitBGM();
             InitSFX();
@@ -367,8 +339,7 @@ namespace CocktailProject.Scenes
             ActiveMixerAndAlcholButton(false);
             base.LoadContent();
         }
-
-        public void LoadImageAndAtlas()
+        public void InitUI()
         {
             atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
@@ -381,70 +352,68 @@ namespace CocktailProject.Scenes
             Mouse_Anim = Mouse_Atlas.CreateAnimatedSprite("LeftMouseClick");
 
             //Load Ui image
-            T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
-            T_Mixer_Panel = Content.Load<Texture2D>("images/UI/Shelf");
-            T_DialogBG_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_DialogBG");
+            Texture2D T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
+            Texture2D T_Mixer_Panel = Content.Load<Texture2D>("images/UI/Shelf");
+            Texture2D T_DialogBG_Panel = Content.Load<Texture2D>("images/UI/Img_Panel_DialogBG");
 
-            T_BTN_Alchol = Content.Load<Texture2D>("images/UI/BTN_Icon_Alcohol");
-            T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
+            Texture2D T_BTN_Alchol = Content.Load<Texture2D>("images/UI/BTN_Icon_Alcohol");
+            Texture2D T_BTN_Mixer = Content.Load<Texture2D>("images/UI/BTN_Icon_Mixer");
 
-            T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
-            T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");
-            T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
+            Texture2D T_BG_Background = Content.Load<Texture2D>("images/Background/BG_Background");
+            Texture2D T_BG_Midgroud = Content.Load<Texture2D>("images/Background/BG_MidGround");
+            Texture2D T_BG_Foreground = Content.Load<Texture2D>("images/Background/BG_ForeGroun");
 
             #region Load Image Button Alcohol
             //load image button alcohol
-            T_BTN_Alcohol_Gin_Default = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175");
-            T_BTN_Alcohol_Gin_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Hover");
-            T_BTN_Alcohol_Gin_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Pressed");
+            Texture2D T_BTN_Alcohol_Gin_Default = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175");
+            Texture2D T_BTN_Alcohol_Gin_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Hover");
+            Texture2D T_BTN_Alcohol_Gin_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Gin_160x175_Pressed");
 
-            T_BTN_Alcohol_Vodka_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175");
-            T_BTN_Alcohol_Vodka_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Hover");
-            T_BTN_Alcohol_Vodka_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Pressed");
+            Texture2D T_BTN_Alcohol_Vodka_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175");
+            Texture2D T_BTN_Alcohol_Vodka_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Hover");
+            Texture2D T_BTN_Alcohol_Vodka_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vodka_160x175_Pressed");
 
-            T_BTN_Alcohol_Triplesec_Default = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175");
-            T_BTN_Alcohol_Triplesec_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Hover");
-            T_BTN_Alcohol_Triplesec_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Pressed");
+            Texture2D T_BTN_Alcohol_Triplesec_Default = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175");
+            Texture2D T_BTN_Alcohol_Triplesec_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Hover");
+            Texture2D T_BTN_Alcohol_Triplesec_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Triplesec_160x175_Pressed");
 
-            T_BTN_Alcohol_Vermouth_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175");
-            T_BTN_Alcohol_Vermouth_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Hover");
-            T_BTN_Alcohol_Vermouth_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Pressed");
+            Texture2D T_BTN_Alcohol_Vermouth_Default = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175");
+            Texture2D T_BTN_Alcohol_Vermouth_Hover = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Hover");
+            Texture2D T_BTN_Alcohol_Vermouth_Pressed = Content.Load<Texture2D>("images/UI/Alcohol/Vermouth_160x175_Pressed");
             #endregion
 
             #region Load Image Button Mixer
             //load image buttone Mixer
-            T_BTN_Mixer_CanberryJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175");
-            T_BTN_Mixer_CanberryJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175_Hover");
-            T_BTN_Mixer_CanberryJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175_Pressed");
+            Texture2D T_BTN_Mixer_CanberryJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175");
+            Texture2D T_BTN_Mixer_CanberryJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175_Hover");
+            Texture2D T_BTN_Mixer_CanberryJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/CanberryJuice_160x175_Pressed");
 
-            T_BTN_Mixer_GrapefruitJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175");
-            T_BTN_Mixer_GrapefruitJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175_Hover");
-            T_BTN_Mixer_GrapefruitJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175_Pressed");
+            Texture2D T_BTN_Mixer_GrapefruitJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175");
+            Texture2D T_BTN_Mixer_GrapefruitJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175_Hover");
+            Texture2D T_BTN_Mixer_GrapefruitJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/GrapefruitJuice_160x175_Pressed");
 
-            T_BTN_Mixer_LemonJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175");
-            T_BTN_Mixer_LemonJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175_Hover");
-            T_BTN_Mixer_LemonJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175_Pressed");
+            Texture2D T_BTN_Mixer_LemonJuice_Default = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175");
+            Texture2D T_BTN_Mixer_LemonJuice_Hover = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175_Hover");
+            Texture2D T_BTN_Mixer_LemonJuice_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Lemon_160x175_Pressed");
 
-            T_BTN_Mixer_Soda_Default = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175");
-            T_BTN_Mixer_Soda_Hover = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175_Hover");
-            T_BTN_Mixer_Soda_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175_Pressed");
+            Texture2D T_BTN_Mixer_Soda_Default = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175");
+            Texture2D T_BTN_Mixer_Soda_Hover = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175_Hover");
+            Texture2D T_BTN_Mixer_Soda_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Soda_160x175_Pressed");
 
-            T_BTN_Mixer_Syrup_Default = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175");
-            T_BTN_Mixer_Syrup_Hover = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175_Hover");
-            T_BTN_Mixer_Syrup_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175_Pressed");
+            Texture2D T_BTN_Mixer_Syrup_Default = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175");
+            Texture2D T_BTN_Mixer_Syrup_Hover = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175_Hover");
+            Texture2D T_BTN_Mixer_Syrup_Pressed = Content.Load<Texture2D>("images/UI/Mixer/Syrup_160x175_Pressed");
 
-            T_BTN_Mixer_PepperMint_Default = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175");
-            T_BTN_Mixer_PepperMint_Hover = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175_Hover");
-            T_BTN_Mixer_PepperMint_Pressed = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175_Pressed");
-
-
+            Texture2D T_BTN_Mixer_PepperMint_Default = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175");
+            Texture2D T_BTN_Mixer_PepperMint_Hover = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175_Hover");
+            Texture2D T_BTN_Mixer_PepperMint_Pressed = Content.Load<Texture2D>("images/UI/Mixer/PepperMint_160x175_Pressed");
             #endregion
 
-            T_CocktailBase = Content.Load<Texture2D>("images/Cocktail/BaseCocktailGlass");
+            Texture2D T_CocktailBase = Content.Load<Texture2D>("images/Cocktail/BaseCocktailGlass");
 
-        }
-        public void InitUI()
-        {
+
+
+
             P_MainGame = new Panel(new Vector2(1920, 1080), PanelSkin.None, anchor: Anchor.Center);
             P_MainGame.Padding = Vector2.Zero;
 
@@ -2080,7 +2049,7 @@ namespace CocktailProject.Scenes
         //------------------------ Book Recipes-------------------
         public void InitBookRecipes()
         {
-            T_BookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Book_Base");
+            Texture2D T_BookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Book_Base");
             Recipes_Atlas = TextureAtlas.FromFile(Content, "images/UI/RecipeBook/Recipes_Define.xml");
             TotalPages = Recipes_Atlas.GetRegionCount() / 2;
 
@@ -2647,36 +2616,5 @@ namespace CocktailProject.Scenes
 
     }
 
-    public enum Enum_MiniGameType
-    {
-        None,
-        Shaking,
-        Stiring
-    }
-    public enum Enum_SlideDirection
-    {
-        Left,
-        Right,
-        Up,
-        Down
-    }
-    public enum Enum_PanelState
-    {
-        None,
-        InitPosWarp,
-        InitPosSlide,
-        Open,
-        Close,
-        Pos1,
-        Pos2,
-        Pos3
-
-    }
-    public enum Enum_CutomerState
-    {
-        None,
-        Entering,
-        WaitingForServe,
-        Leaving
-    }
+    
 }

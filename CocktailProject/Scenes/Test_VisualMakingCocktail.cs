@@ -46,7 +46,6 @@ namespace CocktailProject.Scenes
             { Enum_Mixer.PepperMint, Color.Green }
         };
 
-        protected Panel P_CocktailVisual;
         protected Panel P_MakingCocktailVisual;
         protected Image Img_MainDisplay;
         protected Image Img_Visual01;
@@ -59,7 +58,6 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual08;
         protected Image Img_Visual09;
         protected Image Img_Visual10;
-
 
 
 
