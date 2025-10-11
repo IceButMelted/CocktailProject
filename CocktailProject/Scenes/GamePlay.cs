@@ -280,10 +280,9 @@ namespace CocktailProject.Scenes
         protected Image Img_Visual09;
         protected Image Img_Visual10;
         // Image Cocktil Resuilt
-
         protected Image Img_CocktailResult; protected TextureAtlas CocktailResult_Atlas;
-        protected Dictionary<string, Rectangle> Dic_Sourcerec = new Dictionary<string, Rectangle>();
-
+        // Image Mouse 
+        protected Image Img_Mouse; protected TextureAtlas Mouse_Atlas; AnimatedSprite Mouse_Anim;
         // Fading Close Visual
         protected Panel P_Fade;
         protected RichParagraph RP_Fade;
@@ -374,6 +373,12 @@ namespace CocktailProject.Scenes
             atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
             Atlas_CustomerNPC = TextureAtlas.FromFile(Content, "images/Customer/CustomerNPC_Define.xml");
             Atlas_BGNPC = TextureAtlas.FromFile(Content, "images/Background/BG_NPC_Define.xml");
+            MiniGame_Shaking_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Shake_Define.xml");
+            Shaking_Anim = MiniGame_Shaking_Atlas.CreateAnimatedSprite("Shaking_Animation");
+            MinGame_Stirring_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Stir_Define.xml");
+            Stirring_Anim = MinGame_Stirring_Atlas.CreateAnimatedSprite("Stirring_Animation");
+            Mouse_Atlas = TextureAtlas.FromFile(Content, "images/UI/MouseButton/Mouse_Define.xml");
+            Mouse_Anim = Mouse_Atlas.CreateAnimatedSprite("LeftMouseClick");
 
             //Load Ui image
             T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
@@ -878,8 +883,7 @@ namespace CocktailProject.Scenes
             P_Minigame_Shaking.Padding = Vector2.Zero;
             P_Minigame_Shaking.Offset = new Vector2(0, 0);
 
-            MiniGame_Shaking_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Shake_Define.xml");
-            Shaking_Anim = MiniGame_Shaking_Atlas.CreateAnimatedSprite("Shaking_Animation");
+            
             Img_Minigame_Shaking = new Image(MiniGame_Shaking_Atlas.Texture, new Vector2(800, 600), anchor: Anchor.TopCenter);
             Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
             P_Minigame_Shaking.AddChild(Img_Minigame_Shaking);
@@ -891,21 +895,24 @@ namespace CocktailProject.Scenes
             P_Minigame_Stirring.Offset = new Vector2(0, 0);
             P_Minigame_Shaking.FillColor = Color.Red;
 
-            MinGame_Stirring_Atlas = TextureAtlas.FromFile(Content, "images/MiniGame/QTE_Stir_Define.xml");
-            Stirring_Anim = MinGame_Stirring_Atlas.CreateAnimatedSprite("Stirring_Animation");
+            
             Img_MiniGame_Stirring = new Image(MinGame_Stirring_Atlas.Texture, new Vector2(800, 600), anchor: Anchor.TopCenter);
             Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
             P_Minigame_Stirring.AddChild(Img_MiniGame_Stirring);
 
             InitStiringMinigameUI();
 
-
+            Img_Mouse = new Image(Mouse_Atlas.Texture, new Vector2(100, 100), anchor: Anchor.BottomLeft);
+            Img_Mouse.Offset = new Vector2(-100, 0);
+            Img_Mouse.SourceRectangle = Mouse_Anim.GetRectangleCurrentFrame();
+            Img_Mouse.Visible = false;
             #endregion
 
             #region Add Child To Panel Minigame Zone
 
             P_Minigame.AddChild(P_Minigame_Shaking);
             P_Minigame.AddChild(P_Minigame_Stirring);
+            P_Minigame.AddChild(Img_Mouse);
 
             #endregion
 
@@ -1250,6 +1257,7 @@ namespace CocktailProject.Scenes
             // Update animations and UI
             Shaking_Anim.Update(gameTime);
             Stirring_Anim.Update(gameTime);
+            Mouse_Anim.Update(gameTime);
             UpdateUILogic(gameTime);
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -1274,6 +1282,7 @@ namespace CocktailProject.Scenes
                 UpdateMiniGameShakingUI();
                 Shaking_Anim.Play();
                 Img_Minigame_Shaking.SourceRectangle = Shaking_Anim.GetRectangleCurrentFrame();
+                Img_Mouse.SourceRectangle = Mouse_Anim.GetRectangleCurrentFrame();
 
                 if (ShakingMinigame.IsComplete())
                 {
@@ -1318,6 +1327,7 @@ namespace CocktailProject.Scenes
                 UpdateMiniGameStiringUI();
                 Stirring_Anim.Play();
                 Img_MiniGame_Stirring.SourceRectangle = Stirring_Anim.GetRectangleCurrentFrame();
+                Img_Mouse.SourceRectangle = Mouse_Anim.GetRectangleCurrentFrame();
 
                 if (StiringMinigame.IsComplated())
                 {
@@ -1376,13 +1386,17 @@ namespace CocktailProject.Scenes
             {
                 case Enum_PanelState.Open:
                     SlidePanel(P_Minigame, 0, 20, Enum_SlideDirection.Right);
+                    Img_Mouse.Visible = true;
+                    Mouse_Anim.Play();
                     break;
                 case Enum_PanelState.Close:
+                    Mouse_Anim.Stop();
                     if (SlidePanel(P_Minigame, -600, 20, Enum_SlideDirection.Up))
                         openMinigamePanel = Enum_PanelState.InitPosWarp;
                     break;
                 case Enum_PanelState.InitPosWarp:
                     P_Minigame.Offset = new Vector2(-800, 0);
+                    Img_Mouse.Visible = false;
                     break;
             }
 
@@ -1601,6 +1615,7 @@ namespace CocktailProject.Scenes
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                                 break;
                             case Enum_CocktaillResualt.Fail:
+                                ShakeHelper.ShakingEntity(Img_Customer, 5, true, 1f, 20);
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
                                 break;
                         }
@@ -1937,23 +1952,32 @@ namespace CocktailProject.Scenes
         {
             int SizeBar = 600;
 
+
+            
             BG_TargetZone = new Panel(new Vector2(50, SizeBar), PanelSkin.Simple, Anchor.CenterLeft);
             BG_TargetZone.FillColor = Color.DarkGray;
             BG_TargetZone.Offset = new Vector2(0, 0);
             BG_TargetZone.Padding = Vector2.Zero;
 
             BG_ProgressBar = new Panel(new Vector2(50, SizeBar), PanelSkin.Simple, Anchor.CenterLeft);
-            BG_ProgressBar.FillColor = Color.Blue;
+            BG_ProgressBar.FillColor = Color.RosyBrown;
             BG_ProgressBar.Offset = new Vector2(50, 0);
             BG_ProgressBar.Padding = Vector2.Zero;
 
+            Texture2D T_ProgressBar = new Texture2D(Core.GraphicsDevice, 1, 1);
+            T_ProgressBar.SetData(new[] { Color.GreenYellow });
             ProgressBar = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
-            ProgressBar.FillColor = Color.Olive;
+            ProgressBar.SetCustomSkin(T_ProgressBar);
 
+            Texture2D T_TargetZone = new Texture2D(Core.GraphicsDevice, 1, 1);
+            T_TargetZone.SetData(new[] { Color.DarkGreen * 0.75f });
             TargetZone = new Panel(new Vector2(40, 50), PanelSkin.Simple, Anchor.BottomCenter);
-            TargetZone.FillColor = Color.Green * 0.75f;
+            TargetZone.SetCustomSkin(T_TargetZone);
 
+            Texture2D T_Pointing = new Texture2D(Core.GraphicsDevice, 1, 1);
+            T_Pointing.SetData(new[] { Color.LightBlue });
             Pointing = new Panel(new Vector2(40, 10), PanelSkin.Simple, Anchor.BottomCenter);
+            Pointing.SetCustomSkin(T_Pointing);
 
             BG_TargetZone.AddChild(Pointing);
             BG_TargetZone.AddChild(TargetZone);

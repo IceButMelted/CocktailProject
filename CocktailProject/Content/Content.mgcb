@@ -1319,6 +1319,45 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/Mixer/Syrup_160x175.png;images/UI/Mixer/Syrup_160x175
 
+#begin images/UI/MouseButton/LeftMouseClick.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/MouseButton/LeftMouseClick.png;images/UI/MouseButton/LeftMouseClick
+
+#begin images/UI/MouseButton/LeftMouseReleased.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/MouseButton/LeftMouseReleased.png;images/UI/MouseButton/LeftMouseReleased
+
+#begin images/UI/MouseButton/Mouse_Atlast.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/MouseButton/Mouse_Atlast.png;images/UI/MouseButton/Mouse_Atlast
+
+#begin images/UI/MouseButton/Mouse_Define.xml
+/copy:images/UI/MouseButton/Mouse_Define.xml
+
 #begin images/UI/RecipeBook/Book_Base.png
 /importer:TextureImporter
 /processor:TextureProcessor

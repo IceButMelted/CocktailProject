@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/UI/MouseButton/Mouse_Atlast</Texture>
+	<Regions>
+		<Region name="Normal_Mouse" x="0" y="0" width="512" height="512" />
+		<Region name="Left_Mouse_Click" x="0" y="512" width="512" height="512" />
+	</Regions>
+	<Animations>
+		<Animation name="LeftMouseClick" delay="200">
+			<Frame region="Normal_Mouse" />
+			<Frame region="Left_Mouse_Click" />
+		</Animation>
+	</Animations>
+</TextureAtlas>
