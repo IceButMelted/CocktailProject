@@ -15,6 +15,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using CocktailProject.Utilities;
+using System.IO;
+using System.Diagnostics;
 
 
 
@@ -40,6 +43,7 @@ namespace CocktailProject.Scenes
         public Button BTN_Start; public Texture2D T_BTN_Start_Default; public Texture2D T_BTN_Start_Hover;
         public Button BTN_Credit; public Texture2D T_BTN_Credit_Default; public Texture2D T_BTN_Credit_Hover;
         public Button BTN_Exit; public Texture2D T_BTN_Exit_Default; public Texture2D T_BTN_Exit_Hover;
+        public Image Img_Credit_Book;
 
         public override void Initialize()
         {
@@ -75,6 +79,7 @@ namespace CocktailProject.Scenes
 
             UserInterface.Active.Update(gameTime);
             base.Update(gameTime);
+
         }
 
         public override void LoadContent()
@@ -118,9 +123,10 @@ namespace CocktailProject.Scenes
             BTN_Credit = new Button("", ButtonSkin.Default, Anchor.Center);
             BTN_Credit.Size = new Vector2(240, 80);
             BTN_Credit.SetCustomSkin(T_BTN_Credit_Default, T_BTN_Credit_Hover, T_BTN_Credit_Hover);
-            //BTN_Credit.OnMouseDown = (Entity e) => {
-            //    Core.ChangeScene(new GamePlay());
-            //};
+            BTN_Credit.OnMouseDown = (Entity e) =>
+            {
+                ToggleBookCredit();
+            };
 
             BTN_Exit = new Button("", ButtonSkin.Default, Anchor.Center);
             BTN_Exit.Size = new Vector2(240, 80);
@@ -134,10 +140,37 @@ namespace CocktailProject.Scenes
             P_Credit.AddChild(BTN_Credit);
             P_Exit.AddChild(BTN_Exit);
 
+            Img_Credit_Book = new Image(Content.Load<Texture2D>("images/Book_Credit"), new Vector2(1100, 800), ImageDrawMode.Stretch, Anchor.Center);
+
+            EnableBookCredit(false);
+
+            Button BTN_CloseBookRecipes = new Button("", ButtonSkin.Default, Anchor.TopRight, new Vector2(98-50, 140-50));
+            BTN_CloseBookRecipes.OnClick += (Entity e) =>
+            {
+                ToggleBookCredit();
+            };
+            BTN_CloseBookRecipes.OnMouseDown += (Entity e) =>
+            {
+                BTN_CloseBookRecipes.Offset += new Vector2(0, +5);
+                BTN_CloseBookRecipes.FillColor = Color.DarkGray;
+            };
+            BTN_CloseBookRecipes.OnMouseReleased += (Entity e) =>
+            {
+                BTN_CloseBookRecipes.Offset += new Vector2(0, -5);
+                BTN_CloseBookRecipes.FillColor = Color.White;
+            };
+            BTN_CloseBookRecipes.Offset = new Vector2(80, 0);
+            Texture2D T_BTN_CloseBookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close");
+            Texture2D T_BTN_CloseBookRecipes_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close_Hover");
+            BTN_CloseBookRecipes.SetCustomSkin(T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes);
+
+            Img_Credit_Book.AddChild(BTN_CloseBookRecipes);
+
             UserInterface.Active.AddEntity(P_Start);
             UserInterface.Active.AddEntity(P_Credit);
             UserInterface.Active.AddEntity(P_Exit);
             UserInterface.Active.AddEntity(Logo);
+            UserInterface.Active.AddEntity(Img_Credit_Book);
 
             base.LoadContent();
         }
@@ -161,6 +194,45 @@ namespace CocktailProject.Scenes
             BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, false);
             Core.Audio.SongVolume = 0.25f;
+        }
+
+        public void ToggleBookCredit()
+        {
+            bool isActive = Img_Credit_Book.Visible;
+            EnableBookCredit(!isActive);
+        }
+
+        public void EnableBookCredit(bool _Enable)
+        {
+            Img_Credit_Book.Visible = _Enable;
+            Img_Credit_Book.Enabled = _Enable;
+        }
+
+        public void TakeScreenCap()
+        {
+
+            int w = Core.GraphicsDevice.PresentationParameters.BackBufferWidth;
+            int h = Core.GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+            //force a frame to be drawn (otherwise back buffer is empty) 
+            Draw(new GameTime());
+
+            //pull the picture from the buffer 
+            int[] backBuffer = new int[w * h];
+            Core.GraphicsDevice.GetBackBufferData(backBuffer);
+
+            //copy into a texture 
+            Texture2D texture = new Texture2D(Core.GraphicsDevice, w, h, false, Core.GraphicsDevice.PresentationParameters.BackBufferFormat);
+            texture.SetData(backBuffer);
+
+            //save to disk 
+            Stream stream = File.OpenWrite("Test.png");
+            Debug.WriteLine("Screenshot saved to " + Path.GetFullPath("Test.png"));
+
+            texture.SaveAsPng(stream, w, h);
+            stream.Dispose();
+
+            texture.Dispose();
         }
     }
 }

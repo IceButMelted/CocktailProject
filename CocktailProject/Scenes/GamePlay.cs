@@ -1405,6 +1405,7 @@ namespace CocktailProject.Scenes
             {
                 case Enum_PanelState.InitPosWarp:
                     P_BeforeServe.Offset = new Vector2(-800, 600);
+                    P_BeforeServe.Texture = T_P_BeforeServe;
                     break;
                 case Enum_PanelState.InitPosSlide:
                     SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
@@ -1416,7 +1417,8 @@ namespace CocktailProject.Scenes
                     }
                     break;
                 case Enum_PanelState.Close:
-                    SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left);
+                    if(SlidePanel(P_BeforeServe, 800, 20, Enum_SlideDirection.Left))
+                        P_BeforeServe.Texture = T_P_BeforeServe;
                     break;
                 case Enum_PanelState.Pos1:
                     SlidePanel(P_BeforeServe, 0, 20, Enum_SlideDirection.Up);
@@ -1694,6 +1696,8 @@ namespace CocktailProject.Scenes
                     }
                     break;
             }
+            if(ShakeHelper.IsComplete(Img_Customer))
+                ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false, speed: 2.5f);
         }
 
         // ----------------------Fucntion-----------------------

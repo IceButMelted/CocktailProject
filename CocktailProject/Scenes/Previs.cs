@@ -107,6 +107,7 @@ namespace CocktailProject.Scenes
             BTN_Skip.Size = new Vector2(240, 80);
             BTN_Skip.SetCustomSkin(T_BTN_Skip_Default, T_BTN_Skip_Hover, T_BTN_Skip_Hover);
             BTN_Skip.OnMouseDown = (Entity e) => {
+                
                 Core.ChangeScene(new GamePlay());
             };
 

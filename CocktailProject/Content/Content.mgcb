@@ -179,6 +179,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Background/BGP_Foreground.png;images/Background/BGP_Foreground
 
+#begin images/Book_Credit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Book_Credit.png
+
 #begin images/Cocktail/BaseCocktailGlass.png
 /importer:TextureImporter
 /processor:TextureProcessor
