@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MonoGameLibrary.Core">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQgUAAAAgAAAwAAAgEAAAAAGAAAAAAAQAAFAAAAAgg=</HashCode>
+      <FileName>Core.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Scenes.Scene">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAiAAAwAAAAAAABAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Scencs\Scene.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MonoGameLibrary.Input.GamePadInfo">
+    <Position X="20.5" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AARAAAAABEABBAhAAAAAACQAAEAAAAAACAAAQAAEAAA=</HashCode>
+      <FileName>Input\GamePadInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Input.InputManager">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input\InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Input.KeyboardInfo">
+    <Position X="17" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAACAEAAAQAAAACAAAQEAAAAA=</HashCode>
+      <FileName>Input\KeyboardInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Input.MouseInfo">
+    <Position X="18.75" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAABAAAgAAAACCQAAGAAAgAAiAAAAEAEYAA=</HashCode>
+      <FileName>Input\MouseInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Graphics.AnimatedSprite">
+    <Position X="15.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQiAAAAAAAABAAEgQAAAAQBgAQAAEgAoAAAgAAgAAA=</HashCode>
+      <FileName>Graphics\AnimatedSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Graphics.Animation">
+    <Position X="11.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Graphics\Animation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Graphics.Sprite">
+    <Position X="13.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAhAAAAoAAAAYAAEAAAIAAAAEAAAAAgAgAAAA=</HashCode>
+      <FileName>Graphics\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Graphics.TextureAtlas">
+    <Position X="10" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAgCAAAACAAgABAAABCIAEAAJACABQAAA=</HashCode>
+      <FileName>Graphics\TextureAtlas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Graphics.TextureRegion">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAgAAAAAAAEAAAAAABAIAAAIAAAAAAAA=</HashCode>
+      <FileName>Graphics\TextureRegion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonoGameLibrary.Audio.AudioController">
+    <Position X="8.25" Y="8.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAQABAAAAiAAAAAAAAAAIhIAAAAAAQAgAAAAACABLAA=</HashCode>
+      <FileName>Audio\AudioController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="MonoGameLibrary.Input.MouseButton">
+    <Position X="20.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAABAAAAAAAAAAAAAACACQAAAAAAA=</HashCode>
+      <FileName>Input\MouseButton.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

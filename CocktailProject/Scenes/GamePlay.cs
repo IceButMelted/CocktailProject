@@ -2152,13 +2152,7 @@ namespace CocktailProject.Scenes
 
 
         }
-        public enum Enum_Page
-        {
-            LeftPage,
-            RightPage,
-            PreviousPage,
-            NextPage
-        }
+        
         public void ChangePage(Enum_Page page)
         {
             // Handle page change
@@ -2615,6 +2609,13 @@ namespace CocktailProject.Scenes
         }
 
     }
+    public enum Enum_Page
+    {
+        LeftPage,
+        RightPage,
+        PreviousPage,
+        NextPage
+    }
 
-    
+
 }
