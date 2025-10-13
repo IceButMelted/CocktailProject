@@ -25,9 +25,7 @@ namespace CocktailProject.ClassCocktail
         CanberryJuice,
         GrapefruitJuice,
         LemonJuice,
-
         Soda,
-
         Syrup,
         PepperMint
     }
@@ -72,12 +70,6 @@ namespace CocktailProject.ClassCocktail
         Aceptable,
         Fail,
         None
-    }
-
-    public enum Enum_Direction
-    {
-        Left,
-        Right
     }
 
     public enum Enum_TextType

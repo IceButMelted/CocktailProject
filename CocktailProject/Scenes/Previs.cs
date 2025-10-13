@@ -20,7 +20,6 @@ namespace CocktailProject.Scenes
 {
     class Previs : Scene
     {
-        private const String COCKTAIL_TEXT = "Cocktail : 410";
 
         private Texture2D PrevisAtlas;
         private List<Rectangle> frames = new List<Rectangle>();

@@ -164,6 +164,11 @@ namespace CocktailProject.MiniGame
         {
             Start = false;
         }
+        public enum Enum_Direction
+        {
+            Left,
+            Right
+        }
 
     }
 }

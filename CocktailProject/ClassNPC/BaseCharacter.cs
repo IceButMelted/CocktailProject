@@ -22,13 +22,6 @@ namespace CocktailProject.ClassNPC
         public byte CurrentIndex { get; set; }
     }
 
-    public enum Enum_Mood
-    {
-        BeforeOrder,
-        AfterServe,
-        ChitChat
-    }
-
     public class BaseCharacter
     {
         public SortedList<int, DayConversation> _DayConversations { get; set; }

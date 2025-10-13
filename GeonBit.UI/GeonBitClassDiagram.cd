@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GeonBit.UI.Entities.NamespaceDoc" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.StylePropertyIds" Collapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQIAAAAAIAAAAAIgAIACAAAAAACACAIAAAgAAAA=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Entity" Collapsed="true">
+    <Position X="11" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ZAyz+ZdsZaT9862E8Z7leroSYs6NCqf9NipxxT4ViNw=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Panel" Collapsed="true">
+    <Position X="16" Y="4" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.PanelBase" FixedToPoint="true">
+      <Path>
+        <Point X="16.75" Y="3.691" />
+        <Point X="16.75" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAiAAAAEACRAADQIAAQgAAECAAAIAAAAAEAIAABASIA=</HashCode>
+      <FileName>Source\Entities\Panel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.ProgressBar" Collapsed="true">
+    <Position X="1.25" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Slider" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="3.691" />
+        <Point X="2" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgAQAAAAACAAAAAAAAAAAAAQAAAAAAACAAAAAAAAIA=</HashCode>
+      <FileName>Source\Entities\ProgressBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Paragraph" Collapsed="true">
+    <Position X="5" Y="3" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Entity" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="1.562" />
+        <Point X="11.75" Y="2.625" />
+        <Point X="5.688" Y="2.625" />
+        <Point X="5.688" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ESiAQABJgIAAAIgEgRYAIAIACAAAAQQJKEIAyCAAKIA=</HashCode>
+      <FileName>Source\Entities\Paragraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.RichParagraph" Collapsed="true">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Paragraph" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="3.691" />
+        <Point X="5.75" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgAYAAAAAEAIAAAAAAQAAAAAAAAAAQAAAAAKAAAAIA=</HashCode>
+      <FileName>Source\Entities\RichParagraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Image" Collapsed="true">
+    <Position X="12" Y="3" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Entity" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="1.562" />
+        <Point X="11.75" Y="2.625" />
+        <Point X="12.75" Y="2.625" />
+        <Point X="12.75" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAACAIAAAAAAAAQCAABAAEACIAAAiAAIA=</HashCode>
+      <FileName>Source\Entities\Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.PanelBase" Collapsed="true">
+    <Position X="16" Y="3" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Entity" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="1.562" />
+        <Point X="11.75" Y="2.625" />
+        <Point X="16.75" Y="2.625" />
+        <Point X="16.75" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAggAAAAAggAAAAABAAABAAAAgAAQAAgA=</HashCode>
+      <FileName>Source\Entities\PanelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Button" Collapsed="true">
+    <Position X="8.5" Y="3" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Entity" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="1.562" />
+        <Point X="11.75" Y="2.625" />
+        <Point X="9.312" Y="2.625" />
+        <Point X="9.312" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgCUAAAIAAAwACCAAAgAAAAAQAAAABAAAEgAAYBAIA=</HashCode>
+      <FileName>Source\Entities\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Entities.Slider" Collapsed="true">
+    <Position X="1.25" Y="3" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Entity" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="1.562" />
+        <Point X="11.75" Y="2.625" />
+        <Point X="2.062" Y="2.625" />
+        <Point X="2.062" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ABACQAAAIBAAQAkAECAAIAAAAAAAAAQAGDBgACAAAIA=</HashCode>
+      <FileName>Source\Entities\Slider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeonBit.UI.Source.Entities.FullImagePanel" Collapsed="true">
+    <Position X="16" Y="5" Width="1.5" />
+    <InheritanceLine Type="GeonBit.UI.Entities.Panel" FixedToPoint="true">
+      <Path>
+        <Point X="16.75" Y="4.691" />
+        <Point X="16.75" Y="5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Source\Entities\FullImagePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GeonBit.UI.Entities.RichParagraphStyleInstruction" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQABAAAAAgAAAABAAgACQAAAAAAAFCAAAAgAAAA=</HashCode>
+      <FileName>Source\Entities\RichParagraph.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="GeonBit.UI.Entities.DrawPhase" Collapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.Anchor" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAAIAAAAABAAAQAAAQAABBAAAAAAAAAAACgIQEA=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.EntityState" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Source\Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.PanelOverflowBehavior" Collapsed="true">
+    <Position X="17.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Source\Entities\Panel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.FontStyle" Collapsed="true">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAEAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Source\Entities\Paragraph.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.ImageDrawMode" Collapsed="true">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAA=</HashCode>
+      <FileName>Source\Entities\Image.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.PanelSkin" Collapsed="true">
+    <Position X="17.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAIAAAAAQAAAAAAIAAAQEAAAA=</HashCode>
+      <FileName>Source\Entities\PanelBase.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.ButtonSkin" Collapsed="true">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Source\Entities\Button.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GeonBit.UI.Entities.SliderSkin" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Source\Entities\Slider.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

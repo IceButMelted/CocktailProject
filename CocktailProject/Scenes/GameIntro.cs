@@ -21,7 +21,6 @@ namespace CocktailProject.Scenes
 {
     class GameIntro : Scene
     {
-        private const String COCKTAIL_TEXT = "Cocktail : 410";
 
         private Texture2D introAtlas;
         private List<Rectangle> frames = new List<Rectangle>();

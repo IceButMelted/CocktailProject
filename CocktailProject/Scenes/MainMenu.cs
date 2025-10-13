@@ -30,8 +30,6 @@ namespace CocktailProject.Scenes
         bool shouldPlayBGM_themeSong01 = true;
         bool shouldPlayBGM_themeSong02 = false;
 
-        private const String COCKTAIL_TEXT = "Cocktail : 410";
-
         private BG_Parallax bg;
         private BG_Parallax fg;
         private Point screenCenter;
