@@ -135,6 +135,14 @@
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <InheritanceLine Type="MonoGameLibrary.Scenes.Scene" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="7.812" />
+        <Point X="14.25" Y="8.01" />
+        <Point X="17" Y="8.01" />
+        <Point X="17" Y="8.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAYCAQAAAAAgI4IQAAAAACggAAAAEBAABAAAAGAhAAQ=</HashCode>
       <FileName>Scenes\MainMenu.cs</FileName>
@@ -142,6 +150,9 @@
   </Class>
   <Class Name="CocktailProject.Scenes.Previs">
     <Position X="18.75" Y="8.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>ACwAAAAAgQABAwAACAgAAAAAAAAAAgAhAAAAAQAAAAQ=</HashCode>
       <FileName>Scenes\Previs.cs</FileName>
@@ -152,6 +163,14 @@
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <InheritanceLine Type="MonoGameLibrary.Scenes.Scene" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="7.812" />
+        <Point X="14.25" Y="8.01" />
+        <Point X="22.25" Y="8.01" />
+        <Point X="22.25" Y="8.25" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAEAA4IAAAAAAAAAEAABAIAAAAAAACAwAAQ=</HashCode>
       <FileName>Scenes\Summary.cs</FileName>
@@ -165,7 +184,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MonoGameLibrary.Scenes.Scene" Collapsed="true">
-    <Position X="20.75" Y="6.75" Width="1.5" />
+    <Position X="13.5" Y="7.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="CocktailProject.Scenes.GamePlay">
