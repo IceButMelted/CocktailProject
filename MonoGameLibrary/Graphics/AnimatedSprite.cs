@@ -106,6 +106,11 @@ namespace MonoGameLibrary.Graphics
             }
         }
 
+        public void Update() {
+            _currentFrame = (_currentFrame + 1) % _animation.Frames.Count;
+            Region = _animation.Frames[_currentFrame];
+        }
+
         public void Update(GameTime gameTime, int SpecificFrame, bool IsFreezeFrame = false, bool IsReverse = false)
         {
             if (!_isPlaying || _animation == null) return;

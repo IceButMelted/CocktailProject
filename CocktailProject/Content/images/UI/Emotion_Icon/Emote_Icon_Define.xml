@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>images/UI/Emotion_Icon/Emote_Icon_Atlas</Texture>
+	<Regions>
+		<Region name="Upset001" x="0" y="0" width="100" height="100" />
+		<Region name="Upset002" x="100" y="0" width="100" height="100" />
+		<Region name="Upset003" x="200" y="0" width="100" height="100" />
+		<Region name="Happy001" x="0" y="100" width="100" height="100" />
+		<Region name="Happy002" x="100" y="100" width="100" height="100" />
+		<Region name="Happy003" x="200" y="100" width="100" height="100" />
+
+	</Regions>
+	<Animations>
+		<Animation name="UpsetEmote" delay="150">
+			<Frame region="Upset001" />
+			<Frame region="Upset002" />
+			<Frame region="Upset003" />
+		</Animation>
+		<Animation name="HappyEmote" delay="150">
+			<Frame region="Happy001" />
+			<Frame region="Happy002" />
+			<Frame region="Happy003" />
+		</Animation>
+	</Animations>
+</TextureAtlas>

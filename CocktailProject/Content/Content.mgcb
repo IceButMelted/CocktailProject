@@ -623,6 +623,21 @@
 /processorParam:TextureFormat=Color
 /build:images/UI/BTN_Icon_Mixer.png
 
+#begin images/UI/Emotion_Icon/Emote_Icon_Atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/UI/Emotion_Icon/Emote_Icon_Atlas.png;images/UI/Emotion_Icon/Emote_Icon_Atlas
+
+#begin images/UI/Emotion_Icon/Emote_Icon_Define.xml
+/copy:images/UI/Emotion_Icon/Emote_Icon_Define.xml
+
 #begin images/UI/Img_Panel_Alcohol.png
 /importer:TextureImporter
 /processor:TextureProcessor

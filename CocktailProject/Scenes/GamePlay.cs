@@ -266,6 +266,12 @@ namespace CocktailProject.Scenes
         public RichParagraph RP_CustomerName;
         public Image ImgP_OrderPanel;
         public RichParagraph RP_ConversationCustomer;
+        public Image Img_CustomerEmote;
+            public TextureAtlas Atlas_EmoteIcon;
+            public AnimatedSprite EmoteIcon_Anim;
+            public float TimeToShowEmote = 3f;
+            public float TimeShowingEmote = 0f;
+
 
 #if DEBUG
         public Paragraph P_Debug_targetCocktail;
@@ -295,7 +301,7 @@ namespace CocktailProject.Scenes
             ShuffleCustomers();
 
             ListTextTypes = GlobalVariable.ListOfTextTpyeEachDay[GlobalVariable.Day-1];
-
+            TimeShowingEmote = TimeToShowEmote;
 
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
 
@@ -350,6 +356,9 @@ namespace CocktailProject.Scenes
             Stirring_Anim = MinGame_Stirring_Atlas.CreateAnimatedSprite("Stirring_Animation");
             Mouse_Atlas = TextureAtlas.FromFile(Content, "images/UI/MouseButton/Mouse_Define.xml");
             Mouse_Anim = Mouse_Atlas.CreateAnimatedSprite("LeftMouseClick");
+            Atlas_EmoteIcon = TextureAtlas.FromFile(Content, "images/UI/Emotion_Icon/Emote_Icon_Define.xml");
+            EmoteIcon_Anim = Atlas_EmoteIcon.CreateAnimatedSprite("UpsetEmote");
+
 
             //Load Ui image
             Texture2D T_Alchohol_Panel = Content.Load<Texture2D>("images/UI/Shelf");
@@ -801,7 +810,7 @@ namespace CocktailProject.Scenes
                 ResetUI();
                 UpdateCocktailBars();
 
-
+                
                 Img_CocktailBottle.ToolTipText = _currentCocktail.GetSimpleInfo();
             };
             
@@ -1053,12 +1062,19 @@ namespace CocktailProject.Scenes
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
             Img_Customer.Offset = new Vector2(1920, 40);
 
+            Img_CustomerEmote = new Image(Atlas_EmoteIcon.Texture, new Vector2(200, 200), anchor: Anchor.TopRight);
+            Img_CustomerEmote.Offset = new Vector2(-100, 0);
+            Img_CustomerEmote.SourceRectangle = EmoteIcon_Anim.GetRectangleCurrentFrame();
+            Img_CustomerEmote.Visible = false;
+            Img_Customer.AddChild(Img_CustomerEmote);
+
             #endregion
 
             #region BGNPC Image Atlas
 
             Img_BG_NPC = new Image(Atlas_BGNPC.GetRegion("FaceRight").GetTexture2D(), new Vector2(300, 650), anchor: Anchor.CenterLeft);
             Img_BG_NPC.SourceRectangle = Atlas_BGNPC.GetRegion("FaceRight").SourceRectangle;
+
             #endregion
 
             #region Art After Serve Panel
@@ -1227,6 +1243,7 @@ namespace CocktailProject.Scenes
             Shaking_Anim.Update(gameTime);
             Stirring_Anim.Update(gameTime);
             Mouse_Anim.Update(gameTime);
+            EmoteIcon_Anim.Update(gameTime);
             UpdateUILogic(gameTime);
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -1323,6 +1340,20 @@ namespace CocktailProject.Scenes
         }
         protected void UpdateUILogic(GameTime gameTime)
         {
+            if (Img_CustomerEmote.Visible == true)
+            {
+                Img_CustomerEmote.SourceRectangle = EmoteIcon_Anim.GetRectangleCurrentFrame();
+                if(TimeShowingEmote > 0)
+                {
+                    TimeShowingEmote -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    Img_CustomerEmote.Visible = false;
+                    TimeShowingEmote = TimeToShowEmote;
+                }
+            }
+
             CheckCurrentCountPart();
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -1377,7 +1408,8 @@ namespace CocktailProject.Scenes
                     P_BeforeServe.Texture = T_P_BeforeServe;
                     break;
                 case Enum_PanelState.InitPosSlide:
-                    SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left);
+                    if(SlidePanel(P_BeforeServe, -800, 20, Enum_SlideDirection.Left))
+                        P_BeforeServe.Texture = T_P_BeforeServe;
                     break;
                 case Enum_PanelState.Open:
                     EnableAllBTN(false);
@@ -1578,6 +1610,9 @@ namespace CocktailProject.Scenes
                                 GlobalVariable.AddCocktailDone(str_currentCocktail_Name, (int)(_targetCoctail.GetPrice()));
 
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_happy").SourceRectangle;
+                                EmoteIcon_Anim = Atlas_EmoteIcon.CreateAnimatedSprite("HappyEmote");
+                                EmoteIcon_Anim.Update();
+                                Img_CustomerEmote.Visible = true;   
                                 break;
                             case Enum_CocktaillResualt.Aceptable:
                                 GlobalVariable.AddIncome((int)_targetCoctail.GetPrice());
@@ -1588,6 +1623,9 @@ namespace CocktailProject.Scenes
                             case Enum_CocktaillResualt.Fail:
                                 ShakeHelper.ShakingEntity(Img_Customer, 5, true, 1f, 20);
                                 Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_upset").SourceRectangle;
+                                EmoteIcon_Anim = Atlas_EmoteIcon.CreateAnimatedSprite("UpsetEmote");
+                                EmoteIcon_Anim.Update();
+                                Img_CustomerEmote.Visible = true;
                                 break;
                         }
 
@@ -1665,8 +1703,10 @@ namespace CocktailProject.Scenes
                     }
                     break;
             }
-            if(ShakeHelper.IsComplete(Img_Customer))
+            if (ShakeHelper.IsComplete(Img_Customer))
+            {
                 ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false, speed: 2.5f);
+            }
         }
 
         // ----------------------Fucntion-----------------------

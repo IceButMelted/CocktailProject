@@ -81,7 +81,7 @@ namespace CocktailProject.Scenes
             frames.Add(new Rectangle(0, 200, 1000, 200));   // MNG Title
             frameDurations.Add(3.5);
             frames.Add(new Rectangle(0, 400, 1000, 400));   // Caution Title
-            frameDurations.Add(20.0);
+            frameDurations.Add(5);
 
             base.LoadContent();
         }

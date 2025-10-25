@@ -9,7 +9,6 @@
   <Class Name="TaggedTextRevealer">
     <Position X="11.75" Y="2" Width="2.25" />
     <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
@@ -66,7 +65,6 @@
   <Class Name="CocktailProject.ClassMotion.BG_NPC">
     <Position X="1" Y="8" Width="1.5" />
     <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
@@ -108,7 +106,6 @@
   <Class Name="CocktailProject.MiniGame.StiringMinigame">
     <Position X="8.75" Y="8" Width="2.75" />
     <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
