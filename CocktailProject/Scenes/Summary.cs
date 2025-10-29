@@ -19,11 +19,8 @@ namespace CocktailProject.Scenes
 {
     class Summary : Scene
     {
-        // ---------------------------------------------------------------------
-        // UI Constants and Fonts
-        // ---------------------------------------------------------------------
-        private const int LabelWidth = 28;   // space for text labels
-        private const int ValueWidth = 5;    // space for numeric values (0–1000)
+        private const int LabelWidth = 28;
+        private const int ValueWidth = 5;
         private static readonly Color GoldColor = new Color(192, 130, 30);
 
         protected Image Img_Summary;
@@ -33,15 +30,16 @@ namespace CocktailProject.Scenes
         protected SpriteFont BoldFont;
         protected SpriteFont ItalicFont;
 
-        // ---------------------------------------------------------------------
-        // Background
-        // ---------------------------------------------------------------------
         private BG_Parallax bg;
         private Point screenCenter;
 
-        // ---------------------------------------------------------------------
-        // Scene Lifecycle
-        // ---------------------------------------------------------------------
+        // NEW: Timer for 3-second delay
+        private double timeElapsed = 0;
+        private bool canContinue = false;
+
+        // NEW: Paragraph for “Click Anywhere to Continue”
+        private RichParagraph continueText;
+
         public override void Initialize()
         {
             screenCenter = new Point(
@@ -53,6 +51,9 @@ namespace CocktailProject.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            // update time
+            timeElapsed += gameTime.ElapsedGameTime.TotalSeconds;
+
             if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape))
                 Core.Instance.Exit();
 
@@ -62,7 +63,17 @@ namespace CocktailProject.Scenes
             bg.Update(Mouse.GetState());
             UserInterface.Active.Update(gameTime);
 
-            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Q))
+            // NEW: After 3 seconds, show the continue text
+            if (!canContinue && timeElapsed >= 3)
+            {
+                canContinue = true;
+                continueText.Visible = true;
+            }
+
+            // NEW: Handle Q or mouse click only after continueText appears
+            if (canContinue &&
+                (Core.Input.Keyboard.WasKeyJustPressed(Keys.Q) ||
+                 Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left)))
             {
                 if (GlobalVariable.Day >= 2)
                     Core.ChangeScene(new Thanks());
@@ -71,7 +82,6 @@ namespace CocktailProject.Scenes
                     UserInterface.Active.Clear();
                     GlobalVariable.NextDay();
                     Core.ChangeScene(new GamePlay());
-
                 }
             }
 
@@ -80,24 +90,19 @@ namespace CocktailProject.Scenes
 
         public override void LoadContent()
         {
-            // Initialize GeonBit UI
             UserInterface.Initialize(Content, BuiltinThemes.hd);
 
-            // Load fonts
             RegularFont = Content.Load<SpriteFont>("Fonts/Regular");
             BoldFont = Content.Load<SpriteFont>("Fonts/Bold");
             ItalicFont = Content.Load<SpriteFont>("Fonts/Italic");
 
-            // Set default UI style colors
             RichParagraphStyleInstruction.AddInstruction(
                 "MENU_TEXT",
                 new RichParagraphStyleInstruction(fillColor: new Color(235, 228, 202)));
 
-            // Load background and parallax layer
             Texture2D bgTexture = Content.Load<Texture2D>("images/Background/BG_Summary");
             bg = new BG_Parallax(bgTexture, screenCenter, 0.01f, 0.005f, 1.05f);
 
-            // Load main summary panel
             T_Img_Summary = Content.Load<Texture2D>("images/UI/Summary/Summary_Panel");
             Img_Summary = new Image(T_Img_Summary)
             {
@@ -106,9 +111,6 @@ namespace CocktailProject.Scenes
                 Offset = new Vector2(130, 140)
             };
 
-            // -----------------------------------------------------------------
-            // Title Text
-            // -----------------------------------------------------------------
             Paragraph title = new Paragraph("Summary", Anchor.TopCenter)
             {
                 Size = new Vector2(500, 60),
@@ -118,29 +120,18 @@ namespace CocktailProject.Scenes
                 OutlineOpacity = 0
             };
 
-
-            // -----------------------------------------------------------------
-            // Info Panel
-            // -----------------------------------------------------------------
             Panel panel = new Panel(new Vector2(500, 500), PanelSkin.None, Anchor.Center);
 
-            // Format top section: Customer / Income / Tip
             string formattedCustomer = $"{"Customer".PadRight(LabelWidth)}{GlobalVariable.customerNumber,ValueWidth}";
             string formattedIncome = $"{"Income".PadRight(LabelWidth)}{GlobalVariable.Income,ValueWidth}";
             string formattedTip = $"{"Tip".PadRight(LabelWidth)}{GlobalVariable.Tip,ValueWidth}";
             Paragraph txtCustomer = CreateLabel(formattedCustomer);
             Paragraph txtIncome = CreateLabel(formattedIncome);
 
-            // Add main summary lines
             panel.AddChild(txtCustomer);
             panel.AddChild(txtIncome);
 
-            // -----------------------------------------------------------------
-            // Cocktail List
-            // -----------------------------------------------------------------
-
-            // Fallback safe if no cocktail made
-            int maxNameLength = 10; // default value
+            int maxNameLength = 10;
 
             if (GlobalVariable.CocktailHaveDone.Count != 0)
             {
@@ -157,11 +148,9 @@ namespace CocktailProject.Scenes
                 panel.AddChild(CreateLabel("   No cocktails you made is good enough."));
             }
 
-            // Add tip line last
             Paragraph txtTip = CreateLabel(formattedTip);
             panel.AddChild(txtTip);
 
-            // Total line
             int grandTotal = GlobalVariable.Income + GlobalVariable.Tip;
             Paragraph txt_Total = new Paragraph(
                 $"Total".PadRight(maxNameLength + 9) + $"{grandTotal,5}",
@@ -172,13 +161,26 @@ namespace CocktailProject.Scenes
             txt_Total.OutlineOpacity = 0;
             panel.AddChild(txt_Total);
 
-
-            // -----------------------------------------------------------------
-            // Combine UI Elements
-            // -----------------------------------------------------------------
             Img_Summary.AddChild(title);
             Img_Summary.AddChild(panel);
             UserInterface.Active.AddEntity(Img_Summary);
+
+            // NEW: Add “Click Anywhere to Continue” RichParagraph
+            continueText = new RichParagraph(
+                "Click Anywhere To Continue",
+                Anchor.BottomCenter
+            )
+            {
+                FontOverride = BoldFont,
+                FillColor = new Color(235, 228, 202),
+                OutlineOpacity = 0,
+                Offset = new Vector2(0, -50),
+                Visible = false // hidden until 3 sec passed
+            };
+            continueText.Anchor = Anchor.BottomCenter;
+            continueText.Offset = new Vector2(0, 50);
+
+            UserInterface.Active.AddEntity(continueText);
 
             base.LoadContent();
         }
@@ -195,9 +197,6 @@ namespace CocktailProject.Scenes
             base.Draw(gameTime);
         }
 
-        // ---------------------------------------------------------------------
-        // Helper: Create styled paragraph label
-        // ---------------------------------------------------------------------
         private Paragraph CreateLabel(string text)
         {
             return new Paragraph(text, Anchor.Auto)

@@ -303,6 +303,8 @@ namespace CocktailProject.Scenes
             ListTextTypes = GlobalVariable.ListOfTextTpyeEachDay[GlobalVariable.Day-1];
             TimeShowingEmote = TimeToShowEmote;
 
+            
+
             Debug.WriteLine("Name : " + str_targetCocktail_Name + "\n" + _targetCoctail.Info());
 
             string welcomeText = "Welcome! To Project Cocktail";
@@ -884,6 +886,10 @@ namespace CocktailProject.Scenes
             Img_Mouse.Offset = new Vector2(-140, -5);
             Img_Mouse.SourceRectangle = Mouse_Anim.GetRectangleCurrentFrame();
             Img_Mouse.Visible = false;
+            Img_Mouse.OutlineWidth = 2;
+            Img_Mouse.OutlineColor = new Color(218, 180, 120);
+            Img_Mouse.OutlineOpacity = 128;
+
             #endregion
 
             #region Add Child To Panel Minigame Zone
