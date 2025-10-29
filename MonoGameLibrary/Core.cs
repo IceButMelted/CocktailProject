@@ -80,10 +80,15 @@ public class Core : Game
         // Create a new graphics device manager.
         Graphics = new GraphicsDeviceManager(this);
 
+
+
         // Set the graphics defaults
         Graphics.PreferredBackBufferWidth = width;
         Graphics.PreferredBackBufferHeight = height;
-        Graphics.IsFullScreen = fullScreen;
+
+        Graphics.HardwareModeSwitch = false; // use borderless mode
+        Graphics.IsFullScreen = fullScreen;  // set true to cover screen
+        Graphics.ApplyChanges();
 
         // Apply the graphic presentation changes.
         Graphics.ApplyChanges();
@@ -133,6 +138,9 @@ public class Core : Game
 
     protected override void Update(GameTime gameTime)
     {
+        if (!IsActive)
+            return;
+
         // Update the input manager.
         Input.Update(gameTime);
 
@@ -162,6 +170,9 @@ public class Core : Game
 
     protected override void Draw(GameTime gameTime)
     {
+        if (!IsActive)
+            return;
+
         // If there is an active scene, draw it.
         if (s_activeScene != null)
         {

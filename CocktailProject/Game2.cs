@@ -23,19 +23,19 @@ namespace CocktailProject
     {
         public Game2() : base("CocktialProject", 1920, 1080, true)
         {
-
         }
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            ChangeScene(new Scenes.GameIntro());
+            //ChangeScene(new Scenes.GameIntro());
+            ChangeScene(new Scenes.GamePlay());
         }
 
         protected override void LoadContent() {
-            base.LoadContent();
 
+            base.LoadContent();
 
         }
 

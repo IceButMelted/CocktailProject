@@ -3,7 +3,7 @@
 	<Texture>images/UI/MouseButton/Mouse_Atlast</Texture>
 	<Regions>
 		<Region name="Normal_Mouse" x="0" y="0" width="512" height="512" />
-		<Region name="Left_Mouse_Click" x="0" y="512" width="512" height="512" />
+		<Region name="Left_Mouse_Click" x="512" y="0" width="512" height="512" />
 	</Regions>
 	<Animations>
 		<Animation name="LeftMouseClick" delay="200">

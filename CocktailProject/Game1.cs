@@ -124,7 +124,7 @@ public class Game1 : Core
 
     public Game1() : base("CocktialProject", 1920, 1080, false)
     {
-
+        ;
     }
 
     protected override void Initialize()

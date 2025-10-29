@@ -880,8 +880,8 @@ namespace CocktailProject.Scenes
 
             InitStiringMinigameUI();
 
-            Img_Mouse = new Image(Mouse_Atlas.Texture, new Vector2(100, 100), anchor: Anchor.BottomLeft);
-            Img_Mouse.Offset = new Vector2(-100, 0);
+            Img_Mouse = new Image(Mouse_Atlas.Texture, new Vector2(130, 130), anchor: Anchor.BottomLeft);
+            Img_Mouse.Offset = new Vector2(-140, -5);
             Img_Mouse.SourceRectangle = Mouse_Anim.GetRectangleCurrentFrame();
             Img_Mouse.Visible = false;
             #endregion
@@ -1178,6 +1178,7 @@ namespace CocktailProject.Scenes
         }
         public override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
             Core.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             Core.SpriteBatch.Begin();
@@ -1189,62 +1190,13 @@ namespace CocktailProject.Scenes
             Core.SpriteBatch.End();
 
             UserInterface.Active.Draw(Core.SpriteBatch);
-            base.Draw(gameTime);
+            
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            // Moving NPC updates
-            foreach (var movnpc in movingnpcs)
-                movnpc.Update(gameTime);
-
-            UpdateSong();
-
-            // Handle fade-in
-            if (shouldFadeIn)
-            {
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 3.0f, ref fadeTimer))
-                {
-                    EnableFadePanel(false);
-                    shouldFadeIn = false;
-                    OpenBookOnTutorial();
-                }
-                return;
-            }
-
-            UserInterface.Active.Update(gameTime);
-            if (!EndTutorial) return; 
-
-            if (shouldFadeOut) {
-
-                if (FadeHelper.FadeEntity(P_Fade, gameTime, 0, 255, 5f, ref fadeTimer))
-                {
-                    // go to thank scene
-                    shouldFadeOut = false;
-                    Core.ChangeScene(new Summary());
-                }
-                return;
-            }
-
-                        
-            UpdateUILogic(gameTime);
-            Utilities.ShakeHelper.Update(gameTime);
-
-            // Skip all updates if no customer interaction
-            if (currentCustomerState != Enum_CutomerState.WaitingForServe)
-            {
-                base.Update(gameTime);
-                UserInterface.Active.Update(gameTime);
-                return;
-            }
-
-            // Update animations and UI
-            Shaking_Anim.Update(gameTime);
-            Stirring_Anim.Update(gameTime);
-            Mouse_Anim.Update(gameTime);
-            EmoteIcon_Anim.Update(gameTime);
-            UpdateUILogic(gameTime);
+            base.Update(gameTime);
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -1298,7 +1250,8 @@ namespace CocktailProject.Scenes
                 }
 
                 StiringMinigame.Update(gameTime);
-                if (!StiringMinigame.GetIsHitCorrectValue()) { 
+                if (!StiringMinigame.GetIsHitCorrectValue())
+                {
                     ShakeHelper.ShakingEntity(PB_Stirring, 5f, true, 0.6f, speed: 100f);
                     PB_Stirring.FillColor = Color.Orange;
                     PB_Stirring.ProgressFill.FillColor = Color.Orange;
@@ -1317,13 +1270,69 @@ namespace CocktailProject.Scenes
 
                 if (StiringMinigame.IsComplated())
                 {
+                    // defualt offset and color
+                    PB_Stirring.FillColor = Color.White;
+                    PB_Stirring.Offset = new Vector2(0, 70);
+
                     StiringMinigame.Stop();
                     Stirring_Anim.Stop();
+                    
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
                     cooldownTime_SFX_Stiring = 4f;
                 }
             }
+
+            // Moving NPC updates
+            foreach (var movnpc in movingnpcs)
+                movnpc.Update(gameTime);
+
+            UpdateSong();
+
+            // Handle fade-in
+            if (shouldFadeIn)
+            {
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 255, 0, 3.0f, ref fadeTimer))
+                {
+                    EnableFadePanel(false);
+                    shouldFadeIn = false;
+                    OpenBookOnTutorial();
+                }
+                return;
+            }
+
+            UserInterface.Active.Update(gameTime);
+            if (!EndTutorial) return; 
+
+            if (shouldFadeOut) {
+
+                if (FadeHelper.FadeEntity(P_Fade, gameTime, 0, 255, 5f, ref fadeTimer))
+                {
+                    // go to thank scene
+                    shouldFadeOut = false;
+                    Core.ChangeScene(new Summary());
+                }
+                return;
+            }
+
+                        
+            UpdateUILogic(gameTime);
+            Utilities.ShakeHelper.Update(gameTime);
+
+            // Skip all updates if no customer interaction
+            if (currentCustomerState != Enum_CutomerState.WaitingForServe)
+            {
+                base.Update(gameTime);
+                UserInterface.Active.Update(gameTime);
+                return;
+            }
+
+            // Update animations and UI
+            Shaking_Anim.Update(gameTime);
+            Stirring_Anim.Update(gameTime);
+            Mouse_Anim.Update(gameTime);
+            EmoteIcon_Anim.Update(gameTime);
+            UpdateUILogic(gameTime);
 
             // Conversation and text
             UpdateConversation();
@@ -1335,8 +1344,7 @@ namespace CocktailProject.Scenes
             P_Debug_GlobalVariable.Text = GlobalVariable.DebugPrintString();
 #endif
 
-            base.Update(gameTime);
-            UserInterface.Active.Update(gameTime);
+            
         }
         protected void UpdateUILogic(GameTime gameTime)
         {
@@ -2098,14 +2106,15 @@ namespace CocktailProject.Scenes
 
             Img_BookRecipes = new Image(T_BookRecipes, new Vector2(1100, 750), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_BookRecipes.Offset = new Vector2(66, 63);
+            Img_BookRecipes.Padding = Vector2.Zero;
 
-            Img_LeftPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_LeftPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 740), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_LeftPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_L").SourceRectangle;
-            Img_LeftPage.Offset = new Vector2(25, 0);
+            Img_LeftPage.Offset = new Vector2(50, 6);
 
-            Img_RightPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 700), ImageDrawMode.Stretch, Anchor.TopLeft);
+            Img_RightPage = new Image(Recipes_Atlas.Texture, new Vector2(480, 740), ImageDrawMode.Stretch, Anchor.TopLeft);
             Img_RightPage.SourceRectangle = Recipes_Atlas.GetRegion("Recipe_01_R").SourceRectangle;
-            Img_RightPage.Offset = new Vector2(505, 0);
+            Img_RightPage.Offset = new Vector2(530, 6);
 
 
             BTN_PreviousPage = new Button("", ButtonSkin.Default, Anchor.BottomLeft, new Vector2(166/2, 98/2));
@@ -2125,7 +2134,7 @@ namespace CocktailProject.Scenes
                 BTN_PreviousPage.Offset += new Vector2(0, +5);
                 BTN_PreviousPage.FillColor = Color.White;
             };
-            BTN_PreviousPage.Offset = new Vector2(-20, 0);
+            BTN_PreviousPage.Offset = new Vector2(0, 30);
             Texture2D T_BTN_PreviousPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Left");
             Texture2D T_BTN_PreviousPage_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Left_Hover");
             BTN_PreviousPage.SetCustomSkin(T_BTN_PreviousPage, T_BTN_PreviousPage_hover, T_BTN_PreviousPage);
@@ -2148,7 +2157,7 @@ namespace CocktailProject.Scenes
                 BTN_NextPage.Offset += new Vector2(0, +5);
                 BTN_NextPage.FillColor = Color.White;
             };
-            BTN_NextPage.Offset = new Vector2(20, 0);
+            BTN_NextPage.Offset = new Vector2(45, 30);
             Texture2D T_BTN_NextPage = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Right");
             Texture2D T_BTN_NextPage_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Right_Hover");
             BTN_NextPage.SetCustomSkin(T_BTN_NextPage, T_BTN_NextPage_hover, T_BTN_NextPage);
@@ -2171,7 +2180,8 @@ namespace CocktailProject.Scenes
                 BTN_CloseBookRecipes.Offset += new Vector2(0, -5);
                 BTN_CloseBookRecipes.FillColor = Color.White;
             };
-            BTN_CloseBookRecipes.Offset = new Vector2(80, -40);
+            BTN_CloseBookRecipes.Offset = new Vector2(100, 5);
+
             Texture2D T_BTN_CloseBookRecipes = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close");
             Texture2D T_BTN_CloseBookRecipes_hover = Content.Load<Texture2D>("images/UI/RecipeBook/Recipe_Button_Close_Hover");
             BTN_CloseBookRecipes.SetCustomSkin(T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes, T_BTN_CloseBookRecipes);
@@ -2179,6 +2189,7 @@ namespace CocktailProject.Scenes
 
             Img_BookRecipes.AddChild(Img_LeftPage);
             Img_BookRecipes.AddChild(Img_RightPage);
+
             Img_BookRecipes.AddChild(BTN_PreviousPage);
             Img_BookRecipes.AddChild(BTN_NextPage);
             Img_BookRecipes.AddChild(BTN_CloseBookRecipes);

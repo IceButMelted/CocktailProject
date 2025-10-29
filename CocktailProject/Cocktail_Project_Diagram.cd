@@ -1,13 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Comment CommentText="BaseCharacter Class">
-    <Position X="16.75" Y="1.25" Height="0.291" Width="1.7" />
+    <Position X="12.125" Y="1.292" Height="0.291" Width="1.7" />
   </Comment>
   <Comment CommentText="Cocktail Class ">
     <Position X="4.953" Y="1.146" Height="0.291" Width="1.7" />
   </Comment>
+  <Comment CommentText="BG Class">
+    <Position X="2.247" Y="7.415" Height="0.401" Width="0.86" />
+  </Comment>
+  <Comment CommentText="Mini Game Part">
+    <Position X="7.537" Y="7.202" Height="0.417" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Global Variable">
+    <Position X="17.046" Y="1.358" Height="0.392" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Text animation Cotroller">
+    <Position X="20.713" Y="1.25" Height="0.392" Width="1.7" />
+  </Comment>
   <Class Name="TaggedTextRevealer">
-    <Position X="11.75" Y="2" Width="2.25" />
+    <Position X="20.5" Y="2" Width="2.25" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -80,14 +92,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BG_Parallax">
-    <Position X="3.25" Y="8" Width="1.5" />
+    <Position X="2.75" Y="8" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AASAAAAAAAAAAgAIAAAAAgAAAAQAAgAAAAAAAAAgAAA=</HashCode>
       <FileName>ClassMotion\BG_Parallax.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.ClassNPC.BaseCharacter">
-    <Position X="15" Y="2" Width="2.25" />
+    <Position X="10.75" Y="2" Width="2.25" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -98,13 +113,16 @@
   </Class>
   <Class Name="CocktailProject.MiniGame.ShakingMinigame">
     <Position X="5.75" Y="8" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>QQSAAAACATACJAAAAAAAAAEgAIAIEAAAIwQCAAEAAEA=</HashCode>
       <FileName>MiniGame\ShakingMinigame.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.MiniGame.StiringMinigame">
-    <Position X="8.75" Y="8" Width="2.75" />
+    <Position X="8.5" Y="8" Width="2.75" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -128,7 +146,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.Scenes.MainMenu">
-    <Position X="16" Y="8.25" Width="2.25" />
+    <Position X="15.5" Y="8.25" Width="2.25" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -136,8 +154,8 @@
       <Path>
         <Point X="14.25" Y="7.812" />
         <Point X="14.25" Y="8.01" />
-        <Point X="17" Y="8.01" />
-        <Point X="17" Y="8.25" />
+        <Point X="16.5" Y="8.01" />
+        <Point X="16.5" Y="8.25" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -146,7 +164,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.Scenes.Previs">
-    <Position X="18.75" Y="8.25" Width="2" />
+    <Position X="18" Y="8.25" Width="2" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -156,7 +174,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.Scenes.Summary">
-    <Position X="21.25" Y="8.25" Width="2.25" />
+    <Position X="20.25" Y="8.25" Width="2.25" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -164,8 +182,8 @@
       <Path>
         <Point X="14.25" Y="7.812" />
         <Point X="14.25" Y="8.01" />
-        <Point X="22.25" Y="8.01" />
-        <Point X="22.25" Y="8.25" />
+        <Point X="21.25" Y="8.01" />
+        <Point X="21.25" Y="8.25" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -174,35 +192,36 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CocktailProject.GlobalVariable">
-    <Position X="20.75" Y="2" Width="2" />
+    <Position X="15.75" Y="2" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAACABIAAABCAAADAAhAAAACACAAAAAAQAAAQBAAA=</HashCode>
       <FileName>GlobalVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CocktailProject.Scenes.GamePlay">
+    <Position X="22.75" Y="8.25" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>rNV2SphbfjO3dwZHPrOsMpozfGq1u10jlVAbsnhVaw4=</HashCode>
+      <FileName>Scenes\GamePlay.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MonoGameLibrary.Scenes.Scene" Collapsed="true">
     <Position X="13.5" Y="7.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="CocktailProject.Scenes.GamePlay">
-    <Position X="27" Y="8.25" Width="3.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>rNV2CphbfjO3dwZHNrOsMpozfGq1u1UjlVAbsnhVaw4=</HashCode>
-      <FileName>Scenes\GamePlay.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Struct Name="CocktailProject.ClassNPC.DayConversation">
-    <Position X="17.75" Y="2" Width="1.5" />
+    <Position X="13.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>ClassNPC\BaseCharacter.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="CocktailProject.ClassNPC.TextConversation">
-    <Position X="17.75" Y="3.5" Width="1.5" />
+    <Position X="13.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>ClassNPC\BaseCharacter.cs</FileName>
@@ -237,49 +256,49 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_CocktaillResualt">
-    <Position X="30.75" Y="8.25" Width="1.5" />
+    <Position X="26.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAAEAEAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_TextType">
-    <Position X="23" Y="2" Width="1.75" />
+    <Position X="18" Y="2" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.ConversationPhase">
-    <Position X="34.5" Y="10" Width="1.75" />
+    <Position X="30.25" Y="10" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAQAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_MiniGameType">
-    <Position X="32.5" Y="10" Width="1.75" />
+    <Position X="28.25" Y="10" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_SlideDirection">
-    <Position X="32.5" Y="8.25" Width="1.75" />
+    <Position X="28.25" Y="8.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_PanelState">
-    <Position X="30.75" Y="10" Width="1.5" />
+    <Position X="26.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIEALAAAAAAAAAAAAAABAAAAAAAGAAAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.ClassCocktail.Enum_CutomerState">
-    <Position X="34.5" Y="8.25" Width="1.75" />
+    <Position X="30.25" Y="8.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAEAAAA=</HashCode>
       <FileName>ClassCocktail\EnumElement.cs</FileName>
@@ -293,7 +312,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="CocktailProject.Scenes.Enum_Page">
-    <Position X="32.5" Y="11.5" Width="1.75" />
+    <Position X="28.25" Y="11.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAoAACAAA=</HashCode>
       <FileName>Scenes\GamePlay.cs</FileName>
