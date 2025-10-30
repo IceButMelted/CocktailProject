@@ -102,8 +102,6 @@ namespace CocktailProject.Scenes
 
         #region Conversation Logic Variable
 
-        public bool EndTutorial = false;
-
         public TaggedTextRevealer AnimationText;
         ConversationPhase currentPhase = ConversationPhase.SmallTalkBeforeOrder;
 
@@ -1237,7 +1235,6 @@ namespace CocktailProject.Scenes
                     cooldownTime_SFX_Shaking = 2.5f;
                 }
             }
-
             // Handle Stirring minigame
             else if (currentMinigame == Enum_MiniGameType.Stiring)
             {
@@ -1308,7 +1305,7 @@ namespace CocktailProject.Scenes
             }
 
             UserInterface.Active.Update(gameTime);
-            if (!EndTutorial) return; 
+            if (GlobalVariable.shouldShowTutorial) return; 
 
             if (shouldFadeOut) {
 
@@ -2266,7 +2263,7 @@ namespace CocktailProject.Scenes
         {
             bool isActive = Img_BookRecipes.Visible;
             EnableBookRecipes(!isActive);
-            if (!EndTutorial) 
+            if (GlobalVariable.shouldShowTutorial) 
             {
                 stateImgCustomer = Enum_PanelState.Pos1;
                 Core.Audio.PlaySoundEffect(SFX_Welcome);
@@ -2274,7 +2271,7 @@ namespace CocktailProject.Scenes
                 ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
                 ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
             }
-            EndTutorial = true;
+            GlobalVariable.shouldShowTutorial = false;
         }
         public void OpenBookOnTutorial()
         {

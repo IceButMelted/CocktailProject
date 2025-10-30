@@ -13,6 +13,7 @@ namespace CocktailProject
         public static int Tip = 0;
         public static int customerNumber = 0;
         public static byte Day = 1;
+        public static bool shouldShowTutorial = true;
         public static Dictionary<string, int> CocktailHaveDone = new Dictionary<string, int>();
 
         public static List<Queue<Enum_TextType>> ListOfTextTpyeEachDay = new List<Queue<Enum_TextType>>
