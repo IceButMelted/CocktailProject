@@ -104,6 +104,10 @@ namespace CocktailProject.Scenes
 
         public TaggedTextRevealer AnimationText;
         ConversationPhase currentPhase = ConversationPhase.SmallTalkBeforeOrder;
+        //convertaion auto play variable
+        private bool isAutoPlayEnabled = false;
+        private double autoPlayTimer = 0;
+        private const double autoPlayDelay = 2.0; // 2 seconds delay
 
         protected bool canDoconversation = false;
 
@@ -1172,6 +1176,23 @@ namespace CocktailProject.Scenes
             InitFadePanel();
             #endregion
 
+            #region QoL
+            CheckBox CB_AutoPlay = new CheckBox("Auto Play: Off", anchor: Anchor.BottomLeft);
+            CB_AutoPlay.OnValueChange = (Entity e) =>
+            {
+                ToggleAutoPlay();
+                CB_AutoPlay.TextParagraph.Text = "Auto Play: " + (isAutoPlayEnabled ? "On" : "Off");
+            };
+            CB_AutoPlay.OutlineWidth = 2;
+            CB_AutoPlay.OutlineColor = new Color(218, 180, 120);
+            CB_AutoPlay.OutlineOpacity = 128;
+            CB_AutoPlay.TextParagraph.FillColor = new Color(218, 180, 120);
+            CB_AutoPlay.TextParagraph.FontOverride = RegularFont;
+
+            CB_AutoPlay.Offset = new Vector2(-45, 0);
+
+            P_MainGame.AddChild(CB_AutoPlay);
+            #endregion
 
             //disaple stir and shaking at start
             BTNMethodActive(false);
@@ -1318,7 +1339,8 @@ namespace CocktailProject.Scenes
                 return;
             }
 
-                        
+            if (Core.Input.Keyboard.WasKeyJustPressed(Microsoft.Xna.Framework.Input.Keys.N))
+                ToggleAutoPlay();
             UpdateUILogic(gameTime);
             Utilities.ShakeHelper.Update(gameTime);
 
@@ -1338,7 +1360,7 @@ namespace CocktailProject.Scenes
             UpdateUILogic(gameTime);
 
             // Conversation and text
-            UpdateConversation();
+            UpdateConversation(gameTime);
             AnimationText.Update(gameTime);
 
 #if DEBUG
@@ -1550,7 +1572,7 @@ namespace CocktailProject.Scenes
             if (Core.Input.Keyboard.WasKeyJustPressed(Keys.U)) stateCocktailResultPanel = Enum_PanelState.InitPosWarp;
 #endif
         }
-        protected void UpdateConversation()
+        protected void UpdateConversation(GameTime gameTime)
         {
 
             if (!canDoconversation) return;
@@ -1564,18 +1586,38 @@ namespace CocktailProject.Scenes
                 AnimationText.Skip();
                 canSkipConversation = false;
                 canGoNextConversation = true;
+                autoPlayTimer = 0;
                 return;
             }
 
-            // Animation finished automatically
+            // When animation finishes
             if (AnimationText.IsFinished())
             {
                 canSkipConversation = false;
                 canGoNextConversation = true;
+
+                if (isAutoPlayEnabled)
+                {
+                    autoPlayTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+                    // Auto-advance after delay
+                    if (autoPlayTimer >= autoPlayDelay)
+                    {
+                        mouseClick = true;
+                        autoPlayTimer = 0;
+                    }
+                }
+            }
+            else
+            {
+                autoPlayTimer = 0;
             }
 
             // Advance conversation if conditions met
             if (!(canGoNextConversation && mouseClick || haveDoneOrder || inStartConversation)) return;
+
+            // Reset timer whenever progressing
+            autoPlayTimer = 0;
 
             switch (currentPhase)
             {
@@ -1714,6 +1756,7 @@ namespace CocktailProject.Scenes
                     }
                     break;
             }
+
             if (ShakeHelper.IsComplete(Img_Customer))
             {
                 ShakeHelper.ShakingEntity(Img_Customer, 0.25f, false, speed: 2.5f);
@@ -2595,6 +2638,12 @@ namespace CocktailProject.Scenes
                 Customers[n] = Customers[k];
                 Customers[k] = temp;
             }
+        }
+
+        public void ToggleAutoPlay()
+        {
+            isAutoPlayEnabled = !isAutoPlayEnabled;
+            autoPlayTimer = 0;
         }
         private void PlaySoundEffectWithRandomPitch(SoundEffect sfx)
         {
