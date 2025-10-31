@@ -1320,7 +1320,8 @@ namespace CocktailProject.Scenes
                 {
                     EnableFadePanel(false);
                     shouldFadeIn = false;
-                    OpenBookOnTutorial();
+                    if(GlobalVariable.shouldShowTutorial)
+                        OpenBookOnTutorial();
                 }
                 return;
             }
@@ -1560,6 +1561,7 @@ namespace CocktailProject.Scenes
                             RP_CustomerName.Text = Customers[numbercustomer]._Name;
                             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                             stateImgCustomer = Enum_PanelState.InitPosWarp;
+                            Img_Customer.Offset = new Vector2(1920, 40);
                             currentCustomerState = Enum_CutomerState.Leaving;
                         }
                     }
