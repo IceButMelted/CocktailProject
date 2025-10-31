@@ -1068,7 +1068,7 @@ namespace CocktailProject.Scenes
 
             Img_Customer = new Image(Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").GetTexture2D(), new Vector2(450, 650), anchor: Anchor.TopLeft);
             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
-            Img_Customer.Offset = new Vector2(1920, 40);
+            Img_Customer.Offset = new Vector2(1920, 50);
 
             Img_CustomerEmote = new Image(Atlas_EmoteIcon.Texture, new Vector2(200, 200), anchor: Anchor.TopRight);
             Img_CustomerEmote.Offset = new Vector2(-100, 0);
@@ -1500,7 +1500,7 @@ namespace CocktailProject.Scenes
                     Img_CocktailResult.Offset = new Vector2(1920, 75);
                     break;
                 case Enum_PanelState.Pos1:
-                    if (SlidePanel(Img_CocktailResult, 800, 5, Enum_SlideDirection.Left))
+                    if (SlidePanel(Img_CocktailResult, 800, 7, Enum_SlideDirection.Left))
                     {
                         stateArtAfterServePanel = Enum_PanelState.Pos2;
                         stateBeforeServePanel = Enum_PanelState.Pos2;
@@ -1525,7 +1525,7 @@ namespace CocktailProject.Scenes
                     canDoconversation = false;
                     currentCustomerState = Enum_CutomerState.Entering;
                     Core.Audio.PlaySoundEffect(SFX_Welcome);
-                    Img_Customer.Offset = new Vector2(1920, 40);
+                    Img_Customer.Offset = new Vector2(1920, 50);
                     stateImgCustomer = Enum_PanelState.Pos1;
                     ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
                     ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
@@ -1561,7 +1561,7 @@ namespace CocktailProject.Scenes
                             RP_CustomerName.Text = Customers[numbercustomer]._Name;
                             Img_Customer.SourceRectangle = Atlas_CustomerNPC.GetRegion(Customers[numbercustomer].GetID() + "_default").SourceRectangle;
                             stateImgCustomer = Enum_PanelState.InitPosWarp;
-                            Img_Customer.Offset = new Vector2(1920, 40);
+                            Img_Customer.Offset = new Vector2(1920, 50);
                             currentCustomerState = Enum_CutomerState.Leaving;
                         }
                     }
