@@ -325,7 +325,7 @@ namespace CocktailProject.Scenes
         public override void LoadContent()
         {   //Base DO NOT DELETE 
             UserInterface.Initialize(Content, BuiltinThemes.hd);
-            UserInterface.Active.ShowCursor = true;
+            UserInterface.Active.ShowCursor = false;
             UserInterface.TimeToShowTooltipText = 0.6f;
 
             // #EBE4C6 light cream
@@ -1181,6 +1181,7 @@ namespace CocktailProject.Scenes
             CB_AutoPlay.OnValueChange = (Entity e) =>
             {
                 ToggleAutoPlay();
+                PlaySoundEffectWithRandomPitch(SFX_PressedBTN);
                 CB_AutoPlay.TextParagraph.Text = "Auto Play: " + (isAutoPlayEnabled ? "On" : "Off");
             };
             CB_AutoPlay.OutlineWidth = 2;
@@ -1188,6 +1189,7 @@ namespace CocktailProject.Scenes
             CB_AutoPlay.OutlineOpacity = 128;
             CB_AutoPlay.TextParagraph.FillColor = new Color(218, 180, 120);
             CB_AutoPlay.TextParagraph.FontOverride = RegularFont;
+            CB_AutoPlay.Size = new Vector2(250, 75);
 
             CB_AutoPlay.Offset = new Vector2(-45, 0);
 
@@ -1222,6 +1224,11 @@ namespace CocktailProject.Scenes
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+#if DEBUG
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Z))
+                Core.ChangeScene(new Summary());
+#endif
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

@@ -43,6 +43,7 @@ namespace CocktailProject
             customerNumber = 0;
             Day = 1;
             CocktailHaveDone.Clear();
+            shouldShowTutorial = true;
         }
 
         public static void AddIncome(int amount)

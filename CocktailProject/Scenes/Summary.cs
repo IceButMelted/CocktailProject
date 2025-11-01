@@ -76,7 +76,7 @@ namespace CocktailProject.Scenes
                  Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left)))
             {
                 if (GlobalVariable.Day >= 2)
-                    Core.ChangeScene(new Thanks());
+                    Core.ChangeScene(new MainMenu());
                 else
                 {
                     UserInterface.Active.Clear();

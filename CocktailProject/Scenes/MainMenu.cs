@@ -116,6 +116,7 @@ namespace CocktailProject.Scenes
             BTN_Start.SetCustomSkin(T_BTN_Start_Default, T_BTN_Start_Hover, T_BTN_Start_Hover);
             BTN_Start.OnMouseDown = (Entity e) => {
                 Core.ChangeScene(new Previs()); // Switch Scene here
+                GlobalVariable.Reset();
             };
             BTN_Credit = new Button("", ButtonSkin.Default, Anchor.Center);
             BTN_Credit.Size = new Vector2(240, 80);

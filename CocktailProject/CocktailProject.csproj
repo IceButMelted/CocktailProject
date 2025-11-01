@@ -7,8 +7,8 @@
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
+    <ApplicationIcon>Icon (2).ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
@@ -21,6 +21,7 @@
     <Content Include="Content\images\Previs\Previs_Define.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icon (2).ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico">
