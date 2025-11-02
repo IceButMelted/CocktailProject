@@ -2330,6 +2330,7 @@ namespace CocktailProject.Scenes
             {
                 stateImgCustomer = Enum_PanelState.Pos1;
                 Core.Audio.PlaySoundEffect(SFX_Welcome);
+                
 
                 ShakeHelper.SetShakeAmplitude(Img_Customer, 2f);
                 ShakeHelper.SetShakeSpeed(Img_Customer, 10f);
@@ -2593,7 +2594,7 @@ namespace CocktailProject.Scenes
             BGM_themeSong01 = Content.Load<Song>("Sound/Background_Music/ThemeSong01");
             BGM_themeSong02 = Content.Load<Song>("Sound/Background_Music/ThemeSong02");
             Core.Audio.PlaySong(BGM_themeSong01, true);
-            Core.Audio.SongVolume = 0.75f;
+            Core.Audio.SongVolume = 0.50f;
         }
 
         public void UpdateSong() {
