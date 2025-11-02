@@ -1598,6 +1598,18 @@
 /processorParam:Quality=Best
 /build:Sound/Sound_Effect/Serve.wav;Sound/Sound_Effect/Serve
 
+#begin Sound/Sound_Effect/Shaking_Short01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Shaking_Short01.wav
+
+#begin Sound/Sound_Effect/Shaking_Short02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Sound_Effect/Shaking_Short02.wav
+
 #begin Sound/Sound_Effect/Shaking.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

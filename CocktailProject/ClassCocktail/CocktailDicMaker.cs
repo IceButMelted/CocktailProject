@@ -77,7 +77,7 @@ namespace CocktailProject.ClassCocktail
                 new Dictionary<Enum_Alcohol, int> { { Enum_Alcohol.Vodka, 4 } },
                 new Dictionary<Enum_Mixer, int> { { Enum_Mixer.CanberryJuice, 4 },
                                                   { Enum_Mixer.GrapefruitJuice, 2 } },
-                Enum_Method.Shaking,
+                Enum_Method.Mixing,
                 Enum_Glass.NotFix,
                 true,
                 Enum_TypeOfCocktail.LowAlcohol,

@@ -83,9 +83,12 @@ namespace CocktailProject.Scenes
         SoundEffect SFX_PressedBTN;
         SoundEffect SFX_Welcome;
         SoundEffect SFX_Serve;
-        SoundEffect SFX_Shaking;
-        float cooldownTime_SFX_Shaking = 2f;
+        SoundEffect SFX_Shaking01;
+        SoundEffect SFX_Shaking02;
+        float cooldownTime_SFX_Shaking = 0.67f;
         bool canPlaySFX_Shaking = true;
+        const byte HOW_Many_ShakingSound = 2;
+        byte count_ShakingSound = 0;
         SoundEffect SFX_Stiring;
         float cooldownTime_SFX_Stiring = 1.2f;
         bool canPlaySFX_Stiring = true;
@@ -1237,15 +1240,23 @@ namespace CocktailProject.Scenes
             {
                 if (Core.Input.Mouse.WasButtonJustPressed(MonoGameLibrary.Input.MouseButton.Left) && canPlaySFX_Shaking)
                 {
-                    Core.Audio.PlaySoundEffect(SFX_Shaking);
+                    //consider to use which shaking sound effect
+                    if (count_ShakingSound % 2 == 0)
+                        PlaySoundEffectWithRandomPitch(SFX_Shaking01, 0.5f);
+                    else
+                        PlaySoundEffectWithRandomPitch(SFX_Shaking02, 0.5f);
+                    Core.Audio.PlaySoundEffect(SFX_Shaking01);
                     canPlaySFX_Shaking = false;
+                    count_ShakingSound++;
+                    if(count_ShakingSound > 100)
+                        count_ShakingSound = 0;
                 }
 
                 cooldownTime_SFX_Shaking -= elapsed;
                 if (cooldownTime_SFX_Shaking < 0 && !canPlaySFX_Shaking)
                 {
                     canPlaySFX_Shaking = true;
-                    cooldownTime_SFX_Shaking = 2f;
+                    cooldownTime_SFX_Shaking = 0.67f;
                 }
 
                 ShakingMinigame.Update(gameTime);
@@ -1260,7 +1271,7 @@ namespace CocktailProject.Scenes
                     Shaking_Anim.Stop();
                     currentMinigame = Enum_MiniGameType.None;
                     stateBeforeServePanel = Enum_PanelState.Open;
-                    cooldownTime_SFX_Shaking = 2.5f;
+                    cooldownTime_SFX_Shaking = 0.67f;
                 }
             }
             // Handle Stirring minigame
@@ -2001,7 +2012,7 @@ namespace CocktailProject.Scenes
             BTNMethodActive(false);
             BTNMethodVisible(false);
             VisibleMakingCocktailVisual(false);
-            cooldownTime_SFX_Shaking = 2f;
+            cooldownTime_SFX_Shaking = 0.67f;
             cooldownTime_SFX_Stiring = 1.2f;
             canPlaySFX_Shaking = true;
             canPlaySFX_Stiring = true;
@@ -2571,7 +2582,8 @@ namespace CocktailProject.Scenes
             SFX_Lemon = Content.Load<SoundEffect>("Sound/Sound_Effect/Lemon");
             SFX_Peppermint = Content.Load<SoundEffect>("Sound/Sound_Effect/Peppermint");
             SFX_Pouring = Content.Load<SoundEffect>("Sound/Sound_Effect/Pouring");
-            SFX_Shaking = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking");
+            SFX_Shaking01 = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking_Short01");
+            SFX_Shaking02 = Content.Load<SoundEffect>("Sound/Sound_Effect/Shaking_Short02");
             SFX_Stiring = Content.Load<SoundEffect>("Sound/Sound_Effect/Stiring");
             SFX_Book_Open_Close = Content.Load<SoundEffect>("Sound/Sound_Effect/Book_Open_Close");
             SFX_Open_Interface = Content.Load<SoundEffect>("Sound/Sound_Effect/Open_Interface");
