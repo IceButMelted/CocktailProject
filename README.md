@@ -9,7 +9,7 @@ Development in this repository has been **discontinued**.
 
 ## New Repository
 ➡️ **Please continue following the project here:**  
-👉 [NEW_REPOSITORY_URL_HERE]
+👉 [[NEW_REPOSITORY_URL_HERE]](https://github.com/IceButMelted/ProjectCocktail_renew)
 
 ---
 
